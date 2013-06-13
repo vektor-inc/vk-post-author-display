@@ -1,0 +1,62 @@
+@charset "utf-8";
+/*-------------------------------------------*/
+/* VK Post Author Display CSS 0.3.1.4
+/*-------------------------------------------*/
+#padSection	{ clear:both;margin-top:30px; display:block; overflow:hidden; padding:15px 20px; border:3px solid #e5e5e5; box-shadow:inset 1px 1px 0 rgba(255,255,255,0.8); }
+#padSection h4,
+#padSection h5,
+#padSection dl,
+#padSection dl dt,
+#padSection dl dd	{ margin:0px; padding:0px; background:none; border:none;color:inherit; }
+#padSection dl dt	{ }
+#padSection dl dt #authorName {font-size:18px; }
+#padSection dl dt #pad_caption {padding-left:10px;font-size:12px;font-weight: lighter;}
+#padSection dl dt #pad_twitter {padding-left:10px;font-size:12px;font-weight: lighter;}
+#padSection::before	{ display:block; overflow:hidden; width:100%;}
+
+#padSection h4	{ margin-bottom:15px;padding-bottom:2px; border-bottom:1px dotted #333;}
+#padSection #avatar	{ float:left;}
+#padSection #avatar img	{ border:1px solid #ccc;margin-bottom:15px; }
+#padSection #profileTxtSet	{ margin-left:100px; display:block; overflow:hidden; }
+#padSection #profileTxtSet dt	{ margin-bottom:5px; }
+
+#padSection #latestEntries	{ padding-top:15px;clear:both; }
+#padSection #latestEntries h5	{ margin-top:0;margin-bottom:10px;padding-bottom:2px;border-bottom:1px dotted #ccc;color:#333; }
+#padSection #latestEntries ul,
+#padSection #latestEntries ul li { list-style: none;margin:0;padding:0; }
+#padSection #latestEntries ul li .padDate	{ margin-right:5px;color:#c00;}
+#padSection #latestEntries ul li a.padCate	{ margin-right:5px;font-size:10px; background-color: #e5e5e5; color:#333;padding:0px 5px; line-height:12px; text-decoration: none;}
+#padSection #latestEntries ul li a:hover.padCate { background-color: #333;color:#fff; }
+#padSection #latestEntries ul li.textList { margin-bottom:0;}
+#padSection #latestEntries ul li.textList a.padTitle { display:block; overflow:hidden;clear: both;}
+#padSection #latestEntries ul li.thumbnailBox { display:block; overflow:hidden;width:23.5%;margin-right:2%; float:left;font-size:83.3%; line-height: 140%; }
+#padSection #latestEntries ul li.thumbnailBox:last-child { margin-right:0;}
+#padSection #latestEntries ul li.thumbnailBox img { width:100%;height:auto;margin-bottom:4px;}
+#padSection #latestEntries ul li.thumbnailBox a.padTitle	{ display:block;clear: both; }
+#padSection #latestEntries ul li.thumbnailBox .padDate	{ display:block;float:left; }
+#padSection #latestEntries ul li.thumbnailBox a.padCate	{ display:block; overflow: hidden; text-align: center; padding: 1px;margin-right:0; }
+
+/*-------------------------------------------*/
+/* mobile
+/*-------------------------------------------*/
+@media (max-width: 600px) {
+#padSection	{ padding:10px; }
+#padSection #avatar img	{ width:60px;height:auto; }
+#padSection #profileTxtSet	{ margin-left:70px; }
+#padSection dl dt span { display: block; overflow: hidden; }
+#padSection dl dt #authorName { padding-bottom:5px;}
+#padSection dl dt #pad_caption,
+#padSection dl dt #pad_twitter { padding-left:0; }
+#padSection dl dd { clear: both; width:100%; }
+
+#padSection #latestEntries ul li { border-bottom:1px dotted #ccc; padding:5px 0; }
+
+/* no thumbnail */
+
+/* show thumbnail */
+#padSection #latestEntries ul li.thumbnailBox { display:block; overflow:hidden;width:100%;margin:0%; float:none; }
+#padSection #latestEntries ul li.thumbnailBox .postImage { display:block; overflow:hidden;float:left;width:70px; }
+#padSection #latestEntries ul li.thumbnailBox .postImage img { width:60px;height:auto;margin:0px;}
+#padSection #latestEntries ul li.thumbnailBox a.padTitle	{ clear: none; }
+#padSection #latestEntries ul li.thumbnailBox a.padCate	{ display:inline-block;padding: 1px 5px; }
+}
