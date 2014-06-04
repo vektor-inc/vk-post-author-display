@@ -167,7 +167,7 @@ function pad_add_customSetting() {
 	$custom_page = add_options_page(
 		'Post author display setting',		// Name of page
 		'Post author display',		// Label in menu
-		'edit_plugins',				// Capability required　このメニューページを閲覧・使用するために最低限必要なユーザーレベルまたはユーザーの種類と権限。
+		'edit_theme_options',				// Capability required　このメニューページを閲覧・使用するために最低限必要なユーザーレベルまたはユーザーの種類と権限。
 		'pad_plugin_options',				// ユニークなこのサブメニューページの識別子
 		'pad_add_customSettingPage'			// メニューページのコンテンツを出力する関数
 	);
