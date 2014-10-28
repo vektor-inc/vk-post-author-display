@@ -87,9 +87,15 @@ function pad_add_author($content){
 					/* Show thumbnail box */
 					$entryUnit .= '<li class="thumbnailBox"><span class="postImage"><a href="'.get_permalink().'">';
 					if ( has_post_thumbnail()) {
-						$entryUnit .= get_the_post_thumbnail();
+						//allows display of pad_thumb only if selected in pad options
+						$sizes_available = get_intermediate_image_sizes();
+						$pad_thumb = get_the_post_thumbnail( get_the_ID(), 'pad_thumb' );
+						if ( in_array( 'pad_thumb', $sizes_available) && !empty($pad_thumb) )
+							$entryUnit .= $pad_thumb;
+						else
+							$entryUnit .=  get_the_post_thumbnail();
 					} else {
-						$entryUnit .= '<img src="'.plugins_url().'/vk-post-author-display/images/thumbnailDummy.png" alt="'.get_the_title().'" />';
+						$entryUnit .= '<img src="'.plugins_url().'/vk-post-author-display/images/thumbnailDummy.jpg" alt="'.get_the_title().'" />';
 					}
 					$entryUnit .= '</a></span><span class="padDate">'.get_the_date('Y.m.d').'</span>'.$categories.'<a href="'.get_permalink($post->ID).'" class="padTitle">'.get_the_title().'</a></li>'."\n";
 				}
@@ -138,6 +144,7 @@ function pad_get_default_options() {
 		'list_box_title' => 'Latest entries',
 		'author_archive_link' => 'hide',
 		'show_thumbnai' => 'hide',
+		'generate_thumbnail' => 'no'
 	);
 	return apply_filters( 'pad_default_options', $display_author_options );
 }
@@ -212,6 +219,7 @@ function pad_add_customSettingPage() { ?>
 	settings_fields( 'pad_plugin_options' );
 	$options_pad = pad_get_plugin_options();
 	$default_options = pad_get_default_options();
+
 ?>
 <div id="" class="sectionBox">
 <p>[ <a href="https://gravatar.com/" target="_blank">Set your image (Gravatar)</a> ]</p>
@@ -258,6 +266,26 @@ foreach( $show_thumbnails as $show_thumbnail_value => $show_thumbnail_lavel) {
 </td>
 </tr>
 
+<tr>
+	<th>Use custom size thumbnails for thumbnails display?</th>
+	<td>
+		<?php $generate_thumbnails = array( 
+										'yes' => 'yes',
+										'no' => 'no' );
+		foreach ( $generate_thumbnails as $generate_thumbnail_label => $generate_thumbnail_value ) { 
+			
+			$checked = '';
+			if ( ( !isset($options_pad['generate_thumbnail']) && $generate_thumbnail_value == 'no'  ) 
+				 || ( $options_pad['generate_thumbnail'] == $generate_thumbnail_value ) ) 
+					$checked = ' checked'; ?>
+			<label>
+				<input type="radio" name="pad_plugin_options[generate_thumbnail]" value="<?php echo $generate_thumbnail_value ?>"<?php echo $checked ?>/>
+				<?php echo $generate_thumbnail_label ?>
+			</label><?php	
+		} ?>
+	</td>
+</tr>
+
 </table>
 <?php submit_button(); ?>
 </div><!-- [ /#sogoHeadBnr ] -->
@@ -270,8 +298,9 @@ function pad_plugin_options_validate( $input ) {
 
 	$output['author_box_title'] = $input['author_box_title'];
 	$output['list_box_title'] = $input['list_box_title'];
-	$output['author_archive_link'] = $input['author_archive_link'];
+	//$output['author_archive_link'] = $input['author_archive_link'];
 	$output['show_thumbnai'] = $input['show_thumbnai'];
+	$output['generate_thumbnail'] = $input['generate_thumbnail'];
 
 	return apply_filters( 'pad_plugin_options_validate', $output, $input, $defaults );
 }
@@ -285,3 +314,39 @@ function get_pad_options($optionLabel) {
 		return $options_pad[$optionLabel];
 	}
 }
+
+
+/*-------------------------------------------*/
+/*	vk post author display custom size thumbnail
+/*-------------------------------------------*/
+function pad_plugin_special_thumbnail() {
+
+	$options 		 = pad_get_plugin_options();
+	$default_options = pad_get_default_options();
+	
+	if( $options['generate_thumbnail'] != $default_options['generate_thumbnail'] ) {
+		
+		if ( function_exists( 'add_theme_support' ) ) { 	
+			add_theme_support( 'post-thumbnails' );
+			//custom thumbnail for pad plugin
+			add_image_size( 'pad_thumb', 240, 135, array('center', 'center') ); 
+		}
+	}
+	else {
+		apply_filters('intermediate_image_sizes', 'pad_plugin_disable_thumbnail');
+	}
+}
+
+pad_plugin_special_thumbnail();
+
+
+/*-------------------------------------------*/
+/*	vk post author disable custom size thumbnail
+/*-------------------------------------------*/
+function pad_plugin_disable_thumbnail( $sizes ) {
+	unset( $sizes['pad_thumb'] );
+}
+
+
+
+
