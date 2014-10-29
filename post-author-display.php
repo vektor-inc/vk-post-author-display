@@ -290,6 +290,10 @@ foreach( $show_thumbnails as $show_thumbnail_value => $show_thumbnail_lavel) {
 <?php submit_button(); ?>
 </div><!-- [ /#sogoHeadBnr ] -->
 </form>
+
+<a href="http://global.bizvektor.com/" target="_blank" title="Free Wordpress theme for businesses">
+	<img src="<?php echo plugins_url('/vk-post-author-display/images/bizVektor-ad-banner-01.jpg') ?>" alt="Download Biz Vektor free Wordpress theme for businesses" style="max-width:100%;" />
+</a>
 </div>
 <?php }
 
