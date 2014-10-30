@@ -214,6 +214,9 @@ function pad_add_customSettingPage() { ?>
 <?php screen_icon(); ?>
 <h2>Post author display setting</h2>
 
+
+<div style="width:70%;display:inline-block;vertical-align:top;">
+
 <form method="post" action="options.php">
 <?php
 	settings_fields( 'pad_plugin_options' );
@@ -221,7 +224,7 @@ function pad_add_customSettingPage() { ?>
 	$default_options = pad_get_default_options();
 
 ?>
-<div id="" class="sectionBox">
+<div>
 <p>[ <a href="https://gravatar.com/" target="_blank">Set your image (Gravatar)</a> ]</p>
 <p>[ <a href="<?php echo get_admin_url(); ?>profile.php" target="_blank">Set your display name,twitter,caption,description</a> ]</p>
 <table class="form-table">
@@ -290,10 +293,14 @@ foreach( $show_thumbnails as $show_thumbnail_value => $show_thumbnail_lavel) {
 <?php submit_button(); ?>
 </div><!-- [ /#sogoHeadBnr ] -->
 </form>
+</div>
 
-<a href="http://global.bizvektor.com/" target="_blank" title="Free Wordpress theme for businesses">
-	<img src="<?php echo plugins_url('/vk-post-author-display/images/bizVektor-ad-banner-01.jpg') ?>" alt="Download Biz Vektor free Wordpress theme for businesses" style="max-width:100%;" />
-</a>
+<div style="max-width:350px;display:inline-block;">
+	<a href="http://global.bizvektor.com/" target="_blank" title="Free Wordpress theme for businesses">
+		<img src="<?php echo plugins_url('/vk-post-author-display/images/bizVektor-ad-banner-vert.jpg') ?>" alt="Download Biz Vektor free Wordpress theme for businesses" />
+	</a>
+</div>
+
 </div>
 <?php }
 
