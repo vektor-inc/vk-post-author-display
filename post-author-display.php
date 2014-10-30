@@ -3,9 +3,9 @@
 Plugin Name: VK Post Author Display
 Plugin URI: http://wordpress.org/extend/plugins/vk-post-author-display/
 Description: Show post author information at post bottom.
-Version: 0.3.1.7
+Version: 0.3.2.0
 Author: Kurudrive(Hidekazu Ishikawa) at Vektor,Inc.
-Author URI: http://vektor-inc.co.jp
+Author URI: http://global.bizvektor.com
 License: GPL2
 
 /*  Copyright 2013 Hidekazu Ishikawa ( email : kurudrive@gmail.com )
@@ -285,7 +285,8 @@ foreach( $show_thumbnails as $show_thumbnail_value => $show_thumbnail_lavel) {
 				<input type="radio" name="pad_plugin_options[generate_thumbnail]" value="<?php echo $generate_thumbnail_value ?>"<?php echo $checked ?>/>
 				<?php echo $generate_thumbnail_label ?>
 			</label><?php	
-		} ?>
+		} ?><br />
+		<?php _e('* If you already have many posts in your WordPress, you have to regenerate the thumbnail images using (for example) the "Regenerate Thumbnails" plugin.','vk-post-author-display');?>
 	</td>
 </tr>
 
@@ -295,7 +296,7 @@ foreach( $show_thumbnails as $show_thumbnail_value => $show_thumbnail_lavel) {
 </form>
 </div>
 
-<div style="max-width:350px;display:inline-block;">
+<div style="max-width:350px;display:block; overflow:hidden;">
 	<a href="http://global.bizvektor.com/" target="_blank" title="Free Wordpress theme for businesses">
 		<img src="<?php echo plugins_url('/vk-post-author-display/images/bizVektor-ad-banner-vert.jpg') ?>" alt="Download Biz Vektor free Wordpress theme for businesses" />
 	</a>
