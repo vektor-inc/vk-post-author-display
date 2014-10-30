@@ -3,7 +3,7 @@
 Plugin Name: VK Post Author Display
 Plugin URI: http://wordpress.org/extend/plugins/vk-post-author-display/
 Description: Show post author information at post bottom.
-Version: 0.3.2.0
+Version: 0.3.2.1
 Author: Kurudrive(Hidekazu Ishikawa) at Vektor,Inc.
 Author URI: http://global.bizvektor.com
 License: GPL2
@@ -215,7 +215,7 @@ function pad_add_customSettingPage() { ?>
 <h2>Post author display setting</h2>
 
 
-<div style="width:70%;display:inline-block;vertical-align:top;">
+<div style="width:68%;display:inline-block;vertical-align:top;">
 
 <form method="post" action="options.php">
 <?php
@@ -296,9 +296,9 @@ foreach( $show_thumbnails as $show_thumbnail_value => $show_thumbnail_lavel) {
 </form>
 </div>
 
-<div style="max-width:350px;display:block; overflow:hidden;">
+<div style="width:29%;display:block; overflow:hidden;float:right;">
 	<a href="http://global.bizvektor.com/" target="_blank" title="Free Wordpress theme for businesses">
-		<img src="<?php echo plugins_url('/vk-post-author-display/images/bizVektor-ad-banner-vert.jpg') ?>" alt="Download Biz Vektor free Wordpress theme for businesses" />
+		<img src="<?php echo plugins_url('/vk-post-author-display/images/bizVektor-ad-banner-vert.jpg') ?>" alt="Download Biz Vektor free Wordpress theme for businesses" style="max-width:100%;" />
 	</a>
 </div>
 
@@ -358,7 +358,3 @@ pad_plugin_special_thumbnail();
 function pad_plugin_disable_thumbnail( $sizes ) {
 	unset( $sizes['pad_thumb'] );
 }
-
-
-
-
