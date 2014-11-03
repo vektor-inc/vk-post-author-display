@@ -3,7 +3,7 @@
 Plugin Name: VK Post Author Display
 Plugin URI: http://wordpress.org/extend/plugins/vk-post-author-display/
 Description: Show post author information at post bottom.
-Version: 0.3.2.1
+Version: 0.3.2.2
 Author: Kurudrive(Hidekazu Ishikawa) at Vektor,Inc.
 Author URI: http://global.bizvektor.com
 License: GPL2
