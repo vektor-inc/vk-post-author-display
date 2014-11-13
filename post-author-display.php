@@ -3,9 +3,9 @@
 Plugin Name: VK Post Author Display
 Plugin URI: http://wordpress.org/extend/plugins/vk-post-author-display/
 Description: Show post author information at post bottom.
-Version: 0.3.2.2
+Version: 0.3.2.3
 Author: Kurudrive(Hidekazu Ishikawa) at Vektor,Inc.
-Author URI: http://global.bizvektor.com
+Author URI: http://bizvektor.com/en/
 License: GPL2
 
 /*  Copyright 2013 Hidekazu Ishikawa ( email : kurudrive@gmail.com )
@@ -297,7 +297,7 @@ foreach( $show_thumbnails as $show_thumbnail_value => $show_thumbnail_lavel) {
 </div>
 
 <div style="width:29%;display:block; overflow:hidden;float:right;">
-	<a href="http://global.bizvektor.com/" target="_blank" title="Free Wordpress theme for businesses">
+	<a href="http://bizvektor.com/en/" target="_blank" title="Free Wordpress theme for businesses">
 		<img src="<?php echo plugins_url('/vk-post-author-display/images/bizVektor-ad-banner-vert.jpg') ?>" alt="Download Biz Vektor free Wordpress theme for businesses" style="max-width:100%;" />
 	</a>
 </div>

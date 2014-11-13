@@ -4,7 +4,7 @@ Donate link:
 Tags: post,author
 Requires at least: 3.3
 Tested up to: 4.0.0
-Stable tag: 0.3.2.2
+Stable tag: 0.3.2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -106,6 +106,10 @@ Display to Post Author Information Box on bottom of the contents.
 = 0.3.2.2 =
 
 * Bug(thumnail no image) fix
+
+= 0.3.2.3 =
+
+* Change author url
 
 == Upgrade notice ==
 
