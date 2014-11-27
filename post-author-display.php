@@ -3,9 +3,11 @@
 Plugin Name: VK Post Author Display
 Plugin URI: http://wordpress.org/extend/plugins/vk-post-author-display/
 Description: Show post author information at post bottom.
-Version: 0.3.2.3
+Version: 0.3.2.2
 Author: Kurudrive(Hidekazu Ishikawa) at Vektor,Inc.
-Author URI: http://bizvektor.com/en/
+Author URI: http://global.bizvektor.com
+Text Domain : post-author-display
+Domain Path : /languages/
 License: GPL2
 
 /*  Copyright 2013 Hidekazu Ishikawa ( email : kurudrive@gmail.com )
@@ -140,8 +142,8 @@ add_filter('user_contactmethods','pad_update_profile_fields',10,1);
 
 function pad_get_default_options() {
 	$display_author_options = array(
-		'author_box_title' => 'Author Profile',
-		'list_box_title' => 'Latest entries',
+		'author_box_title' => __( 'Author Profile', 'post-author-display' ),
+		'list_box_title' => __( 'Latest entries', 'post-author-display' ),
 		'author_archive_link' => 'hide',
 		'show_thumbnai' => 'hide',
 		'generate_thumbnail' => 'no'
@@ -172,8 +174,8 @@ function pad_get_plugin_options() {
 /*-------------------------------------------*/
 function pad_add_customSetting() {
 	$custom_page = add_options_page(
-		'Post author display setting',		// Name of page
-		'Post author display',		// Label in menu
+		__( 'Post author display setting', 'post-author-display' ),		// Name of page
+		__( 'Post author display', 'post-author-display' ),				// Label in menu
 		'edit_theme_options',				// Capability required　このメニューページを閲覧・使用するために最低限必要なユーザーレベルまたはユーザーの種類と権限。
 		'pad_plugin_options',				// ユニークなこのサブメニューページの識別子
 		'pad_add_customSettingPage'			// メニューページのコンテンツを出力する関数
@@ -212,7 +214,7 @@ function suffix2console() {
 function pad_add_customSettingPage() { ?>
 <div class="wrap" id="pad_plugin_options">
 <?php screen_icon(); ?>
-<h2>Post author display setting</h2>
+<h2><?php _e( 'Post author display setting', 'post-author-display' ); ?></h2>
 
 
 <div style="width:68%;display:inline-block;vertical-align:top;">
@@ -225,15 +227,15 @@ function pad_add_customSettingPage() { ?>
 
 ?>
 <div>
-<p>[ <a href="https://gravatar.com/" target="_blank">Set your image (Gravatar)</a> ]</p>
-<p>[ <a href="<?php echo get_admin_url(); ?>profile.php" target="_blank">Set your display name,twitter,caption,description</a> ]</p>
+<p>[ <a href="https://gravatar.com/" target="_blank"><?php  _e( 'Set your image (Gravatar)', 'post-author-display' ); ?></a> ]</p>
+<p>[ <a href="<?php echo get_admin_url(); ?>profile.php" target="_blank"><?php _e( 'Set your display name, twitter, caption, description', 'post-author-display' );?></a> ]</p>
 <table class="form-table">
 <tr>
-<th>Post author box title</th>
+<th><?php _e( 'Post author box title', 'post-author-display' ); ?></th>
 <td><?php echo get_pad_options('author_box_title'); ?> -> <input type="text" name="pad_plugin_options[author_box_title]" id="author_box_title" value="<?php echo esc_attr( $options_pad['author_box_title'] ); ?>" style="width:50%;" /></td>
 </tr>
 <tr>
-<th>Post list box title</th>
+<th><?php _e( 'Post list box title', 'post-author-display' ); ?></th>
 <td><?php echo get_pad_options('list_box_title'); ?> -> <input type="text" name="pad_plugin_options[list_box_title]" id="list_box_title" value="<?php echo esc_attr( $options_pad['list_box_title'] ); ?>" style="width:50%;" /></td>
 </tr>
 
@@ -242,8 +244,8 @@ function pad_add_customSettingPage() { ?>
 <th>Display post author archive page link</th>
 <td>
 <?php $author_archive_links = array(
-	'hide' => 'hide',
-	'display' => 'display author archive link'
+	'hide' => __( 'hide', 'post-author-display' ),
+	'display' => __( 'display author archive link', 'post-author-display' )
 	);
 foreach( $author_archive_links as $author_archive_link_value => $author_archive_link_lavel) {
 	$checked = ''; ?>
@@ -256,9 +258,9 @@ foreach( $author_archive_links as $author_archive_link_value => $author_archive_
 </tr>
 -->
 <tr>
-<th>Display post thumbnail image</th>
+<th><?php _e( 'Display post thumbnail image', 'post-author-display' ); ?></th>
 <td>
-<?php $show_thumbnails = array('hide' => 'hide','display' => 'display thumbnail image');
+<?php $show_thumbnails = array('hide' => __( 'hide', 'post-author-display' ), 'display' => __( 'display thumbnail image', 'post-author-display' ), );
 foreach( $show_thumbnails as $show_thumbnail_value => $show_thumbnail_lavel) {
 	$checked = ''; ?>
 	<label>
@@ -270,11 +272,11 @@ foreach( $show_thumbnails as $show_thumbnail_value => $show_thumbnail_lavel) {
 </tr>
 
 <tr>
-	<th>Use custom size thumbnails for thumbnails display?</th>
+	<th><?php _e( 'Use custom size thumbnails for thumbnails display?', 'post-author-display' ); ?></th>
 	<td>
 		<?php $generate_thumbnails = array( 
-										'yes' => 'yes',
-										'no' => 'no' );
+										'yes' => __( 'yes', 'post-author-display' ),
+										'no' => __( 'no', 'post-author-display' ) );
 		foreach ( $generate_thumbnails as $generate_thumbnail_label => $generate_thumbnail_value ) { 
 			
 			$checked = '';
@@ -286,7 +288,7 @@ foreach( $show_thumbnails as $show_thumbnail_value => $show_thumbnail_lavel) {
 				<?php echo $generate_thumbnail_label ?>
 			</label><?php	
 		} ?><br />
-		<?php _e('* If you already have many posts in your WordPress, you have to regenerate the thumbnail images using (for example) the "Regenerate Thumbnails" plugin.','vk-post-author-display');?>
+		<?php _e('* If you already have many posts in your WordPress, you have to regenerate the thumbnail images using (for example) the "Regenerate Thumbnails" plugin.','post-author-display');?>
 	</td>
 </tr>
 
@@ -297,8 +299,8 @@ foreach( $show_thumbnails as $show_thumbnail_value => $show_thumbnail_lavel) {
 </div>
 
 <div style="width:29%;display:block; overflow:hidden;float:right;">
-	<a href="http://bizvektor.com/en/" target="_blank" title="Free Wordpress theme for businesses">
-		<img src="<?php echo plugins_url('/vk-post-author-display/images/bizVektor-ad-banner-vert.jpg') ?>" alt="Download Biz Vektor free Wordpress theme for businesses" style="max-width:100%;" />
+	<a href="http://global.bizvektor.com/" target="_blank" title="<?php _e( 'Free Wordpress theme for businesses', 'post-author-display' );?>">
+		<img src="<?php echo plugins_url('/vk-post-author-display/images/bizVektor-ad-banner-vert.jpg') ?>" alt="<?php _e( 'Download Biz Vektor free Wordpress theme for businesses', 'post-author-display' ); ?>" style="max-width:100%;" />
 	</a>
 </div>
 
@@ -358,3 +360,11 @@ pad_plugin_special_thumbnail();
 function pad_plugin_disable_thumbnail( $sizes ) {
 	unset( $sizes['pad_thumb'] );
 }
+
+/*-------------------------------------------*/
+/*	vk post author text domain load
+/*-------------------------------------------*/
+function post_author_display_text_domain() {
+	load_plugin_textdomain( 'post-author-display', false, dirname( plugin_basename( __FILE__) ) . '/languages/' );
+}
+add_action( 'plugins_loaded', 'post_author_display_text_domain' );
