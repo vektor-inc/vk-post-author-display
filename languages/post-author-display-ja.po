@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BizVektor\n"
 "Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
-"POT-Creation-Date: 2014-11-27 18:57+0900\n"
+"POT-Creation-Date: 2014-11-28 17:34+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Vektor,Inc. <info@vektor-inc.co.jp>\n"
@@ -23,65 +23,74 @@ msgstr ""
 "X-Generator: Poedit 1.5.7\n"
 "X-Poedit-SearchPath-0: .\n"
 
+#: post-author-display.php:136
+msgid "Caption(Post Author Display)"
+msgstr "肩書(Post Author Display)"
+
+#: post-author-display.php:137
+msgid "Twitter(Post Author Display)"
+msgstr "Twitter(Post Author Display)"
+
 #: post-author-display.php:145
 msgid "Author Profile"
-msgstr ""
+msgstr "投稿者プロフィール"
 
 #: post-author-display.php:146
 msgid "Latest entries"
-msgstr ""
+msgstr "最新投稿"
 
 #: post-author-display.php:177 post-author-display.php:217
 msgid "Post author display setting"
-msgstr ""
+msgstr "Post author display設定"
 
 #: post-author-display.php:178
+msgctxt "label in admin menu"
 msgid "Post author display"
-msgstr ""
+msgstr "Post author display"
 
 #: post-author-display.php:230
 msgid "Set your image (Gravatar)"
-msgstr ""
+msgstr "プロフィール画像の設定(Gravatar)"
 
 #: post-author-display.php:231
 msgid "Set your display name, twitter, caption, description"
-msgstr ""
+msgstr "ニックネーム、Twitter、肩書、プロフィール情報の編集"
 
 #: post-author-display.php:234
 msgid "Post author box title"
-msgstr ""
+msgstr "Post authorボックスのタイトル"
 
 #: post-author-display.php:238
 msgid "Post list box title"
-msgstr ""
+msgstr "最新記事一覧ボックスのタイトル"
 
 #: post-author-display.php:247 post-author-display.php:263
 msgid "hide"
-msgstr ""
+msgstr "表示しない"
 
 #: post-author-display.php:248
 msgid "display author archive link"
-msgstr ""
+msgstr "記事のアーカイブページへのリンクを表示する"
 
 #: post-author-display.php:261
 msgid "Display post thumbnail image"
-msgstr ""
+msgstr "記事のサムネイル画像を表示する"
 
 #: post-author-display.php:263
 msgid "display thumbnail image"
-msgstr ""
+msgstr "サムネイルを表示する"
 
 #: post-author-display.php:275
 msgid "Use custom size thumbnails for thumbnails display?"
-msgstr ""
+msgstr "サムネイルのカスタムサイズを使用する"
 
 #: post-author-display.php:278
 msgid "yes"
-msgstr ""
+msgstr "はい"
 
 #: post-author-display.php:279
 msgid "no"
-msgstr ""
+msgstr "いいえ"
 
 #: post-author-display.php:291
 msgid ""
@@ -89,11 +98,13 @@ msgid ""
 "the thumbnail images using (for example) the \"Regenerate Thumbnails\" "
 "plugin."
 msgstr ""
+"※過去のサムネイル画像のサイズをカスタムサイズに適切するために「Regenerate "
+"Thumbnails」のようなプラグインを使ってください。"
 
 #: post-author-display.php:302
 msgid "Free Wordpress theme for businesses"
-msgstr ""
+msgstr "ビジネス用の無料ワードプレステーマ"
 
 #: post-author-display.php:303
 msgid "Download Biz Vektor free Wordpress theme for businesses"
-msgstr ""
+msgstr "WordPress無料テーマ「BizVektor」をダウンロードする"

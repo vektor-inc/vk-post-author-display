@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BizVektor\n"
 "Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
-"POT-Creation-Date: 2014-11-27 18:57+0900\n"
+"POT-Creation-Date: 2014-11-28 17:45+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Vektor,Inc. <info@vektor-inc.co.jp>\n"
@@ -23,6 +23,14 @@ msgstr ""
 "X-Generator: Poedit 1.5.7\n"
 "X-Poedit-SearchPath-0: .\n"
 
+#: post-author-display.php:136
+msgid "Caption(Post Author Display)"
+msgstr ""
+
+#: post-author-display.php:137
+msgid "Twitter(Post Author Display)"
+msgstr ""
+
 #: post-author-display.php:145
 msgid "Author Profile"
 msgstr ""
@@ -36,6 +44,7 @@ msgid "Post author display setting"
 msgstr ""
 
 #: post-author-display.php:178
+msgctxt "label in admin menu"
 msgid "Post author display"
 msgstr ""
 
@@ -53,6 +62,10 @@ msgstr ""
 
 #: post-author-display.php:238
 msgid "Post list box title"
+msgstr ""
+
+#: post-author-display.php:244
+msgid "Display post author archive page link"
 msgstr ""
 
 #: post-author-display.php:247 post-author-display.php:263

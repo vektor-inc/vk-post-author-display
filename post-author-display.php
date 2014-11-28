@@ -133,8 +133,8 @@ function pad_set_css(){
 /*-------------------------------------------*/
 function pad_update_profile_fields( $contactmethods ) {
 	//項目の追加
-	$contactmethods['pad_caption'] = 'Caption(Post Author Display)';
-	$contactmethods['pad_twitter'] = 'Twitter(Post Author Display)';
+	$contactmethods['pad_caption'] = __( 'Caption(Post Author Display)', 'post-author-display' );
+	$contactmethods['pad_twitter'] = __( 'Twitter(Post Author Display)', 'post-author-display' );
 	return $contactmethods;
 }
 add_filter('user_contactmethods','pad_update_profile_fields',10,1);
@@ -175,7 +175,7 @@ function pad_get_plugin_options() {
 function pad_add_customSetting() {
 	$custom_page = add_options_page(
 		__( 'Post author display setting', 'post-author-display' ),		// Name of page
-		__( 'Post author display', 'post-author-display' ),				// Label in menu
+		_x( 'Post author display', 'label in admin menu', 'post-author-display' ),				// Label in menu
 		'edit_theme_options',				// Capability required　このメニューページを閲覧・使用するために最低限必要なユーザーレベルまたはユーザーの種類と権限。
 		'pad_plugin_options',				// ユニークなこのサブメニューページの識別子
 		'pad_add_customSettingPage'			// メニューページのコンテンツを出力する関数
@@ -241,7 +241,7 @@ function pad_add_customSettingPage() { ?>
 
 <!--
 <tr>
-<th>Display post author archive page link</th>
+<th><?php _e( 'Display post author archive page link', 'post-author-display' ) ?></th>
 <td>
 <?php $author_archive_links = array(
 	'hide' => __( 'hide', 'post-author-display' ),
@@ -275,8 +275,8 @@ foreach( $show_thumbnails as $show_thumbnail_value => $show_thumbnail_lavel) {
 	<th><?php _e( 'Use custom size thumbnails for thumbnails display?', 'post-author-display' ); ?></th>
 	<td>
 		<?php $generate_thumbnails = array( 
-										'yes' => __( 'yes', 'post-author-display' ),
-										'no' => __( 'no', 'post-author-display' ) );
+										__( 'yes', 'post-author-display' ) => 'yes',
+										__( 'no', 'post-author-display' ) => 'no' );
 		foreach ( $generate_thumbnails as $generate_thumbnail_label => $generate_thumbnail_value ) { 
 			
 			$checked = '';
@@ -365,6 +365,6 @@ function pad_plugin_disable_thumbnail( $sizes ) {
 /*	vk post author text domain load
 /*-------------------------------------------*/
 function post_author_display_text_domain() {
-	load_plugin_textdomain( 'post-author-display', false, dirname( plugin_basename( __FILE__) ) . '/languages/' );
+	load_plugin_textdomain( 'post-author-display', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
-add_action( 'plugins_loaded', 'post_author_display_text_domain' );
+add_action( 'init', 'post_author_display_text_domain' );
