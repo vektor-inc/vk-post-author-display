@@ -20,9 +20,9 @@
 #padSection #profileTxtSet	{ margin-left:100px; display:block; overflow:hidden; }
 #padSection #profileTxtSet dt	{ margin-bottom:5px; }
 
-#padSection #latestEntries	{ padding-top:15px;clear:both; position:relative; }
+#padSection #latestEntries	{ margin-top:15px;clear:both; position:relative; }
 #padSection #latestEntries h5	{ margin-top:0;margin-bottom:10px;padding-bottom:2px;border-bottom:1px dotted #ccc;color:#333; }
-#padSection #latestEntries .authorLink { text-align:right; position:absolute; top:0; right:0; }
+#padSection #latestEntries .authorLink { text-align:right; margin:0; position:absolute; top:0; right:0; }
 #padSection #latestEntries ul,
 #padSection #latestEntries ul li { list-style: none;margin:0;padding:0; }
 #padSection #latestEntries ul li .padDate	{ margin-right:5px;color:#c00;}
