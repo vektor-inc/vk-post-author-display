@@ -1,6 +1,6 @@
 @charset "utf-8";
 /*-------------------------------------------*/
-/* VK Post Author Display CSS 0.3.1.4
+/* VK Post Author Display CSS 0.3.3
 /*-------------------------------------------*/
 #padSection	{ clear:both;margin-top:30px; display:block; overflow:hidden; padding:15px 20px; border:3px solid #e5e5e5; box-shadow:inset 1px 1px 0 rgba(255,255,255,0.8); }
 #padSection h4,
@@ -20,8 +20,9 @@
 #padSection #profileTxtSet	{ margin-left:100px; display:block; overflow:hidden; }
 #padSection #profileTxtSet dt	{ margin-bottom:5px; }
 
-#padSection #latestEntries	{ padding-top:15px;clear:both; }
+#padSection #latestEntries	{ padding-top:15px;clear:both; position:relative; }
 #padSection #latestEntries h5	{ margin-top:0;margin-bottom:10px;padding-bottom:2px;border-bottom:1px dotted #ccc;color:#333; }
+#padSection #latestEntries .authorLink { text-align:right; position:absolute; top:0; right:0; }
 #padSection #latestEntries ul,
 #padSection #latestEntries ul li { list-style: none;margin:0;padding:0; }
 #padSection #latestEntries ul li .padDate	{ margin-right:5px;color:#c00;}
@@ -49,6 +50,7 @@
 #padSection dl dt #pad_twitter { padding-left:0; }
 #padSection dl dd { clear: both; width:100%; }
 
+#padSection #latestEntries .authorLink { position:static; }
 #padSection #latestEntries ul li { border-bottom:1px dotted #ccc; padding:5px 0; }
 
 /* no thumbnail */
