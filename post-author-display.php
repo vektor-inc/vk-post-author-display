@@ -3,7 +3,7 @@
 Plugin Name: VK Post Author Display
 Plugin URI: http://wordpress.org/extend/plugins/vk-post-author-display/
 Description: Show post author information at post bottom.
-Version: 0.3.2.3
+Version: 0.3.3
 Author: Kurudrive(Hidekazu Ishikawa) at Vektor,Inc.
 Author URI: http://bizvektor.com/en/
 Text Domain : post-author-display
@@ -12,18 +12,18 @@ License: GPL2
 
 /*  Copyright 2013 Hidekazu Ishikawa ( email : kurudrive@gmail.com )
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License, version 2, as
+		This program is free software; you can redistribute it and/or modify
+		it under the terms of the GNU General Public License, version 2, as
 	published by the Free Software Foundation.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+		This program is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+		You should have received a copy of the GNU General Public License
+		along with this program; if not, write to the Free Software
+		Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 /*-------------------------------------------*/
 
@@ -64,8 +64,10 @@ function pad_add_author($content){
 			/*-------------------------------------------*/
 			/*	entryUnit (Latest entries)
 			/*-------------------------------------------*/
-			$list_box_title = get_pad_options('list_box_title');
-			$thumbnail = get_pad_options('show_thumbnai');
+			$list_box_title  = get_pad_options('list_box_title');
+			$thumbnail       = get_pad_options('show_thumbnail');
+			$author_link     = get_pad_options('author_archive_link');
+			$author_link_txt = get_pad_options('author_archive_link_txt');
 
 			// author entries
 			global $post;
@@ -73,6 +75,9 @@ function pad_add_author($content){
 			$loop = new WP_Query( array( 'post_type' => 'post', 'posts_per_page'=> 4, 'author' => $autorID ) );
 			$entryUnit = '<div id="latestEntries">'."\n";
 			$entryUnit .= '<h5>'.$list_box_title.'</h5>'."\n";
+			if ($author_link == 'display'){
+					$entryUnit .= '<p class="authorLink"><a href="'. esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) .'" rel="author">'.$author_link_txt.'</a></p>'."\n";
+				}
 			$entryUnit .= '<ul class="entryList">'."\n";
 			while ( $loop->have_posts() ) : $loop->the_post();
 				$categories = '';
@@ -142,11 +147,12 @@ add_filter('user_contactmethods','pad_update_profile_fields',10,1);
 
 function pad_get_default_options() {
 	$display_author_options = array(
-		'author_box_title' => __( 'Author Profile', 'post-author-display' ),
-		'list_box_title' => __( 'Latest entries', 'post-author-display' ),
-		'author_archive_link' => 'hide',
-		'show_thumbnai' => 'hide',
-		'generate_thumbnail' => 'no'
+		'author_box_title'        => __( 'Author Profile', 'post-author-display' ),
+		'list_box_title'          => __( 'Latest entries', 'post-author-display' ),
+		'author_archive_link'     => 'hide',
+		'author_archive_link_txt' => __( 'Author Archives', 'post-author-display' ),
+		'show_thumbnail'          => 'hide',
+		'generate_thumbnail'      => 'no'
 	);
 	return apply_filters( 'pad_default_options', $display_author_options );
 }
@@ -191,11 +197,11 @@ add_action( 'admin_menu', 'pad_add_customSetting' );
 
 add_action("admin_head", 'suffix2console');
 function suffix2console() {
-    global $hook_suffix;
-    if (is_user_logged_in()) {
-        $str = "<script type=\"text/javascript\">console.log('%s')</script>";
-        printf($str, $hook_suffix);
-    }
+		global $hook_suffix;
+		if (is_user_logged_in()) {
+				$str = "<script type=\"text/javascript\">console.log('%s')</script>";
+				printf($str, $hook_suffix);
+		}
 }
 
 /*-------------------------------------------*/
@@ -239,7 +245,6 @@ function pad_add_customSettingPage() { ?>
 <td><?php echo get_pad_options('list_box_title'); ?> -> <input type="text" name="pad_plugin_options[list_box_title]" id="list_box_title" value="<?php echo esc_attr( $options_pad['list_box_title'] ); ?>" style="width:50%;" /></td>
 </tr>
 
-<!--
 <tr>
 <th><?php _e( 'Display post author archive page link', 'post-author-display' ) ?></th>
 <td>
@@ -256,7 +261,11 @@ foreach( $author_archive_links as $author_archive_link_value => $author_archive_
 <?php } ?>
 </td>
 </tr>
--->
+<tr>
+<th><?php _e( 'Author archives text', 'post-author-display' ); ?></th>
+<td><?php echo get_pad_options('author_archive_link_txt'); ?> -> <input type="text" name="pad_plugin_options[author_archive_link_txt]" id="author_archive_link_txt" value="<?php echo esc_attr( $options_pad['author_archive_link_txt'] ); ?>" style="width:50%;" /></td>
+</tr>
+
 <tr>
 <th><?php _e( 'Display post thumbnail image', 'post-author-display' ); ?></th>
 <td>
@@ -264,8 +273,8 @@ foreach( $author_archive_links as $author_archive_link_value => $author_archive_
 foreach( $show_thumbnails as $show_thumbnail_value => $show_thumbnail_lavel) {
 	$checked = ''; ?>
 	<label>
-	<?php if ( $show_thumbnail_value == $options_pad['show_thumbnai'] ) : $checked = ' checked'; endif; ?>
-	<input type="radio" name="pad_plugin_options[show_thumbnai]" value="<?php echo $show_thumbnail_value ?>"<?php echo $checked; ?>> <?php echo $show_thumbnail_lavel ?>
+	<?php if ( $show_thumbnail_value == $options_pad['show_thumbnail'] ) : $checked = ' checked'; endif; ?>
+	<input type="radio" name="pad_plugin_options[show_thumbnail]" value="<?php echo $show_thumbnail_value ?>"<?php echo $checked; ?>> <?php echo $show_thumbnail_lavel ?>
 	</label>
 <?php } ?>
 </td>
@@ -274,19 +283,19 @@ foreach( $show_thumbnails as $show_thumbnail_value => $show_thumbnail_lavel) {
 <tr>
 	<th><?php _e( 'Use custom size thumbnails for thumbnails display?', 'post-author-display' ); ?></th>
 	<td>
-		<?php $generate_thumbnails = array( 
+		<?php $generate_thumbnails = array(
 										__( 'yes', 'post-author-display' ) => 'yes',
 										__( 'no', 'post-author-display' ) => 'no' );
-		foreach ( $generate_thumbnails as $generate_thumbnail_label => $generate_thumbnail_value ) { 
-			
+		foreach ( $generate_thumbnails as $generate_thumbnail_label => $generate_thumbnail_value ) {
+
 			$checked = '';
-			if ( ( !isset($options_pad['generate_thumbnail']) && $generate_thumbnail_value == 'no'  ) 
-				 || ( $options_pad['generate_thumbnail'] == $generate_thumbnail_value ) ) 
+			if ( ( !isset($options_pad['generate_thumbnail']) && $generate_thumbnail_value == 'no'  )
+				 || ( $options_pad['generate_thumbnail'] == $generate_thumbnail_value ) )
 					$checked = ' checked'; ?>
 			<label>
 				<input type="radio" name="pad_plugin_options[generate_thumbnail]" value="<?php echo $generate_thumbnail_value ?>"<?php echo $checked ?>/>
 				<?php echo $generate_thumbnail_label ?>
-			</label><?php	
+			</label><?php
 		} ?><br />
 		<?php _e('* If you already have many posts in your WordPress, you have to regenerate the thumbnail images using (for example) the "Regenerate Thumbnails" plugin.','post-author-display');?>
 	</td>
@@ -299,8 +308,8 @@ foreach( $show_thumbnails as $show_thumbnail_value => $show_thumbnail_lavel) {
 </div>
 
 <div style="width:29%;display:block; overflow:hidden;float:right;">
-	<a href="http://bizvektor.com/en/" target="_blank" title="<?php _e( 'Free Wordpress theme for businesses', 'post-author-display' );?>">
-		<img src="<?php echo plugins_url('/vk-post-author-display/images/bizVektor-ad-banner-vert.jpg') ?>" alt="<?php _e( 'Download Biz Vektor free Wordpress theme for businesses', 'post-author-display' ); ?>" style="max-width:100%;" />
+	<a href="http://bizvektor.com/en/" target="_blank" title="<?php _e( 'Free WordPress theme for businesses', 'post-author-display' );?>">
+		<img src="<?php echo plugins_url('/vk-post-author-display/images/bizVektor-ad-banner-vert.jpg') ?>" alt="<?php _e( 'Download Biz Vektor free WordPress theme for businesses', 'post-author-display' ); ?>" style="max-width:100%;" />
 	</a>
 </div>
 
@@ -310,11 +319,12 @@ foreach( $show_thumbnails as $show_thumbnail_value => $show_thumbnail_lavel) {
 function pad_plugin_options_validate( $input ) {
 	$output = $defaults = pad_get_default_options();
 
-	$output['author_box_title'] = $input['author_box_title'];
-	$output['list_box_title'] = $input['list_box_title'];
-	//$output['author_archive_link'] = $input['author_archive_link'];
-	$output['show_thumbnai'] = $input['show_thumbnai'];
-	$output['generate_thumbnail'] = $input['generate_thumbnail'];
+	$output['author_box_title']         = $input['author_box_title'];
+	$output['list_box_title']           = $input['list_box_title'];
+	$output['author_archive_link']      = $input['author_archive_link'];
+	$output['author_archive_link_txt']  = $input['author_archive_link_txt'];
+	$output['show_thumbnail']           = $input['show_thumbnail'];
+	$output['generate_thumbnail']       = $input['generate_thumbnail'];
 
 	return apply_filters( 'pad_plugin_options_validate', $output, $input, $defaults );
 }
@@ -337,13 +347,13 @@ function pad_plugin_special_thumbnail() {
 
 	$options 		 = pad_get_plugin_options();
 	$default_options = pad_get_default_options();
-	
+
 	if( $options['generate_thumbnail'] != $default_options['generate_thumbnail'] ) {
-		
-		if ( function_exists( 'add_theme_support' ) ) { 	
+
+		if ( function_exists( 'add_theme_support' ) ) {
 			add_theme_support( 'post-thumbnails' );
 			//custom thumbnail for pad plugin
-			add_image_size( 'pad_thumb', 240, 135, array('center', 'center') ); 
+			add_image_size( 'pad_thumb', 240, 135, array('center', 'center') );
 		}
 	}
 	else {
