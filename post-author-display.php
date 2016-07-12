@@ -10,7 +10,7 @@ Text Domain : post-author-display
 Domain Path : /languages/
 License: GPL2
 
-/*  Copyright 2013 Hidekazu Ishikawa ( email : kurudrive@gmail.com )
+/*  Copyright 2013-2016 Hidekazu Ishikawa ( email : kurudrive@gmail.com )
 
 		This program is free software; you can redistribute it and/or modify
 		it under the terms of the GNU General Public License, version 2, as
@@ -25,6 +25,14 @@ License: GPL2
 		along with this program; if not, write to the Free Software
 		Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
+$data = get_file_data( __FILE__, array( 'version' => 'Version','textdomain' => 'Text Domain' ) );
+define( 'VK_PAD_VERSION', $data['version'] );
+define( 'VK_PAD_TEXTDOMAIN', $data['textdomain'] );
+define( 'VK_PAD_BASENAME', plugin_basename( __FILE__ ) );
+define( 'VK_PAD_URL', plugin_dir_url( __FILE__ ) );
+define( 'VK_PAD_DIR', plugin_dir_path( __FILE__ ) );
+
 /*-------------------------------------------*/
 
 /*-------------------------------------------*/
