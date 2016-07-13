@@ -4,29 +4,64 @@ function pad_get_author_box(){
 	/*	Profile
 	/*-------------------------------------------*/
 	$author_box_title = get_pad_options('author_box_title');
+	
+	global $post;
+	$user_id = $post->post_author;
+	$user = get_userdata( $user_id );
+	
 	// author caption
 	if (get_the_author_meta( 'pad_caption' )){
 		$caption = '<span id="pad_caption">'.get_the_author_meta( 'pad_caption' ).'</span>';
 	}
-	// twitter
-	if (get_the_author_meta( 'pad_twitter' )){
-		$twitter = '<span id="pad_twitter">Twitter:<a href="https://twitter.com/'.get_the_author_meta( 'pad_twitter' ).'" target
-		="_blank">@'.get_the_author_meta( 'pad_twitter' ).'</a></span>';
+
+	// url
+	$url = isset( $user->data->user_url ) ? $user->data->user_url : '';
+	if ( $url ){
+		$sns_icons = '<li class="pad_url"><a href="'.esc_url( $url ).'" target
+		="_blank" class="web"><i class="fa fa-globe web" aria-hidden="true"></i></a></li>';
 	}
+
+	$sns_array = pad_sns_array();
+
+	foreach ($sns_array as $key => $value) {
+		$field = 'pad_'.$key;
+		$sns_url = get_the_author_meta( $field );
+
+		// 旧バージョンの人はアカウントだけで保存されているので、その前のURLを追加
+		if ( $key == 'twitter' ){
+			$subject = $sns_url;
+			$pattern = '/https:\/\/twitter.com\//';
+			preg_match( $pattern, $subject, $matches, PREG_OFFSET_CAPTURE );
+			if ( !$matches )
+				$sns_url = 'https://twitter.com/'.$sns_url;
+		} // if ( $key == 'twitter' ){
+
+		if ( $sns_url ){
+			$sns_icons .= '<li class="pad_'.$key.'"><a href="'.esc_url( $sns_url ).'" target
+			="_blank" class="'.$key.'"><i class="fa '.$value['icon'].'" aria-hidden="true"></i></a></li>';
+		}
+	}
+
+
 	$profileUnit =
 		'<h4>'.$author_box_title.'</h4>'.
-		'<div id="avatar">'.get_avatar( get_the_author_meta('email'), 80 ).'</div>'.
+		'<div id="avatar">'.get_avatar( get_the_author_meta('email'), 100 ).'</div>'.
 		'<dl id="profileTxtSet">'.
 		'<dt>'.'<span id="authorName">'.esc_html ( get_the_author_meta( 'display_name' ) ).'</span>';
 	if(isset($caption)):
 		$profileUnit .= $caption;
 	endif;
-	if(isset($twitter)):
-		$profileUnit .= $twitter;
-	endif;
-	$profileUnit .= '</dt>'.
-					'<dd>'.nl2br(get_the_author_meta( 'description' )).'</dd>'.
-					'</dl>';
+
+	$profileUnit .= '</dt><dd>'.nl2br(get_the_author_meta( 'description' ));
+	if ( $sns_icons ){
+		$profileUnit .= '<ul class="sns_icons">';
+		$profileUnit .= $sns_icons;
+		$profileUnit .= '</ul>';
+	}
+	$profileUnit .= '</dd></dl>';
+
+
+
 	/*-------------------------------------------*/
 	/*	entryUnit (Latest entries)
 	/*-------------------------------------------*/

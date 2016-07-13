@@ -53,20 +53,40 @@ function pad_add_author($content){
 /*-------------------------------------------*/
 /*	front display css
 /*-------------------------------------------*/
-add_action('wp_head', 'pad_set_css');
+add_action('wp_enqueue_scripts', 'pad_set_css');
 function pad_set_css(){
 	$cssPath = apply_filters( "pad-stylesheet", plugins_url("css/vk-post-author.css", __FILE__) );
 	if ( get_post_type() == 'post'){
-		wp_enqueue_style( 'set_vk_post_autor_css', $cssPath , false, '2013-05-13b');
+		wp_enqueue_style( 'set_vk_post_autor_css', $cssPath , false, VK_PAD_VERSION);
+		wp_enqueue_style( 'font-awesome', VK_PAD_URL . '/libraries/font-awesome/css/font-awesome.min.css', array(), '4.6.3', 'all' );
 	}
 }
+
+function pad_sns_array(){
+	$sns_array = array( 
+		'twitter'     => array( 'name' => 'Twitter', 'icon' => 'fa-twitter-square' ),
+		'facebook'    => array( 'name' => 'Facebook', 'icon' => 'fa-facebook-square' ),
+		'instagram'   => array( 'name' => 'Instagram', 'icon' => 'fa-instagram' ),
+		'youtube'     => array( 'name' => 'You Tube', 'icon' => 'fa-youtube-square' ),
+		'linkedin'    => array( 'name' => 'LinkedIn', 'icon' => 'fa-linkedin-square' ),
+		'google-plus' => array( 'name' => 'Google+', 'icon' => 'fa-google-plus-square' ),
+		);
+	return $sns_array;
+}
+
 /*-------------------------------------------*/
 /*	Add user items
 /*-------------------------------------------*/
 function pad_update_profile_fields( $contactmethods ) {
+
 	//項目の追加
 	$contactmethods['pad_caption'] = __( 'Caption(Post Author Display)', 'post-author-display' );
-	$contactmethods['pad_twitter'] = __( 'Twitter(Post Author Display)', 'post-author-display' );
+
+	$sns_array = pad_sns_array();
+	foreach ($sns_array as $key => $value) {
+		$contactmethods['pad_'.$key] = $value['name'].' URL (Post Author Display)';
+	}
+
 	return $contactmethods;
 }
 add_filter('user_contactmethods','pad_update_profile_fields',10,1);
