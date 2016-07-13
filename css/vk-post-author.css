@@ -27,6 +27,7 @@
 #padSection #latestEntries ul li { list-style: none;margin:0;padding:0; }
 #padSection #latestEntries ul li .padDate	{ margin-right:5px;color:#c00;}
 #padSection #latestEntries ul li a.padCate	{ margin-right:5px;font-size:10px; background-color: #e5e5e5; color:#333;padding:0px 5px; line-height:12px; text-decoration: none;}
+#padSection #latestEntries ul li a.padTitle { color:inherit; }
 #padSection #latestEntries ul li a:hover.padCate { background-color: #333;color:#fff; }
 #padSection #latestEntries ul li.textList { margin-bottom:0;}
 #padSection #latestEntries ul li.textList a.padTitle { display:block; overflow:hidden;clear: both;}
