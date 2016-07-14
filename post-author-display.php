@@ -36,6 +36,14 @@ define( 'VK_PAD_DIR', plugin_dir_path( __FILE__ ) );
 require_once( 'class.term_color.php' );
 require_once( VK_PAD_DIR . 'view.post-author.php' );
 
+	// Add a link to this plugin's settings page
+function pad_set_plugin_meta( $links ) { 
+    $settings_link             = '<a href="options-general.php?page=pad_plugin_options">'.__( 'Setting', VK_PAD_TEXTDOMAIN ).'</a>';
+    array_unshift($links, $settings_link);
+    return $links;
+}
+ add_filter('plugin_action_links_'.VK_PAD_BASENAME , 'pad_set_plugin_meta', 10, 1);
+
 /*-------------------------------------------*/
 
 /*-------------------------------------------*/
