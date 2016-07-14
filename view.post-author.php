@@ -3,16 +3,18 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 
     class Vk_Post_Author_Box {
 
-		public static function pad_get_author_box(){
-			/*-------------------------------------------*/
-			/*	Profile
-			/*-------------------------------------------*/
-			$author_box_title = get_pad_options('author_box_title');
-			
+		public static function pad_get_author_profile(  ){
 			global $post;
 			$user_id = $post->post_author;
 			$user = get_userdata( $user_id );
-			
+			$profileUnit =
+				'<div id="avatar">'.get_avatar( get_the_author_meta('email'), 100 ).'</div>'.
+				'<dl id="profileTxtSet">'.
+				'<dt>'.'<span id="authorName">'.esc_html ( get_the_author_meta( 'display_name' ) ).'</span>';
+			if(isset($caption)):
+				$profileUnit .= $caption;
+			endif;
+
 			// author caption
 			if (get_the_author_meta( 'pad_caption' )){
 				$caption = '<span id="pad_caption">'.get_the_author_meta( 'pad_caption' ).'</span>';
@@ -46,16 +48,6 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 				}
 			}
 
-
-			$profileUnit =
-				'<h4>'.$author_box_title.'</h4>'.
-				'<div id="avatar">'.get_avatar( get_the_author_meta('email'), 100 ).'</div>'.
-				'<dl id="profileTxtSet">'.
-				'<dt>'.'<span id="authorName">'.esc_html ( get_the_author_meta( 'display_name' ) ).'</span>';
-			if(isset($caption)):
-				$profileUnit .= $caption;
-			endif;
-
 			$profileUnit .= '</dt><dd>'.nl2br(get_the_author_meta( 'description' ));
 			if ( $sns_icons ){
 				$profileUnit .= '<ul class="sns_icons">';
@@ -63,10 +55,10 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 				$profileUnit .= '</ul>';
 			}
 			$profileUnit .= '</dd></dl>';
+			return $profileUnit;
+		}
 
-			/*-------------------------------------------*/
-			/*	entryUnit (Latest entries)
-			/*-------------------------------------------*/
+		public static function pad_get_author_entries(  ){
 			$list_box_title  = get_pad_options('list_box_title');
 			$thumbnail       = get_pad_options('show_thumbnail');
 			$author_link     = get_pad_options('author_archive_link');
@@ -120,13 +112,20 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 			$entryUnit .= '</ul>'."\n";
 			$entryUnit .= '</div>'."\n";
 			wp_reset_query(); // important!!
-			//  get_author_posts_url()
-			/*-------------------------------------------*/
-			/*	Unit display
-			/*-------------------------------------------*/
-			$author_unit = '<div id="padSection">';
-			$author_unit .= $profileUnit;
-			$author_unit .= $entryUnit;
+			return $entryUnit;
+		}
+
+		public static function pad_get_author_box( $layout = 'normal' ){
+			$author_unit = '<div class="padSection">';
+
+			if ( $layout != 'author_archive' )
+				$author_unit .= '<h4>'.esc_html( get_pad_options('author_box_title') ).'</h4>';
+			
+			$author_unit .= Vk_Post_Author_Box::pad_get_author_profile();
+
+			if ( $layout != 'author_archive' )
+				$author_unit .= Vk_Post_Author_Box::pad_get_author_entries();
+
 			$author_unit .= '</div>';
 			return $author_unit;
 		}
