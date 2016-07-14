@@ -1,5 +1,5 @@
 === VK Post Author Display ===
-Contributors: kurudrive,dswebstudio
+Contributors: kurudrive,dswebstudio,mypacecreator,gatespace
 Donate link:
 Tags: post,author
 Requires at least: 3.3
