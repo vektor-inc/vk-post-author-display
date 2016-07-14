@@ -1,0 +1,101 @@
+@charset "utf-8";
+@import "compass";
+/*-------------------------------------------*/
+/* VK Post Author Display CSS 0.3.3
+/*-------------------------------------------*/
+#padSection	{ clear:both;margin-top:30px; display:block; overflow:hidden; padding:30px 30px 20px; border:3px solid #e5e5e5; box-shadow:inset 1px 1px 0 rgba(255,255,255,0.8);font-size:14px; }
+#padSection a { text-decoration: none;border-bottom:none; }
+#padSection h4,
+#padSection h5,
+#padSection dl,
+#padSection dl dt,
+#padSection dl dd	{ margin:0px; padding:0px; background:none; border:none;color:inherit; }
+#padSection dl dt	{ }
+#padSection dl dt #authorName {font-size:18px; }
+#padSection dl dt #pad_caption {padding-left:10px;font-size:12px;font-weight: lighter;}
+#padSection dl dt #pad_twitter {padding-left:10px;font-size:12px;font-weight: lighter;}
+#padSection::before	{ display:block; overflow:hidden; width:100%;}
+
+#padSection h4	{ margin-bottom:20px;padding-bottom:2px; border-bottom:1px dotted #333;}
+#padSection #avatar	{ float:left;}
+#padSection #avatar img	{ border:1px solid #ccc;margin-bottom:15px; }
+#padSection #profileTxtSet	{ margin-left:130px; display:block; overflow:hidden; }
+#padSection #profileTxtSet dt	{ margin-bottom:5px; }
+
+#padSection .sns_icons { list-style: none;margin:10px 0;padding:0; }
+#padSection .sns_icons li { display:inline;font-size:28px; margin-right:10px; }
+#padSection a.web { color:#1780bb; }
+#padSection a.twitter { color:#0084B4; }
+#padSection a.facebook { color:#3B5998; }
+#padSection a.instagram { color:#262626; }
+#padSection a.youtube { color:#CC181E; }
+#padSection a.linkedin { color:#0077B5; }
+#padSection a.google-plus { color:#DB4437; }
+
+#latestEntries	{ margin-top:15px;clear:both; position:relative;
+	h5 { margin-top:0;margin-bottom:10px;padding-bottom:3px;border-bottom:1px dotted #ccc;color:#333; }
+	.authorLink { text-align:right; margin:0; position:absolute; top:-1px; right:0;font-size:14px;
+		a { color:#666; }
+	}
+	ul,
+	ul li { list-style: none;margin:0;padding:0; position: relative;  }
+	li a { position: relative; }
+	li .padDate	{ color:#999; line-height: 14px; }
+	li a.padCate { font-size:10px; background-color: #e5e5e5; color:#fff;padding:0 5px; line-height:11px; text-decoration: none; }
+	li a.padTitle { color:inherit; }
+	li.textList { margin-bottom:0; border-bottom:1px dotted #ccc;
+		.padDate { margin-right:5px;vertical-align: text-bottom; }
+		a.padCate { border-radius: 2px; position:relative; vertical-align: middle; }
+		a.padTitle { display:block; overflow:hidden;clear: both;margin-top:3px;
+			&::before {
+				display: inline-block;
+				font: normal normal normal 14px/1 FontAwesome;
+				font-size: inherit;
+				text-rendering: auto;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+    			content: "\f0da";
+    			margin-right:6px;
+			}
+		}
+		
+	}
+	li.thumbnailBox { display:block; overflow:hidden;width:23.5%;margin-right:2%; float:left;
+		&:last-child { margin-right:0;}
+		.postImage { display:block; overflow:hidden;border:1px solid #ccc;margin-bottom:4px; position: relative;
+			a { display:block; overflow:hidden;border:1px solid #fff;
+				img { width:100%;height:auto; }
+			}
+			a.padCate { position: absolute;bottom:0;right:0;border:1px solid #fff; }
+		}
+		.padDate	{ display:block;font-size:10px; }
+		a.padTitle	{ display:block;clear: both;font-size:12px; line-height: 15px; }
+	}
+}
+
+
+/*-------------------------------------------*/
+/* mobile
+/*-------------------------------------------*/
+@media (max-width: 600px) {
+#padSection	{ padding:15px 10px 10px; }
+#padSection #avatar img	{ width:80px;height:auto; }
+#padSection #profileTxtSet	{ margin-left:95px; }
+#padSection dl dt span { display: block; overflow: hidden; }
+#padSection dl dt #authorName { padding-bottom:5px;}
+#padSection dl dt #pad_caption,
+#padSection dl dt #pad_twitter { padding-left:0; }
+#padSection dl dd { clear: both; width:100%; }
+
+#padSection #latestEntries {
+	h5 { margin-bottom:5px; }
+	ul li { border-bottom:1px dotted #ccc; padding:4px 0; }
+	/* show thumbnail */
+	ul li.thumbnailBox { display:block; overflow:hidden;width:100%;margin:0%; float:none;
+		.postImage { display:block; overflow:hidden;float:left;width:120px;margin-right:10px;margin-bottom:0; }
+		a.padTitle	{ clear: none; }
+		a.padCate	{ display:inline-block;padding: 1px 5px; }
+	}
+}
+
+} // @media (max-width: 600px) {

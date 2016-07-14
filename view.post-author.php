@@ -77,20 +77,33 @@ function pad_get_author_box(){
 	$entryUnit = '<div id="latestEntries">'."\n";
 	$entryUnit .= '<h5>'.$list_box_title.'</h5>'."\n";
 	if ($author_link == 'display'){
-			$entryUnit .= '<p class="authorLink"><a href="'. esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) .'" rel="author">'.$author_link_txt.'</a></p>'."\n";
+			$entryUnit .= '<p class="authorLink"><a href="'. esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) .'" rel="author"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> '.$author_link_txt.'</a></p>'."\n";
 		}
 	$entryUnit .= '<ul class="entryList">'."\n";
 	while ( $loop->have_posts() ) : $loop->the_post();
-		$categories = '';
-		foreach((get_the_category()) as $cat) {
-			$cat_id = $cat->cat_ID ;
-			break ;
-		}
-		$category_link = get_category_link( $cat_id );
-		$categories = '<a href="'.$category_link.'" title="'.$cat->cat_name.'" class="padCate cate-'.$cat->slug.'">'.$cat->cat_name.'</a>';
+		$term = '';
+		// foreach((get_the_category()) as $cat) {
+		// 	$cat_id = $cat->cat_ID ;
+		// 	break ;
+		// }
+		// $category_link = get_category_link( $cat_id );
+		// $categories = '<a href="'.$category_link.'" title="'.$cat->cat_name.'" class="padCate cate-'.$cat->slug.'">'.$cat->cat_name.'</a>';
+			
+			$taxonomies = get_the_taxonomies();
+			if ($taxonomies):
+				// get $taxonomy name
+				$taxonomy = key( $taxonomies );
+				$terms  = get_the_terms( get_the_ID(),$taxonomy );
+				$term_name	= esc_html($terms[0]->name);
+				$term_color = Vk_term_color::get_term_color( $terms[0]->term_id );
+				$term_color = ( $term_color ) ? ' style="background-color:'.$term_color.'"': '';
+				$term_link = esc_url( get_term_link( $terms[0]->term_id, $taxonomy ) );
+				$term = '<a class="padCate"'.$term_color.' href="'.$term_link.'">'.$term_name.'</a>';
+			endif;
+
 		if ($thumbnail == 'hide'){
 			/* list only */
-			$entryUnit .= '<li class="textList"><span class="padDate">'.get_the_date('Y.m.d').'</span>'.$categories.'<a href="'.get_permalink($post->ID).'" class="padTitle">'.get_the_title().'</a></li>'."\n";
+			$entryUnit .= '<li class="textList"><span class="padDate">'.get_the_date('Y.m.d').'</span>'.$term.'<a href="'.get_permalink($post->ID).'" class="padTitle">'.get_the_title().'</a></li>'."\n";
 		} else {
 			/* Show thumbnail box */
 			$entryUnit .= '<li class="thumbnailBox"><span class="postImage"><a href="'.get_permalink().'">';
@@ -105,7 +118,7 @@ function pad_get_author_box(){
 			} else {
 				$entryUnit .= '<img src="'.plugins_url().'/vk-post-author-display/images/thumbnailDummy.jpg" alt="'.get_the_title().'" />';
 			}
-			$entryUnit .= '</a></span><span class="padDate">'.get_the_date('Y.m.d').'</span>'.$categories.'<a href="'.get_permalink($post->ID).'" class="padTitle">'.get_the_title().'</a></li>'."\n";
+			$entryUnit .= $term.'</a></span><span class="padDate">'.get_the_date('Y.m.d').'</span><a href="'.get_permalink($post->ID).'" class="padTitle">'.get_the_title().'</a></li>'."\n";
 		}
 		endwhile;
 	$entryUnit .= '</ul>'."\n";
