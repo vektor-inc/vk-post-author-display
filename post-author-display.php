@@ -93,7 +93,7 @@ function pad_update_profile_fields( $contactmethods ) {
 
 	$sns_array = pad_sns_array();
 	foreach ($sns_array as $key => $value) {
-		$contactmethods['pad_'.$key] = $value['name'].' URL (Post Author Display)';
+		$contactmethods['pad_'.$key] = $value['name'].' URL <br>(VK Post Author Display)';
 	}
 
 	return $contactmethods;
@@ -137,7 +137,7 @@ function pad_get_plugin_options() {
 function pad_add_customSetting() {
 	$custom_page = add_options_page(
 		__( 'Post author display setting', 'post-author-display' ),		// Name of page
-		_x( 'Post author display', 'label in admin menu', 'post-author-display' ),				// Label in menu
+		_x( 'VK Post author display', 'label in admin menu', 'post-author-display' ),				// Label in menu
 		'edit_theme_options',				// Capability required　このメニューページを閲覧・使用するために最低限必要なユーザーレベルまたはユーザーの種類と権限。
 		'pad_plugin_options',				// ユニークなこのサブメニューページの識別子
 		'pad_add_customSettingPage'			// メニューページのコンテンツを出力する関数
