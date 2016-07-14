@@ -45,7 +45,7 @@ add_filter( 'the_content', 'pad_add_author');
 function pad_add_author($content){
 	if ( is_single()){
 		if ( get_post_type() == 'post'){
-			$author_unit = pad_get_author_box();
+			$author_unit = Vk_Post_Author_Box::pad_get_author_box();
 			$content = $content.$author_unit;
 		}
 	}
