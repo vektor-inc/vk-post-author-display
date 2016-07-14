@@ -3,8 +3,8 @@ Contributors: kurudrive,dswebstudio
 Donate link:
 Tags: post,author
 Requires at least: 3.3
-Tested up to: 4.4.2
-Stable tag: 0.3.3.0
+Tested up to: 4.5.2
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
