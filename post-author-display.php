@@ -107,8 +107,8 @@ function pad_get_default_options() {
 		'list_box_title'          => __( 'Latest entries', 'post-author-display' ),
 		'author_archive_link'     => 'hide',
 		'author_archive_link_txt' => __( 'Author Archives', 'post-author-display' ),
-		'show_thumbnail'          => 'hide',
-		'generate_thumbnail'      => 'no'
+		'show_thumbnail'          => 'display',
+		'generate_thumbnail'      => 'yes'
 	);
 	return apply_filters( 'pad_default_options', $display_author_options );
 }
