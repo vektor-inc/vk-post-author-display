@@ -34,7 +34,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 				$sns_url = get_the_author_meta( $field );
 
 				// 旧バージョンの人はアカウントだけで保存されているので、その前のURLを追加
-				if ( $key == 'twitter' ){
+				if ( $key == 'twitter' && $sns_url ){
 					$subject = $sns_url;
 					$pattern = '/https:\/\/twitter.com\//';
 					preg_match( $pattern, $subject, $matches, PREG_OFFSET_CAPTURE );
