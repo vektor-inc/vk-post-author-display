@@ -139,7 +139,7 @@ if ( ! class_exists( 'Vk_term_color' ) ) {
 		/* 	termのカラーを取得
 		/*-------------------------------------------*/
 		public static function get_term_color( $term_id ){
-			$term_color_default = '#337ab7';
+			$term_color_default = '#999999';
 			$term_color_default = apply_filters( 'term_color_default_custom', $term_color_default );
 			if ( isset( $term_id ) ) {
 				$term_color = Vk_term_color::sanitize_hex ( get_term_meta( $term_id, 'term_color', true ) );
