@@ -7,6 +7,11 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 			global $post;
 			$user_id = $post->post_author;
 			$user = get_userdata( $user_id );
+			// author caption
+			if (get_the_author_meta( 'pad_caption' )){
+				$caption = '<span id="pad_caption">'.get_the_author_meta( 'pad_caption' ).'</span>';
+			}
+
 			$profileUnit =
 				'<div id="avatar">'.get_avatar( get_the_author_meta('email'), 100 ).'</div>'.
 				'<dl id="profileTxtSet">'.
@@ -14,11 +19,6 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 			if(isset($caption)):
 				$profileUnit .= $caption;
 			endif;
-
-			// author caption
-			if (get_the_author_meta( 'pad_caption' )){
-				$caption = '<span id="pad_caption">'.get_the_author_meta( 'pad_caption' ).'</span>';
-			}
 
 			// url
 			$url = isset( $user->data->user_url ) ? $user->data->user_url : '';
