@@ -1,9 +1,5 @@
-<div class="wrap" id="pad_plugin_options">
-<?php screen_icon(); ?>
-<h2><?php _e( 'Post author display setting', 'post-author-display' ); ?></h2>
-
-
-<div style="width:68%;display:inline-block;vertical-align:top;">
+<?php
+function pad_the_admin_body(){ ?>
 
 <form method="post" action="options.php">
 <?php
@@ -13,6 +9,8 @@
 
 ?>
 <div>
+<section>
+<h3><?php _e( 'Post Author Box Setting', 'post-author-display');?></h3>
 <p>[ <a href="https://gravatar.com/" target="_blank"><?php  _e( 'Set your image (Gravatar)', 'post-author-display' ); ?></a> ]</p>
 <p>[ <a href="<?php echo get_admin_url(); ?>profile.php" target="_blank"><?php _e( 'Set your display name, twitter, caption, description', 'post-author-display' );?></a> ]</p>
 <table class="form-table">
@@ -83,14 +81,8 @@ foreach( $show_thumbnails as $show_thumbnail_value => $show_thumbnail_lavel) {
 
 </table>
 <?php submit_button(); ?>
-</div><!-- [ /#sogoHeadBnr ] -->
+</section>
+</div>
 </form>
-</div>
 
-<div style="width:29%;display:block; overflow:hidden;float:right;">
-	<a href="http://bizvektor.com/en/" target="_blank" title="<?php _e( 'Free WordPress theme for businesses', 'post-author-display' );?>">
-		<img src="<?php echo plugins_url('/vk-post-author-display/images/bizVektor-ad-banner-vert.jpg') ?>" alt="<?php _e( 'Download Biz Vektor free WordPress theme for businesses', 'post-author-display' ); ?>" style="max-width:100%;" />
-	</a>
-</div>
-
-</div>
+<?php } ?>

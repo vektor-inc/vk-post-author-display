@@ -35,6 +35,7 @@ define( 'VK_PAD_DIR', plugin_dir_path( __FILE__ ) );
 
 require_once( 'class.term_color.php' );
 require_once( VK_PAD_DIR . 'view.post-author.php' );
+require_once( 'vk-admin-config.php' );
 
 	// Add a link to this plugin's settings page
 function pad_set_plugin_meta( $links ) { 
@@ -175,6 +176,11 @@ function suffix2console() {
 /*-------------------------------------------*/
 function pad_add_customSettingPage() {
 	require_once( VK_PAD_DIR . 'view.post-author-admin.php' );
+	$get_page_title = __( 'Post author display setting', 'post-author-display' );
+	$get_logo_html = '';
+	$get_menu_html = '<li><a href="#post_author_box">'.__('Post Author Box Setting', 'post-author-display').'</a></li>';
+	$get_menu_html .='<li><a href="'.get_admin_url().'profile.php" target="_blank">'.__( 'Set your profile', 'post-author-display' ).'</a></li>';
+	Vk_Admin::admin_page_frame( $get_page_title, 'pad_the_admin_body', $get_logo_html, $get_menu_html );
 }
 
 function pad_plugin_options_validate( $input ) {
