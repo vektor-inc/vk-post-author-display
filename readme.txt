@@ -4,7 +4,7 @@ Donate link:
 Tags: post,author
 Requires at least: 3.3
 Tested up to: 4.5.2
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -124,6 +124,10 @@ Display to Post Author Information Box on bottom of the contents.
 = 1.0.1 =
 
 * [ Bug fix ] twitter icon
+
+= 1.1.0 =
+
+* Change Setting Page UI
 
 == Upgrade notice ==
 
