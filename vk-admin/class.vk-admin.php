@@ -40,13 +40,13 @@ class Vk_Admin {
 	/*  admin_banner
 	/*--------------------------------------------------*/
 	public static function admin_banner() {
-		// print '<pre style="text-align:left">';print_r($a);print '</pre>';
-		$dir_url = plugin_dir_url( __FILE__ );
+		$dir_url = self::admin_directory_url();
 		if ( get_locale() == 'ja' ) {
 			$banner = '<a href="http://lightning.vektor-inc.co.jp/ja/" target="_blank"><img src="'.$dir_url.'/images/lightning_bnr_ja.jpg" alt="lightning_bnr_ja" /></a>';
 		} else {
 			$banner = '<a href="http://lightning.vektor-inc.co.jp/" target="_blank"><img src="'.$dir_url.'/images/lightning_bnr_en.jpg" alt="lightning_bnr_en" /></a>';
 		}
+		$banner .= '<a href="http://www.vektor-inc.co.jp" class="vektor_logo" target="_blank"><img src="'.$dir_url.'/images/vektor_logo.png" alt="lightning_bnr_en" /></a>';
 		return apply_filters( 'vkExUnit_news_admin_banner_html' , $banner );
 	}
 
@@ -129,7 +129,7 @@ class Vk_Admin {
 		<div class="wrap vk_admin_page">
 			<div class="adminMain">
 
-				<div id="adminContent_sub">
+				<div id="adminContent_sub" class="scrTracking">
 					<?php echo $get_logo_html; ?>
 					<h2 class="page_title"><?php echo $get_page_title;?></h2>
 					<div class="vk_option_nav">
@@ -146,7 +146,7 @@ class Vk_Admin {
 
 			</div><!-- [ /.adminMain ] -->
 
-			<div class="adminSub">
+			<div class="adminSub scrTracking">
 			<div class="infoBox"><?php echo Vk_Admin::get_news_body();?></div>
 			<div class="adminBnr"><?php echo Vk_Admin::admin_banner();?></div>
 			</div><!-- [ /.adminSub ] -->

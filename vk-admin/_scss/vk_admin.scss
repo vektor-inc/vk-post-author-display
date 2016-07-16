@@ -29,18 +29,23 @@
 	tr.dev_object{ display:none; }
 
 	.adminMain { display:block; overflow:hidden;width:74%;float:left;
-		#adminContent_sub { display:block; overflow:hidden;width:24%;float:left; }
+		#adminContent_sub { display:block; overflow:hidden;width:24%;float:left;padding-bottom:10px; }
 		#adminContent_main { display:block; overflow:hidden;width:74%;float:right; }
 	}
 
-	.adminSub { display:block; overflow:hidden;width:24%;float:right;
-		.infoBox { display:block; overflow:hidden;padding: 1em;margin-right:1em; background-color: #fff;	}
+	.adminSub { display:block; overflow:hidden;width:24%;float:right;padding-bottom:10px;
+		.infoBox { display:block; overflow:hidden;padding: 1em;margin-right:1em; background-color: #fff; }
 		.adminBnr{
-			display:block; overflow:hidden;padding: 1em;margin-right:1em; background-color: #fff;
+			display:block; overflow:hidden;margin-right:1em;
 			margin-top: 1em;
 			a{ display: block; }
 			img{ max-width: 100%;height: auto;
 				&:hover{ opacity: 0.7; }
+			}
+			.vektor_logo { 
+				margin-top:1em;
+				text-align:right;
+				img { width:150px;}
 			}
 		}
 		h1.veu_admin_subTitle { background-color: #ccc;width:auto; padding: 5px 10px; border-radius: 3px;margin-bottom:15px; }
