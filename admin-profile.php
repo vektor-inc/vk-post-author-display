@@ -1,6 +1,36 @@
 <?php
 
 /*-------------------------------------------*/
+/*	Add user sns link
+/*-------------------------------------------*/
+
+function pad_sns_array(){
+	$sns_array = array( 
+		'twitter'     => array( 'name' => 'Twitter', 'icon' => 'fa-twitter-square' ),
+		'facebook'    => array( 'name' => 'Facebook', 'icon' => 'fa-facebook-square' ),
+		'instagram'   => array( 'name' => 'Instagram', 'icon' => 'fa-instagram' ),
+		'youtube'     => array( 'name' => 'You Tube', 'icon' => 'fa-youtube-square' ),
+		'linkedin'    => array( 'name' => 'LinkedIn', 'icon' => 'fa-linkedin-square' ),
+		'google-plus' => array( 'name' => 'Google+', 'icon' => 'fa-google-plus-square' ),
+		);
+	return $sns_array;
+}
+
+function pad_update_profile_fields( $contactmethods ) {
+
+	//項目の追加
+	$contactmethods['pad_caption'] = __( 'Caption(Post Author Display)', 'post-author-display' );
+
+	$sns_array = pad_sns_array();
+	foreach ($sns_array as $key => $value) {
+		$contactmethods['pad_'.$key] = $value['name'].' URL <br>(VK Post Author Display)';
+	}
+
+	return $contactmethods;
+}
+add_filter('user_contactmethods','pad_update_profile_fields',10,1);
+
+/*-------------------------------------------*/
 /*	vk post author profile image
 /*-------------------------------------------*/
 require_once( VK_PAD_DIR . 'view.admin-profile.php' );
