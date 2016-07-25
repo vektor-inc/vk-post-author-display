@@ -28,7 +28,6 @@ License: GPL2
 
 $data = get_file_data( __FILE__, array( 'version' => 'Version','textdomain' => 'Text Domain' ) );
 define( 'VK_PAD_VERSION', $data['version'] );
-define( 'VK_PAD_TEXTDOMAIN', $data['textdomain'] );
 define( 'VK_PAD_BASENAME', plugin_basename( __FILE__ ) );
 define( 'VK_PAD_URL', plugin_dir_url( __FILE__ ) );
 define( 'VK_PAD_DIR', plugin_dir_path( __FILE__ ) );
@@ -36,10 +35,11 @@ define( 'VK_PAD_DIR', plugin_dir_path( __FILE__ ) );
 require_once( 'class.term_color.php' );
 require_once( VK_PAD_DIR . 'view.post-author.php' );
 require_once( 'vk-admin-config.php' );
+require_once( VK_PAD_DIR . 'admin-profile.php' );
 
 	// Add a link to this plugin's settings page
 function pad_set_plugin_meta( $links ) { 
-    $settings_link             = '<a href="options-general.php?page=pad_plugin_options">'.__( 'Setting', VK_PAD_TEXTDOMAIN ).'</a>';
+    $settings_link             = '<a href="options-general.php?page=pad_plugin_options">'.__( 'Setting', 'post-author-display' ).'</a>';
     array_unshift($links, $settings_link);
     return $links;
 }
@@ -137,8 +137,8 @@ function pad_get_plugin_options() {
 /*-------------------------------------------*/
 function pad_add_customSetting() {
 	$custom_page = add_options_page(
-		__( 'Post author display setting', 'post-author-display' ),		// Name of page
-		_x( 'VK Post author display', 'label in admin menu', 'post-author-display' ),				// Label in menu
+		__( 'VK Post Author Display setting', 'post-author-display' ),		// Name of page
+		_x( 'VK Post Author Display', 'label in admin menu', 'post-author-display' ),				// Label in menu
 		'edit_theme_options',				// Capability required　このメニューページを閲覧・使用するために最低限必要なユーザーレベルまたはユーザーの種類と権限。
 		'pad_plugin_options',				// ユニークなこのサブメニューページの識別子
 		'pad_add_customSettingPage'			// メニューページのコンテンツを出力する関数
@@ -147,19 +147,6 @@ function pad_add_customSetting() {
 	return;
 }
 add_action( 'admin_menu', 'pad_add_customSetting' );
-
-/*-------------------------------------------*/
-/*	管理画面_admin_head JavaScriptのデバッグコンソールにhook_suffixの値を出力
-/*-------------------------------------------*/
-
-add_action("admin_head", 'suffix2console');
-function suffix2console() {
-		global $hook_suffix;
-		if (is_user_logged_in()) {
-				$str = "<script type=\"text/javascript\">console.log('%s')</script>";
-				printf($str, $hook_suffix);
-		}
-}
 
 /*-------------------------------------------*/
 /*	Setting page
@@ -171,17 +158,6 @@ function suffix2console() {
 // function pad_custom_enqueue_scripts( $hook_suffix ) {
 // 	wp_enqueue_style( 'pad_plugin_options', get_template_directory_uri() . '/inc/theme-options.css', false, '2012-11-17' );
 // }
-/*-------------------------------------------*/
-/*	Setting Page
-/*-------------------------------------------*/
-function pad_add_customSettingPage() {
-	require_once( VK_PAD_DIR . 'view.post-author-admin.php' );
-	$get_page_title = __( 'Post author display setting', 'post-author-display' );
-	$get_logo_html = '';
-	$get_menu_html = '<li><a href="#post_author_box">'.__('Post Author Box Setting', 'post-author-display').'</a></li>';
-	$get_menu_html .='<li><a href="'.get_admin_url().'profile.php" target="_blank">'.__( 'Set your profile', 'post-author-display' ).'</a></li>';
-	Vk_Admin::admin_page_frame( $get_page_title, 'pad_the_admin_body', $get_logo_html, $get_menu_html );
-}
 
 function pad_plugin_options_validate( $input ) {
 	$output = $defaults = pad_get_default_options();
@@ -240,7 +216,7 @@ function pad_plugin_disable_thumbnail( $sizes ) {
 /*-------------------------------------------*/
 /*	vk post author text domain load
 /*-------------------------------------------*/
-function post_author_display_text_domain() {
+function pad_text_domain() {
 	load_plugin_textdomain( 'post-author-display', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
-add_action( 'init', 'post_author_display_text_domain' );
+add_action( 'init', 'pad_text_domain' );

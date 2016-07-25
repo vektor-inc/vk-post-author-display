@@ -131,7 +131,9 @@ class Vk_Admin {
 
 				<div id="adminContent_sub" class="scrTracking">
 					<?php echo $get_logo_html; ?>
+					<?php if ( $get_page_title ) : ?>
 					<h2 class="page_title"><?php echo $get_page_title;?></h2>
+					<?php endif; ?>
 					<div class="vk_option_nav">
 						<ul>
 						<?php echo $get_menu_html; ?>

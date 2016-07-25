@@ -11,8 +11,6 @@ function pad_the_admin_body(){ ?>
 <div>
 <section>
 <h3><?php _e( 'Post Author Box Setting', 'post-author-display');?></h3>
-<p>[ <a href="https://gravatar.com/" target="_blank"><?php  _e( 'Set your image (Gravatar)', 'post-author-display' ); ?></a> ]</p>
-<p>[ <a href="<?php echo get_admin_url(); ?>profile.php" target="_blank"><?php _e( 'Set your display name, twitter, caption, description', 'post-author-display' );?></a> ]</p>
 <table class="form-table">
 <tr>
 <th><?php _e( 'Post author box title', 'post-author-display' ); ?></th>

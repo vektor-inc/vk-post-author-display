@@ -10,17 +10,15 @@
 .padSection dl,
 .padSection dl dt,
 .padSection dl dd	{ margin:0px; padding:0px; background:none; border:none;color:inherit; }
-.padSection dl dt	{ }
-.padSection dl dt #authorName {font-size:18px; }
-.padSection dl dt #pad_caption {padding-left:10px;font-size:12px;font-weight: lighter;}
-.padSection dl dt #pad_twitter {padding-left:10px;font-size:12px;font-weight: lighter;}
+.padSection dl dt .authorName {font-size:18px; }
+.padSection dl dt .pad_caption {padding-left:10px;font-size:12px;font-weight: lighter;}
 .padSection::before	{ display:block; overflow:hidden; width:100%;}
 
 .padSection h4	{ margin-bottom:20px;padding-bottom:2px; border-bottom:1px dotted #333;}
-.padSection #avatar	{ float:left;}
-.padSection #avatar img	{ border:1px solid #ccc;margin-bottom:15px; }
-.padSection #profileTxtSet	{ margin-left:130px; display:block; overflow:hidden; }
-.padSection #profileTxtSet dt	{ margin-bottom:5px; }
+.padSection .avatar	{ float:left;}
+.padSection .avatar img	{ border:1px solid #ccc;margin-bottom:15px;width:100px;height:auto; }
+.padSection .profileTxtSet	{ margin-left:130px; display:block; overflow:hidden; }
+.padSection .profileTxtSet dt	{ margin-bottom:5px; }
 
 .padSection .sns_icons { list-style: none;margin:10px 0;padding:0; }
 .padSection .sns_icons li { display:inline;font-size:28px; margin-right:10px; }
@@ -79,12 +77,11 @@
 /*-------------------------------------------*/
 @media (max-width: 600px) {
 .padSection	{ padding:15px 10px 10px; }
-.padSection #avatar img	{ width:80px;height:auto; }
-.padSection #profileTxtSet	{ margin-left:95px; }
+.padSection .avatar img	{ width:80px;height:auto; }
+.padSection .profileTxtSet	{ margin-left:95px; }
 .padSection dl dt span { display: block; overflow: hidden; }
-.padSection dl dt #authorName { padding-bottom:5px;}
-.padSection dl dt #pad_caption,
-.padSection dl dt #pad_twitter { padding-left:0; }
+.padSection dl dt .authorName { padding-bottom:5px;}
+.padSection dl dt .pad_caption { padding-left:0; }
 .padSection dl dd { clear: both; width:100%; }
 
 .padSection #latestEntries {

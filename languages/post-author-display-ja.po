@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BizVektor\n"
 "Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
-"POT-Creation-Date: 2016-07-14 23:52+0900\n"
+"POT-Creation-Date: 2016-07-24 16:33+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Kurudrive <kurudrive@gmail.com>\n"
 "Language-Team: Vektor,Inc. <info@vektor-inc.co.jp>\n"
@@ -47,7 +47,7 @@ msgstr "最新の投稿"
 msgid "Author Archives"
 msgstr "この著者の記事一覧"
 
-#: post-author-display.php:139 view.post-author-admin.php:3
+#: post-author-display.php:139 vk-admin-config.php:19
 msgid "Post author display setting"
 msgstr "Post author display設定"
 
@@ -56,59 +56,71 @@ msgctxt "label in admin menu"
 msgid "VK Post author display"
 msgstr "VK Post author display"
 
-#: view.post-author-admin.php:16
+#: post-author-display.php:232
+msgid "Profile image<br>(VK Post Author Display)"
+msgstr "プロフィール写真<br>(VK Post Author Display)"
+
+#: post-author-display.php:248
+msgid "Choose image"
+msgstr "写真を選択"
+
+#: view.post-author-admin.php:13 vk-admin-config.php:21
+msgid "Post Author Box Setting"
+msgstr "投稿者ボックスの設定"
+
+#: view.post-author-admin.php:14
 msgid "Set your image (Gravatar)"
 msgstr "プロフィール画像の設定(Gravatar)"
 
-#: view.post-author-admin.php:17
+#: view.post-author-admin.php:15
 msgid "Set your display name, twitter, caption, description"
 msgstr "表示名、Twitter、肩書、プロフィール情報の編集"
 
-#: view.post-author-admin.php:20
+#: view.post-author-admin.php:18
 msgid "Post author box title"
 msgstr "Post authorボックスのタイトル"
 
-#: view.post-author-admin.php:24
+#: view.post-author-admin.php:22
 msgid "Post list box title"
 msgstr "最新記事一覧ボックスのタイトル"
 
-#: view.post-author-admin.php:29
+#: view.post-author-admin.php:27
 msgid "Display post author archive page link"
 msgstr "著者アーカイブページへのリンクを表示する"
 
-#: view.post-author-admin.php:32 view.post-author-admin.php:52
+#: view.post-author-admin.php:30 view.post-author-admin.php:50
 msgid "hide"
 msgstr "表示しない"
 
-#: view.post-author-admin.php:33
+#: view.post-author-admin.php:31
 msgid "display author archive link"
 msgstr "著者アーカイブのリンクを表示する"
 
-#: view.post-author-admin.php:45
+#: view.post-author-admin.php:43
 msgid "Author archives text"
 msgstr "著者アーカイブリンクのテキスト"
 
-#: view.post-author-admin.php:50
+#: view.post-author-admin.php:48
 msgid "Display post thumbnail image"
 msgstr "記事のサムネイル画像を表示する"
 
-#: view.post-author-admin.php:52
+#: view.post-author-admin.php:50
 msgid "display thumbnail image"
 msgstr "サムネイルを表示する"
 
-#: view.post-author-admin.php:64
+#: view.post-author-admin.php:62
 msgid "Use custom size thumbnails for thumbnails display?"
 msgstr "サムネイルのカスタムサイズを使用する"
 
-#: view.post-author-admin.php:67
+#: view.post-author-admin.php:65
 msgid "yes"
 msgstr "はい"
 
-#: view.post-author-admin.php:68
+#: view.post-author-admin.php:66
 msgid "no"
 msgstr "いいえ"
 
-#: view.post-author-admin.php:80
+#: view.post-author-admin.php:78
 msgid ""
 "* If you already have many posts in your WordPress, you have to regenerate "
 "the thumbnail images using (for example) the \"Regenerate Thumbnails\" "
@@ -117,13 +129,16 @@ msgstr ""
 "※過去のサムネイル画像のサイズをカスタムサイズに適切するために「Regenerate "
 "Thumbnails」のようなプラグインを使ってください。"
 
-#: view.post-author-admin.php:91
-msgid "Free WordPress theme for businesses"
-msgstr "ビジネス用の無料WordPressテーマ"
+#: vk-admin-config.php:22
+msgid "Edit your profile"
+msgstr "プロフィールを編集"
 
-#: view.post-author-admin.php:92
-msgid "Download Biz Vektor free WordPress theme for businesses"
-msgstr "無料WordPressテーマ「BizVektor」をダウンロードする"
+#: vk-admin/class.vk-admin.php:85
+msgid "Sorry, there is no post"
+msgstr ""
 
-#~ msgid "Twitter(Post Author Display)"
-#~ msgstr "Twitter(Post Author Displayプラグインにより追加)"
+#~ msgid "Free WordPress theme for businesses"
+#~ msgstr "ビジネス用の無料WordPressテーマ"
+
+#~ msgid "Download Biz Vektor free WordPress theme for businesses"
+#~ msgstr "無料WordPressテーマ「BizVektor」をダウンロードする"
