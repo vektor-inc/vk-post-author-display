@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BizVektor\n"
 "Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
-"POT-Creation-Date: 2016-07-25 14:58+0900\n"
+"POT-Creation-Date: 2016-07-25 17:46+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Kurudrive <kurudrive@gmail.com>\n"
 "Language-Team: Vektor,Inc. <info@vektor-inc.co.jp>\n"
@@ -23,31 +23,31 @@ msgstr ""
 "X-Generator: Poedit 1.5.7\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: post-author-display.php:42
+#: admin-profile.php:22
+msgid "Caption<br>(VK Post Author Display)"
+msgstr "肩書<br>(VK Post Author Display)"
+
+#: post-author-display.php:60
 msgid "Setting"
 msgstr "設定"
-
-#: post-author-display.php:93
-msgid "Caption(Post Author Display)"
-msgstr "肩書(Post Author Displayプラグイン)"
 
 #: post-author-display.php:107
 msgid "Author Profile"
 msgstr "投稿者プロフィール"
 
-#: post-author-display.php:108
+#: post-author-display.php:109
 msgid "Latest entries"
 msgstr "最新の投稿"
 
-#: post-author-display.php:110
+#: post-author-display.php:111
 msgid "Author Archives"
 msgstr "この著者の記事一覧"
 
-#: post-author-display.php:140
+#: post-author-display.php:141
 msgid "VK Post Author Display setting"
 msgstr "VK Post Author Display 設定"
 
-#: post-author-display.php:141
+#: post-author-display.php:142
 msgctxt "label in admin menu"
 msgid "VK Post Author Display"
 msgstr "VK Post Author Display"
@@ -74,53 +74,65 @@ msgstr ""
 
 #: view.admin.php:13 inc/vk-admin-config.php:21
 msgid "Post Author Box Setting"
-msgstr "投稿者ボックスの設定"
+msgstr "著者情報表示エリアの設定"
 
 #: view.admin.php:16
 msgid "Post author box title"
-msgstr "Post authorボックスのタイトル"
+msgstr "タイトル"
 
 #: view.admin.php:20
-msgid "Post list box title"
-msgstr "最新記事一覧ボックスのタイトル"
+msgid "Profile Picture Style"
+msgstr "プロフィール写真の形状"
 
-#: view.admin.php:25
+#: view.admin.php:26
+msgid "Square"
+msgstr "四角形"
+
+#: view.admin.php:27
+msgid "Circle"
+msgstr "円形"
+
+#: view.admin.php:39
+msgid "Post list box title"
+msgstr "最新記事一覧のタイトル"
+
+#: view.admin.php:44
 msgid "Display post author archive page link"
 msgstr "著者アーカイブページへのリンクを表示する"
 
-#: view.admin.php:28 view.admin.php:48
+#: view.admin.php:47 view.admin.php:67
 msgid "hide"
 msgstr "表示しない"
 
-#: view.admin.php:29
+#: view.admin.php:48
 msgid "display author archive link"
 msgstr "著者アーカイブのリンクを表示する"
 
-#: view.admin.php:41
+#: view.admin.php:60
 msgid "Author archives text"
 msgstr "著者アーカイブリンクのテキスト"
 
-#: view.admin.php:46
+#: view.admin.php:65
 msgid "Display post thumbnail image"
 msgstr "記事のサムネイル画像を表示する"
 
-#: view.admin.php:48
+#: view.admin.php:67
 msgid "display thumbnail image"
 msgstr "サムネイルを表示する"
 
-#: view.admin.php:60
+#: view.admin.php:79
 msgid "Use custom size thumbnails for thumbnails display?"
 msgstr "サムネイルのカスタムサイズを使用する"
 
-#: view.admin.php:63
+#: view.admin.php:82
 msgid "yes"
 msgstr "はい"
 
-#: view.admin.php:64
+#: view.admin.php:83
 msgid "no"
 msgstr "いいえ"
 
-#: view.admin.php:76
+#: view.admin.php:95
 msgid ""
 "* If you already have many posts in your WordPress, you have to regenerate "
 "the thumbnail images using (for example) the \"Regenerate Thumbnails\" "
@@ -142,7 +154,7 @@ msgstr "VK Post Author Display 設定"
 msgid "Edit your profile"
 msgstr "プロフィールを編集"
 
-#: inc/vk-admin/class.vk-admin.php:85
+#: inc/vk-admin/class.vk-admin.php:85 vk-admin/class.vk-admin.php:85
 msgid "Sorry, there is no post"
 msgstr "投稿はありません"
 

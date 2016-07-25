@@ -17,6 +17,25 @@ function pad_the_admin_body(){ ?>
 <td><?php echo get_pad_options('author_box_title'); ?> -> <input type="text" name="pad_plugin_options[author_box_title]" id="author_box_title" value="<?php echo esc_attr( $options_pad['author_box_title'] ); ?>" style="width:50%;" /></td>
 </tr>
 <tr>
+<th><?php _e( 'Profile Picture Style', 'post-author-display' ); ?></th>
+<td>
+<?php
+if ( !isset( $options_pad['author_picture_style'] ) ) $options_pad['author_picture_style'] = 'square';
+
+$picture_designs = array(
+	'square' => __( 'Square', 'post-author-display' ),
+	'circle' => __( 'Circle', 'post-author-display' )
+	);
+foreach( $picture_designs as $picture_design_value => $picture_design_lavel) {
+	$checked = ''; ?>
+	<label class="form_horizontal_item">
+	<?php if ( $picture_design_value == $options_pad['author_picture_style'] ) : $checked = ' checked'; endif; ?>
+	<input type="radio" name="pad_plugin_options[author_picture_style]" value="<?php echo $picture_design_value ?>"<?php echo $checked; ?>> <?php echo $picture_design_lavel ?>
+	</label>
+<?php } ?>
+</td>
+</tr>
+<tr>
 <th><?php _e( 'Post list box title', 'post-author-display' ); ?></th>
 <td><?php echo get_pad_options('list_box_title'); ?> -> <input type="text" name="pad_plugin_options[list_box_title]" id="list_box_title" value="<?php echo esc_attr( $options_pad['list_box_title'] ); ?>" style="width:50%;" /></td>
 </tr>
@@ -30,7 +49,7 @@ function pad_the_admin_body(){ ?>
 	);
 foreach( $author_archive_links as $author_archive_link_value => $author_archive_link_lavel) {
 	$checked = ''; ?>
-	<label>
+	<label class="form_horizontal_item">
 	<?php if ( $author_archive_link_value == $options_pad['author_archive_link'] ) : $checked = ' checked'; endif; ?>
 	<input type="radio" name="pad_plugin_options[author_archive_link]" value="<?php echo $author_archive_link_value ?>"<?php echo $checked; ?>> <?php echo $author_archive_link_lavel ?>
 	</label>
@@ -48,7 +67,7 @@ foreach( $author_archive_links as $author_archive_link_value => $author_archive_
 <?php $show_thumbnails = array('hide' => __( 'hide', 'post-author-display' ), 'display' => __( 'display thumbnail image', 'post-author-display' ), );
 foreach( $show_thumbnails as $show_thumbnail_value => $show_thumbnail_lavel) {
 	$checked = ''; ?>
-	<label>
+	<label class="form_horizontal_item">
 	<?php if ( $show_thumbnail_value == $options_pad['show_thumbnail'] ) : $checked = ' checked'; endif; ?>
 	<input type="radio" name="pad_plugin_options[show_thumbnail]" value="<?php echo $show_thumbnail_value ?>"<?php echo $checked; ?>> <?php echo $show_thumbnail_lavel ?>
 	</label>
@@ -68,12 +87,12 @@ foreach( $show_thumbnails as $show_thumbnail_value => $show_thumbnail_lavel) {
 			if ( ( !isset($options_pad['generate_thumbnail']) && $generate_thumbnail_value == 'no'  )
 				 || ( $options_pad['generate_thumbnail'] == $generate_thumbnail_value ) )
 					$checked = ' checked'; ?>
-			<label>
+			<label class="form_horizontal_item">
 				<input type="radio" name="pad_plugin_options[generate_thumbnail]" value="<?php echo $generate_thumbnail_value ?>"<?php echo $checked ?>/>
 				<?php echo $generate_thumbnail_label ?>
 			</label><?php
 		} ?><br />
-		<?php _e('* If you already have many posts in your WordPress, you have to regenerate the thumbnail images using (for example) the "Regenerate Thumbnails" plugin.','post-author-display');?>
+		<p><?php _e('* If you already have many posts in your WordPress, you have to regenerate the thumbnail images using (for example) the "Regenerate Thumbnails" plugin.','post-author-display');?></p>
 	</td>
 </tr>
 

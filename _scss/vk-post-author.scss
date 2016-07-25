@@ -15,8 +15,10 @@
 .padSection::before	{ display:block; overflow:hidden; width:100%;}
 
 .padSection h4	{ margin-bottom:20px;padding-bottom:2px; border-bottom:1px dotted #333;}
-.padSection .avatar	{ float:left;}
-.padSection .avatar img	{ border:1px solid #ccc;margin-bottom:15px;width:100px;height:auto; }
+.padSection .avatar	{ float:left;
+	&.circle img { border-radius: 50%; }
+	img	{ border:1px solid #ccc;margin-bottom:15px;width:100px;height:auto; }
+}
 .padSection .profileTxtSet	{ margin-left:130px; display:block; overflow:hidden; }
 .padSection .profileTxtSet dt	{ margin-bottom:5px; }
 

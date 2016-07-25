@@ -26,6 +26,24 @@ License: GPL2
 		Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+/*-------------------------------------------*/
+/* Setting & load file
+/*-------------------------------------------*/
+/*	vk post author text domain load
+/*-------------------------------------------*/
+/*	Display post author unit
+/*-------------------------------------------*/
+/*	front display css
+/*-------------------------------------------*/
+/*	init
+/*-------------------------------------------*/
+/*	メニューに追加
+/*-------------------------------------------*/
+
+/*-------------------------------------------*/
+/* Setting & load file
+/*-------------------------------------------*/
+
 $data = get_file_data( __FILE__, array( 'version' => 'Version','textdomain' => 'Text Domain' ) );
 define( 'VK_PAD_VERSION', $data['version'] );
 define( 'VK_PAD_BASENAME', plugin_basename( __FILE__ ) );
@@ -46,6 +64,12 @@ function pad_set_plugin_meta( $links ) {
  add_filter('plugin_action_links_'.VK_PAD_BASENAME , 'pad_set_plugin_meta', 10, 1);
 
 /*-------------------------------------------*/
+/*	vk post author text domain load
+/*-------------------------------------------*/
+function pad_text_domain() {
+	load_plugin_textdomain( 'post-author-display', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+}
+add_action( 'init', 'pad_text_domain' );
 
 /*-------------------------------------------*/
 /*	Display post author unit
@@ -53,9 +77,12 @@ function pad_set_plugin_meta( $links ) {
 add_filter( 'the_content', 'pad_add_author');
 function pad_add_author($content){
 	if ( is_single() ){
-		if ( get_post_type() == 'post'){
-			$author_unit = Vk_Post_Author_Box::pad_get_author_box();
-			$content = $content.$author_unit;
+		$post_types = apply_filters( 'pad_display_post_types', array('post') );
+		foreach ($post_types as $key => $value) {
+			if ( get_post_type() == $value ){
+				$author_unit = Vk_Post_Author_Box::pad_get_author_box();
+				$content = $content.$author_unit;
+			}
 		}
 	}
 	return $content;
@@ -72,9 +99,13 @@ function pad_set_css(){
 	}
 }
 
+/*-------------------------------------------*/
+/*	init
+/*-------------------------------------------*/
 function pad_get_default_options() {
 	$display_author_options = array(
 		'author_box_title'        => __( 'Author Profile', 'post-author-display' ),
+		'author_picture_style'   => 'square',
 		'list_box_title'          => __( 'Latest entries', 'post-author-display' ),
 		'author_archive_link'     => 'hide',
 		'author_archive_link_txt' => __( 'Author Archives', 'post-author-display' ),
@@ -133,6 +164,7 @@ function pad_plugin_options_validate( $input ) {
 	$output = $defaults = pad_get_default_options();
 
 	$output['author_box_title']         = $input['author_box_title'];
+	$output['author_picture_style']    = $input['author_picture_style'];
 	$output['list_box_title']           = $input['list_box_title'];
 	$output['author_archive_link']      = $input['author_archive_link'];
 	$output['author_archive_link_txt']  = $input['author_archive_link_txt'];
@@ -182,11 +214,3 @@ pad_plugin_special_thumbnail();
 function pad_plugin_disable_thumbnail( $sizes ) {
 	unset( $sizes['pad_thumb'] );
 }
-
-/*-------------------------------------------*/
-/*	vk post author text domain load
-/*-------------------------------------------*/
-function pad_text_domain() {
-	load_plugin_textdomain( 'post-author-display', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-}
-add_action( 'init', 'pad_text_domain' );

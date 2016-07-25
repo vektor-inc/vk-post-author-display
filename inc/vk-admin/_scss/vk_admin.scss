@@ -30,7 +30,9 @@
 
 	.adminMain { display:block; overflow:hidden;width:74%;float:left;
 		#adminContent_sub { display:block; overflow:hidden;width:23%;float:left;padding-bottom:10px; }
-		#adminContent_main { display:block; overflow:hidden;width:74%;float:right; }
+		#adminContent_main { display:block; overflow:hidden;width:74%;float:right;
+			.form_horizontal_item { margin-right:1em; }
+		}
 	}
 
 	.adminSub { display:block; overflow:hidden;width:24%;float:right;padding-bottom:10px;

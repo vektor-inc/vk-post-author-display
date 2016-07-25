@@ -15,7 +15,9 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 				$caption = '<span id="pad_caption" class="pad_caption">'.get_the_author_meta( 'pad_caption' ).'</span>';
 			}
 
-			$profileUnit = '<div id="avatar" class="avatar">';
+			$author_picture_style = ( !isset( $options['author_picture_style'] ) || !$options['author_picture_style']) ? 'square' : $options['author_picture_style'];
+
+			$profileUnit = '<div id="avatar" class="avatar '.esc_attr( $author_picture_style ).'">';
 			$profile_image_id = get_the_author_meta('user_profile_image');
 			if ( $profile_image_id ){
 				$profile_image_src = wp_get_attachment_image_src( $profile_image_id,'thumbnail');
