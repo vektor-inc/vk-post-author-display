@@ -32,9 +32,9 @@ define( 'VK_PAD_BASENAME', plugin_basename( __FILE__ ) );
 define( 'VK_PAD_URL', plugin_dir_url( __FILE__ ) );
 define( 'VK_PAD_DIR', plugin_dir_path( __FILE__ ) );
 
-require_once( 'class.term_color.php' );
+require_once( VK_PAD_DIR . 'inc/class.term_color.php' );
 require_once( VK_PAD_DIR . 'view.post-author.php' );
-require_once( 'vk-admin-config.php' );
+require_once( VK_PAD_DIR . 'inc/vk-admin-config.php' );
 require_once( VK_PAD_DIR . 'admin-profile.php' );
 
 	// Add a link to this plugin's settings page
