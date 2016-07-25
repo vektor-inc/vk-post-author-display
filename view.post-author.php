@@ -28,7 +28,8 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 			}
 
 			$sns_array = pad_sns_array();
-
+			$sns_icons = '';
+			
 			foreach ($sns_array as $key => $value) {
 				$field = 'pad_'.$key;
 				$sns_url = get_the_author_meta( $field );
