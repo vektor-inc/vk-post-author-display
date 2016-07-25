@@ -1,10 +1,10 @@
 === VK Post Author Display ===
-Contributors: kurudrive,dswebstudio
+Contributors: kurudrive,dswebstudio,mypacecreator,gatespace
 Donate link:
 Tags: post,author
 Requires at least: 3.3
-Tested up to: 4.4.2
-Stable tag: 0.3.3.0
+Tested up to: 4.5.2
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -114,6 +114,20 @@ Display to Post Author Information Box on bottom of the contents.
 = 0.3.3.0 =
 
 * Add author link
+
+= 1.0.0 =
+
+* Add SNS icons
+* Category color support
+* Design tuning
+
+= 1.0.1 =
+
+* [ Bug fix ] twitter icon
+
+= 1.1.0 =
+
+* Change Setting Page UI
 
 == Upgrade notice ==
 
