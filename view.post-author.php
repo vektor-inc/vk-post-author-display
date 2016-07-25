@@ -5,20 +5,38 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 
 		public static function pad_get_author_profile(  ){
 			global $post;
-			$user_id = $post->post_author;
-			$user = get_userdata( $user_id );
+			$user_id   = $post->post_author;
+			$user      = get_userdata( $user_id );
+			$options   = pad_get_plugin_options();
+			$user_name = esc_html ( get_the_author_meta( 'display_name' ) );
+
 			// author caption
-			if (get_the_author_meta( 'pad_caption' )){
-				$caption = '<span id="pad_caption">'.get_the_author_meta( 'pad_caption' ).'</span>';
+			if ( get_the_author_meta( 'pad_caption' ) ){
+				$caption = '<span id="pad_caption" class="pad_caption">'.get_the_author_meta( 'pad_caption' ).'</span>';
 			}
 
-			$profileUnit =
-				'<div id="avatar">'.get_avatar( get_the_author_meta('email'), 100 ).'</div>'.
-				'<dl id="profileTxtSet">'.
-				'<dt>'.'<span id="authorName">'.esc_html ( get_the_author_meta( 'display_name' ) ).'</span>';
+			$author_picture_style = ( !isset( $options['author_picture_style'] ) || !$options['author_picture_style']) ? 'square' : $options['author_picture_style'];
+
+			$profileUnit = '<div id="avatar" class="avatar '.esc_attr( $author_picture_style ).'">';
+			$profile_image_id = get_the_author_meta('user_profile_image');
+			if ( $profile_image_id ){
+				$profile_image_src = wp_get_attachment_image_src( $profile_image_id,'thumbnail');
+				$profileUnit .= '<img src="'.$profile_image_src[0].'" alt="'.$user_name.'" />';
+			} else {
+				$profileUnit .= get_avatar( get_the_author_meta('email'), 100 );
+			}
+			$profileUnit .= '</div><!-- [ /#avatar ] -->';
+			
+			$profileUnit .= '<dl id="profileTxtSet" class="profileTxtSet">'."\n";
+			$profileUnit .= '<dt>'."\n";
+			$profileUnit .= '<span id="authorName" class="authorName">'.$user_name.'</span>';
+
 			if(isset($caption)):
 				$profileUnit .= $caption;
 			endif;
+
+			$profileUnit .= '</dt><dd>'."\n";
+			$profileUnit .= nl2br( get_the_author_meta( 'description' ) )."\n";
 
 			// url
 			$url = isset( $user->data->user_url ) ? $user->data->user_url : '';
@@ -28,8 +46,9 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 			}
 
 			$sns_array = pad_sns_array();
+			$sns_icons = '';
 
-			foreach ($sns_array as $key => $value) {
+			foreach ( $sns_array as $key => $value ) {
 				$field = 'pad_'.$key;
 				$sns_url = get_the_author_meta( $field );
 
@@ -48,7 +67,6 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 				}
 			}
 
-			$profileUnit .= '</dt><dd>'.nl2br(get_the_author_meta( 'description' ));
 			if ( $sns_icons ){
 				$profileUnit .= '<ul class="sns_icons">';
 				$profileUnit .= $sns_icons;
@@ -59,10 +77,11 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 		}
 
 		public static function pad_get_author_entries(  ){
-			$list_box_title  = get_pad_options('list_box_title');
-			$thumbnail       = get_pad_options('show_thumbnail');
-			$author_link     = get_pad_options('author_archive_link');
-			$author_link_txt = get_pad_options('author_archive_link_txt');
+			$options         = pad_get_plugin_options();
+			$list_box_title  = $options['list_box_title'];
+			$thumbnail       = $options['show_thumbnail'];
+			$author_link     = $options['author_archive_link'];
+			$author_link_txt = $options['author_archive_link_txt'];
 
 			// author entries
 			global $post;
