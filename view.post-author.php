@@ -38,15 +38,15 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 			$profileUnit .= '</dt><dd>'."\n";
 			$profileUnit .= nl2br( get_the_author_meta( 'description' ) )."\n";
 
+			$sns_array = pad_sns_array();
+			$sns_icons = '';
+
 			// url
 			$url = isset( $user->data->user_url ) ? $user->data->user_url : '';
 			if ( $url ){
 				$sns_icons = '<li class="pad_url"><a href="'.esc_url( $url ).'" target
 				="_blank" class="web"><i class="fa fa-globe web" aria-hidden="true"></i></a></li>';
 			}
-
-			$sns_array = pad_sns_array();
-			$sns_icons = '';
 
 			foreach ( $sns_array as $key => $value ) {
 				$field = 'pad_'.$key;
