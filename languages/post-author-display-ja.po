@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BizVektor\n"
 "Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
-"POT-Creation-Date: 2016-07-25 17:46+0900\n"
+"POT-Creation-Date: 2016-07-26 14:38+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Kurudrive <kurudrive@gmail.com>\n"
 "Language-Team: Vektor,Inc. <info@vektor-inc.co.jp>\n"
@@ -27,27 +27,31 @@ msgstr ""
 msgid "Caption<br>(VK Post Author Display)"
 msgstr "肩書<br>(VK Post Author Display)"
 
-#: post-author-display.php:60
+#: post-author-display.php:59
+msgid "aaaaa"
+msgstr "がじょーん"
+
+#: post-author-display.php:63
 msgid "Setting"
 msgstr "設定"
 
-#: post-author-display.php:107
+#: post-author-display.php:110
 msgid "Author Profile"
 msgstr "投稿者プロフィール"
 
-#: post-author-display.php:109
+#: post-author-display.php:112
 msgid "Latest entries"
 msgstr "最新の投稿"
 
-#: post-author-display.php:111
+#: post-author-display.php:114
 msgid "Author Archives"
 msgstr "この著者の記事一覧"
 
-#: post-author-display.php:141
+#: post-author-display.php:144
 msgid "VK Post Author Display setting"
 msgstr "VK Post Author Display 設定"
 
-#: post-author-display.php:142
+#: post-author-display.php:145
 msgctxt "label in admin menu"
 msgid "VK Post Author Display"
 msgstr "VK Post Author Display"
@@ -56,15 +60,15 @@ msgstr "VK Post Author Display"
 msgid "Profile Picture<br>(VK Post Author Display)"
 msgstr "プロフィール写真<br>(VK Post Author Display)"
 
-#: view.admin-profile.php:26
+#: view.admin-profile.php:25
 msgid "Choose image"
 msgstr "写真を選択"
 
-#: view.admin-profile.php:29
+#: view.admin-profile.php:28
 msgid "Reset image"
 msgstr "写真をリセット"
 
-#: view.admin-profile.php:31
+#: view.admin-profile.php:30
 msgid ""
 "If you set the \"VK Post Author Display Profile Picture\", this image "
 "overrides the normal profile picture."
@@ -141,8 +145,9 @@ msgstr ""
 "※過去のサムネイル画像のサイズをカスタムサイズに適切するために「Regenerate "
 "Thumbnails」のようなプラグインを使ってください。"
 
-#: inc/class.term_color.php:34 inc/class.term_color.php:48
-#: inc/class.term_color.php:117
+#: inc/term-color-config.php:13 inc/term-color/class.term-color.php:35
+#: inc/term-color/class.term-color.php:50
+#: inc/term-color/class.term-color.php:120
 msgid "Color"
 msgstr "色"
 
@@ -154,7 +159,7 @@ msgstr "VK Post Author Display 設定"
 msgid "Edit your profile"
 msgstr "プロフィールを編集"
 
-#: inc/vk-admin/class.vk-admin.php:85 vk-admin/class.vk-admin.php:85
+#: inc/vk-admin/class.vk-admin.php:85
 msgid "Sorry, there is no post"
 msgstr "投稿はありません"
 
