@@ -37,17 +37,17 @@
 
 	.adminSub { display:block; overflow:hidden;width:24%;float:right;padding-bottom:10px;
 		.infoBox { display:block; overflow:hidden;padding: 1em;margin-right:1em; background-color: #fff; }
-		.adminBnr{
+		.adminBnr_section{
 			display:block; overflow:hidden;margin-right:1em;
 			margin-top: 1em;
-			a{ display: block; }
-			img{ max-width: 100%;height: auto;
+			a { display: block; }
+			a.admin_banner {  margin-bottom:1em;border:1px solid #ccc;box-shadow:inset 0px 0px 0px 1px rgba(255,255,255,1); }
+			img{ max-width: 100%;height: auto; display: block;
 				&:hover{ opacity: 0.7; }
 			}
 			.vektor_logo { 
 				margin-top:1em;
-				text-align:right;
-				img { width:150px;}
+				img { width:150px;float:right;}
 			}
 		}
 		h1.veu_admin_subTitle { background-color: #ccc;width:auto; padding: 5px 10px; border-radius: 3px;margin-bottom:15px; }
