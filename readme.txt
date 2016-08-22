@@ -2,9 +2,9 @@
 Contributors: kurudrive,dswebstudio,mypacecreator,gatespace
 Donate link:
 Tags: post,author
-Requires at least: 3.3
-Tested up to: 4.5.3
-Stable tag: 1.2.2
+Requires at least: 4.4
+Tested up to: 4.6.0
+Stable tag: 1.2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,10 @@ Display to Post Author Information Box on bottom of the contents.
 3. You can edit "Post author box title","Post list box title","Display post thumbnail image" and more...
 
 == Changelog ==
+
+= 1.2.3 =
+
+* [ Design tuning ] Edit Term Color padding.
 
 = 1.2.1 =
 
