@@ -3,12 +3,15 @@
 /*
 このファイルの元ファイルは
 https://github.com/vektor-inc/vektor-wp-libraries
-にあります。修正の際は上記リポジトリのデータを修正してください。
+にあります。
+修正の際は上記リポジトリのデータを修正してください。
+編集権限を持っていない方で何か修正要望などありましたら
+各プラグインのリポジトリにプルリクエストで結構です。
 */
 
 class Vk_Admin {
 
-	public static $version = '1.0.0';
+	public static $version = '1.2.0';
 	
 	static function init(){
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_common_css' ) );
@@ -20,13 +23,13 @@ class Vk_Admin {
 	}
 
 	static function admin_common_css (){
-		wp_enqueue_style( 'vk-admin-style', self::admin_directory_url().'/css/vk_admin.css', array(), self::$version, 'all' );
+		wp_enqueue_style( 'vk-admin-style', self::admin_directory_url().'css/vk_admin.css', array(), self::$version, 'all' );
 	}
 
 	static function admin_enqueue_scripts() {
 		wp_enqueue_script( 'jquery' );
 		wp_enqueue_media();
-		wp_enqueue_script( 'vk-admin-js', self::admin_directory_url().'/js/vk_admin.js', array( 'jquery' ), self::$version );
+		wp_enqueue_script( 'vk-admin-js', self::admin_directory_url().'js/vk_admin.js', array( 'jquery' ), self::$version );
 	}
 
 	static function admin_scripts( $admin_pages ){
@@ -40,14 +43,24 @@ class Vk_Admin {
 	/*  admin_banner
 	/*--------------------------------------------------*/
 	public static function admin_banner() {
+		$banner = '';
 		$dir_url = self::admin_directory_url();
-		if ( get_locale() == 'ja' ) {
-			$banner = '<a href="http://lightning.vektor-inc.co.jp/ja/" target="_blank"><img src="'.$dir_url.'/images/lightning_bnr_ja.jpg" alt="lightning_bnr_ja" /></a>';
-		} else {
-			$banner = '<a href="http://lightning.vektor-inc.co.jp/" target="_blank"><img src="'.$dir_url.'/images/lightning_bnr_en.jpg" alt="lightning_bnr_en" /></a>';
+		$lang = ( get_locale() == 'ja' ) ? 'ja' : 'en' ;
+
+		if ( !is_plugin_active('vk-post-author-display/post-author-display.php') ){
+			$banner .= '<a href="https://wordpress.org/plugins/vk-post-author-display/" target="_blank" class="admin_banner"><img src="'.$dir_url.'/images/post_author_display_bnr_'.$lang .'.jpg" alt="VK Post Author 
+			Display" /></a>';
 		}
-		$banner .= '<a href="http://www.vektor-inc.co.jp" class="vektor_logo" target="_blank"><img src="'.$dir_url.'/images/vektor_logo.png" alt="lightning_bnr_en" /></a>';
-		return apply_filters( 'vkExUnit_news_admin_banner_html' , $banner );
+
+		if ( $lang == 'ja' ) {
+			$banner .= '<a href="http://lightning.vektor-inc.co.jp/ja/" target="_blank" class="admin_banner"><img src="'.$dir_url.'/images/lightning_bnr_ja.jpg" alt="lightning_bnr_ja" /></a>';
+		} else {
+			$banner .= '<a href="http://lightning.vektor-inc.co.jp/" target="_blank" class="admin_banner"><img src="'.$dir_url.'/images/lightning_bnr_en.jpg" alt="lightning_bnr_en" /></a>';
+		}
+
+		$banner .= '<a href="http://www.vektor-inc.co.jp" class="vektor_logo" target="_blank" class="admin_banner"><img src="'.$dir_url.'/images/vektor_logo.png" alt="lightning_bnr_en" /></a>';
+
+		return apply_filters( 'vk_admin_banner_html' , $banner );
 	}
 
 	/*--------------------------------------------------*/
@@ -58,9 +71,9 @@ class Vk_Admin {
 		include_once( ABSPATH . WPINC . '/feed.php' );
 
 		if ( 'ja' == get_locale() ) {
-			$exUnit_feed_url = apply_filters( 'vkExUnit_news_RSS_URL_ja', 'http://ex-unit.vektor-inc.co.jp/ja/?feed?'.date( 'his' ) );
+			$exUnit_feed_url = apply_filters( 'vkAdmin_news_RSS_URL_ja', 'http://ex-unit.vektor-inc.co.jp/ja/feed' );
 		} else {
-			$exUnit_feed_url = apply_filters( 'vkExUnit_news_RSS_URL', 'http://ex-unit.vektor-inc.co.jp/?feed?'.date( 'his' ) );
+			$exUnit_feed_url = apply_filters( 'vkAdmin_news_RSS_URL', 'http://ex-unit.vektor-inc.co.jp/feed' );
 		}
 
 		$my_feeds = array(
@@ -77,7 +90,7 @@ class Vk_Admin {
 				$rss_items = $rss->get_items( 0, $maxitems );
 
 				$output .= '<div class="rss-widget">';
-				$output .= '<h1 class="veu_admin_subTitle">Information</h1>';
+				$output .= '<h4 class="adminSub_title">'.apply_filters( 'vk-admin-sub-title-text', 'Information' ).'</h4>';
 				$output .= '<ul>';
 
 				if ( $maxitems == 0 ) {
@@ -114,10 +127,11 @@ class Vk_Admin {
 	/*--------------------------------------------------*/
 	/*  admin_sub
 	/*--------------------------------------------------*/
+	// 2016.08.07 ExUnitの有効化ページでは直接 admin_subを呼び出しているので注意
 	public static function admin_sub() {
-		$adminSub = '<div class="adminSub">'."\n";
+		$adminSub = '<div class="adminSub scrTracking">'."\n";
 		$adminSub .= '<div class="infoBox">'.Vk_Admin::get_news_body().'</div>'."\n";
-		$adminSub .= '<div class="adminBnr">'.Vk_Admin::admin_banner().'</div>'."\n";
+		$adminSub .= '<div class="adminBnr_section">'.Vk_Admin::admin_banner().'</div>'."\n";
 		$adminSub .= '</div><!-- [ /.adminSub ] -->'."\n";
 		return $adminSub;
 	}
@@ -125,12 +139,14 @@ class Vk_Admin {
 	/*--------------------------------------------------*/
 	/*  admin_banner
 	/*--------------------------------------------------*/
-	public static function admin_page_frame( $get_page_title, $the_body_callback, $get_logo_html = '' , $get_menu_html = '' ) { ?>
+	public static function admin_page_frame( $get_page_title, $the_body_callback, $get_logo_html = '' , $get_menu_html = '', $get_layout = 'column_3' ) { ?>
 		<div class="wrap vk_admin_page">
-			<div class="adminMain">
 
+			<div class="adminMain <?php echo $get_layout;?>">
+
+				<?php if ( $get_layout == 'column_3' ) : ?>
 				<div id="adminContent_sub" class="scrTracking">
-					<?php echo $get_logo_html; ?>
+					<div class="pageLogo"><?php echo $get_logo_html; ?></div>
 					<?php if ( $get_page_title ) : ?>
 					<h2 class="page_title"><?php echo $get_page_title;?></h2>
 					<?php endif; ?>
@@ -140,18 +156,22 @@ class Vk_Admin {
 						</ul>
 					</div>
 				</div><!-- [ /#adminContent_sub ] -->
+				<?php endif; ?>
+
+				<?php if ( $get_layout == 'column_2' ) : ?>
+					<div class="pageLogo"><?php echo $get_logo_html; ?></div>
+					<?php if ( $get_page_title ) : ?>
+						<h1 class="page_title"><?php echo $get_page_title;?></h1>
+					<?php endif; ?>
+				<?php endif; ?>
 
 				<div id="adminContent_main">
-
 				<?php call_user_func_array( $the_body_callback, array() );?>
 				</div><!-- [ /#adminContent_main ] -->
 
 			</div><!-- [ /.adminMain ] -->
 
-			<div class="adminSub scrTracking">
-			<div class="infoBox"><?php echo Vk_Admin::get_news_body();?></div>
-			<div class="adminBnr"><?php echo Vk_Admin::admin_banner();?></div>
-			</div><!-- [ /.adminSub ] -->
+			<?php echo Vk_Admin::admin_sub();?>
 
 		</div><!-- [ /.vkExUnit_admin_page ] -->
 	<?php 
