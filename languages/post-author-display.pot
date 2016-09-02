@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BizVektor\n"
 "Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
-"POT-Creation-Date: 2016-07-24 16:28+0900\n"
+"POT-Creation-Date: 2016-07-26 14:27+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Kurudrive <kurudrive@gmail.com>\n"
 "Language-Team: Vektor,Inc. <info@vektor-inc.co.jp>\n"
@@ -23,114 +23,135 @@ msgstr ""
 "X-Generator: Poedit 1.5.7\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: class.term_color.php:34 class.term_color.php:48 class.term_color.php:117
+#: admin-profile.php:22
+msgid "Caption<br>(VK Post Author Display)"
+msgstr ""
+
+#: post-author-display.php:47 inc/term-color-config.php:13
+#: inc/term-color/class.term-color.php:35
+#: inc/term-color/class.term-color.php:50
+#: inc/term-color/class.term-color.php:120
 msgid "Color"
 msgstr ""
 
-#: post-author-display.php:41
+#: post-author-display.php:62
 msgid "Setting"
 msgstr ""
 
-#: post-author-display.php:92
-msgid "Caption(Post Author Display)"
-msgstr ""
-
-#: post-author-display.php:106
+#: post-author-display.php:109
 msgid "Author Profile"
 msgstr ""
 
-#: post-author-display.php:107
+#: post-author-display.php:111
 msgid "Latest entries"
 msgstr ""
 
-#: post-author-display.php:109
+#: post-author-display.php:113
 msgid "Author Archives"
 msgstr ""
 
-#: post-author-display.php:139 vk-admin-config.php:19
-msgid "Post author display setting"
+#: post-author-display.php:143
+msgid "VK Post Author Display setting"
 msgstr ""
 
-#: post-author-display.php:140
+#: post-author-display.php:144
 msgctxt "label in admin menu"
-msgid "VK Post author display"
+msgid "VK Post Author Display"
 msgstr ""
 
-#: post-author-display.php:232
-msgid "Profile image<br>(VK Post Author Display)"
+#: view.admin-profile.php:7
+msgid "Profile Picture<br>(VK Post Author Display)"
 msgstr ""
 
-#: post-author-display.php:248
+#: view.admin-profile.php:26
 msgid "Choose image"
 msgstr ""
 
-#: view.post-author-admin.php:13 vk-admin-config.php:21
+#: view.admin-profile.php:29
+msgid "Reset image"
+msgstr ""
+
+#: view.admin-profile.php:31
+msgid ""
+"If you set the \"VK Post Author Display Profile Picture\", this image "
+"overrides the normal profile picture."
+msgstr ""
+
+#: view.admin.php:13 inc/vk-admin-config.php:21
 msgid "Post Author Box Setting"
 msgstr ""
 
-#: view.post-author-admin.php:14
-msgid "Set your image (Gravatar)"
-msgstr ""
-
-#: view.post-author-admin.php:15
-msgid "Set your display name, twitter, caption, description"
-msgstr ""
-
-#: view.post-author-admin.php:18
+#: view.admin.php:16
 msgid "Post author box title"
 msgstr ""
 
-#: view.post-author-admin.php:22
+#: view.admin.php:20
+msgid "Profile Picture Style"
+msgstr ""
+
+#: view.admin.php:26
+msgid "Square"
+msgstr ""
+
+#: view.admin.php:27
+msgid "Circle"
+msgstr ""
+
+#: view.admin.php:39
 msgid "Post list box title"
 msgstr ""
 
-#: view.post-author-admin.php:27
+#: view.admin.php:44
 msgid "Display post author archive page link"
 msgstr ""
 
-#: view.post-author-admin.php:30 view.post-author-admin.php:50
+#: view.admin.php:47 view.admin.php:67
 msgid "hide"
 msgstr ""
 
-#: view.post-author-admin.php:31
+#: view.admin.php:48
 msgid "display author archive link"
 msgstr ""
 
-#: view.post-author-admin.php:43
+#: view.admin.php:60
 msgid "Author archives text"
 msgstr ""
 
-#: view.post-author-admin.php:48
+#: view.admin.php:65
 msgid "Display post thumbnail image"
 msgstr ""
 
-#: view.post-author-admin.php:50
+#: view.admin.php:67
 msgid "display thumbnail image"
 msgstr ""
 
-#: view.post-author-admin.php:62
+#: view.admin.php:79
 msgid "Use custom size thumbnails for thumbnails display?"
 msgstr ""
 
-#: view.post-author-admin.php:65
+#: view.admin.php:82
 msgid "yes"
 msgstr ""
 
-#: view.post-author-admin.php:66
+#: view.admin.php:83
 msgid "no"
 msgstr ""
 
-#: view.post-author-admin.php:78
+#: view.admin.php:95
 msgid ""
 "* If you already have many posts in your WordPress, you have to regenerate "
 "the thumbnail images using (for example) the \"Regenerate Thumbnails\" "
 "plugin."
 msgstr ""
 
-#: vk-admin-config.php:22
-msgid "Set your profile"
+#: inc/vk-admin-config.php:19
+msgid "VK Post Author Display Main Setting"
 msgstr ""
 
-#: vk-admin/class.vk-admin.php:85
+#: inc/vk-admin-config.php:22
+msgid "Edit your profile"
+msgstr ""
+
+#: inc/vk-admin/class.vk-admin.php:85
 msgid "Sorry, there is no post"
 msgstr ""
