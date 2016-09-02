@@ -135,7 +135,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 		}
 
 		public static function pad_get_author_box( $layout = 'normal' ){
-			$author_unit = '<div class="padSection">';
+			$author_unit = '<div class="padSection" id="padSection">';
 
 			if ( $layout != 'author_archive' )
 				$author_unit .= '<h4>'.esc_html( get_pad_options('author_box_title') ).'</h4>';
