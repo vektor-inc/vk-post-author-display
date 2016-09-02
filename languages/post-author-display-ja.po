@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BizVektor\n"
 "Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
-"POT-Creation-Date: 2016-07-26 14:38+0900\n"
+"POT-Creation-Date: 2016-09-02 12:26+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Kurudrive <kurudrive@gmail.com>\n"
 "Language-Team: Vektor,Inc. <info@vektor-inc.co.jp>\n"
@@ -27,31 +27,35 @@ msgstr ""
 msgid "Caption<br>(VK Post Author Display)"
 msgstr "肩書<br>(VK Post Author Display)"
 
-#: post-author-display.php:59
-msgid "aaaaa"
-msgstr "がじょーん"
+#: hide_controller.php:22
+msgid "Post Author Display"
+msgstr "著者情報の表示"
 
-#: post-author-display.php:63
+#: hide_controller.php:41
+msgid "Don't display post author"
+msgstr "著者情報を表示しない"
+
+#: post-author-display.php:72
 msgid "Setting"
 msgstr "設定"
 
-#: post-author-display.php:110
+#: post-author-display.php:126
 msgid "Author Profile"
 msgstr "投稿者プロフィール"
 
-#: post-author-display.php:112
+#: post-author-display.php:128
 msgid "Latest entries"
 msgstr "最新の投稿"
 
-#: post-author-display.php:114
+#: post-author-display.php:130
 msgid "Author Archives"
 msgstr "この著者の記事一覧"
 
-#: post-author-display.php:144
+#: post-author-display.php:160
 msgid "VK Post Author Display setting"
 msgstr "VK Post Author Display 設定"
 
-#: post-author-display.php:145
+#: post-author-display.php:161
 msgctxt "label in admin menu"
 msgid "VK Post Author Display"
 msgstr "VK Post Author Display"
@@ -145,9 +149,9 @@ msgstr ""
 "※過去のサムネイル画像のサイズをカスタムサイズに適切するために「Regenerate "
 "Thumbnails」のようなプラグインを使ってください。"
 
-#: inc/term-color-config.php:13 inc/term-color/class.term-color.php:35
-#: inc/term-color/class.term-color.php:50
-#: inc/term-color/class.term-color.php:120
+#: inc/term-color-config.php:13 inc/term-color/class.term-color.php:42
+#: inc/term-color/class.term-color.php:57
+#: inc/term-color/class.term-color.php:127
 msgid "Color"
 msgstr "色"
 
@@ -159,9 +163,12 @@ msgstr "VK Post Author Display 設定"
 msgid "Edit your profile"
 msgstr "プロフィールを編集"
 
-#: inc/vk-admin/class.vk-admin.php:85
+#: inc/vk-admin/class.vk-admin.php:98
 msgid "Sorry, there is no post"
 msgstr "投稿はありません"
+
+#~ msgid "aaaaa"
+#~ msgstr "がじょーん"
 
 #~ msgid "Set your image (Gravatar)"
 #~ msgstr "プロフィール画像の設定(Gravatar)"
