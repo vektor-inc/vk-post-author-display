@@ -38,7 +38,7 @@ function pad_content_meta_fields(){
 
     global $post;
     $checked = ( get_post_meta( $post->ID,'pad_hide_post_author',true ) ) ? ' checked':'';
-    $label = __('Hide Post Author', 'post-author-display' );
+    $label = __('Don\'t display post author', 'post-author-display' );
 
     echo '<ul>';
     echo '<li><label>'.'<input type="checkbox" id="pad_hide_post_author" name="pad_hide_post_author" value="true"'.$checked.'> '.$label.'</label></li>';
@@ -79,3 +79,13 @@ function pad_save_hide_items($post_id){
     }
 
 }
+
+/*-------------------------------------------*/
+/*  非表示を実行
+/*-------------------------------------------*/
+
+
+
+
+
+
