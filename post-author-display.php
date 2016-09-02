@@ -62,6 +62,7 @@ require_once( VK_PAD_DIR . 'inc/term-color-config.php' );
 require_once( VK_PAD_DIR . 'inc/vk-admin-config.php' );
 require_once( VK_PAD_DIR . 'view.post-author.php' );
 require_once( VK_PAD_DIR . 'admin-profile.php' );
+require_once( VK_PAD_DIR . 'hide_controller.php' );
 
 
 // _e('aaaaa','post-author-display');
@@ -76,17 +77,30 @@ function pad_set_plugin_meta( $links ) {
 
 
 
+function pad_display_post_types(){
+	// $post_types = get_post_types( $args, $output, $operator );
+	$post_types = apply_filters( 'pad_display_post_types', array('post') );
+	return $post_types;
+}
+
 /*-------------------------------------------*/
 /*	Display post author unit
 /*-------------------------------------------*/
 add_filter( 'the_content', 'pad_add_author');
 function pad_add_author($content){
-	if ( is_single() ){
-		$post_types = apply_filters( 'pad_display_post_types', array('post') );
+	if ( is_single() || is_singular() ){
+		$post_types = pad_display_post_types();
 		foreach ($post_types as $key => $value) {
 			if ( get_post_type() == $value ){
-				$author_unit = Vk_Post_Author_Box::pad_get_author_box();
-				$content = $content.$author_unit;
+				global $post;
+				$hidden = apply_filters( 
+					'pad_hide_post_author_custom', 
+					get_post_meta( $post->ID,'pad_hide_post_author',true )
+					);
+				if ( !$hidden ){
+					$author_unit = Vk_Post_Author_Box::pad_get_author_box();
+					$content = $content.$author_unit;
+				}
 			}
 		}
 	}
