@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BizVektor\n"
 "Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
-"POT-Creation-Date: 2016-09-02 12:26+0900\n"
+"POT-Creation-Date: 2016-09-07 16:37+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Kurudrive <kurudrive@gmail.com>\n"
 "Language-Team: Vektor,Inc. <info@vektor-inc.co.jp>\n"
@@ -140,14 +140,29 @@ msgstr "はい"
 msgid "no"
 msgstr "いいえ"
 
-#: view.admin.php:95
-msgid ""
-"* If you already have many posts in your WordPress, you have to regenerate "
-"the thumbnail images using (for example) the \"Regenerate Thumbnails\" "
-"plugin."
+#: view.admin.php:96
+msgid "If your theme already cropping thumbnail, please select the \"no\"."
 msgstr ""
-"※過去のサムネイル画像のサイズをカスタムサイズに適切するために「Regenerate "
-"Thumbnails」のようなプラグインを使ってください。"
+"ご利用のテーマがアイキャッチ画像をサポートしていて、アイキャッチ画像の自動ト"
+"リミングを行なっている場合は「いいえ」を選択してください。"
+
+#: view.admin.php:97
+msgid "If thumbnail images layout has not aligned, please select the \"yes\"."
+msgstr "サムネイル画像の高さが揃わない場合は「はい」を選択してください。"
+
+#: view.admin.php:98
+msgid "This plugin generate the appropriate image size."
+msgstr "このプラグインに最適な画像サイズを生成します。"
+
+#: view.admin.php:99
+msgid ""
+"* If you select the \"yes\" and already have many posts in your WordPress, "
+"you have to regenerate the thumbnail images using (for example) the "
+"\"Regenerate Thumbnails\" plugin."
+msgstr ""
+"※もし「はい」を選択した場合、過去のサムネイル画像のサイズをこのプラグインに合"
+"わせた適切なサイズでも出力するために「Regenerate Thumbnails」のようなプラグイ"
+"ンを使って一度サムネイル画像を再生成してください。"
 
 #: inc/term-color-config.php:13 inc/term-color/class.term-color.php:42
 #: inc/term-color/class.term-color.php:57

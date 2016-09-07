@@ -92,7 +92,11 @@ foreach( $show_thumbnails as $show_thumbnail_value => $show_thumbnail_lavel) {
 				<?php echo $generate_thumbnail_label ?>
 			</label><?php
 		} ?><br />
-		<p><?php _e('* If you already have many posts in your WordPress, you have to regenerate the thumbnail images using (for example) the "Regenerate Thumbnails" plugin.','post-author-display');?></p>
+		<p>
+		<?php _e('If your theme already cropping thumbnail, please select the "no".','post-author-display');?></br>
+		<?php _e('If thumbnail images layout has not aligned, please select the "yes".','post-author-display');?>
+		<?php _e('This plugin generate the appropriate image size.','post-author-display');?></br>
+		<?php _e('* If you select the "yes" and already have many posts in your WordPress, you have to regenerate the thumbnail images using (for example) the "Regenerate Thumbnails" plugin.','post-author-display');?></p>
 	</td>
 </tr>
 
