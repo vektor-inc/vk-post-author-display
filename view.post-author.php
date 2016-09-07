@@ -117,11 +117,17 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 					if ( has_post_thumbnail()) {
 						//allows display of pad_thumb only if selected in pad options
 						$sizes_available = get_intermediate_image_sizes();
-						$pad_thumb = get_the_post_thumbnail( get_the_ID(), 'pad_thumb' );
-						if ( in_array( 'pad_thumb', $sizes_available) && !empty($pad_thumb) )
-							$entryUnit .= $pad_thumb;
-						else
-							$entryUnit .=  get_the_post_thumbnail();
+
+						if ( in_array( 'pad_thumb', $sizes_available) ) {
+							$pad_thumb = get_the_post_thumbnail( get_the_ID(), 'pad_thumb' );
+						} elseif ( in_array( 'post-thumbnail', $sizes_available) ) {
+							$pad_thumb = get_the_post_thumbnail( get_the_ID(), 'post-thumbnail' );
+						} else {
+							$pad_thumb = get_the_post_thumbnail( get_the_ID(), 'thumbnail' );
+						}
+						
+						$entryUnit .= $pad_thumb;
+
 					} else {
 						$entryUnit .= '<img src="'.plugins_url().'/vk-post-author-display/images/thumbnailDummy.jpg" alt="'.get_the_title().'" />';
 					}

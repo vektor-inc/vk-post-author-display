@@ -209,27 +209,28 @@ function get_pad_options($optionLabel) {
 function pad_plugin_special_thumbnail() {
 
 	$options 		 = pad_get_plugin_options();
-	$default_options = pad_get_default_options();
+	// $default_options = pad_get_default_options();
 
-	if( $options['generate_thumbnail'] != $default_options['generate_thumbnail'] ) {
+	// Case of use PAD image size 
+	if( $options['generate_thumbnail'] == 'yes' ) {
 
 		if ( function_exists( 'add_theme_support' ) ) {
 			add_theme_support( 'post-thumbnails' );
 			//custom thumbnail for pad plugin
 			add_image_size( 'pad_thumb', 240, 135, array('center', 'center') );
 		}
-	}
-	else {
-		apply_filters('intermediate_image_sizes', 'pad_plugin_disable_thumbnail');
-	}
+	} 
+	// else {
+	// 	apply_filters('intermediate_image_sizes', 'pad_plugin_disable_thumbnail');
+	// }
 }
-
-pad_plugin_special_thumbnail();
-
+add_action('after_setup_theme', 'pad_plugin_special_thumbnail');
 
 /*-------------------------------------------*/
-/*	vk post author disable custom size thumbnail
+/*	Unset pad custom size thumbnail
 /*-------------------------------------------*/
-function pad_plugin_disable_thumbnail( $sizes ) {
-	unset( $sizes['pad_thumb'] );
-}
+// function pad_plugin_disable_thumbnail( $sizes ) {
+// 	if ( isset( $sizes['pad_thumb'] ) ){
+// 		unset( $sizes['pad_thumb'] );
+// 	}
+// }
