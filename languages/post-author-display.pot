@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BizVektor\n"
 "Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
-"POT-Creation-Date: 2016-07-26 14:27+0900\n"
+"POT-Creation-Date: 2016-09-07 16:43+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Kurudrive <kurudrive@gmail.com>\n"
 "Language-Team: Vektor,Inc. <info@vektor-inc.co.jp>\n"
@@ -27,34 +27,35 @@ msgstr ""
 msgid "Caption<br>(VK Post Author Display)"
 msgstr ""
 
-#: post-author-display.php:47 inc/term-color-config.php:13
-#: inc/term-color/class.term-color.php:35
-#: inc/term-color/class.term-color.php:50
-#: inc/term-color/class.term-color.php:120
-msgid "Color"
+#: hide_controller.php:22
+msgid "Post Author Display"
 msgstr ""
 
-#: post-author-display.php:62
+#: hide_controller.php:41
+msgid "Don't display post author"
+msgstr ""
+
+#: post-author-display.php:72
 msgid "Setting"
 msgstr ""
 
-#: post-author-display.php:109
+#: post-author-display.php:126
 msgid "Author Profile"
 msgstr ""
 
-#: post-author-display.php:111
+#: post-author-display.php:128
 msgid "Latest entries"
 msgstr ""
 
-#: post-author-display.php:113
+#: post-author-display.php:130
 msgid "Author Archives"
 msgstr ""
 
-#: post-author-display.php:143
+#: post-author-display.php:160
 msgid "VK Post Author Display setting"
 msgstr ""
 
-#: post-author-display.php:144
+#: post-author-display.php:161
 msgctxt "label in admin menu"
 msgid "VK Post Author Display"
 msgstr ""
@@ -63,15 +64,15 @@ msgstr ""
 msgid "Profile Picture<br>(VK Post Author Display)"
 msgstr ""
 
-#: view.admin-profile.php:26
+#: view.admin-profile.php:25
 msgid "Choose image"
 msgstr ""
 
-#: view.admin-profile.php:29
+#: view.admin-profile.php:28
 msgid "Reset image"
 msgstr ""
 
-#: view.admin-profile.php:31
+#: view.admin-profile.php:30
 msgid ""
 "If you set the \"VK Post Author Display Profile Picture\", this image "
 "overrides the normal profile picture."
@@ -137,11 +138,29 @@ msgstr ""
 msgid "no"
 msgstr ""
 
-#: view.admin.php:95
+#: view.admin.php:96
+msgid "If your theme already cropping thumbnail, please select the \"no\"."
+msgstr ""
+
+#: view.admin.php:97
+msgid "If thumbnail images layout has not aligned, please select the \"yes\"."
+msgstr ""
+
+#: view.admin.php:98
+msgid "This plugin generate the appropriate image size."
+msgstr ""
+
+#: view.admin.php:99
 msgid ""
-"* If you already have many posts in your WordPress, you have to regenerate "
-"the thumbnail images using (for example) the \"Regenerate Thumbnails\" "
-"plugin."
+"* If you select the \"yes\" and already have many posts in your WordPress, "
+"you have to regenerate the thumbnail images using (for example) the "
+"\"Regenerate Thumbnails\" plugin."
+msgstr ""
+
+#: inc/term-color-config.php:13 inc/term-color/class.term-color.php:42
+#: inc/term-color/class.term-color.php:57
+#: inc/term-color/class.term-color.php:127
+msgid "Color"
 msgstr ""
 
 #: inc/vk-admin-config.php:19
@@ -152,6 +171,6 @@ msgstr ""
 msgid "Edit your profile"
 msgstr ""
 
-#: inc/vk-admin/class.vk-admin.php:85
+#: inc/vk-admin/class.vk-admin.php:98
 msgid "Sorry, there is no post"
 msgstr ""
