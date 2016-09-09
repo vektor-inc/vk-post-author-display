@@ -66,16 +66,16 @@ function pad_save_hide_items($post_id){
     if(defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) { return $post_id; }
     
     $field = 'pad_hide_post_author';
-    $field_value = $_POST[$field];
+    $field_value = ( isset( $_POST[$field] ) ) ? $_POST[$field] : '';
     // データが空だったら入れる
-    if(get_post_meta($post_id, $field ) == ""){
+    if( get_post_meta($post_id, $field ) == ""){
         add_post_meta($post_id, $field , $field_value, true);
     // 今入ってる値と違ってたらアップデートする
-    }elseif($field_value != get_post_meta($post_id, $field , true)){
+    } elseif( $field_value != get_post_meta( $post_id, $field , true)){
         update_post_meta($post_id, $field , $field_value);
     // 入力がなかったら消す
-    }elseif($field_value == ""){
-        delete_post_meta($post_id, $field , get_post_meta($post_id, $field , true));
+    } elseif( $field_value == "" ){
+        delete_post_meta($post_id, $field , get_post_meta( $post_id, $field , true ));
     }
 
 }
