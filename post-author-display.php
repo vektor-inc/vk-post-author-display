@@ -88,7 +88,8 @@ function pad_display_post_types(){
 /*-------------------------------------------*/
 add_filter( 'the_content', 'pad_add_author');
 function pad_add_author($content){
-	if ( is_single() || is_page() ){
+	// if ( ( is_single() || is_page() ) && !is_front_page() ){
+	if ( is_single() ){
 		$post_types = pad_display_post_types();
 		foreach ($post_types as $key => $value) {
 			if ( get_post_type() == $value ){

@@ -136,6 +136,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 				endwhile;
 			$entryUnit .= '</ul>'."\n";
 			$entryUnit .= '</div>'."\n";
+			/* トップページが固定ページで is_page() でも pad を使おうとすると wp_reset_query() があるとthe_post_thumbnailが誤動作する */
 			wp_reset_query(); // important!!
 			return $entryUnit;
 		}
