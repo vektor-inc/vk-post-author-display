@@ -78,10 +78,10 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 
 		public static function pad_get_author_entries(  ){
 			$options         = pad_get_plugin_options();
-			$list_box_title  = $options['list_box_title'];
-			$thumbnail       = $options['show_thumbnail'];
-			$author_link     = $options['author_archive_link'];
-			$author_link_txt = $options['author_archive_link_txt'];
+			$list_box_title  = ( isset( $options['list_box_title'] ) ) ? $options['list_box_title']:'';
+			$thumbnail       = ( isset( $options['show_thumbnail'] ) ) ? $options['show_thumbnail']:'';
+			$author_link     = ( isset( $options['author_archive_link'] ) ) ? $options['author_archive_link']:'';
+			$author_link_txt = ( isset( $options['author_archive_link_txt'] ) ) ? $options['author_archive_link_txt']:'';
 
 			// author entries
 			global $post;
