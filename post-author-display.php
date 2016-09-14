@@ -213,7 +213,7 @@ function pad_plugin_special_thumbnail() {
 	// $default_options = pad_get_default_options();
 
 	// Case of use PAD image size 
-	if( $options['generate_thumbnail'] == 'yes' ) {
+	if( isset( $options['generate_thumbnail'] ) && $options['generate_thumbnail'] == 'yes' ) {
 
 		if ( function_exists( 'add_theme_support' ) ) {
 			add_theme_support( 'post-thumbnails' );
