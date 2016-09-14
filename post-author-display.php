@@ -79,9 +79,17 @@ function pad_set_plugin_meta( $links ) {
 
 function pad_display_post_types(){
 	// $post_types = get_post_types( $args, $output, $operator );
-	$post_types = apply_filters( 'pad_display_post_types', array('post') );
+	$post_types = array('post');
+	$post_types = apply_filters( 'pad_display_post_types', $post_types );
 	return $post_types;
 }
+
+// custom example
+// add_filter( 'pad_display_post_types','add_pad_custom_post_types' );
+// function add_pad_custom_post_types($post_types){
+// 	$post_types[] = 'page';
+// 	return $post_types;
+// }
 
 /*-------------------------------------------*/
 /*	Display post author unit
