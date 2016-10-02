@@ -123,7 +123,7 @@ function pad_set_css(){
 	$cssPath = apply_filters( "pad-stylesheet", plugins_url("css/vk-post-author.css", __FILE__) );
 	if ( get_post_type() == 'post'){
 		wp_enqueue_style( 'set_vk_post_autor_css', $cssPath , false, VK_PAD_VERSION);
-		wp_enqueue_style( 'font-awesome', VK_PAD_URL . '/libraries/font-awesome/css/font-awesome.min.css', array(), '4.6.3', 'all' );
+		wp_enqueue_style( 'font-awesome', VK_PAD_URL . 'libraries/font-awesome/css/font-awesome.min.css', array(), '4.6.3', 'all' );
 	}
 }
 

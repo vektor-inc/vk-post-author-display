@@ -18,7 +18,7 @@ function add_user_profile_image_form( $bool ) {
 		if ( isset( $profileuser->user_profile_image ) && $profileuser->user_profile_image ){
 			echo wp_get_attachment_image( $profileuser->user_profile_image, 'medium', false, $attr );
 		} else {
-			echo '<img src="'.VK_PAD_URL.'/images/no_image.png" id="'.$attr['id'].'" alt="" class="'.$attr['class'].'" style="width:96px;height:auto;">';
+			echo '<img src="'.VK_PAD_URL.'images/no_image.png" id="'.$attr['id'].'" alt="" class="'.$attr['class'].'" style="width:96px;height:auto;">';
 		} ?>
 
 		<button id="media_user_profile_image" class="media_btn btn btn-default button button-default">
