@@ -3,10 +3,10 @@
 Plugin Name: VK Post Author Display
 Plugin URI: http://wordpress.org/extend/plugins/vk-post-author-display/
 Description: Show post author information at post bottom.
-Version: 1.4.2
+Version: 1.4.3
 Author: Vektor,Inc.
 Author URI: https://ex-unit.nagoya/
-Text Domain: post-author-display
+Text Domain: vk-post-author-display
 Domain Path: /languages
 License: GPL2
 
@@ -54,7 +54,7 @@ define( 'VK_PAD_DIR', plugin_dir_path( __FILE__ ) );
 /*	vk post author text domain load
 /*-------------------------------------------*/
 function pad_text_domain() {
-	load_plugin_textdomain( 'post-author-display', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+	load_plugin_textdomain( 'vk-post-author-display', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
 add_action( 'init', 'pad_text_domain' );
 
@@ -65,11 +65,11 @@ require_once( VK_PAD_DIR . 'admin-profile.php' );
 require_once( VK_PAD_DIR . 'hide_controller.php' );
 
 
-// _e('aaaaa','post-author-display');
+// _e('aaaaa','vk-post-author-display');
 
 	// Add a link to this plugin's settings page
 function pad_set_plugin_meta( $links ) { 
-    $settings_link             = '<a href="options-general.php?page=pad_plugin_options">'.__( 'Setting', 'post-author-display' ).'</a>';
+    $settings_link             = '<a href="options-general.php?page=pad_plugin_options">'.__( 'Setting', 'vk-post-author-display' ).'</a>';
     array_unshift($links, $settings_link);
     return $links;
 }
@@ -133,11 +133,11 @@ function pad_set_css(){
 /*-------------------------------------------*/
 function pad_get_default_options() {
 	$display_author_options = array(
-		'author_box_title'        => __( 'Author Profile', 'post-author-display' ),
+		'author_box_title'        => __( 'Author Profile', 'vk-post-author-display' ),
 		'author_picture_style'   => 'square',
-		'list_box_title'          => __( 'Latest entries', 'post-author-display' ),
+		'list_box_title'          => __( 'Latest entries', 'vk-post-author-display' ),
 		'author_archive_link'     => 'hide',
-		'author_archive_link_txt' => __( 'Author Archives', 'post-author-display' ),
+		'author_archive_link_txt' => __( 'Author Archives', 'vk-post-author-display' ),
 		'show_thumbnail'          => 'display',
 		'generate_thumbnail'      => 'yes'
 	);
@@ -167,8 +167,8 @@ function pad_get_plugin_options() {
 /*-------------------------------------------*/
 function pad_add_customSetting() {
 	$custom_page = add_options_page(
-		__( 'VK Post Author Display setting', 'post-author-display' ),		// Name of page
-		_x( 'VK Post Author Display', 'label in admin menu', 'post-author-display' ),				// Label in menu
+		__( 'VK Post Author Display setting', 'vk-post-author-display' ),		// Name of page
+		_x( 'VK Post Author Display', 'label in admin menu', 'vk-post-author-display' ),				// Label in menu
 		'edit_theme_options',				// Capability required　このメニューページを閲覧・使用するために最低限必要なユーザーレベルまたはユーザーの種類と権限。
 		'pad_plugin_options',				// ユニークなこのサブメニューページの識別子
 		'pad_add_customSettingPage'			// メニューページのコンテンツを出力する関数

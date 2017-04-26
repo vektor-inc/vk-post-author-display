@@ -3,9 +3,9 @@
 # This file is distrubuted under the GPL-2.0+
 msgid ""
 msgstr ""
-"Project-Id-Version: BizVektor\n"
+"Project-Id-Version: vk-post-author-display\n"
 "Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
-"POT-Creation-Date: 2017-04-26 15:26+0900\n"
+"POT-Creation-Date: 2017-04-26 15:27+0900\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Kurudrive <kurudrive@gmail.com>\n"
 "Language-Team: Vektor,Inc. <info@vektor-inc.co.jp>\n"
