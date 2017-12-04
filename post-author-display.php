@@ -3,7 +3,7 @@
 Plugin Name: VK Post Author Display
 Plugin URI: http://wordpress.org/extend/plugins/vk-post-author-display/
 Description: Show post author information at post bottom.
-Version: 1.4.3
+Version: 1.4.4
 Author: Vektor,Inc.
 Author URI: https://ex-unit.nagoya/
 Text Domain: vk-post-author-display
@@ -68,7 +68,7 @@ require_once( VK_PAD_DIR . 'hide_controller.php' );
 // _e('aaaaa','vk-post-author-display');
 
 	// Add a link to this plugin's settings page
-function pad_set_plugin_meta( $links ) { 
+function pad_set_plugin_meta( $links ) {
     $settings_link             = '<a href="options-general.php?page=pad_plugin_options">'.__( 'Setting', 'vk-post-author-display' ).'</a>';
     array_unshift($links, $settings_link);
     return $links;
@@ -102,8 +102,8 @@ function pad_add_author($content){
 		foreach ($post_types as $key => $value) {
 			if ( get_post_type() == $value ){
 				global $post;
-				$hidden = apply_filters( 
-					'pad_hide_post_author_custom', 
+				$hidden = apply_filters(
+					'pad_hide_post_author_custom',
 					get_post_meta( $post->ID,'pad_hide_post_author',true )
 					);
 				if ( !$hidden ){
@@ -221,7 +221,7 @@ function pad_plugin_special_thumbnail() {
 	$options 		 = pad_get_plugin_options();
 	// $default_options = pad_get_default_options();
 
-	// Case of use PAD image size 
+	// Case of use PAD image size
 	if( isset( $options['generate_thumbnail'] ) && $options['generate_thumbnail'] == 'yes' ) {
 
 		if ( function_exists( 'add_theme_support' ) ) {
@@ -229,7 +229,7 @@ function pad_plugin_special_thumbnail() {
 			//custom thumbnail for pad plugin
 			add_image_size( 'pad_thumb', 240, 135, array('center', 'center') );
 		}
-	} 
+	}
 	// else {
 	// 	apply_filters('intermediate_image_sizes', 'pad_plugin_disable_thumbnail');
 	// }
