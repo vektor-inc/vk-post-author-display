@@ -36,7 +36,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 			endif;
 
 			$profileUnit .= '</dt><dd>'."\n";
-			$profileUnit .= nl2br( get_the_author_meta( 'description' ) )."\n";
+			$profileUnit .= get_the_author_meta( 'description' )."\n";
 
 			$sns_array = pad_sns_array();
 			$sns_icons = '';
