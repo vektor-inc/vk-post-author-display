@@ -26,7 +26,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 				$profileUnit .= get_avatar( get_the_author_meta('email'), 100 );
 			}
 			$profileUnit .= '</div><!-- [ /#avatar ] -->';
-			
+
 			$profileUnit .= '<dl id="profileTxtSet" class="profileTxtSet">'."\n";
 			$profileUnit .= '<dt>'."\n";
 			$profileUnit .= '<span id="authorName" class="authorName">'.$user_name.'</span>';
@@ -95,7 +95,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 			$entryUnit .= '<ul class="entryList">'."\n";
 			while ( $loop->have_posts() ) : $loop->the_post();
 				$term = '';
-					
+
 				$taxonomies = get_the_taxonomies();
 				if ($taxonomies):
 					// get $taxonomy name
@@ -125,7 +125,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 						} else {
 							$pad_thumb = get_the_post_thumbnail( get_the_ID(), 'thumbnail' );
 						}
-						
+
 						$entryUnit .= $pad_thumb;
 
 					} else {
@@ -146,7 +146,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 
 			if ( $layout != 'author_archive' )
 				$author_unit .= '<h4>'.esc_html( get_pad_options('author_box_title') ).'</h4>';
-			
+
 			$author_unit .= Vk_Post_Author_Box::pad_get_author_profile();
 
 			if ( $layout != 'author_archive' )
