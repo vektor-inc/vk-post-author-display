@@ -5,7 +5,7 @@
 /*-------------------------------------------*/
 if ( ! class_exists( 'Vk_term_color' ) )
 {
-	require_once( 'term-color/class.term-color.php' );
+	require_once( 'term-color/class-term-color.php' );
 
 	/*  transrate
 	/*-------------------------------------------*/
