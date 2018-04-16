@@ -37,7 +37,7 @@ function pad_sns_array() {
 function pad_update_profile_fields( $contactmethods ) {
 
 	//項目の追加
-	$contactmethods['pad_caption'] = __( 'Caption<br>(VK Post Author Display)', 'post-author-display' );
+	$contactmethods['pad_caption'] = __( 'Caption<br>(VK Post Author Display)', 'vk-post-author-display' );
 
 	$sns_array = pad_sns_array();
 	foreach ( $sns_array as $key => $value ) {

@@ -10,14 +10,14 @@ function pad_the_admin_body(){ ?>
 ?>
 <div>
 <section>
-<h3><?php _e( 'Post Author Box Setting', 'post-author-display' ); ?></h3>
+<h3><?php _e( 'Post Author Box Setting', 'vk-post-author-display' ); ?></h3>
 <table class="form-table">
 <tr>
-<th><?php _e( 'Post author box title', 'post-author-display' ); ?></th>
+<th><?php _e( 'Post author box title', 'vk-post-author-display' ); ?></th>
 <td><?php echo get_pad_options( 'author_box_title' ); ?> -> <input type="text" name="pad_plugin_options[author_box_title]" id="author_box_title" value="<?php echo esc_attr( $options_pad['author_box_title'] ); ?>" style="width:50%;" /></td>
 </tr>
 <tr>
-<th><?php _e( 'Profile Picture Style', 'post-author-display' ); ?></th>
+<th><?php _e( 'Profile Picture Style', 'vk-post-author-display' ); ?></th>
 <td>
 <?php
 if ( ! isset( $options_pad['author_picture_style'] ) ) {
@@ -25,8 +25,8 @@ if ( ! isset( $options_pad['author_picture_style'] ) ) {
 }
 
 $picture_designs = array(
-	'square' => __( 'Square', 'post-author-display' ),
-	'circle' => __( 'Circle', 'post-author-display' ),
+	'square' => __( 'Square', 'vk-post-author-display' ),
+	'circle' => __( 'Circle', 'vk-post-author-display' ),
 );
 foreach ( $picture_designs as $picture_design_value => $picture_design_lavel ) {
 	$checked = '';
@@ -43,17 +43,17 @@ endif;
 </td>
 </tr>
 <tr>
-<th><?php _e( 'Post list box title', 'post-author-display' ); ?></th>
+<th><?php _e( 'Post list box title', 'vk-post-author-display' ); ?></th>
 <td><?php echo get_pad_options( 'list_box_title' ); ?> -> <input type="text" name="pad_plugin_options[list_box_title]" id="list_box_title" value="<?php echo esc_attr( $options_pad['list_box_title'] ); ?>" style="width:50%;" /></td>
 </tr>
 
 <tr>
-<th><?php _e( 'Display post author archive page link', 'post-author-display' ); ?></th>
+<th><?php _e( 'Display post author archive page link', 'vk-post-author-display' ); ?></th>
 <td>
 <?php
 $author_archive_links = array(
-	'hide'    => __( 'hide', 'post-author-display' ),
-	'display' => __( 'display author archive link', 'post-author-display' ),
+	'hide'    => __( 'hide', 'vk-post-author-display' ),
+	'display' => __( 'display author archive link', 'vk-post-author-display' ),
 );
 foreach ( $author_archive_links as $author_archive_link_value => $author_archive_link_lavel ) {
 	$checked = '';
@@ -70,17 +70,17 @@ endif;
 </td>
 </tr>
 <tr>
-<th><?php _e( 'Author archives text', 'post-author-display' ); ?></th>
+<th><?php _e( 'Author archives text', 'vk-post-author-display' ); ?></th>
 <td><?php echo get_pad_options( 'author_archive_link_txt' ); ?> -> <input type="text" name="pad_plugin_options[author_archive_link_txt]" id="author_archive_link_txt" value="<?php echo esc_attr( $options_pad['author_archive_link_txt'] ); ?>" style="width:50%;" /></td>
 </tr>
 
 <tr>
-<th><?php _e( 'Display post thumbnail image', 'post-author-display' ); ?></th>
+<th><?php _e( 'Display post thumbnail image', 'vk-post-author-display' ); ?></th>
 <td>
 <?php
 $show_thumbnails = array(
-	'hide'    => __( 'hide', 'post-author-display' ),
-	'display' => __( 'display thumbnail image', 'post-author-display' ),
+	'hide'    => __( 'hide', 'vk-post-author-display' ),
+	'display' => __( 'display thumbnail image', 'vk-post-author-display' ),
 );
 foreach ( $show_thumbnails as $show_thumbnail_value => $show_thumbnail_lavel ) {
 	$checked = '';
@@ -98,12 +98,12 @@ endif;
 </tr>
 
 <tr>
-	<th><?php _e( 'Use custom size thumbnails for thumbnails display?', 'post-author-display' ); ?></th>
+	<th><?php _e( 'Use custom size thumbnails for thumbnails display?', 'vk-post-author-display' ); ?></th>
 	<td>
 		<?php
 		$generate_thumbnails = array(
-			__( 'yes', 'post-author-display' ) => 'yes',
-			__( 'no', 'post-author-display' )  => 'no',
+			__( 'yes', 'vk-post-author-display' ) => 'yes',
+			__( 'no', 'vk-post-author-display' )  => 'no',
 		);
 		foreach ( $generate_thumbnails as $generate_thumbnail_label => $generate_thumbnail_value ) {
 
@@ -122,10 +122,10 @@ endif;
 		?>
 		<br />
 		<p>
-		<?php _e( 'If your theme already cropping thumbnail, please select the "no".', 'post-author-display' ); ?></br>
-		<?php _e( 'If thumbnail images layout has not aligned, please select the "yes".', 'post-author-display' ); ?>
-		<?php _e( 'This plugin generate the appropriate image size.', 'post-author-display' ); ?></br>
-		<?php _e( '* If you select the "yes" and already have many posts in your WordPress, you have to regenerate the thumbnail images using (for example) the "Regenerate Thumbnails" plugin.', 'post-author-display' ); ?></p>
+		<?php _e( 'If your theme already cropping thumbnail, please select the "no".', 'vk-post-author-display' ); ?></br>
+		<?php _e( 'If thumbnail images layout has not aligned, please select the "yes".', 'vk-post-author-display' ); ?>
+		<?php _e( 'This plugin generate the appropriate image size.', 'vk-post-author-display' ); ?></br>
+		<?php _e( '* If you select the "yes" and already have many posts in your WordPress, you have to regenerate the thumbnail images using (for example) the "Regenerate Thumbnails" plugin.', 'vk-post-author-display' ); ?></p>
 	</td>
 </tr>
 

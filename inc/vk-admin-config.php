@@ -16,9 +16,9 @@ Vk_Admin::admin_scripts( $admin_pages );
 /*-------------------------------------------*/
 function pad_add_customSettingPage() {
 	require_once( VK_PAD_DIR . 'view.admin.php' );
-	$get_page_title = __( 'VK Post Author Display Main Setting', 'post-author-display' );
+	$get_page_title = __( 'VK Post Author Display Main Setting', 'vk-post-author-display' );
 	$get_logo_html = '';
-	$get_menu_html = '<li><a href="#post_author_box">'.__('Post Author Box Setting', 'post-author-display').'</a></li>';
-	$get_menu_html .='<li><a href="'.get_admin_url().'profile.php" target="_blank">'.__( 'Edit your profile', 'post-author-display' ).'</a></li>';
+	$get_menu_html = '<li><a href="#post_author_box">'.__('Post Author Box Setting', 'vk-post-author-display').'</a></li>';
+	$get_menu_html .='<li><a href="'.get_admin_url().'profile.php" target="_blank">'.__( 'Edit your profile', 'vk-post-author-display' ).'</a></li>';
 	Vk_Admin::admin_page_frame( $get_page_title, 'pad_the_admin_body', $get_logo_html, $get_menu_html );
 }

@@ -22,7 +22,7 @@ global $vk_term_color_taxonomies;
 if ( ! class_exists( 'Vk_term_color' ) ) {
 
 	global $vk_term_color_textdomain;
-	$vk_term_color_textdomain = 'post-author-display';
+	$vk_term_color_textdomain = 'vk-post-author-display';
 
 	/*
 	読み込みタイミングをafter_setup_themeにしておかないと

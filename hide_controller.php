@@ -19,7 +19,7 @@ function pad_add_custom_field_user_view_group() {
 	foreach ( $post_types  as $post_type ) {
 		add_meta_box(
 			'post_author_display',
-			__( 'Post Author Display', 'post-author-display' ),
+			__( 'Post Author Display', 'vk-post-author-display' ),
 			'pad_content_meta_fields',
 			$post_type,
 			'side'
@@ -38,7 +38,7 @@ function pad_content_meta_fields() {
 
 	global $post;
 	$checked = ( get_post_meta( $post->ID, 'pad_hide_post_author', true ) ) ? ' checked' : '';
-	$label   = __( 'Don\'t display post author', 'post-author-display' );
+	$label   = __( 'Don\'t display post author', 'vk-post-author-display' );
 
 	echo '<ul>';
 	echo '<li><label>' . '<input type="checkbox" id="pad_hide_post_author" name="pad_hide_post_author" value="true"' . $checked . '> ' . $label . '</label></li>';
