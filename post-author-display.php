@@ -58,10 +58,10 @@ define( 'VK_PAD_DIR', plugin_dir_path( __FILE__ ) );
 /*-------------------------------------------*/
 /*	vk post author text domain load
 /*-------------------------------------------*/
-function pad_text_domain() {
-	load_plugin_textdomain( 'vk-post-author-display', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-}
-add_action( 'init', 'pad_text_domain' );
+// function pad_text_domain() {
+// 	load_plugin_textdomain( 'vk-post-author-display', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+// }
+// add_action( 'init', 'pad_text_domain' );
 
 require_once( VK_PAD_DIR . 'inc/term-color-config.php' );
 require_once( VK_PAD_DIR . 'inc/vk-admin-config.php' );
