@@ -3,8 +3,8 @@ Contributors: kurudrive,dswebstudio,mypacecreator,gatespace,hnle,catherine8007
 Donate link:
 Tags: post,author
 Requires at least: 4.4
-Tested up to: 4.9.5
-Stable tag: 1.6.0
+Tested up to: 4.9.8
+Stable tag: 1.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,10 @@ Display to Post Author Information Box on bottom of the contents.
 3. You can edit "Post author box title","Post list box title","Display post thumbnail image" and more...
 
 == Changelog ==
+
+= 1.7.0 =
+
+* Font Awesome Version 5 compatible
 
 = 1.6.0 =
 
