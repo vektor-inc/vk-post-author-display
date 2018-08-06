@@ -65,6 +65,7 @@ define( 'VK_PAD_DIR', plugin_dir_path( __FILE__ ) );
 
 require_once( VK_PAD_DIR . 'inc/term-color-config.php' );
 require_once( VK_PAD_DIR . 'inc/vk-admin-config.php' );
+require_once( VK_PAD_DIR . 'inc/font-awesome-config.php' );
 require_once( VK_PAD_DIR . 'view.post-author.php' );
 require_once( VK_PAD_DIR . 'admin-profile.php' );
 require_once( VK_PAD_DIR . 'hide_controller.php' );
@@ -129,7 +130,7 @@ function pad_set_css() {
 	$cssPath    = apply_filters( 'pad-stylesheet', plugins_url( 'css/vk-post-author.css', __FILE__ ) );
 	if ( is_singular( $post_types ) ) {
 		wp_enqueue_style( 'set_vk_post_autor_css', $cssPath, false, VK_PAD_VERSION );
-		wp_enqueue_style( 'font-awesome', VK_PAD_URL . 'libraries/font-awesome/css/font-awesome.min.css', array(), '4.6.3', 'all' );
+		// wp_enqueue_style( 'font-awesome', VK_PAD_URL . 'libraries/font-awesome/css/font-awesome.min.css', array(), '4.6.3', 'all' );
 	}
 }
 

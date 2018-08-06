@@ -24,7 +24,7 @@ function pad_sns_array() {
 		),
 		'linkedin'    => array(
 			'name' => 'LinkedIn',
-			'icon' => 'fa-linkedin-square',
+			'icon' => 'fa-linkedin',
 		),
 		'google-plus' => array(
 			'name' => 'Google+',

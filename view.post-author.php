@@ -48,6 +48,17 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 				="_blank" class="web"><i class="fa fa-globe web" aria-hidden="true"></i></a></li>';
 			}
 
+			if ( class_exists( 'Vk_Font_Awesome_Versions' ) ) {
+				$current = Vk_Font_Awesome_Versions::current_info();
+				if ( $current['version'] == '5.0' ) {
+					$fa_before = 'fab ';
+				} else {
+					$fa_before = 'fa ';
+				}
+			} else {
+				$fa_before = 'fab ';
+			}
+
 			foreach ( $sns_array as $key => $value ) {
 				$field   = 'pad_' . $key;
 				$sns_url = get_the_author_meta( $field );
@@ -64,7 +75,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 
 				if ( $sns_url ) {
 					$sns_icons .= '<li class="pad_' . $key . '"><a href="' . esc_url( $sns_url ) . '" target
-					="_blank" class="' . $key . '"><i class="fa ' . $value['icon'] . '" aria-hidden="true"></i></a></li>';
+					="_blank" class="' . $key . '"><i class="' . $fa_before . $value['icon'] . '" aria-hidden="true"></i></a></li>';
 				}
 			}
 
