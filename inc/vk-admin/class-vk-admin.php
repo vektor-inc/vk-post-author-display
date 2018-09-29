@@ -109,11 +109,11 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 			}
 
 			if ( $lang == 'ja' && ! is_plugin_active( 'lightning-skin-jpnstyle/lightning_skin_jpnstyle.php' ) ) {
-				$banner .= '<a href="//lightning.nagoya/ja/plugins/ex_plugin/lightning-jpnstyle" target="_blank" class="admin_banner"><img src="' . $dir_url . 'images/jpnstyle-bnr.jpg" alt="" /></a>';
+				$banner .= '<a href="//lightning.nagoya/ja/plugins/expansion/lightning-jpnstyle" target="_blank" class="admin_banner"><img src="' . $dir_url . 'images/jpnstyle-bnr.jpg" alt="" /></a>';
 			}
 
 			if ( $lang == 'ja' && ! is_plugin_active( 'lightning-skin-fort/lightning-skin-fort.php' ) ) {
-					$banner .= '<a href="//lightning.nagoya/ja/plugins/ex_plugin/lightning-fort" target="_blank" class="admin_banner"><img src="' . $dir_url . 'images/fort-bnr.jpg" alt="" /></a>';
+					$banner .= '<a href="//lightning.nagoya/ja/plugins/expansion/lightning-fort" target="_blank" class="admin_banner"><img src="' . $dir_url . 'images/fort-bnr.jpg" alt="" /></a>';
 			}
 
 			if ( $lang == 'ja' && ! is_plugin_active( 'vk-all-in-one-expansion-unit/vkExUnit.php' ) ) {
@@ -150,19 +150,19 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 
 			$html  = '<h4 class="vk-metabox-sub-title">';
 			$html .= 'Vektor WordPress Information';
-			$html .= '<a href="https://www.vektor-inc.co.jp/info-cat/vk-wp-info/" target="_blank" class="vk-metabox-more-link">記事一覧<span aria-hidden="true" class="dashicons dashicons-external"></span></a>';
+			$html .= '<a href="https://www.vektor-inc.co.jp/info-cat/vk-wp-info/?rel=vkadmin" target="_blank" class="vk-metabox-more-link">記事一覧<span aria-hidden="true" class="dashicons dashicons-external"></span></a>';
 			$html .= '</h4>';
 			$html .= '<ul id="vk-wp-info" class="vk-metabox-post-list"></ul>';
 
 			$html .= '<h4 class="vk-metabox-sub-title">';
 			$html .= 'Vektor WordPress ブログ';
-			$html .= '<a href="https://www.vektor-inc.co.jp/category/wordpress-info/" target="_blank" class="vk-metabox-more-link">記事一覧<span aria-hidden="true" class="dashicons dashicons-external"></span></a>';
+			$html .= '<a href="https://www.vektor-inc.co.jp/category/wordpress-info/?rel=vkadmin" target="_blank" class="vk-metabox-more-link">記事一覧<span aria-hidden="true" class="dashicons dashicons-external"></span></a>';
 			$html .= '</h4>';
 			$html .= '<ul id="vk-wp-blog" class="vk-metabox-post-list"></ul>';
 
 			$html .= '<h4 class="vk-metabox-sub-title">';
 			$html .= 'Vektor WordPress フォーラム';
-			$html .= '<a href="https://forum.vektor-inc.co.jp/" target="_blank" class="vk-metabox-more-link">記事一覧<span aria-hidden="true" class="dashicons dashicons-external"></span></a>';
+			$html .= '<a href="https://vws.vektor-inc.co.jp/forums/?rel=vkadmin" target="_blank" class="vk-metabox-more-link">記事一覧<span aria-hidden="true" class="dashicons dashicons-external"></span></a>';
 			$html .= '</h4>';
 			$html .= '<ul id="vk-wp-forum" class="vk-metabox-post-list"></ul>';
 
@@ -185,6 +185,7 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 		;(function($){
 			jQuery(document).ready(function($){
 
+				// お知らせ
 				$.getJSON( "https://vektor-inc.co.jp/wp-json/wp/v2/info?info-cat=111&per_page=5",
 				function(results) {
 						// 取得したJSONの内容をループする
@@ -193,10 +194,11 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 							var date = new Date(item.date_gmt);
 							var formate_date = date.toLocaleDateString();
 							// JSONの内容の要素を</ul>の前に出力する
-							$("ul#vk-wp-info").append('<li><span class="date">'+ formate_date +'</span><a href="' + item.link + '" target="_blank">' + item.title.rendered + '</a></li>');
+							$("ul#vk-wp-info").append('<li><span class="date">'+ formate_date +'</span><a href="' + item.link + '?rel=vkadmin" target="_blank">' + item.title.rendered + '</a></li>');
 						});
 				});
 
+				// ブログ
 				$.getJSON( "https://www.vektor-inc.co.jp/wp-json/wp/v2/posts/?categories=55&per_page=3",
 				function(results) {
 						// 取得したJSONの内容をループする
@@ -205,16 +207,17 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 							var date = new Date(item.date_gmt);
 							var formate_date = date.toLocaleDateString();
 							// JSONの内容の要素を</ul>の前に出力する
-							$("ul#vk-wp-blog").append('<li><span class="date">'+ formate_date +'</span><a href="' + item.link + '" target="_blank">' + item.title.rendered + '</a></li>');
+							$("ul#vk-wp-blog").append('<li><span class="date">'+ formate_date +'</span><a href="' + item.link + '?rel=vkadmin" target="_blank">' + item.title.rendered + '</a></li>');
 						});
 				});
 
-				$.getJSON( "https://forum.vektor-inc.co.jp/wp-json/wp/v2/topics/?per_page=5",
+				// フォーラム
+				$.getJSON( "https://vws.vektor-inc.co.jp/wp-json/wp/v2/topics/?per_page=5",
 				function(results) {
 						$.each(results, function(i, item) {
 							var date = new Date(item.date_gmt);
 							var formate_date = date.toLocaleDateString();
-							 $("ul#vk-wp-forum").append('<li><a href="' + item.link + '" target="_blank">' + item.title.rendered + '</a></li>');
+							 $("ul#vk-wp-forum").append('<li><a href="' + item.link + '?rel=vkadmin" target="_blank">' + item.title.rendered + '</a></li>');
 						});
 				});
 
