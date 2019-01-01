@@ -102,6 +102,14 @@ function pad_display_post_types() {
 /*-------------------------------------------*/
 add_filter( 'the_content', 'pad_add_author' );
 function pad_add_author( $content ) {
+
+	$option = pad_get_plugin_options();
+
+	// 非表示指定されてたら表示しない
+	if ( $option['auto_display'] == 'no' ) {
+		return $content;
+	}
+
 	$post_types = pad_display_post_types();
 	// if ( ( is_single() || is_page() ) && !is_front_page() ){
 	if ( is_singular( $post_types ) ) {
@@ -146,6 +154,7 @@ function pad_get_default_options() {
 		'author_archive_link_txt' => __( 'Author Archives', 'vk-post-author-display' ),
 		'show_thumbnail'          => 'display',
 		'generate_thumbnail'      => 'yes',
+		'auto_display'            => 'yes',
 	);
 	return apply_filters( 'pad_default_options', $display_author_options );
 }
@@ -223,6 +232,7 @@ function pad_plugin_options_validate( $input ) {
 	$output['author_archive_link_txt'] = wp_kses_post( [ 'author_archive_link_txt' ] );
 	$output['show_thumbnail']          = esc_html( $input['show_thumbnail'] );
 	$output['generate_thumbnail']      = esc_html( $input['generate_thumbnail'] );
+	$output['auto_display']            = esc_html( $input['auto_display'] );
 
 	return apply_filters( 'pad_plugin_options_validate', $output, $input, $defaults );
 }

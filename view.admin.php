@@ -127,6 +127,42 @@ endif;
 	</td>
 </tr>
 
+<tr>
+	<th><?php _e( 'Auto display', 'vk-post-author-display' ); ?></th>
+	<td>
+		<?php
+		$auto_displays = array(
+			__( 'yes', 'vk-post-author-display' ) => 'yes',
+			__( 'no', 'vk-post-author-display' )  => 'no',
+		);
+		foreach ( $auto_displays as $auto_display_label => $auto_display_value ) {
+
+			$checked = '';
+			if ( $options_pad['auto_display'] == $auto_display_value ) {
+					$checked = ' checked';
+			}
+			?>
+			<label class="form_horizontal_item">
+				<input type="radio" name="pad_plugin_options[auto_display]" value="<?php echo $auto_display_value; ?>"<?php echo $checked; ?>/>
+				<?php echo $auto_display_label; ?>
+			</label>
+			<?php
+
+		}
+		?>
+		<br />
+		<p>
+		<?php _e( 'If you wantt to control of display position, please select the "no" and write this code to the template file', 'vk-post-author-display' ); ?></p>
+
+		<pre>
+if ( class_exists( 'Vk_Post_Author_Box' ) ) {
+	Vk_Post_Author_Box::pad_get_author_box();
+}
+		</pre>
+
+	</td>
+</tr>
+
 </table>
 <?php submit_button(); ?>
 </section>
