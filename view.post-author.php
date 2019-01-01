@@ -170,6 +170,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 		}
 
 		public static function pad_get_author_box( $layout = 'normal' ) {
+			$options     = pad_get_plugin_options();
 			$author_unit = '<div class="padSection" id="padSection">';
 
 			if ( $layout != 'author_archive' ) {
