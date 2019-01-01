@@ -4,9 +4,7 @@ function pad_the_admin_body(){ ?>
 <form method="post" action="options.php">
 <?php
 	settings_fields( 'pad_plugin_options' );
-	$options_pad     = pad_get_plugin_options();
-	$default_options = pad_get_default_options();
-
+	$options_pad = pad_get_plugin_options();
 ?>
 <div>
 <section>
