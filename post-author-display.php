@@ -200,13 +200,13 @@ add_action( 'admin_menu', 'pad_add_customSetting' );
 function pad_plugin_options_validate( $input ) {
 	$output = $defaults = pad_get_default_options();
 
-	$output['author_box_title']        = $input['author_box_title'];
-	$output['author_picture_style']    = $input['author_picture_style'];
-	$output['list_box_title']          = $input['list_box_title'];
-	$output['author_archive_link']     = $input['author_archive_link'];
-	$output['author_archive_link_txt'] = $input['author_archive_link_txt'];
-	$output['show_thumbnail']          = $input['show_thumbnail'];
-	$output['generate_thumbnail']      = $input['generate_thumbnail'];
+	$output['author_box_title']        = wp_kses_post( $input['author_box_title'] );
+	$output['author_picture_style']    = esc_html( $input['author_picture_style'] );
+	$output['list_box_title']          = wp_kses_post( [ 'list_box_title' ] );
+	$output['author_archive_link']     = esc_html( $input['author_archive_link'] );
+	$output['author_archive_link_txt'] = wp_kses_post( [ 'author_archive_link_txt' ] );
+	$output['show_thumbnail']          = esc_html( $input['show_thumbnail'] );
+	$output['generate_thumbnail']      = esc_html( $input['generate_thumbnail'] );
 
 	return apply_filters( 'pad_plugin_options_validate', $output, $input, $defaults );
 }
