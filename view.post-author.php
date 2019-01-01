@@ -102,11 +102,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 		}
 
 		public static function pad_get_author_entries() {
-			$options         = pad_get_plugin_options();
-			$list_box_title  = ( isset( $options['list_box_title'] ) ) ? $options['list_box_title'] : '';
-			$thumbnail       = ( isset( $options['show_thumbnail'] ) ) ? $options['show_thumbnail'] : '';
-			$author_link     = ( isset( $options['author_archive_link'] ) ) ? $options['author_archive_link'] : '';
-			$author_link_txt = ( isset( $options['author_archive_link_txt'] ) ) ? $options['author_archive_link_txt'] : '';
+			$options = pad_get_plugin_options();
 
 			// author entries
 			global $post;
@@ -119,9 +115,9 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 				)
 			);
 			$entryUnit  = '<div id="latestEntries">' . "\n";
-			$entryUnit .= '<h5>' . $list_box_title . '</h5>' . "\n";
-			if ( $author_link == 'display' ) {
-					$entryUnit .= '<p class="authorLink"><a href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '" rel="author"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> ' . $author_link_txt . '</a></p>' . "\n";
+			$entryUnit .= '<h5>' . wp_kses_post( $options['list_box_title'] ) . '</h5>' . "\n";
+			if ( $options['author_archive_link'] == 'display' ) {
+					$entryUnit .= '<p class="authorLink"><a href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '" rel="author"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> ' . wp_kses_post( $options['author_archive_link_txt'] ) . '</a></p>' . "\n";
 			}
 			$entryUnit .= '<ul class="entryList">' . "\n";
 			while ( $loop->have_posts() ) :
@@ -140,7 +136,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 					$term       = '<a class="padCate"' . $term_color . ' href="' . $term_link . '">' . $term_name . '</a>';
 				endif;
 
-				if ( $thumbnail == 'hide' ) {
+				if ( $options['show_thumbnail'] == 'hide' ) {
 					/* list only */
 					$entryUnit .= '<li class="textList"><span class="padDate">' . get_the_date( 'Y.m.d' ) . '</span>' . $term . '<a href="' . get_permalink( $post->ID ) . '" class="padTitle">' . get_the_title() . '</a></li>' . "\n";
 				} else {
@@ -177,7 +173,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 			$author_unit = '<div class="padSection" id="padSection">';
 
 			if ( $layout != 'author_archive' ) {
-				$author_unit .= '<h4>' . esc_html( get_pad_options( 'author_box_title' ) ) . '</h4>';
+				$author_unit .= '<h4>' . esc_html( $options['author_box_title'] ) . '</h4>';
 			}
 
 			$author_unit .= Vk_Post_Author_Box::pad_get_author_profile();

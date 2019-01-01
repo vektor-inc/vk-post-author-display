@@ -12,7 +12,7 @@ function pad_the_admin_body(){ ?>
 <table class="form-table">
 <tr>
 <th><?php _e( 'Post author box title', 'vk-post-author-display' ); ?></th>
-<td><?php echo get_pad_options( 'author_box_title' ); ?> -> <input type="text" name="pad_plugin_options[author_box_title]" id="author_box_title" value="<?php echo esc_attr( $options_pad['author_box_title'] ); ?>" style="width:50%;" /></td>
+<td><?php echo wp_kses_post( $options_pad['author_box_title'] ); ?> -> <input type="text" name="pad_plugin_options[author_box_title]" id="author_box_title" value="<?php echo esc_attr( $options_pad['author_box_title'] ); ?>" style="width:50%;" /></td>
 </tr>
 <tr>
 <th><?php _e( 'Profile Picture Style', 'vk-post-author-display' ); ?></th>
@@ -42,7 +42,7 @@ endif;
 </tr>
 <tr>
 <th><?php _e( 'Post list box title', 'vk-post-author-display' ); ?></th>
-<td><?php echo get_pad_options( 'list_box_title' ); ?> -> <input type="text" name="pad_plugin_options[list_box_title]" id="list_box_title" value="<?php echo esc_attr( $options_pad['list_box_title'] ); ?>" style="width:50%;" /></td>
+<td><?php echo wp_kses_post( $options_pad['list_box_title'] ); ?> -> <input type="text" name="pad_plugin_options[list_box_title]" id="list_box_title" value="<?php echo esc_attr( $options_pad['list_box_title'] ); ?>" style="width:50%;" /></td>
 </tr>
 
 <tr>
@@ -69,7 +69,7 @@ endif;
 </tr>
 <tr>
 <th><?php _e( 'Author archives text', 'vk-post-author-display' ); ?></th>
-<td><?php echo get_pad_options( 'author_archive_link_txt' ); ?> -> <input type="text" name="pad_plugin_options[author_archive_link_txt]" id="author_archive_link_txt" value="<?php echo esc_attr( $options_pad['author_archive_link_txt'] ); ?>" style="width:50%;" /></td>
+<td><?php echo wp_kses_post( $options_pad['author_archive_link_txt'] ); ?> -> <input type="text" name="pad_plugin_options[author_archive_link_txt]" id="author_archive_link_txt" value="<?php echo esc_attr( $options_pad['author_archive_link_txt'] ); ?>" style="width:50%;" /></td>
 </tr>
 
 <tr>

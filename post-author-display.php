@@ -168,8 +168,17 @@ add_action( 'admin_init', 'pad_plugin_options_Custom_init' );
 function pad_get_plugin_options() {
 	// デフォルト値を取得
 	$default = pad_get_default_options();
+
 	// オプション値を取得（無い場合はデフォルト値を入れて設定）
 	$options = get_option( 'pad_plugin_options', $default );
+
+	// なぜか配列で値が入ってしまってる場合があるので...
+	foreach ( $options as $key => $value ) {
+		// 配列ではいっちゃってる場合はデフォルトで上書き
+		if ( is_array( $value ) ) {
+			$options[ $key ] = $default[ $key ];
+		}
+	}
 	// 後で追加された値などオプション値がちゃんと入ってない場合があるので値を再結合
 	$options = wp_parse_args( $options, $default );
 
