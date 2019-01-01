@@ -166,7 +166,14 @@ add_action( 'admin_init', 'pad_plugin_options_Custom_init' );
 /*	functionsで毎回呼び出して$options_padに入れる処理を他でする。
 /*-------------------------------------------*/
 function pad_get_plugin_options() {
-	return get_option( 'pad_plugin_options', pad_get_default_options() );
+	// デフォルト値を取得
+	$default = pad_get_default_options();
+	// オプション値を取得（無い場合はデフォルト値を入れて設定）
+	$options = get_option( 'pad_plugin_options', $default );
+	// 後で追加された値などオプション値がちゃんと入ってない場合があるので値を再結合
+	$options = wp_parse_args( $options, $default );
+
+	return $options;
 }
 
 /*-------------------------------------------*/
