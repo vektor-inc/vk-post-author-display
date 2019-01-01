@@ -156,7 +156,7 @@ endif;
 
 		<pre>
 if ( class_exists( 'Vk_Post_Author_Box' ) ) {
-	Vk_Post_Author_Box::pad_get_author_box();
+	echo Vk_Post_Author_Box::pad_get_author_box();
 }
 		</pre>
 
