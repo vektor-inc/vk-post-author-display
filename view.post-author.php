@@ -42,34 +42,28 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 			$sns_icons = '';
 
 			// Set Font Awesome Version
+			$fa = '4.7';
 			if ( class_exists( 'Vk_Font_Awesome_Versions' ) ) {
-				$current = Vk_Font_Awesome_Versions::current_info();
-				if ( $current['version'] == '5.0' ) {
-					$fa_version = '5.0';
-				} else {
-					$fa_version = '4.7';
-				}
-			} else {
-				$fa_version = '4.7';
+				$fa = Vk_Font_Awesome_Versions::get_option_fa();
 			}
 
 			// url
 			$url = isset( $user->data->user_url ) ? $user->data->user_url : '';
 			if ( $url ) {
-				if ( $fa_version == '5.0' ) {
-					$icon = 'fas fa-globe';
-				} else {
+				if ( $fa == '4.7' ) {
 					$icon = 'fa fa-globe web';
+				} else {
+					$icon = 'fas fa-globe';
 				}
 				$sns_icons = '<li class="pad_url"><a href="' . esc_url( $url ) . '" target
 				="_blank" class="web"><i class="' . $icon . '" aria-hidden="true"></i></a></li>';
 			}
 
 			// SNS Brand Icon
-			if ( $fa_version == '5.0' ) {
-				$fa_before = 'fab ';
-			} else {
+			if ( $fa == '4.7' ) {
 				$fa_before = 'fa ';
+			} else {
+				$fa_before = 'fab ';
 			}
 
 			foreach ( $sns_array as $key => $value ) {
