@@ -129,6 +129,8 @@ function pad_add_author( $content ) {
 	}
 	return $content;
 }
+
+
 /*-------------------------------------------*/
 /*	front display css
 /*-------------------------------------------*/
