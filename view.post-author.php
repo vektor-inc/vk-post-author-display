@@ -42,9 +42,13 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 			$sns_icons = '';
 
 			// Set Font Awesome Version
-			$fa = '4.7';
+			$fa = '5_WebFonts_CSS';
+
 			if ( class_exists( 'Vk_Font_Awesome_Versions' ) ) {
-				$fa = Vk_Font_Awesome_Versions::get_option_fa();
+				$fa_versions = new Vk_Font_Awesome_Versions();
+				if ( method_exists( $fa_versions, 'get_option_fa' ) ) {
+					$fa = $fa_versions::get_option_fa();
+				}
 			}
 
 			// url
