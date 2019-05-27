@@ -25,14 +25,14 @@ jQuery(document).ready(function($){
             return;
         }
         custom_uploader = wp.media({
-            title: 'Choose Image',
+            // title: 'Choose Image',
             // 以下のコメントアウトを解除すると画像のみに限定される。 → されないみたい
             library: {
                 type: 'image'
             },
-            button: {
-                text: 'Choose Image'
-            },
+            // button: {
+            //     text: 'Choose Image'
+            // },
             multiple: false, // falseにすると画像を1つしか選択できなくなる
         });
         custom_uploader.on('select', function() {
@@ -133,7 +133,7 @@ function navMove( default_offset, contentHeight ){
 /* ページ内リンクで頭出しの余白を適切にする
 /*-------------------------------------------*/
 jQuery(document).ready(function(){
-    if(!jQuery('body').hasClass('vk-exunit_page_vkExUnit_main_setting')){ return; }
+    if(!jQuery('body').hasClass('exunit_page_vkExUnit_main_setting')){ return; }
     // 一つ目のセクションの位置を取得
     var default_offset = jQuery('.adminMain section:first-child').offset();
 
