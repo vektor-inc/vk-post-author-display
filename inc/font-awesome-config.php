@@ -17,13 +17,14 @@ if ( ! class_exists( 'Vk_Font_Awesome_Versions' ) ) {
 	function pad_is_veu_fa_active() {
 		 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		 $plugin = 'vk-all-in-one-expansion-unit/vkExUnit.php';
+		 // プラグインがアクティブか？
 		if ( is_plugin_active( $plugin ) ) {
-			$options = vkExUnit_get_common_options();
+			$options = get_option( 'vkExUnit_common_options' );
 			if ( empty( $options['active_fontawesome'] ) ) {
 				return true;
-			}
-		}
-	}
+			} // if ( empty( $options['active_fontawesome'] ) ) {
+		} // if ( is_plugin_active( $plugin ) ) {
+	} // function pad_is_veu_fa_active() {
 
 	if ( ! pad_is_theme_lightning() && ! pad_is_veu_fa_active() ) {
 
