@@ -10,7 +10,7 @@ Text Domain: vk-post-author-display
 Domain Path: /languages
 License: GPL2
 
-/*  Copyright 2013-2016 Hidekazu Ishikawa ( email : kurudrive@gmail.com )
+/*  Copyright 2013-2019 Hidekazu Ishikawa ( email : kurudrive@gmail.com )
 
 		This program is free software; you can redistribute it and/or modify
 		it under the terms of the GNU General Public License, version 2, as
