@@ -3,8 +3,8 @@ Contributors: kurudrive,dswebstudio,mypacecreator,gatespace,hnle,catherine8007
 Donate link:
 Tags: post,author
 Requires at least: 4.4
-Tested up to: 5.2.1
-Stable tag: 1.8.3
+Tested up to: 5.3.0
+Stable tag: 1.8.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,8 +31,13 @@ Display to Post Author Information Box on bottom of the contents.
 == Changelog ==
 
 
+= 1.8.4 =
+
+* term color class update
+
 = 1.8.3 =
-[bug fix] Fatal error: Uncaught Error: Call to undefined function vkExUnit_get_common_options()
+
+* [bug fix] Fatal error: Uncaught Error: Call to undefined function vkExUnit_get_common_options()
 
 = 1.7.0 =
 
