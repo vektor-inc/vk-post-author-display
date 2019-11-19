@@ -165,6 +165,38 @@ if ( ! class_exists( 'Vk_term_color' ) ) {
 		}
 
 		/*-------------------------------------------*/
+		/* 	termのカラーを取得
+		/*-------------------------------------------*/
+		public static function get_single_term_with_color( $post = '', $args = array() ) {
+			if ( ! $post ) {
+				global $post;
+			}
+
+			$args_default = array(
+				'class' => '',
+			);
+			$args         = wp_parse_args( $args, $args_default );
+
+			$outer_class = '';
+			if ( ! empty( $args['class'] ) ) {
+				$outer_class = ' class="' . esc_attr( $args['class'] ) . '"';
+			}
+
+			$taxonomies             = get_the_taxonomies();
+			$single_term_with_color = '';
+			if ( $taxonomies ) :
+				// get $taxonomy name
+				$taxonomy                = key( $taxonomies );
+				$terms                   = get_the_terms( $post->ID, $taxonomy );
+				$term_name               = esc_html( $terms[0]->name );
+				$term_color              = Vk_term_color::get_term_color( $terms[0]->term_id );
+				$term_color              = ( $term_color ) ? ' style="color:#fff;background-color:' . $term_color . '"' : '';
+				$single_term_with_color .= '<span' . $outer_class . $term_color . '>' . $term_name . '</span>';
+			endif;
+			return $single_term_with_color;
+		}
+
+		/*-------------------------------------------*/
 		/* 	term color を有効化する taxonomy
 		/*-------------------------------------------*/
 		public function get_term_color_taxonomies() {
