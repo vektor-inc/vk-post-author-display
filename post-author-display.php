@@ -237,9 +237,9 @@ function pad_plugin_options_validate( $input ) {
 
 	$output['author_box_title']        = wp_kses_post( $input['author_box_title'] );
 	$output['author_picture_style']    = esc_html( $input['author_picture_style'] );
-	$output['list_box_title']          = wp_kses_post( [ 'list_box_title' ] );
+	$output['list_box_title']          = wp_kses_post( $input['list_box_title'] );
 	$output['author_archive_link']     = esc_html( $input['author_archive_link'] );
-	$output['author_archive_link_txt'] = wp_kses_post( [ 'author_archive_link_txt' ] );
+	$output['author_archive_link_txt'] = wp_kses_post( $input['author_archive_link_txt'] );
 	$output['show_thumbnail']          = esc_html( $input['show_thumbnail'] );
 	$output['generate_thumbnail']      = esc_html( $input['generate_thumbnail'] );
 	$output['auto_display']            = esc_html( $input['auto_display'] );
