@@ -7,6 +7,7 @@ function pad_the_admin_body(){ ?>
 	$options_pad = pad_get_plugin_options();
 ?>
 <div>
+
 <section>
 <h3><?php _e( 'Post Author Box Setting', 'vk-post-author-display' ); ?></h3>
 <table class="form-table">
@@ -166,6 +167,27 @@ if ( class_exists( 'Vk_Post_Author_Box' ) ) {
 </table>
 <?php submit_button(); ?>
 </section>
+
+<section id="disolay_post_types">
+<h3><?php _e( 'Display post types', 'vk-post-author-display' ); ?></h3>
+<table class="form-table">
+<tr>
+<th><?php _e( 'Display post types', 'vk-post-author-display' ); ?></th>
+<td>
+<?php
+$args = array(
+	'name'    => 'pad_plugin_options[post_types]',
+	'checked' => $options_pad['post_types'],
+	'id'      => 'pad_plugin_options[post_types]',
+);
+vk_the_post_type_check_list( $args );
+?>
+</td>
+</tr>
+</table>
+</section>
+<?php submit_button(); ?>
+
 </div>
 </form>
 
