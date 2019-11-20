@@ -4,7 +4,7 @@ Donate link:
 Tags: post,author
 Requires at least: 4.4
 Tested up to: 5.3.0
-Stable tag: 1.8.4
+Stable tag: 1.9.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,9 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
+= 1.9.0 =
+
+* Support to custom post types
 
 = 1.8.4 =
 
