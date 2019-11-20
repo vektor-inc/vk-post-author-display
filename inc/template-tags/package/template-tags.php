@@ -389,6 +389,23 @@ function vk_the_post_type_check_list( $args ) {
 	echo '</ul>';
 }
 
+/**
+ * vk_the_post_type_check_list で保存される配列が、キーに投稿タイプ名が入る微妙な仕様のため、投稿タイプだけを配列で返すように変換
+ * @param  [type] $post_types : array( 'post' => 'true', 'info' => '' );
+ * @return [type] $return : array( 'post' );
+ */
+function vk_the_post_type_check_list_saved_array_convert( $post_types ) {
+	$return = array();
+	if ( is_array( $post_types ) ) {
+		foreach ( $post_types as $post_type => $value ) {
+			if ( $value ) {
+				$return[] = $post_type;
+			}
+		}
+	}
+	return$return;
+}
+
 /*
 	vk_is_checked
 /*-------------------------------------------*/

@@ -85,8 +85,15 @@ function pad_set_plugin_meta( $links ) {
 
 
 function pad_display_post_types() {
-	// $post_types = get_post_types( $args, $output, $operator );
-	$post_types = array( 'post' );
+	$options = pad_get_plugin_options();
+
+	// Reason of use function_exists that template tags lib was not version management.
+	if ( function_exists( 'vk_the_post_type_check_list_saved_array_convert' ) ) {
+		$post_types = vk_the_post_type_check_list_saved_array_convert( $options['post_types'] );
+	} else {
+		$post_types = array( 'post' );
+	}
+	$post_types = vk_the_post_type_check_list_saved_array_convert( $options['post_types'] );
 	$post_types = apply_filters( 'pad_display_post_types', $post_types );
 	return $post_types;
 }
