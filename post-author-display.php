@@ -158,6 +158,7 @@ function pad_get_default_options() {
 		'show_thumbnail'          => 'display',
 		'generate_thumbnail'      => 'yes',
 		'auto_display'            => 'yes',
+		'post_types'              => array( 'post' => 'true' ),
 	);
 	return apply_filters( 'pad_default_options', $display_author_options );
 }
@@ -234,6 +235,11 @@ function pad_plugin_options_validate( $input ) {
 	$output['show_thumbnail']          = esc_html( $input['show_thumbnail'] );
 	$output['generate_thumbnail']      = esc_html( $input['generate_thumbnail'] );
 	$output['auto_display']            = esc_html( $input['auto_display'] );
+	if ( function_exists( 'vk_sanitize_array' ) ) {
+		$output['post_types'] = vk_sanitize_array( $input['post_types'] );
+	} else {
+		$output['post_types'] = $input['post_types'];
+	}
 
 	return apply_filters( 'pad_plugin_options_validate', $output, $input, $defaults );
 }
