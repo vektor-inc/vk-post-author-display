@@ -186,15 +186,6 @@ function pad_get_plugin_options() {
 
 	$options = wp_parse_args( $options, $default );
 
-	// なぜか配列で値が入ってしまってる場合があるので...
-	foreach ( $options as $key => $value ) {
-		// 配列ではいっちゃってる場合はデフォルトで上書き
-		if ( is_array( $value ) ) {
-			$options[ $key ] = $default[ $key ];
-		}
-	}
-	// 後で追加された値などオプション値がちゃんと入ってない場合があるので値を再結合
-
 	// 値が空で既に保存されているものがあり、管理画面で保存値のアクティブが効かないため、
 	// 値が空の場合は display を代入して返す
 	if ( empty( $options['show_thumbnail'] ) ) {
