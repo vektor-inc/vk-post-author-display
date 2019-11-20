@@ -66,6 +66,7 @@ define( 'VK_PAD_DIR', plugin_dir_path( __FILE__ ) );
 require_once( VK_PAD_DIR . 'inc/term-color-config.php' );
 require_once( VK_PAD_DIR . 'inc/vk-admin-config.php' );
 require_once( VK_PAD_DIR . 'inc/font-awesome-config.php' );
+require_once( VK_PAD_DIR . 'inc/template-tags/template-tags-config.php' );
 require_once( VK_PAD_DIR . 'view.post-author.php' );
 require_once( VK_PAD_DIR . 'admin-profile.php' );
 require_once( VK_PAD_DIR . 'hide_controller.php' );
