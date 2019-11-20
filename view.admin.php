@@ -89,7 +89,7 @@ foreach ( $show_thumbnails as $key => $lavel ) {
 		$checked = ' checked';
 	}
 ?>
-	<input type="radio" name="pad_plugin_options[show_thumbnail]" value="<?php echo $show_thumbnail_value; ?>"<?php echo $checked; ?>> <?php echo $lavel; ?>
+	<input type="radio" name="pad_plugin_options[show_thumbnail]" value="<?php echo $key; ?>"<?php echo $checked; ?>> <?php echo $lavel; ?>
 	</label>
 <?php } ?>
 </td>
