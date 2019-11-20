@@ -80,16 +80,16 @@ $show_thumbnails = array(
 	'hide'    => __( 'hide', 'vk-post-author-display' ),
 	'display' => __( 'display thumbnail image', 'vk-post-author-display' ),
 );
-foreach ( $show_thumbnails as $show_thumbnail_value => $show_thumbnail_lavel ) {
+foreach ( $show_thumbnails as $key => $lavel ) {
 	$checked = '';
 	?>
 	<label class="form_horizontal_item">
 	<?php
-	if ( $show_thumbnail_value == $options_pad['show_thumbnail'] ) :
+	if ( $key == $options_pad['show_thumbnail'] ) {
 		$checked = ' checked';
-endif;
+	}
 ?>
-	<input type="radio" name="pad_plugin_options[show_thumbnail]" value="<?php echo $show_thumbnail_value; ?>"<?php echo $checked; ?>> <?php echo $show_thumbnail_lavel; ?>
+	<input type="radio" name="pad_plugin_options[show_thumbnail]" value="<?php echo $show_thumbnail_value; ?>"<?php echo $checked; ?>> <?php echo $lavel; ?>
 	</label>
 <?php } ?>
 </td>
