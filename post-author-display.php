@@ -93,7 +93,6 @@ function pad_display_post_types() {
 	} else {
 		$post_types = array( 'post' );
 	}
-	$post_types = vk_the_post_type_check_list_saved_array_convert( $options['post_types'] );
 	$post_types = apply_filters( 'pad_display_post_types', $post_types );
 	return $post_types;
 }
