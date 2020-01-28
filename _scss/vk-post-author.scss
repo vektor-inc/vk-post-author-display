@@ -1,7 +1,7 @@
 @charset "utf-8";
-@import "compass";
+
 /*-------------------------------------------*/
-/* VK Post Author Display CSS 0.3.3
+/* VK Post Author Display CSS
 /*-------------------------------------------*/
 #padSection {
 	clear: both;
@@ -99,6 +99,12 @@
 }
 #padSection a.google-plus {
 	color: #db4437;
+}
+#padSection a.wordpress {
+	color: #585c60;
+}
+#padSection a.amazon {
+	color: #232f3e;
 }
 
 #latestEntries {

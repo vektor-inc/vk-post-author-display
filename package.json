@@ -1,0 +1,28 @@
+{
+  "name": "vk-post-author-display",
+  "version": "1.0.0",
+  "description": "=== VK Post Author Display === Contributors: kurudrive,dswebstudio,mypacecreator,gatespace,hnle,catherine8007 Donate link: Tags: post,author Requires at least: 4.4 Tested up to: 5.3.0 Stable tag: 1.10.0 License: GPLv2 or later License URI: http://www.gnu.org/licenses/gpl-2.0.html",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vektor-inc/vk-post-author-display.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vektor-inc/vk-post-author-display/issues"
+  },
+  "homepage": "https://github.com/vektor-inc/vk-post-author-display#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-merge-media-queries": "^0.2.1",
+    "gulp-sass": "^4.0.2"
+  }
+}
