@@ -41,6 +41,11 @@ function pad_sns_array() {
 			'icon_fa4' => 'fa fa-wordpress',
 			'icon_fa5' => 'fab fa-wordpress',
 		),
+		'amazon'    => array(
+			'name'     => __( 'amazon Wish List', 'vk-post-author-display' ),
+			'icon_fa4' => 'fa fa-amazon',
+			'icon_fa5' => 'fab fa-amazon',
+		),
 	);
 	return $sns_array;
 }
