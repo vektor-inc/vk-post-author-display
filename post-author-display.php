@@ -10,7 +10,8 @@ Text Domain: vk-post-author-display
 Domain Path: /languages
 License: GPL2
 
-/*  Copyright 2013-2019 Hidekazu Ishikawa ( email : kurudrive@gmail.com )
+/*
+  Copyright 2013-2019 Hidekazu Ishikawa ( email : kurudrive@gmail.com )
 
 		This program is free software; you can redistribute it and/or modify
 		it under the terms of the GNU General Public License, version 2, as
@@ -26,26 +27,27 @@ License: GPL2
 		Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-/*-------------------------------------------*/
-/* Setting & load file
-/*-------------------------------------------*/
-/*	vk post author text domain load
-/*-------------------------------------------*/
-/*	Display post author unit
-/*-------------------------------------------*/
-/*	front display css
-/*-------------------------------------------*/
-/*	init
-/*-------------------------------------------*/
-/*	メニューに追加
+/*
+ Setting & load file
+/*
+  vk post author text domain load
+/*
+  Display post author unit
+/*
+  front display css
+/*
+  init
+/*
+  メニューに追加
 /*-------------------------------------------*/
 
-/*-------------------------------------------*/
-/* Setting & load file
+/*
+ Setting & load file
 /*-------------------------------------------*/
 
 $data = get_file_data(
-	__FILE__, array(
+	__FILE__,
+	array(
 		'version'    => 'Version',
 		'textdomain' => 'Text Domain',
 	)
@@ -55,21 +57,21 @@ define( 'VK_PAD_BASENAME', plugin_basename( __FILE__ ) );
 define( 'VK_PAD_URL', plugin_dir_url( __FILE__ ) );
 define( 'VK_PAD_DIR', plugin_dir_path( __FILE__ ) );
 
-/*-------------------------------------------*/
-/*	vk post author text domain load
-/*-------------------------------------------*/
+/*
+  vk post author text domain load
+-------------------------------------------*/
 // function pad_text_domain() {
-// 	load_plugin_textdomain( 'vk-post-author-display', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+// load_plugin_textdomain( 'vk-post-author-display', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 // }
 // add_action( 'init', 'pad_text_domain' );
 
-require_once( VK_PAD_DIR . 'inc/term-color-config.php' );
-require_once( VK_PAD_DIR . 'inc/vk-admin-config.php' );
-require_once( VK_PAD_DIR . 'inc/font-awesome-config.php' );
-require_once( VK_PAD_DIR . 'inc/template-tags/template-tags-config.php' );
-require_once( VK_PAD_DIR . 'view.post-author.php' );
-require_once( VK_PAD_DIR . 'admin-profile.php' );
-require_once( VK_PAD_DIR . 'hide_controller.php' );
+require_once VK_PAD_DIR . 'inc/term-color-config.php';
+require_once VK_PAD_DIR . 'inc/vk-admin-config.php';
+require_once VK_PAD_DIR . 'inc/font-awesome-config.php';
+require_once VK_PAD_DIR . 'inc/template-tags/template-tags-config.php';
+require_once VK_PAD_DIR . 'view.post-author.php';
+require_once VK_PAD_DIR . 'admin-profile.php';
+require_once VK_PAD_DIR . 'hide_controller.php';
 
 
 // _e('aaaaa','vk-post-author-display');
@@ -100,12 +102,12 @@ function pad_display_post_types() {
 // custom example
 // add_filter( 'pad_display_post_types','add_pad_custom_post_types' );
 // function add_pad_custom_post_types($post_types){
-// 	$post_types[] = 'page';
-// 	return $post_types;
+// $post_types[] = 'page';
+// return $post_types;
 // }
 
-/*-------------------------------------------*/
-/*	Display post author unit
+/*
+  Display post author unit
 /*-------------------------------------------*/
 add_filter( 'the_content', 'pad_add_author' );
 function pad_add_author( $content ) {
@@ -138,8 +140,8 @@ function pad_add_author( $content ) {
 }
 
 
-/*-------------------------------------------*/
-/*	front display css
+/*
+  front display css
 /*-------------------------------------------*/
 add_action( 'wp_enqueue_scripts', 'pad_set_css' );
 function pad_set_css() {
@@ -151,8 +153,8 @@ function pad_set_css() {
 	}
 }
 
-/*-------------------------------------------*/
-/*	init
+/*
+  init
 /*-------------------------------------------*/
 function pad_get_default_options() {
 	$display_author_options = array(
@@ -181,8 +183,8 @@ function pad_plugin_options_Custom_init() {
 }
 add_action( 'admin_init', 'pad_plugin_options_Custom_init' );
 
-/*-------------------------------------------*/
-/*	functionsで毎回呼び出して$options_padに入れる処理を他でする。
+/*
+  functionsで毎回呼び出して$options_padに入れる処理を他でする。
 /*-------------------------------------------*/
 function pad_get_plugin_options() {
 	// デフォルト値を取得
@@ -202,8 +204,8 @@ function pad_get_plugin_options() {
 	return $options;
 }
 
-/*-------------------------------------------*/
-/*	メニューに追加
+/*
+  メニューに追加
 /*-------------------------------------------*/
 function pad_add_customSetting() {
 	$custom_page = add_options_page(
@@ -219,15 +221,15 @@ function pad_add_customSetting() {
 }
 add_action( 'admin_menu', 'pad_add_customSetting' );
 
-/*-------------------------------------------*/
-/*	Setting page
-/*-------------------------------------------*/
+/*
+  Setting page
+-------------------------------------------*/
 // 第１引数で、どのページで適応するのかを指定。この場合後半（settings_page_pad_plugin_options ）がどのページかを判断する hook_suffix になっている。
 // hook_suffix は、body のclass名などから確認する事が出来る。
 // 第２引数は処理するfunction名
 // add_action( 'admin_print_styles-settings_page_pad_plugin_options ', 'pad_custom_enqueue_scripts' );
 // function pad_custom_enqueue_scripts( $hook_suffix ) {
-// 	wp_enqueue_style( 'pad_plugin_options', get_template_directory_uri() . '/inc/theme-options.css', false, '2012-11-17' );
+// wp_enqueue_style( 'pad_plugin_options', get_template_directory_uri() . '/inc/theme-options.css', false, '2012-11-17' );
 // }
 
 function pad_plugin_options_validate( $input ) {
@@ -250,8 +252,8 @@ function pad_plugin_options_validate( $input ) {
 	return apply_filters( 'pad_plugin_options_validate', $output, $input, $defaults );
 }
 
-/*-------------------------------------------*/
-/*	optionの値を単純に引っ張る
+/*
+  optionの値を単純に引っ張る
 /*-------------------------------------------*/
 function get_pad_options( $optionLabel ) {
 	$options_pad = pad_get_plugin_options();
@@ -260,8 +262,8 @@ function get_pad_options( $optionLabel ) {
 	}
 }
 
-/*-------------------------------------------*/
-/*	vk post author display custom size thumbnail
+/*
+  vk post author display custom size thumbnail
 /*-------------------------------------------*/
 function pad_plugin_special_thumbnail() {
 
@@ -273,21 +275,22 @@ function pad_plugin_special_thumbnail() {
 
 		if ( function_exists( 'add_theme_support' ) ) {
 			add_theme_support( 'post-thumbnails' );
-			//custom thumbnail for pad plugin
+			// custom thumbnail for pad plugin
 			add_image_size( 'pad_thumb', 240, 135, array( 'center', 'center' ) );
 		}
 	}
 	// else {
-	// 	apply_filters('intermediate_image_sizes', 'pad_plugin_disable_thumbnail');
+	// apply_filters('intermediate_image_sizes', 'pad_plugin_disable_thumbnail');
 	// }
 }
 add_action( 'after_setup_theme', 'pad_plugin_special_thumbnail' );
 
-/*-------------------------------------------*/
-/*	Unset pad custom size thumbnail
-/*-------------------------------------------*/
+/*
+  Unset pad custom size thumbnail
+/*
+-------------------------------------------*/
 // function pad_plugin_disable_thumbnail( $sizes ) {
-// 	if ( isset( $sizes['pad_thumb'] ) ){
-// 		unset( $sizes['pad_thumb'] );
-// 	}
+// if ( isset( $sizes['pad_thumb'] ) ){
+// unset( $sizes['pad_thumb'] );
+// }
 // }
