@@ -27,7 +27,7 @@ function pad_sns_array() {
 			'icon_fa5' => 'fab fa-instagram',
 		),
 		'youtube'   => array(
-			'name'     => 'You Tube',
+			'name'     => 'YouTube',
 			'icon_fa4' => 'fa fa-youtube-square',
 			'icon_fa5' => 'fab fa-youtube-square',
 		),
