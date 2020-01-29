@@ -3,8 +3,8 @@ Contributors: kurudrive,dswebstudio,mypacecreator,gatespace,hnle,catherine8007
 Donate link:
 Tags: post,author
 Requires at least: 4.4
-Tested up to: 5.3.２
-Stable tag: 1.11.1
+Tested up to: 5.3.2
+Stable tag: 1.11.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
