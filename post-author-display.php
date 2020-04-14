@@ -99,18 +99,13 @@ function pad_display_post_types() {
 	return $post_types;
 }
 
-// custom example
-// add_filter( 'pad_display_post_types','add_pad_custom_post_types' );
-// function add_pad_custom_post_types($post_types){
-// $post_types[] = 'page';
-// return $post_types;
-// }
-
 /*
   Display post author unit
 /*-------------------------------------------*/
 add_filter( 'the_content', 'pad_add_author' );
 function pad_add_author( $content ) {
+	global $is_pagewidget;
+	if ( $is_pagewidget ) { return $content; }
 
 	$option = pad_get_plugin_options();
 
@@ -149,7 +144,6 @@ function pad_set_css() {
 	$cssPath    = apply_filters( 'pad-stylesheet', plugins_url( 'css/vk-post-author.css', __FILE__ ) );
 	if ( is_singular( $post_types ) ) {
 		wp_enqueue_style( 'set_vk_post_autor_css', $cssPath, false, VK_PAD_VERSION );
-		// wp_enqueue_style( 'font-awesome', VK_PAD_URL . 'libraries/font-awesome/css/font-awesome.min.css', array(), '4.6.3', 'all' );
 	}
 }
 
@@ -284,13 +278,3 @@ function pad_plugin_special_thumbnail() {
 	// }
 }
 add_action( 'after_setup_theme', 'pad_plugin_special_thumbnail' );
-
-/*
-  Unset pad custom size thumbnail
-/*
--------------------------------------------*/
-// function pad_plugin_disable_thumbnail( $sizes ) {
-// if ( isset( $sizes['pad_thumb'] ) ){
-// unset( $sizes['pad_thumb'] );
-// }
-// }
