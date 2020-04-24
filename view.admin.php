@@ -152,6 +152,7 @@ foreach ( $show_thumbnails as $key => $lavel ) {
 		}
 		?>
 		<br />
+		<hr >
 		<p>
 		<?php _e( 'If you wantt to control of display position, please select the "no" and write this code to the template file', 'vk-post-author-display' ); ?></p>
 
@@ -161,6 +162,9 @@ if ( class_exists( 'Vk_Post_Author_Box' ) ) {
 }
 		</pre>
 
+		<h4><?php _e( 'Short code', 'vk-post-author-display' );?></h4>
+		<p><?php _e( 'You can use short code too.', 'vk-post-author-display' );?></p>
+		<pre>[pad]</pre>
 	</td>
 </tr>
 

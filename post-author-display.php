@@ -302,3 +302,13 @@ add_action( 'after_setup_theme', 'pad_plugin_special_thumbnail' );
 // unset( $sizes['pad_thumb'] );
 // }
 // }
+
+/*
+  Add Short code
+-------------------------------------------*/
+add_shortcode( 'pad', 'pad_short_code' );
+function pad_short_code(){
+	if ( class_exists( 'Vk_Post_Author_Box' ) && is_singular() ) {
+		return Vk_Post_Author_Box::pad_get_author_box();
+	}
+}
