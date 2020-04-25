@@ -147,13 +147,24 @@ function pad_add_author( $content ) {
 	return $content;
 }
 
-
 /*
   front display css
 /*-------------------------------------------*/
 add_action( 'wp_enqueue_scripts', 'pad_set_css' );
 function pad_set_css() {
 	$post_types = pad_display_post_types();
+
+	// Cope with use short code in page
+	$post_types = apply_filters( 'pad_css_post_types', $post_types );
+	// Example
+	// add_filter(
+	// 	'pad_css_post_types',
+	// 	function( $post_types ) {
+	// 		$post_types[] = 'page';
+	// 		return $post_types;
+	// 	}
+	// );
+
 	$cssPath    = apply_filters( 'pad-stylesheet', plugins_url( 'css/vk-post-author.css', __FILE__ ) );
 	if ( is_singular( $post_types ) ) {
 		wp_enqueue_style( 'set_vk_post_autor_css', $cssPath, false, VK_PAD_VERSION );
