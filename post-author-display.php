@@ -158,14 +158,14 @@ function pad_set_css() {
 	$post_types = apply_filters( 'pad_css_post_types', $post_types );
 	// Example
 	// add_filter(
-	// 	'pad_css_post_types',
-	// 	function( $post_types ) {
-	// 		$post_types[] = 'page';
-	// 		return $post_types;
-	// 	}
+	// 'pad_css_post_types',
+	// function( $post_types ) {
+	// $post_types[] = 'page';
+	// return $post_types;
+	// }
 	// );
 
-	$cssPath    = apply_filters( 'pad-stylesheet', plugins_url( 'css/vk-post-author.css', __FILE__ ) );
+	$cssPath = apply_filters( 'pad-stylesheet', plugins_url( 'css/vk-post-author.css', __FILE__ ) );
 	if ( is_singular( $post_types ) ) {
 		wp_enqueue_style( 'set_vk_post_autor_css', $cssPath, false, VK_PAD_VERSION );
 		// wp_enqueue_style( 'font-awesome', VK_PAD_URL . 'libraries/font-awesome/css/font-awesome.min.css', array(), '4.6.3', 'all' );
@@ -318,7 +318,7 @@ add_action( 'after_setup_theme', 'pad_plugin_special_thumbnail' );
   Add Short code
 -------------------------------------------*/
 add_shortcode( 'pad', 'pad_short_code' );
-function pad_short_code(){
+function pad_short_code() {
 	if ( class_exists( 'Vk_Post_Author_Box' ) && is_singular() ) {
 		return Vk_Post_Author_Box::pad_get_author_box();
 	}
