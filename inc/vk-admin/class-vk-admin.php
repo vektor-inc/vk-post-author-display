@@ -258,7 +258,7 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 		/*  RSS方針で現在は日本語以外でのみ使用
 		/*--------------------------------------------------*/
 		public static function get_news_from_rss() {
-			global $vk_admin_textdomain;
+
 			$output = '';
 
 			include_once ABSPATH . WPINC . '/feed.php';
@@ -288,7 +288,7 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 
 					if ( $maxitems == 0 ) {
 						$output .= '<li>';
-						$output .= __( 'Sorry, there is no post', $vk_admin_textdomain );
+						$output .= __( 'Sorry, there is no post', 'vk-post-author-display' );
 						$output .= '</li>';
 					} else {
 						foreach ( $rss_items as $item ) {
@@ -338,11 +338,11 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 		admin _ Dashboard Widget
 		/*--------------------------------------------------*/
 		public static function dashboard_widget() {
-			global $vk_admin_textdomain;
+
 			if ( self::is_dashboard_active() ) {
 				wp_add_dashboard_widget(
 					'vk_dashboard_widget',
-					__( 'Vektor WordPress Information', $vk_admin_textdomain ),
+					__( 'Vektor WordPress Information', 'vk-post-author-display' ),
 					array( __CLASS__, 'dashboard_widget_body' )
 				);
 			}
