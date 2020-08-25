@@ -3,7 +3,7 @@
 Plugin Name: VK Post Author Display
 Plugin URI: http://wordpress.org/extend/plugins/vk-post-author-display/
 Description: Show post author information at post bottom.
-Version: 1.13.0
+Version: 1.14.1
 Author: Vektor,Inc.
 Author URI: https://ex-unit.nagoya/
 Text Domain: vk-post-author-display
@@ -120,6 +120,12 @@ function pad_display_post_types() {
 add_filter( 'the_content', 'pad_add_author' );
 function pad_add_author( $content ) {
 
+	global $is_pagewidget;
+	// 固定ページ本文ウィジェットだったら
+	if ( $is_pagewidget ) {
+		return $content;
+	}
+
 	$option = pad_get_plugin_options();
 
 	// 非表示指定されてたら表示しない
@@ -147,14 +153,25 @@ function pad_add_author( $content ) {
 	return $content;
 }
 
-
 /*
   front display css
 /*-------------------------------------------*/
 add_action( 'wp_enqueue_scripts', 'pad_set_css' );
 function pad_set_css() {
 	$post_types = pad_display_post_types();
-	$cssPath    = apply_filters( 'pad-stylesheet', plugins_url( 'css/vk-post-author.css', __FILE__ ) );
+
+	// Cope with use short code in page
+	$post_types = apply_filters( 'pad_css_post_types', $post_types );
+	// Example
+	// add_filter(
+	// 'pad_css_post_types',
+	// function( $post_types ) {
+	// $post_types[] = 'page';
+	// return $post_types;
+	// }
+	// );
+
+	$cssPath = apply_filters( 'pad-stylesheet', plugins_url( 'css/vk-post-author.css', __FILE__ ) );
 	if ( is_singular( $post_types ) ) {
 		wp_enqueue_style( 'set_vk_post_autor_css', $cssPath, false, VK_PAD_VERSION );
 		// wp_enqueue_style( 'font-awesome', VK_PAD_URL . 'libraries/font-awesome/css/font-awesome.min.css', array(), '4.6.3', 'all' );
@@ -307,7 +324,7 @@ add_action( 'after_setup_theme', 'pad_plugin_special_thumbnail' );
   Add Short code
 -------------------------------------------*/
 add_shortcode( 'pad', 'pad_short_code' );
-function pad_short_code(){
+function pad_short_code() {
 	if ( class_exists( 'Vk_Post_Author_Box' ) && is_singular() ) {
 		return Vk_Post_Author_Box::pad_get_author_box();
 	}
