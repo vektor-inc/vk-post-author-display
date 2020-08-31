@@ -24,5 +24,8 @@
     "gulp-clean-css": "^4.2.0",
     "gulp-merge-media-queries": "^0.2.1",
     "gulp-sass": "^4.0.2"
+  },
+  "dependencies": {
+    "gulp-replace": "^1.0.0"
   }
 }

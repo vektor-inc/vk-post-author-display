@@ -1,4 +1,5 @@
 var path = require('path');
+const replace = require('gulp-replace')
 var fs = require('fs');
 var pkg = JSON.parse(fs.readFileSync('./package.json'));
 // var assetsPath = path.resolve(pkg.path.assetsDir);
@@ -25,6 +26,13 @@ gulp.task('sass', function(done) {
 		.pipe(gulp.dest('./css/'));
 		done();
 });
+
+gulp.task('text-domain', function (done) {
+	gulp.src(['./inc/term-color/*'])
+	.pipe(replace(', \'vk_term_color_textdomain\'', ', \'vk-post-author-display\''))
+	.pipe(gulp.dest('./inc/term-color/'));
+	done();
+  });
 
 gulp.task('default', function() {
     gulp.watch('_scss/**.scss',gulp.task('watch'));
