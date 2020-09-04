@@ -37,7 +37,7 @@ if ( ! class_exists( 'Vk_Font_Awesome_Versions' ) ) {
 			$versions = array(
 				'5_SVG_JS'       => array(
 					'label'   => '5 SVG with JS ( ' . __( 'Not recommended', 'vk-post-author-display' ) . ' )',
-					'version' => '5.11.2',
+					'version' => '5.13.0',
 					'type'    => 'svg-with-js',
 					/* [ Notice ] use editor css*/
 					'url_css' => $font_awesome_directory_uri . 'versions/5/css/all.min.css',
@@ -45,7 +45,7 @@ if ( ! class_exists( 'Vk_Font_Awesome_Versions' ) ) {
 				),
 				'5_WebFonts_CSS' => array(
 					'label'   => '5 Web Fonts with CSS',
-					'version' => '5.11.2',
+					'version' => '5.13.0',
 					'type'    => 'web-fonts-with-css',
 					'url_css' => $font_awesome_directory_uri . 'versions/5/css/all.min.css',
 					'url_js'  => '',
@@ -183,12 +183,16 @@ if ( ! class_exists( 'Vk_Font_Awesome_Versions' ) ) {
 		static function customize_register( $wp_customize ) {
 
 			global $vk_font_awesome_version_prefix_customize_panel;
+			global $vk_font_awesome_version_priority;
+			if ( ! $vk_font_awesome_version_priority ){
+				$vk_font_awesome_version_priority = 450;
+			}
 
 			$wp_customize->add_section(
 				'VK Font Awesome',
 				array(
-					'title'    => $vk_font_awesome_version_prefix_customize_panel . __( 'Font Awesome', 'vk-post-author-display' ),
-					'priority' => 450,
+					'title'    => $vk_font_awesome_version_prefix_customize_panel . __( 'Font Awesome', 'lightning' ),
+					'priority' => $vk_font_awesome_version_priority,
 				)
 			);
 

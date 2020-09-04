@@ -31,6 +31,6 @@ if ( ! class_exists( 'Vk_term_color' ) ) {
 	*/
 	add_action( 'after_setup_theme', 'pad_load_term_color' );
 	function pad_load_term_color() {
-		require_once( 'term-color/class.term-color.php' );
+		require_once 'package/class.term-color.php';
 	}
 }
