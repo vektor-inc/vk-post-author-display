@@ -287,28 +287,6 @@ function get_pad_options( $optionLabel ) {
 	}
 }
 
-/*
-  vk post author display custom size thumbnail
-/*-------------------------------------------*/
-function pad_plugin_special_thumbnail() {
-
-	$options = pad_get_plugin_options();
-	// $default_options = pad_get_default_options();
-
-	// Case of use PAD image size
-	if ( isset( $options['generate_thumbnail'] ) && $options['generate_thumbnail'] == 'yes' ) {
-
-		if ( function_exists( 'add_theme_support' ) ) {
-			add_theme_support( 'post-thumbnails' );
-			// custom thumbnail for pad plugin
-			add_image_size( 'pad_thumb', 240, 135, array( 'center', 'center' ) );
-		}
-	}
-	// else {
-	// apply_filters('intermediate_image_sizes', 'pad_plugin_disable_thumbnail');
-	// }
-}
-add_action( 'after_setup_theme', 'pad_plugin_special_thumbnail' );
 
 /*
   Unset pad custom size thumbnail
