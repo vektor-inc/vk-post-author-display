@@ -20,7 +20,7 @@ if ( ! class_exists( 'Vk_Font_Awesome_Versions' ) ) {
 		 // プラグインがアクティブか？
 		if ( is_plugin_active( $plugin ) ) {
 			$options = get_option( 'vkExUnit_common_options' );
-			if ( empty( $options['active_fontawesome'] ) ) {
+			if ( ! empty( $options['active_fontawesome'] ) ) {
 				return true;
 			} // if ( empty( $options['active_fontawesome'] ) ) {
 		} // if ( is_plugin_active( $plugin ) ) {
