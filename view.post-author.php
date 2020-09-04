@@ -141,9 +141,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 						//allows display of pad_thumb only if selected in pad options
 						$sizes_available = get_intermediate_image_sizes();
 
-						if ( in_array( 'pad_thumb', $sizes_available ) ) {
-							$pad_thumb = get_the_post_thumbnail( get_the_ID(), 'pad_thumb' );
-						} elseif ( in_array( 'post-thumbnail', $sizes_available ) ) {
+						if ( in_array( 'post-thumbnail', $sizes_available ) ) {
 							$pad_thumb = get_the_post_thumbnail( get_the_ID(), 'post-thumbnail' );
 						} else {
 							$pad_thumb = get_the_post_thumbnail( get_the_ID(), 'thumbnail' );

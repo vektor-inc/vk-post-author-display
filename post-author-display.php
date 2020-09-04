@@ -189,7 +189,6 @@ function pad_get_default_options() {
 		'author_archive_link'     => 'hide',
 		'author_archive_link_txt' => __( 'Author Archives', 'vk-post-author-display' ),
 		'show_thumbnail'          => 'display',
-		'generate_thumbnail'      => 'yes',
 		'auto_display'            => 'yes',
 		'post_types'              => array( 'post' => 'true' ),
 	);
@@ -266,7 +265,6 @@ function pad_plugin_options_validate( $input ) {
 	$output['author_archive_link']     = esc_html( $input['author_archive_link'] );
 	$output['author_archive_link_txt'] = wp_kses_post( $input['author_archive_link_txt'] );
 	$output['show_thumbnail']          = esc_html( $input['show_thumbnail'] );
-	$output['generate_thumbnail']      = esc_html( $input['generate_thumbnail'] );
 	$output['auto_display']            = esc_html( $input['auto_display'] );
 	if ( function_exists( 'vk_sanitize_array' ) ) {
 		$output['post_types'] = vk_sanitize_array( $input['post_types'] );
