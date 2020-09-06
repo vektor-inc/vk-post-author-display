@@ -182,6 +182,10 @@
 				-moz-osx-font-smoothing: grayscale;
 				content: "\f0da";
 				margin-right: 6px;
+				.fa_v5_css & {
+					font-family:"Font Awesome 5 Free";
+					font-weight: 900;
+				}
 			}
 		}
 	}
