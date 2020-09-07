@@ -27,6 +27,15 @@
 	background: none;
 	border: none;
 	color: inherit;
+	outline: unset;
+	outline-offset: unset;
+	box-shadow: unset;
+	border-radius:unset;
+	color: inherit;
+	&::before,
+	&::after {
+		content: none;
+	}
 }
 #padSection dl dt .authorName {
 	font-size: 18px;
