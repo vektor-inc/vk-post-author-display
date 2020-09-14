@@ -107,13 +107,6 @@ function pad_display_post_types() {
 	return $post_types;
 }
 
-// custom example
-// add_filter( 'pad_display_post_types','add_pad_custom_post_types' );
-// function add_pad_custom_post_types($post_types){
-// $post_types[] = 'page';
-// return $post_types;
-// }
-
 /*
   Display post author unit
 /*-------------------------------------------*/
