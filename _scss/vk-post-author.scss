@@ -27,6 +27,15 @@
 	background: none;
 	border: none;
 	color: inherit;
+	outline: unset;
+	outline-offset: unset;
+	box-shadow: unset;
+	border-radius:unset;
+	color: inherit;
+	&::before,
+	&::after {
+		content: none;
+	}
 }
 #padSection dl dt .authorName {
 	font-size: 18px;
@@ -198,22 +207,48 @@
 		&:last-child {
 			margin-right: 0;
 		}
+		//テーマ内でpost-thumbnail が対応されていない場合はthumbnailを出すので
+		//メディアの「サムネイルを実寸法にトリミングする」にチェックがない場合、
+		//thumbnailの高さのサイズがバラバラで見た目が悪くなるので追加
+		.adjust-box{
+			display: block;
+			position: relative;
+			width: 100%;
+			height: auto;
+			background: #e8e8e8;
+			border: 1px solid #ccc;
+			&::before {
+				content: "";
+				display: block;
+				padding-top: 56%;
+			}
+		}
+		.inner-box {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			border: 1px solid #fff;
+			overflow: hidden;
+		}
 		.postImage {
 			display: block;
-			overflow: hidden;
-			border: 1px solid #ccc;
 			margin-bottom: 4px;
-			position: relative;
-			a {
+			> a {
 				display: block;
-				overflow: hidden;
-				border: 1px solid #fff;
+				position: relative;
 				img {
 					width: 100%;
 					height: auto;
+					&.size-thumbnail{ //サムネイルサイズの場合
+						//高さが56%なのでその半分
+						transform: translateY(-26%);
+					}
 				}
 			}
 			a.padCate {
+				display: block;
 				position: absolute;
 				bottom: 0;
 				right: 0;
