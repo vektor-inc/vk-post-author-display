@@ -53,7 +53,7 @@
 
 #padSection h4 {
 	margin-bottom: 20px;
-	padding-bottom: 2px;
+	padding-bottom: 4px;
 	border-bottom: 1px dotted #333;
 	font-size: 18px;
 }
@@ -123,7 +123,7 @@
 	h5 {
 		margin-top: 0;
 		margin-bottom: 10px;
-		padding-bottom: 3px;
+		padding-bottom: 5px;
 		border-bottom: 1px dotted #ccc;
 		color: #333;
 		font-size: 16px;
@@ -261,7 +261,7 @@
 			display: block;
 			clear: both;
 			font-size: 12px;
-			line-height: 15px;
+			line-height: 18px;
 		}
 	}
 }
@@ -301,7 +301,7 @@
 		}
 		ul li {
 			border-bottom: 1px dotted #ccc;
-			padding: 4px 0;
+			padding: 6px 0;
 		}
 		/* show thumbnail */
 		ul li.thumbnailBox {
