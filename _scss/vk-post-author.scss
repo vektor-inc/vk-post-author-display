@@ -210,20 +210,21 @@
 		//テーマ内でpost-thumbnail が対応されていない場合はthumbnailを出すので
 		//メディアの「サムネイルを実寸法にトリミングする」にチェックがない場合、
 		//thumbnailの高さのサイズがバラバラで見た目が悪くなるので追加
-		.adjust-box{
+		.inner-box {
 			display: block;
 			position: relative;
 			width: 100%;
 			height: auto;
 			background: #e8e8e8;
 			border: 1px solid #ccc;
+			margin-bottom: 4px;
 			&::before {
 				content: "";
 				display: block;
 				padding-top: 56%;
 			}
 		}
-		.inner-box {
+		.postImage {
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -231,10 +232,6 @@
 			height: 100%;
 			border: 1px solid #fff;
 			overflow: hidden;
-		}
-		.postImage {
-			display: block;
-			margin-bottom: 4px;
 			> a {
 				display: block;
 				position: relative;
