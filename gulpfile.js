@@ -27,10 +27,23 @@ gulp.task('sass', function(done) {
 		done();
 });
 
-gulp.task('text-domain', function (done) {
-	gulp.src(['./inc/term-color/*'])
-	.pipe(replace(', \'vk_term_color_textdomain\'', ', \'vk-post-author-display\''))
-	.pipe(gulp.dest('./inc/term-color/'));
+gulp.task('replace_text_domain', function (done) {
+	// font-awesome.
+	gulp.src(["./inc/font-awesome/package/*.php"])
+		.pipe(replace("vk_font_awesome_version_textdomain","vk-post-author-display"))
+		.pipe(gulp.dest("./inc/font-awesome/package/"));
+	// template-tags.
+	gulp.src(["./inc/template-tags/package/*.php"])
+		.pipe(replace("template_tags_textdomain","vk-post-author-display"))
+		.pipe(gulp.dest("./inc/template-tags/package/"));
+	// term-color.
+	gulp.src(["./inc/term-color/package/*.php"])
+		.pipe(replace("vk_term_color_textdomain","vk-post-author-display"))
+		.pipe(gulp.dest("./inc/term-color/package/"));
+	// vk-admin.
+	gulp.src(["./inc/vk-admin/package/*.php"])
+		.pipe(replace("vk_admin_textdomain","vk-post-author-display"))
+		.pipe(gulp.dest("./inc/vk-admin/package/"));
 	done();
   });
 

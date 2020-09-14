@@ -97,38 +97,6 @@ foreach ( $show_thumbnails as $key => $lavel ) {
 </tr>
 
 <tr>
-	<th><?php _e( 'Use custom size thumbnails for thumbnails display?', 'vk-post-author-display' ); ?></th>
-	<td>
-		<?php
-		$generate_thumbnails = array(
-			__( 'yes', 'vk-post-author-display' ) => 'yes',
-			__( 'no', 'vk-post-author-display' )  => 'no',
-		);
-		foreach ( $generate_thumbnails as $generate_thumbnail_label => $generate_thumbnail_value ) {
-
-			$checked = '';
-			if ( ( ! isset( $options_pad['generate_thumbnail'] ) && $generate_thumbnail_value == 'no' )
-				 || ( $options_pad['generate_thumbnail'] == $generate_thumbnail_value ) ) {
-					$checked = ' checked';
-			}
-					?>
-			<label class="form_horizontal_item">
-				<input type="radio" name="pad_plugin_options[generate_thumbnail]" value="<?php echo $generate_thumbnail_value; ?>"<?php echo $checked; ?>/>
-				<?php echo $generate_thumbnail_label; ?>
-			</label>
-			<?php
-		}
-		?>
-		<br />
-		<p>
-		<?php _e( 'If your theme already cropping thumbnail, please select the "no".', 'vk-post-author-display' ); ?></br>
-		<?php _e( 'If thumbnail images layout has not aligned, please select the "yes".', 'vk-post-author-display' ); ?>
-		<?php _e( 'This plugin generate the appropriate image size.', 'vk-post-author-display' ); ?></br>
-		<?php _e( '* If you select the "yes" and already have many posts in your WordPress, you have to regenerate the thumbnail images using (for example) the "Regenerate Thumbnails" plugin.', 'vk-post-author-display' ); ?></p>
-	</td>
-</tr>
-
-<tr>
 	<th><?php _e( 'Auto display', 'vk-post-author-display' ); ?></th>
 	<td>
 		<?php

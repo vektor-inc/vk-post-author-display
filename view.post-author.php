@@ -136,14 +136,12 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 					$entryUnit .= '<li class="textList"><span class="padDate">' . get_the_date( 'Y.m.d' ) . '</span>' . $term . '<a href="' . get_permalink( $post->ID ) . '" class="padTitle">' . get_the_title() . '</a></li>' . "\n";
 				} else {
 					/* Show thumbnail box */
-					$entryUnit .= '<li class="thumbnailBox"><span class="postImage"><a href="' . get_permalink() . '">';
+					$entryUnit .= '<li class="thumbnailBox"><span class="adjust-box"><span class="inner-box"><span class="postImage"><a href="' . get_permalink() . '">';
 					if ( has_post_thumbnail() ) {
 						//allows display of pad_thumb only if selected in pad options
 						$sizes_available = get_intermediate_image_sizes();
 
-						if ( in_array( 'pad_thumb', $sizes_available ) ) {
-							$pad_thumb = get_the_post_thumbnail( get_the_ID(), 'pad_thumb' );
-						} elseif ( in_array( 'post-thumbnail', $sizes_available ) ) {
+						if ( in_array( 'post-thumbnail', $sizes_available ) ) {
 							$pad_thumb = get_the_post_thumbnail( get_the_ID(), 'post-thumbnail' );
 						} else {
 							$pad_thumb = get_the_post_thumbnail( get_the_ID(), 'thumbnail' );
@@ -154,7 +152,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 					} else {
 						$entryUnit .= '<img src="' . plugins_url() . '/vk-post-author-display/images/thumbnailDummy.jpg" alt="' . get_the_title() . '" />';
 					}
-					$entryUnit .= $term . '</a></span><span class="padDate">' . get_the_date( 'Y.m.d' ) . '</span><a href="' . get_permalink( $post->ID ) . '" class="padTitle">' . get_the_title() . '</a></li>' . "\n";
+					$entryUnit .= $term . '</a></span></span></span><span class="padDate">' . get_the_date( 'Y.m.d' ) . '</span><a href="' . get_permalink( $post->ID ) . '" class="padTitle">' . get_the_title() . '</a></li>' . "\n";
 				}
 				endwhile;
 			$entryUnit .= '</ul>' . "\n";
