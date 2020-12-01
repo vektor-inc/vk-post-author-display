@@ -26,7 +26,7 @@ if ( ! class_exists( 'Vk_term_color' ) ) {
 
 	/*
 	読み込みタイミングを init にしておかないと
-	init で作成されたカスタム分類に対応できない
+	init で定義されたカスタム投稿タイプでフィールドが表示されない
 	★★★★★★ 関数のprefixは固有のものに変更する事 ★★★★★★
 	*/
 	add_action( 'init', 'pad_load_term_color' );
