@@ -2,7 +2,7 @@
 Contributors: kurudrive,dswebstudio,mypacecreator,gatespace,hnle,catherine8007
 Donate link:
 Tags: post,author
-Requires at least: 4.4
+Requires at least: 5.3
 Tested up to: 5.5.1
 Stable tag: 1.18.3
 License: GPLv2 or later
