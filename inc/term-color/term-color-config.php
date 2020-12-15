@@ -25,11 +25,11 @@ if ( ! class_exists( 'Vk_term_color' ) ) {
 	$vk_term_color_textdomain = 'vk-post-author-display';
 
 	/*
-	読み込みタイミングをafter_setup_themeにしておかないと
-	テーマから対象taxonomyの指定がある場合に効かない
+	読み込みタイミングを init にしておかないと
+	init で定義されたカスタム投稿タイプでフィールドが表示されない
 	★★★★★★ 関数のprefixは固有のものに変更する事 ★★★★★★
 	*/
-	add_action( 'after_setup_theme', 'pad_load_term_color' );
+	add_action( 'init', 'pad_load_term_color' );
 	function pad_load_term_color() {
 		require_once 'package/class.term-color.php';
 	}
