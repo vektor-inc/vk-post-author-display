@@ -21,9 +21,9 @@
   "homepage": "https://github.com/vektor-inc/vk-post-author-display#readme",
   "devDependencies": {
     "gulp": "^4.0.2",
-    "gulp-clean-css": "^4.2.0",
+    "gulp-clean-css": "^4.3.0",
     "gulp-merge-media-queries": "^0.2.1",
-    "gulp-sass": "^4.0.2"
+    "gulp-sass": "^4.1.0"
   },
   "dependencies": {
     "gulp-replace": "^1.0.0"

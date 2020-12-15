@@ -3,7 +3,7 @@
 Plugin Name: VK Post Author Display
 Plugin URI: http://wordpress.org/extend/plugins/vk-post-author-display/
 Description: Show post author information at post bottom.
-Version: 1.17.1
+Version: 1.18.3
 Author: Vektor,Inc.
 Author URI: https://ex-unit.nagoya/
 Text Domain: vk-post-author-display
@@ -104,21 +104,11 @@ function pad_display_post_types() {
 	return $post_types;
 }
 
-function pad_is_singular_only(){
-	$is_singular_only = true;
-	return apply_filters( 'pad_is_singular_only', $is_singular_only );
-}
-
 /*
   Display post author unit
 /*-------------------------------------------*/
 add_filter( 'the_content', 'pad_add_author' );
 function pad_add_author( $content ) {
-
-	// シングルのみには制限しているが、シングル以外に表示は未実装
-	if ( pad_is_singular_only() && ! is_singular() ) {
-		return $content;
-	}
 
 	global $is_pagewidget;
 	// 固定ページ本文ウィジェットだったら
@@ -172,7 +162,8 @@ function pad_set_css() {
 	// );
 
 	$cssPath = apply_filters( 'pad-stylesheet', plugins_url( 'css/vk-post-author.css', __FILE__ ) );
-	if ( pad_is_singular_only() && is_singular( $post_types ) ){
+
+	if ( is_singular( $post_types ) || is_author() ) {
 		wp_enqueue_style( 'set_vk_post_autor_css', $cssPath, false, VK_PAD_VERSION );
 		// wp_enqueue_style( 'font-awesome', VK_PAD_URL . 'libraries/font-awesome/css/font-awesome.min.css', array(), '4.6.3', 'all' );
 	}
