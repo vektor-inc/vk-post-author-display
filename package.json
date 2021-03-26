@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "gulp replace_text_domain && gulp sass"
   },
   "repository": {
     "type": "git",
@@ -23,9 +23,8 @@
     "gulp": "^4.0.2",
     "gulp-clean-css": "^4.3.0",
     "gulp-merge-media-queries": "^0.2.1",
-    "gulp-sass": "^4.1.0"
-  },
-  "dependencies": {
-    "gulp-replace": "^1.0.0"
+    "gulp-replace": "^1.0.0",
+    "gulp-sass": "^4.1.0",
+    "npm-check-updates": "^11.3.0"
   }
 }
