@@ -4,7 +4,7 @@
 /*  Load modules
 /*-------------------------------------------*/
 if ( ! class_exists( 'Vk_Admin' ) ) {
-	require_once 'package/class-vk-admin.php';
+	require_once dirname( __FILE__ ) . '/package/class-vk-admin.php';
 }
 
 $admin_pages = array( 'settings_page_pad_plugin_options' );
