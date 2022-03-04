@@ -4,7 +4,7 @@
  *
  * @package vk_blocks
  */
-
+require_once VK_PAD_DIR . 'vendor/autoload.php';
 use VektorInc\VK_Font_Awesome_Versions\VkFontAwesomeVersions;
 
 /*
