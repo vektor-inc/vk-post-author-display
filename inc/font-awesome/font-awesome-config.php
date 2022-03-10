@@ -1,40 +1,18 @@
 <?php
+/**
+ * VK Blocks Font Awesome
+ *
+ * @package vk_blocks
+ */
+require_once VK_PAD_DIR . 'vendor/autoload.php';
+use VektorInc\VK_Font_Awesome_Versions\VkFontAwesomeVersions;
 
-/*-------------------------------------------*/
-/*  Load modules
-/*-------------------------------------------*/
+/*
+ * Font Awesome Load modules
+ */
 if ( ! class_exists( 'Vk_Font_Awesome_Versions' ) ) {
-
-	// テーマがLightningかどうか
-	function pad_is_theme_lightning() {
-		$template = get_option( 'template' );
-		if ( $template == 'lightning' || $template == 'Lightning' || $template == 'lightning-pro' ) {
-			return true;
-		}
-	}
-
-	// ExUnitでFontAwesomeがアクティブになってるかどうか？
-	function pad_is_veu_fa_active() {
-		 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-		 $plugin = 'vk-all-in-one-expansion-unit/vkExUnit.php';
-		 // プラグインがアクティブか？
-		if ( is_plugin_active( $plugin ) ) {
-			$options = get_option( 'vkExUnit_common_options' );
-			if ( ! empty( $options['active_fontawesome'] ) ) {
-				return true;
-			} // if ( empty( $options['active_fontawesome'] ) ) {
-		} // if ( is_plugin_active( $plugin ) ) {
-	} // function pad_is_veu_fa_active() {
-
-	if ( ! pad_is_theme_lightning() && ! pad_is_veu_fa_active() ) {
-
-		require_once 'package/class-vk-font-awesome-versions.php';
-
-		global $font_awesome_directory_uri;
-		$font_awesome_directory_uri = plugins_url( '', __FILE__ ) . '/package/';
-
-		global $set_enqueue_handle_style;
-		$set_enqueue_handle_style = 'vkExUnit_common_style';
-
-	}
+	new VkFontAwesomeVersions();
+	global $font_awesome_directory_uri;
+	// phpcs:ignore
+	$font_awesome_directory_uri = VK_PAD_URL . 'vendor/vektor-inc/font-awesome-versions/src/';
 }
