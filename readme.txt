@@ -4,7 +4,7 @@ Donate link:
 Tags: post,author
 Requires at least: 5.3
 Tested up to: 5.9.0
-Stable tag: 1.18.9
+Stable tag: 1.19.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,10 @@ Display to Post Author Information Box on bottom of the contents.
 3. You can edit "Post author box title","Post list box title","Display post thumbnail image" and more...
 
 == Changelog ==
+
+= 1.19.0 =
+
+[ Other ] cope with Font Awesome 6
 
 = 1.18.9 =
 
