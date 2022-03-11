@@ -24,7 +24,7 @@
     "gulp-clean-css": "^4.3.0",
     "gulp-merge-media-queries": "^0.2.1",
     "gulp-replace": "^1.0.0",
-    "gulp-sass": "^4.1.0",
+    "gulp-sass": "^5.1.0",
     "npm-check-updates": "^11.3.0"
   }
 }
