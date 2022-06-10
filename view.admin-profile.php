@@ -1,13 +1,13 @@
 <?php
 function add_user_profile_image_form( $bool ) {
-	global $profileuser;
+	global $profile_user;
 	if ( preg_match( '/^(profile\.php|user-edit\.php)/', basename( $_SERVER['REQUEST_URI'] ) ) ) {
 ?>
 	<tr>
 	<th scope="row"><?php _e( 'Profile Picture<br>(VK Post Author Display)', 'vk-post-author-display' ); ?></th>
 	<td>
 
-	<input id="user_profile_image" type="hidden" name="user_profile_image" value="<?php echo esc_html( $profileuser->user_profile_image ); ?>" />
+	<input id="user_profile_image" type="hidden" name="user_profile_image" value="<?php echo esc_html( $profile_user->user_profile_image ); ?>" />
 	<img id="defaultImage_user_profile_image" style="display:none;" src="<?php echo esc_url( VK_PAD_URL ); ?>images/no_image.png" alt="" />
 	<?php
 		$attr = array(
@@ -15,8 +15,8 @@ function add_user_profile_image_form( $bool ) {
 			'src'   => '',
 			'class' => 'input_thumb',
 		);
-	if ( isset( $profileuser->user_profile_image ) && $profileuser->user_profile_image ) {
-		echo wp_get_attachment_image( $profileuser->user_profile_image, 'medium', false, $attr );
+	if ( isset( $profile_user->user_profile_image ) && $profile_user->user_profile_image ) {
+		echo wp_get_attachment_image( $profile_user->user_profile_image, 'medium', false, $attr );
 	} else {
 		echo '<img src="' . VK_PAD_URL . 'images/no_image.png" id="' . $attr['id'] . '" alt="" class="' . $attr['class'] . '" style="width:96px;height:auto;">';
 	}
