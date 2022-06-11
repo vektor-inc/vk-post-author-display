@@ -1,7 +1,7 @@
 <?php
 function add_user_profile_image_form( $bool ) {
 	global $wp_version, $profileuser, $profile_user;
-	$major_version = explode( '.', $wp_version)[0];
+	$major_version = explode( '.', $wp_version )[0];
 	$vpad_profile_user = 5 < intval( $major_version ) ? $profile_user : $profileuser;
 
 	if ( preg_match( '/^(profile\.php|user-edit\.php)/', basename( $_SERVER['REQUEST_URI'] ) ) ) {
