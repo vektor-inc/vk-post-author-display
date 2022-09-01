@@ -17,7 +17,7 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 	*/
 	class Vk_Admin {
 
-		public static $version = '2.1.0';
+		public static $version = '2.4.0';
 
 		static function init() {
 			add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_common_css' ) );
@@ -55,7 +55,7 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 
 		/**
 		 * Theme Exists
-		 * 
+		 *
 		 * @param string $theme '${theme_dir}/style.css'.
 		 */
 		public static function theme_exists( $theme ) {
@@ -76,8 +76,6 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 		/*--------------------------------------------------*/
 		public static function get_admin_banner() {
 
-
-
 			$banner_html = '';
 			$dir_url     = plugin_dir_url( __FILE__ );
 			$lang        = ( get_locale() == 'ja' ) ? 'ja' : 'en';
@@ -86,7 +84,7 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 			$img_base_url = 'https://raw.githubusercontent.com/vektor-inc/vk-admin-banners/main/images/';
 
 			// 変数の初期化
-			$product_array  = array();
+			$product_array = array();
 
 			// WP File System で JSON ファイルを読み込み
 			require_once ABSPATH . 'wp-admin/includes/file.php';
@@ -97,7 +95,7 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 				$product_json_url = 'https://raw.githubusercontent.com/vektor-inc/vk-admin-banners/main/vk-admin-banners.json';
 				$product_json     = $wp_filesystem->get_contents( $product_json_url );
 				$product_json     = mb_convert_encoding( $product_json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN' );
-				$product_array    = json_decode( $product_json,true );
+				$product_array    = json_decode( $product_json, true );
 
 			}
 
@@ -113,10 +111,10 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 
 			$banner_html .= '<div class="vk-admin-banner-grid">';
 
-			if( ! empty( $product_array ) ) {
+			if ( ! empty( $product_array ) ) {
 
 				// テーマのバナーを設置
-				foreach( $product_array as $product ) {
+				foreach ( $product_array as $product ) {
 					// include パラメーターが存在する場合
 					if ( ! empty( $product['include'] ) ) {
 						// include パラメーターをカンマで区切って配列化
@@ -124,7 +122,7 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 						// include パラメーター が配列の場合
 						if ( is_array( $includes ) ) {
 							// 該当するものがあった時点で continue を２回発動
-							foreach( $includes as $include ) {
+							foreach ( $includes as $include ) {
 								if ( self::theme_exists( $include ) || self::plugin_exists( $include ) ) {
 									continue 2;
 								}
@@ -168,7 +166,6 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 							}
 						}
 					}
-
 				}
 			}
 
@@ -200,7 +197,7 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 
 		public static function get_news_from_rest_api() {
 
-			$html = '<h4 class="vk-metabox-sub-title">';
+			$html  = '<h4 class="vk-metabox-sub-title">';
 			$html .= 'Vektor製品更新情報';
 			$html .= '<a href="https://www.vektor-inc.co.jp/product-update/?rel=vkadmin" target="_blank" class="vk-metabox-more-link">記事一覧<span aria-hidden="true" class="dashicons dashicons-external"></span></a>';
 			$html .= '</h4>';
@@ -409,7 +406,7 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 			if ( ! $display ) {
 				return;
 			}
-			$adminSub = '<div class="adminSub scrTracking">' . "\n";
+			$adminSub = '<div class="adminSub">' . "\n";
 			if ( 'ja' == get_locale() ) {
 				$adminSub .= '<div class="infoBox">' . self::get_news_body() . '</div>' . "\n";
 			}
@@ -425,37 +422,38 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 		public static function admin_page_frame( $get_page_title, $the_body_callback, $get_logo_html = '', $get_menu_html = '', $get_layout = 'column_3' ) {
 			?>
 			<div class="wrap vk_admin_page">
-
-				<div class="adminMain <?php echo $get_layout; ?>">
-
-					<?php if ( $get_layout == 'column_3' ) : ?>
-				<div id="adminContent_sub" class="scrTracking adminMain_sub">
+				<?php if ( $get_layout == 'column_2' ) : ?>
 					<div class="pageLogo"><?php echo $get_logo_html; ?></div>
-						<?php if ( $get_page_title ) : ?>
-					<h2 class="page_title"><?php echo $get_page_title; ?></h2>
-					<?php endif; ?>
-					<div class="vk_option_nav">
-						<ul>
-						<?php echo $get_menu_html; ?>
-						</ul>
-					</div>
-				</div><!-- [ /#adminContent_sub ] -->
-				<?php endif; ?>
-
-					<?php if ( $get_layout == 'column_2' ) : ?>
-					<div class="pageLogo"><?php echo $get_logo_html; ?></div>
-						<?php if ( $get_page_title ) : ?>
+					<?php if ( $get_page_title ) : ?>
 						<h1 class="page_title"><?php echo $get_page_title; ?></h1>
 					<?php endif; ?>
 				<?php endif; ?>
 
-					<div id="adminContent_main" class="adminMain_main">
-					<?php call_user_func_array( $the_body_callback, array() ); ?>
-					</div><!-- [ /#adminContent_main ] -->
+				<div class="adminLayout">
+					<div class="adminMain <?php echo $get_layout; ?>">
 
-				</div><!-- [ /.adminMain ] -->
+						<?php if ( $get_layout == 'column_3' ) : ?>
+							<div id="adminContent_sub" class="scrTracking adminMain_sub">
+								<div class="pageLogo"><?php echo $get_logo_html; ?></div>
+								<?php if ( $get_page_title ) : ?>
+								<h2 class="page_title"><?php echo $get_page_title; ?></h2>
+								<?php endif; ?>
+								<div class="vk_option_nav">
+									<ul>
+									<?php echo $get_menu_html; ?>
+									</ul>
+								</div>
+							</div><!-- [ /#adminContent_sub ] -->
+						<?php endif; ?>
 
-				<?php echo self::admin_sub(); ?>
+						<div id="adminContent_main" class="adminMain_main">
+						<?php call_user_func_array( $the_body_callback, array() ); ?>
+						</div><!-- [ /#adminContent_main ] -->
+
+					</div><!-- [ /.adminMain ] -->
+
+					<?php echo self::admin_sub(); ?>
+				</div>
 
 			</div><!-- [ /.vkExUnit_admin_page ] -->
 			<?php
@@ -468,4 +466,3 @@ if ( ! class_exists( 'Vk_Admin' ) ) {
 } // if ( ! class_exists( 'Vk_Admin' ) )
 
 Vk_Admin::init();
-$Vk_Admin = new Vk_Admin();
