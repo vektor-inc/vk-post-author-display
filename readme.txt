@@ -3,8 +3,8 @@ Contributors: kurudrive,dswebstudio,mypacecreator,gatespace,hnle,catherine8007,r
 Donate link:
 Tags: post,author
 Requires at least: 5.3
-Tested up to: 6.0.0
-Stable tag: 1.21.0
+Tested up to: 6.0.2
+Stable tag: 1.21.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,9 +30,13 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
+= 1.21.1 =
+
+[ Bug fix ] Fix admin setting page layout bug
+
 = 1.21.0 =
 
-[ Other ] Update admin settingpage library 2.4.0
+[ Other ] Update admin setting page library 2.4.0
 
 = 1.20.4 =
 
