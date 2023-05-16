@@ -11,5 +11,10 @@
 		"phpcompatibility/phpcompatibility-wp": "*",
 		"wp-coding-standards/wpcs": "*",
 		"yoast/phpunit-polyfills": "^1.0"
-	}
+	},
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
 }
