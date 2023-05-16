@@ -53,6 +53,9 @@ License: GPL2
  Setting & load file
 -------------------------------------------*/
 
+// load composer
+require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+
 $data = get_file_data(
 	__FILE__,
 	array(
@@ -74,11 +77,11 @@ define( 'VK_PAD_DIR', plugin_dir_path( __FILE__ ) );
 // add_action( 'init', 'pad_text_domain' );
 
 require_once VK_PAD_DIR . 'inc/term-color/term-color-config.php';
-require_once VK_PAD_DIR . 'inc/vk-admin/vk-admin-config.php';
 require_once VK_PAD_DIR . 'inc/font-awesome/font-awesome-config.php';
 require_once VK_PAD_DIR . 'inc/template-tags/template-tags-config.php';
+require_once VK_PAD_DIR . 'admin/admin.php';
+require_once VK_PAD_DIR . 'admin/admin-profile.php';
 require_once VK_PAD_DIR . 'view.post-author.php';
-require_once VK_PAD_DIR . 'admin-profile.php';
 require_once VK_PAD_DIR . 'hide_controller.php';
 
 // Add a link to this plugin's settings page

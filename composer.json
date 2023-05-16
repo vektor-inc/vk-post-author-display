@@ -1,5 +1,6 @@
 {
     "require": {
+		"vektor-inc/vk-admin": "^0.3.3",
         "vektor-inc/font-awesome-versions": "^0.4.1"
     },
     "require-dev": {
