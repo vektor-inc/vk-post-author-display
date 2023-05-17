@@ -77,7 +77,7 @@ define( 'VK_PAD_DIR', plugin_dir_path( __FILE__ ) );
 // add_action( 'init', 'pad_text_domain' );
 
 require_once VK_PAD_DIR . 'inc/term-color/term-color-config.php';
-require_once VK_PAD_DIR . 'inc/font-awesome/font-awesome-config.php';
+require_once VK_PAD_DIR . 'inc/font-awesome/config.php';
 require_once VK_PAD_DIR . 'inc/template-tags/template-tags-config.php';
 require_once VK_PAD_DIR . 'admin/admin.php';
 require_once VK_PAD_DIR . 'admin/admin-profile.php';
@@ -164,11 +164,10 @@ function pad_set_css() {
 	// }
 	// );
 
-	$cssPath = apply_filters( 'pad-stylesheet', plugins_url( 'css/vk-post-author.css', __FILE__ ) );
+	$cssPath = apply_filters( 'pad-stylesheet', plugins_url( 'assets/css/vk-post-author.css', __FILE__ ) );
 
 	if ( is_singular( $post_types ) || is_author() ) {
 		wp_enqueue_style( 'set_vk_post_autor_css', $cssPath, false, VK_PAD_VERSION );
-		// wp_enqueue_style( 'font-awesome', VK_PAD_URL . 'libraries/font-awesome/css/font-awesome.min.css', array(), '4.6.3', 'all' );
 	}
 }
 

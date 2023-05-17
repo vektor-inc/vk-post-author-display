@@ -96,8 +96,8 @@ add_action( 'profile_update', 'pad_update_user_profile_image', 10, 2 );
 function pad_admin_enqueue_scripts() {
 	wp_enqueue_script( 'jquery' );
 	wp_enqueue_media();
-	wp_enqueue_script( 'pad-profile-media-js', VK_PAD_URL . 'js/media.js', array( 'jquery' ), VK_PAD_VERSION );
-	wp_enqueue_style( 'pad-profile-style', VK_PAD_URL . 'css/pad-admin-profile.css', array(), VK_PAD_VERSION );
+	wp_enqueue_script( 'pad-profile-media-js', VK_PAD_URL . 'assets/js/media.js', array( 'jquery' ), VK_PAD_VERSION );
+	wp_enqueue_style( 'pad-profile-style', VK_PAD_URL . 'assets/css/pad-admin-profile.css', array(), VK_PAD_VERSION );
 }
 add_action( 'admin_print_styles-profile.php', 'pad_admin_enqueue_scripts' );
 add_action( 'admin_print_styles-user-edit.php', 'pad_admin_enqueue_scripts' );

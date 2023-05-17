@@ -11,7 +11,8 @@
     "wp-env": "wp-env",
     "sass": "sass --watch assets/_scss:assets/css",
     "sass:build": "sass --style=compressed --no-source-map assets/_scss:assets/css",
-    "build": "gulp replace_text_domain && npm run sass:build"
+    "build": "gulp replace_text_domain && npm run sass:build",
+    "phpunit": "composer install && wp-env run tests-cli --env-cwd=wp-content/plugins/vk-post-author-display 'phpunit -c /var/www/html/wp-content/plugins/vk-post-author-display/.phpunit.xml --testsuite default --verbose'"
   },
   "repository": {
     "type": "git",
