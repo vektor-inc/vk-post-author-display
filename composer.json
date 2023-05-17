@@ -1,8 +1,7 @@
 {
     "require": {
 		"vektor-inc/vk-admin": "^0.3.3",
-        "vektor-inc/font-awesome-versions": "^0.4.1",
-        "vektor-inc/vk-wp-unit-test-tools": "^0.12.0"
+        "vektor-inc/font-awesome-versions": "^0.4.1"
     },
     "require-dev": {
 		"doctrine/instantiator": "1.5.0",
@@ -12,7 +11,8 @@
 		"dealerdirect/phpcodesniffer-composer-installer": "*",
 		"phpcompatibility/phpcompatibility-wp": "*",
 		"wp-coding-standards/wpcs": "*",
-		"yoast/phpunit-polyfills": "^1.0"
+		"yoast/phpunit-polyfills": "^1.0",
+        "vektor-inc/vk-wp-unit-test-tools": "^0.12.0"
 	},
     "config": {
         "allow-plugins": {
