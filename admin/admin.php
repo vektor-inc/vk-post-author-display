@@ -16,7 +16,7 @@ VkAdmin::admin_scripts( $admin_pages );
 /*	Setting Page
 /*-------------------------------------------*/
 function pad_add_customSettingPage() {
-	require_once( VK_PAD_DIR . 'view.admin.php' );
+	require_once dirname( __FILE__ ) . '/view.admin.php';
 	$get_page_title = __( 'VK Post Author Display Main Setting', 'vk-post-author-display' );
 
 	$get_logo_html = '';

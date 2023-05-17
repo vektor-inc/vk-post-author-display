@@ -67,7 +67,7 @@ add_filter( 'user_contactmethods', 'pad_update_profile_fields', 10, 1 );
 /*
   vk post author profile image
 /*-------------------------------------------*/
-require_once VK_PAD_DIR . 'view.admin-profile.php';
+require_once dirname( __FILE__ ) . '/view.admin-profile.php';
 add_action( 'show_password_fields', 'add_user_profile_image_form' );
 
 function pad_update_user_profile_image( $user_id, $old_user_data ) {
