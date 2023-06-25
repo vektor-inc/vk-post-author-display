@@ -127,7 +127,6 @@ function pad_add_author( $content ) {
 	}
 
 	$post_types = pad_display_post_types();
-	// if ( ( is_single() || is_page() ) && !is_front_page() ){
 	if ( is_singular( $post_types ) ) {
 		foreach ( $post_types as $key => $value ) {
 			if ( get_post_type() == $value ) {
