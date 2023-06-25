@@ -1,8 +1,22 @@
-<?php
+<?php // phpcs:ignore
+/**
+ * Class Vk_Post_Author_Box
+ *
+ * @package vektor-inc/vk-poat-author-display
+ */
+
 if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 
+	/**
+	 * Class Vk_Post_Author_Box
+	 */
 	class Vk_Post_Author_Box {
 
+		/**
+		 * Get author profile html
+		 *
+		 * @return string $profile_unit
+		 */
 		public static function pad_get_author_profile() {
 			global $post;
 			$user_id   = $post->post_author;
@@ -10,38 +24,38 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 			$options   = pad_get_plugin_options();
 			$user_name = esc_html( get_the_author_meta( 'display_name' ) );
 
-			// author caption
+			// author caption.
 			if ( get_the_author_meta( 'pad_caption' ) ) {
 				$caption = '<span id="pad_caption" class="pad_caption">' . get_the_author_meta( 'pad_caption' ) . '</span>';
 			}
 
 			$author_picture_style = ( ! isset( $options['author_picture_style'] ) || ! $options['author_picture_style'] ) ? 'square' : $options['author_picture_style'];
 
-			$profileUnit      = '<div id="avatar" class="avatar ' . esc_attr( $author_picture_style ) . '">';
+			$profile_unit     = '<div id="avatar" class="avatar ' . esc_attr( $author_picture_style ) . '">';
 			$profile_image_id = get_the_author_meta( 'user_profile_image' );
 			if ( $profile_image_id ) {
 				$profile_image_src = wp_get_attachment_image_src( $profile_image_id, 'thumbnail' );
-				$profileUnit      .= '<img src="' . $profile_image_src[0] . '" alt="' . $user_name . '" />';
+				$profile_unit     .= '<img src="' . $profile_image_src[0] . '" alt="' . $user_name . '" />';
 			} else {
-				$profileUnit .= get_avatar( get_the_author_meta( 'email' ), 100 );
+				$profile_unit .= get_avatar( get_the_author_meta( 'email' ), 100 );
 			}
-			$profileUnit .= '</div><!-- [ /#avatar ] -->';
+			$profile_unit .= '</div><!-- [ /#avatar ] -->';
 
-			$profileUnit .= '<dl id="profileTxtSet" class="profileTxtSet">' . "\n";
-			$profileUnit .= '<dt>' . "\n";
-			$profileUnit .= '<span id="authorName" class="authorName">' . $user_name . '</span>';
+			$profile_unit .= '<dl id="profileTxtSet" class="profileTxtSet">' . "\n";
+			$profile_unit .= '<dt>' . "\n";
+			$profile_unit .= '<span id="authorName" class="authorName">' . $user_name . '</span>';
 
 			if ( isset( $caption ) ) :
-				$profileUnit .= $caption;
+				$profile_unit .= $caption;
 			endif;
 
-			$profileUnit .= '</dt><dd>' . "\n";
-			$profileUnit .= wp_kses_post( nl2br( get_the_author_meta( 'description' ) ) ) . "\n";
+			$profile_unit .= '</dt><dd>' . "\n";
+			$profile_unit .= wp_kses_post( nl2br( get_the_author_meta( 'description' ) ) ) . "\n";
 
 			$sns_array = pad_sns_array();
 			$sns_icons = '';
 
-			// Set Font Awesome Version
+			// Set Font Awesome Version.
 			$fa = '5_WebFonts_CSS';
 
 			if ( class_exists( 'Vk_Font_Awesome_Versions' ) ) {
@@ -51,10 +65,9 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 				}
 			}
 
-			// url
 			$url = isset( $user->data->user_url ) ? $user->data->user_url : '';
 			if ( $url ) {
-				if ( $fa == '4.7' ) {
+				if ( '4.7' === $fa ) {
 					$icon = 'fa fa-globe web';
 				} else {
 					$icon = 'fas fa-globe';
@@ -67,8 +80,8 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 				$field   = 'pad_' . $key;
 				$sns_url = get_the_author_meta( $field );
 
-				// 旧バージョンの人はアカウントだけで保存されているので、その前のURLを追加
-				if ( $key == 'twitter' && $sns_url ) {
+				// 旧バージョンの人はアカウントだけで保存されているので、その前のURLを追加.
+				if ( 'twitter' === $key && $sns_url ) {
 					$subject = $sns_url;
 					$pattern = '/https:\/\/twitter.com\//';
 					preg_match( $pattern, $subject, $matches, PREG_OFFSET_CAPTURE );
@@ -78,7 +91,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 				} // if ( $key == 'twitter' ){
 
 				if ( $sns_url ) {
-					if ( $fa == '4.7' ) {
+					if ( '4.7' === $fa ) {
 						$class = $value['icon_fa4'];
 					} else {
 						$class = $value['icon_fa5'];
@@ -89,39 +102,42 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 			}
 
 			if ( $sns_icons ) {
-				$profileUnit .= '<ul class="sns_icons">';
-				$profileUnit .= $sns_icons;
-				$profileUnit .= '</ul>';
+				$profile_unit .= '<ul class="sns_icons">';
+				$profile_unit .= $sns_icons;
+				$profile_unit .= '</ul>';
 			}
-			$profileUnit .= '</dd></dl>';
-			return $profileUnit;
+			$profile_unit .= '</dd></dl>';
+			return $profile_unit;
 		}
 
+		/**
+		 * Get author entries html
+		 */
 		public static function pad_get_author_entries() {
 			$options = pad_get_plugin_options();
 
-			// author entries
+			// Author entries.
 			global $post;
-			$args       = array(
+			$args        = array(
 				'post_type'      => $post->post_type,
 				'posts_per_page' => 4,
 				'author'         => $post->post_author,
 			);
-			$args       = apply_filters( 'pad_get_author_entries_args', $args );
-			$loop       = new WP_Query( $args );
-			$entryUnit  = '<div id="latestEntries">' . "\n";
-			$entryUnit .= '<h5>' . wp_kses_post( $options['list_box_title'] ) . '</h5>' . "\n";
-			if ( $options['author_archive_link'] == 'display' ) {
-					$entryUnit .= '<p class="authorLink"><a href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '" rel="author"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> ' . wp_kses_post( $options['author_archive_link_txt'] ) . '</a></p>' . "\n";
+			$args        = apply_filters( 'pad_get_author_entries_args', $args );
+			$loop        = new WP_Query( $args );
+			$entry_unit  = '<div id="latestEntries">' . "\n";
+			$entry_unit .= '<h5>' . wp_kses_post( $options['list_box_title'] ) . '</h5>' . "\n";
+			if ( 'display' === $options['author_archive_link'] ) {
+					$entry_unit .= '<p class="authorLink"><a href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '" rel="author"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> ' . wp_kses_post( $options['author_archive_link_txt'] ) . '</a></p>' . "\n";
 			}
-			$entryUnit .= '<ul class="entryList">' . "\n";
+			$entry_unit .= '<ul class="entryList">' . "\n";
 			while ( $loop->have_posts() ) :
 				$loop->the_post();
 				$term = '';
 
 				$taxonomies = get_the_taxonomies();
 				if ( $taxonomies ) :
-					// get $taxonomy name
+					// get $taxonomy name.
 					$taxonomy   = key( $taxonomies );
 					$terms      = get_the_terms( get_the_ID(), $taxonomy );
 					$term_name  = esc_html( $terms[0]->name );
@@ -133,12 +149,12 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 
 				if ( $options['show_thumbnail'] == 'hide' ) {
 					/* list only */
-					$entryUnit .= '<li class="textList"><span class="padDate">' . get_the_date( 'Y.m.d' ) . '</span>' . $term . '<a href="' . get_permalink( $post->ID ) . '" class="padTitle">' . get_the_title() . '</a></li>' . "\n";
+					$entry_unit .= '<li class="textList"><span class="padDate">' . get_the_date( 'Y.m.d' ) . '</span>' . $term . '<a href="' . get_permalink( $post->ID ) . '" class="padTitle">' . get_the_title() . '</a></li>' . "\n";
 				} else {
 					/* Show thumbnail box */
-					$entryUnit .= '<li class="thumbnailBox"><span class="inner-box"><span class="postImage"><a href="' . get_permalink() . '">';
+					$entry_unit .= '<li class="thumbnailBox"><span class="inner-box"><span class="postImage"><a href="' . get_permalink() . '">';
 					if ( has_post_thumbnail() ) {
-						//allows display of pad_thumb only if selected in pad options
+						// allows display of pad_thumb only if selected in pad options.
 						$sizes_available = get_intermediate_image_sizes();
 
 						if ( in_array( 'post-thumbnail', $sizes_available ) ) {
@@ -147,33 +163,38 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 							$pad_thumb = get_the_post_thumbnail( get_the_ID(), 'thumbnail' );
 						}
 
-						$entryUnit .= $pad_thumb;
+						$entry_unit .= $pad_thumb;
 
 					} else {
-						$entryUnit .= '<img src="' . plugins_url() . '/vk-post-author-display/images/thumbnailDummy.jpg" alt="' . get_the_title() . '" />';
+						$entry_unit .= '<img src="' . plugins_url() . '/vk-post-author-display/images/thumbnailDummy.jpg" alt="' . get_the_title() . '" />';
 					}
-					$entryUnit .= $term . '</a></span></span><span class="padDate">' . get_the_date( 'Y.m.d' ) . '</span><a href="' . get_permalink( $post->ID ) . '" class="padTitle">' . get_the_title() . '</a></li>' . "\n";
+					$entry_unit .= $term . '</a></span></span><span class="padDate">' . get_the_date( 'Y.m.d' ) . '</span><a href="' . get_permalink( $post->ID ) . '" class="padTitle">' . get_the_title() . '</a></li>' . "\n";
 				}
 				endwhile;
-			$entryUnit .= '</ul>' . "\n";
-			$entryUnit .= '</div>' . "\n";
+			$entry_unit .= '</ul>' . "\n";
+			$entry_unit .= '</div>' . "\n";
 			/* トップページが固定ページで is_page() でも pad を使おうとすると wp_reset_query() があるとthe_post_thumbnailが誤動作する */
 			wp_reset_query(); // important!!
-			return $entryUnit;
+			return $entry_unit;
 		}
 
+		/**
+		 * Get author box html
+		 *
+		 * @param string $layout : posts layout.
+		 */
 		public static function pad_get_author_box( $layout = 'normal' ) {
 			$options     = pad_get_plugin_options();
 			$author_unit = '<div class="padSection" id="padSection">';
 
-			if ( $layout != 'author_archive' ) {
+			if ( 'author_archive' !== $layout ) {
 				$author_unit .= '<h4>' . esc_html( $options['author_box_title'] ) . '</h4>';
 			}
 
-			$author_unit .= Vk_Post_Author_Box::pad_get_author_profile();
+			$author_unit .= self::pad_get_author_profile();
 
-			if ( $layout != 'author_archive' ) {
-				$author_unit .= Vk_Post_Author_Box::pad_get_author_entries();
+			if ( 'author_archive' !== $layout ) {
+				$author_unit .= self::pad_get_author_entries();
 			}
 
 			$author_unit .= '</div>';

@@ -30,6 +30,11 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
+= 1.22.0 =
+
+[ Specification Change ] CSS Update and Cope with theme X-T9 BG Dark
+[ Other ] Update VK Admin 0.4.0
+
 = 1.21.2 =
 
 [ Bug fix ] Fix admin setting page layout bug ( VK Admin 2.6.0 )
