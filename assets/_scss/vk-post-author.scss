@@ -8,9 +8,8 @@
 	margin:2em 0;
 	display: block;
 	overflow: hidden;
-	padding: 30px 30px 20px;
-	border: 3px solid #e5e5e5;
-	box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.8);
+	padding: 25px;
+	border: 3px solid var(--wp--preset--color--border-normal, #e5e5e5);
 	font-size: 14px;
 }
 #padSection a {
@@ -54,7 +53,7 @@
 #padSection h4 {
 	margin-bottom: 20px;
 	padding-bottom: 4px;
-	border-bottom: 1px dotted #333;
+	border-bottom: 1px dotted var(--wp--preset--color--border-normal, #e5e5e5);
 	font-size: 18px;
 }
 #padSection .avatar {
@@ -124,8 +123,8 @@
 		margin-top: 0;
 		margin-bottom: 10px;
 		padding-bottom: 5px;
-		border-bottom: 1px dotted #ccc;
-		color: #333;
+		border-bottom: 1px dotted var(--wp--preset--color--border-normal, #ccc);;
+		color: var(--wp--preset--color--text-normal,#333 );
 		font-size: 16px;
 	}
 	.authorLink {
@@ -136,7 +135,7 @@
 		right: 0;
 		font-size: 14px;
 		a {
-			color: #666;
+			color: var(--wp--preset--color--text-normal,#333 );
 		}
 	}
 	ul,
@@ -151,7 +150,7 @@
 		position: relative;
 	}
 	li .padDate {
-		color: #999;
+		color: var(--wp--preset--color--text-secondary,#666 );
 		line-height: 14px;
 	}
 	li a.padCate {
@@ -207,41 +206,20 @@
 		&:last-child {
 			margin-right: 0;
 		}
-		//テーマ内でpost-thumbnail が対応されていない場合はthumbnailを出すので
-		//メディアの「サムネイルを実寸法にトリミングする」にチェックがない場合、
-		//thumbnailの高さのサイズがバラバラで見た目が悪くなるので追加
 		.inner-box {
 			display: block;
 			position: relative;
-			width: 100%;
-			height: auto;
-			background: #e8e8e8;
-			border: 1px solid #ccc;
+			border: 1px solid var(--wp--preset--color--border-normal,rgba( 0,0,0,0.1 ));
 			margin-bottom: 4px;
-			&::before {
-				content: "";
-				display: block;
-				padding-top: 56%;
-			}
 		}
 		.postImage {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			border: 1px solid #fff;
-			overflow: hidden;
 			> a {
-				display: block;
-				position: relative;
 				img {
 					width: 100%;
-					height: auto;
-					&.size-thumbnail{ //サムネイルサイズの場合
-						//高さが56%なのでその半分
-						transform: translateY(-26%);
-					}
+					height: 100%;
+					display: block;
+					aspect-ratio: 16 / 9;
+					object-fit:cover;
 				}
 			}
 			a.padCate {
@@ -249,8 +227,6 @@
 				position: absolute;
 				bottom: 0;
 				right: 0;
-				border-top: 1px solid #fff;
-				border-left: 1px solid #fff;
 			}
 		}
 		.padDate {
