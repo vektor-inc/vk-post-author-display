@@ -3,7 +3,7 @@
 Plugin Name: VK Post Author Display
 Plugin URI: http://wordpress.org/extend/plugins/vk-post-author-display/
 Description: Show post author information at post bottom.
-Version: 1.21.2
+Version: 1.21.3
 Author: Vektor,Inc.
 Author URI: https://ex-unit.nagoya/
 Text Domain: vk-post-author-display
@@ -53,6 +53,9 @@ License: GPL2
  Setting & load file
 -------------------------------------------*/
 
+// load composer
+require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+
 $data = get_file_data(
 	__FILE__,
 	array(
@@ -74,11 +77,11 @@ define( 'VK_PAD_DIR', plugin_dir_path( __FILE__ ) );
 // add_action( 'init', 'pad_text_domain' );
 
 require_once VK_PAD_DIR . 'inc/term-color/term-color-config.php';
-require_once VK_PAD_DIR . 'inc/vk-admin/vk-admin-config.php';
-require_once VK_PAD_DIR . 'inc/font-awesome/font-awesome-config.php';
+require_once VK_PAD_DIR . 'inc/font-awesome/config.php';
 require_once VK_PAD_DIR . 'inc/template-tags/template-tags-config.php';
+require_once VK_PAD_DIR . 'admin/admin.php';
+require_once VK_PAD_DIR . 'admin/admin-profile.php';
 require_once VK_PAD_DIR . 'view.post-author.php';
-require_once VK_PAD_DIR . 'admin-profile.php';
 require_once VK_PAD_DIR . 'hide_controller.php';
 
 // Add a link to this plugin's settings page
@@ -161,11 +164,10 @@ function pad_set_css() {
 	// }
 	// );
 
-	$cssPath = apply_filters( 'pad-stylesheet', plugins_url( 'css/vk-post-author.css', __FILE__ ) );
+	$cssPath = apply_filters( 'pad-stylesheet', plugins_url( 'assets/css/vk-post-author.css', __FILE__ ) );
 
 	if ( is_singular( $post_types ) || is_author() ) {
 		wp_enqueue_style( 'set_vk_post_autor_css', $cssPath, false, VK_PAD_VERSION );
-		// wp_enqueue_style( 'font-awesome', VK_PAD_URL . 'libraries/font-awesome/css/font-awesome.min.css', array(), '4.6.3', 'all' );
 	}
 }
 

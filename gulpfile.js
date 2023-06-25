@@ -12,12 +12,12 @@ var gulp = require('gulp');
 // error handling
 // var plumber = require('gulp-plumber');
 // gulp.task('sass', function(done) {
-//     gulp.src('./_scss/*.scss')
+//     gulp.src('./assets/_scss/*.scss')
 //         .pipe(sass())
 // 		.pipe(cmq({log:true}))
 //         // .pipe(autoprefixer())
 // 		.pipe(cleanCss())
-// 		.pipe(gulp.dest('./css/'));
+// 		.pipe(gulp.dest('./assets/css/'));
 // 		done();
 // });
 
@@ -34,19 +34,15 @@ gulp.task('replace_text_domain', function (done) {
 	gulp.src(["./inc/term-color/package/*.php"])
 		.pipe(replace("vk_term_color_textdomain","vk-post-author-display"))
 		.pipe(gulp.dest("./inc/term-color/package/"));
-	// vk-admin.
-	gulp.src(["./inc/vk-admin/package/*.php"])
-		.pipe(replace("vk_admin_textdomain","vk-post-author-display"))
-		.pipe(gulp.dest("./inc/vk-admin/package/"));
 	done();
   });
 
 // gulp.task('default', function() {
-//     gulp.watch('_scss/**.scss',gulp.task('watch'));
+//     gulp.watch('./assets/_scss/**.scss',gulp.task('watch'));
 // });
 
 // gulp.task('watch', function() {
-// 	gulp.watch('_scss/**/*.scss',gulp.parallel('sass'));
+// 	gulp.watch('./assets/_scss/**/*.scss',gulp.parallel('sass'));
 // });
 
 // copy dist ////////////////////////////////////////////////
@@ -66,7 +62,7 @@ gulp.task('replace_text_domain', function (done) {
 // 				'./**/*.woff',
 // 				'./images/**',
 // 				'./inc/**',
-// 				'./js/**',
+// 				'./assets/**',
 // 				'./languages/**',
 // 				"!./tests/**",
 // 				"!./dist/**",
