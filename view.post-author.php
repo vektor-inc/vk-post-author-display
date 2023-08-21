@@ -149,7 +149,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 
 				if ( $options['show_thumbnail'] == 'hide' ) {
 					/* list only */
-					$entry_unit .= '<li class="textList"><span class="padDate">' . get_the_date( 'Y.m.d' ) . '</span>' . $term . '<a href="' . get_permalink( $post->ID ) . '" class="padTitle">' . get_the_title() . '</a></li>' . "\n";
+					$entry_unit .= '<li class="textList"><span class="padDate">' . get_the_date() . '</span>' . $term . '<a href="' . get_permalink( $post->ID ) . '" class="padTitle">' . get_the_title() . '</a></li>' . "\n";
 				} else {
 					/* Show thumbnail box */
 					$entry_unit .= '<li class="thumbnailBox"><span class="inner-box"><span class="postImage"><a href="' . get_permalink() . '">';
@@ -168,7 +168,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 					} else {
 						$entry_unit .= '<img src="' . plugins_url() . '/vk-post-author-display/images/thumbnailDummy.jpg" alt="' . get_the_title() . '" />';
 					}
-					$entry_unit .= $term . '</a></span></span><span class="padDate">' . get_the_date( 'Y.m.d' ) . '</span><a href="' . get_permalink( $post->ID ) . '" class="padTitle">' . get_the_title() . '</a></li>' . "\n";
+					$entry_unit .= $term . '</a></span></span><span class="padDate">' . get_the_date() . '</span><a href="' . get_permalink( $post->ID ) . '" class="padTitle">' . get_the_title() . '</a></li>' . "\n";
 				}
 				endwhile;
 			$entry_unit .= '</ul>' . "\n";
