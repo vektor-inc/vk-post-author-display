@@ -3,8 +3,8 @@ Contributors: kurudrive,dswebstudio,mypacecreator,gatespace,hnle,catherine8007,r
 Donate link:
 Tags: post,author
 Requires at least: 5.3
-Tested up to: 6.0.2
-Stable tag: 1.22.2
+Tested up to: 6.3
+Stable tag: 1.23.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,10 @@ Display to Post Author Information Box on bottom of the contents.
 3. You can edit "Post author box title","Post list box title","Display post thumbnail image" and more...
 
 == Changelog ==
+
+= 1.23.0 =
+
+[ Specification Change ] Change the date format to match the specified format in WordPress.
 
 = 1.22.2 =
 
