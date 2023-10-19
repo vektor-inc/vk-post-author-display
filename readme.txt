@@ -30,6 +30,8 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
+[ Specification Change ] Fix Twitter icon to X icon
+
 = 1.24.0 =
 
 [ Specification Change ] Update Font Awesome 6.4.2 ( Supports the icon font of X )
