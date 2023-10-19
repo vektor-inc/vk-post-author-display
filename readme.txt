@@ -4,7 +4,7 @@ Donate link:
 Tags: post,author
 Requires at least: 5.3
 Tested up to: 6.3
-Stable tag: 1.24.0
+Stable tag: 1.24.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,7 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
+= 1.24.1 =
 [ Specification Change ] Fix Twitter icon to X icon
 
 = 1.24.0 =
