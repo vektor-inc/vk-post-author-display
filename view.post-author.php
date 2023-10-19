@@ -94,7 +94,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 					if ( '4.7' === $fa ) {
 						$class = $value['icon_fa4'];
 					} else {
-						$class = $value['icon_fa5'];
+						$class = $value['icon_fa6'];
 					}
 					$sns_icons .= '<li class="pad_' . $key . '"><a href="' . esc_url( $sns_url ) . '" target
 					="_blank" class="' . $key . '"><i class="' . $class . '" aria-hidden="true"></i></a></li>';
@@ -166,7 +166,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 						$entry_unit .= $pad_thumb;
 
 					} else {
-						$entry_unit .= '<img src="' . plugins_url() . '/vk-post-author-display/images/thumbnailDummy.jpg" alt="' . get_the_title() . '" />';
+						$entry_unit .= '<img src="' . plugin_dir_url( __FILE__ ) . 'assets/images/thumbnailDummy.jpg" alt="' . get_the_title() . '" />';
 					}
 					$entry_unit .= $term . '</a></span></span><span class="padDate">' . get_the_date() . '</span><a href="' . get_permalink( $post->ID ) . '" class="padTitle">' . get_the_title() . '</a></li>' . "\n";
 				}

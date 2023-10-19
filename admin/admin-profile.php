@@ -9,42 +9,42 @@ function pad_sns_array() {
 		'mail'      => array(
 			'name'     => 'Mail（Contact Page）',
 			'icon_fa4' => 'fa fa-envelope-square',
-			'icon_fa5' => 'fas fa-envelope-square',
+			'icon_fa6' => 'fa-solid fa-square-envelope',
 		),
 		'twitter'   => array(
-			'name'     => 'Twitter',
+			'name'     => 'X',
 			'icon_fa4' => 'fa fa-twitter-square',
-			'icon_fa5' => 'fab fa-twitter-square',
+			'icon_fa6' => 'fa-brands fa-square-x-twitter',
 		),
 		'facebook'  => array(
 			'name'     => 'Facebook',
 			'icon_fa4' => 'fa fa-facebook-square',
-			'icon_fa5' => 'fab fa-facebook-square',
+			'icon_fa6' => 'fa-brands fa-square-facebook',
 		),
 		'instagram' => array(
 			'name'     => 'Instagram',
 			'icon_fa4' => 'fa fa-instagram',
-			'icon_fa5' => 'fab fa-instagram',
+			'icon_fa6' => 'fa-brands fa-square-instagram',
 		),
 		'youtube'   => array(
 			'name'     => 'YouTube',
 			'icon_fa4' => 'fa fa-youtube-square',
-			'icon_fa5' => 'fab fa-youtube-square',
+			'icon_fa6' => 'fa-brands fa-square-youtube',
 		),
 		'linkedin'  => array(
 			'name'     => 'LinkedIn',
 			'icon_fa4' => 'fa fa-linkedin',
-			'icon_fa5' => 'fab fa-linkedin',
+			'icon_fa6' => 'fa-brands fa-linkedin',
 		),
 		'wordpress' => array(
 			'name'     => 'WordPress',
 			'icon_fa4' => 'fa fa-wordpress',
-			'icon_fa5' => 'fab fa-wordpress',
+			'icon_fa6' => 'fa-brands fa-wordpress',
 		),
 		'amazon'    => array(
 			'name'     => __( 'amazon Wish List', 'vk-post-author-display' ),
 			'icon_fa4' => 'fa fa-amazon',
-			'icon_fa5' => 'fab fa-amazon',
+			'icon_fa6' => 'fa-brands fa-amazon',
 		),
 	);
 	return $sns_array;
