@@ -118,15 +118,16 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 
 			// Author entries.
 			global $post;
-			$args        = array(
+			$args       = array(
 				'post_type'      => $post->post_type,
 				'posts_per_page' => 4,
 				'author'         => $post->post_author,
 			);
-			$args        = apply_filters( 'pad_get_author_entries_args', $args );
-			$loop        = new WP_Query( $args );
-			$entry_unit  = '<div id="latestEntries">' . "\n";
-			$entry_unit .= '<h5>' . wp_kses_post( $options['list_box_title'] ) . '</h5>' . "\n";
+			$args       = apply_filters( 'pad_get_author_entries_args', $args );
+			$loop       = new WP_Query( $args );
+			$entry_unit = '<div id="latestEntries">' . "\n";
+
+			$entry_unit .= '<' . esc_html( $options['list_box_title_tag'] ) . ' class="latestEntriesTitle">' . wp_kses_post( $options['list_box_title'] ) . '</' . esc_html( $options['list_box_title_tag'] ) . '>' . "\n";
 			if ( 'display' === $options['author_archive_link'] ) {
 					$entry_unit .= '<p class="authorLink"><a href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '" rel="author"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> ' . wp_kses_post( $options['author_archive_link_txt'] ) . '</a></p>' . "\n";
 			}
@@ -185,10 +186,10 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 		 */
 		public static function pad_get_author_box( $layout = 'normal' ) {
 			$options     = pad_get_plugin_options();
-			$author_unit = '<div class="padSection" id="padSection">';
+			$author_unit = '<section class="padSection" id="padSection">';
 
 			if ( 'author_archive' !== $layout ) {
-				$author_unit .= '<h4>' . esc_html( $options['author_box_title'] ) . '</h4>';
+				$author_unit .= '<'. esc_html( $options['author_box_title_tag'] ) .' class="padSectionTitle">' . esc_html( $options['author_box_title'] ) . '</'. esc_html( $options['author_box_title_tag'] ) .'>';
 			}
 
 			$author_unit .= self::pad_get_author_profile();
@@ -197,7 +198,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 				$author_unit .= self::pad_get_author_entries();
 			}
 
-			$author_unit .= '</div>';
+			$author_unit .= '</section>';
 			return $author_unit;
 		}
 	}

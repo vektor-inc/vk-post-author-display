@@ -1,4 +1,32 @@
 <?php
+function pad_tag_selector( $options_pad, $name ){
+	// タイトルのタグをセレクトボックスで選択できるようにする。option は h2〜h6 と div span strong
+	$tag_options = array(
+		'h2'     => 'h2',
+		'h3'     => 'h3',
+		'h4'     => 'h4',
+		'h5'     => 'h5',
+		'h6'     => 'h6',
+		'div'    => 'div',
+		'span'   => 'span',
+		'strong' => 'strong',
+	);
+	?>
+<select name="pad_plugin_options[<?php echo $name;?>]" style="width:100%;max-width:100%;">
+	<?php
+	foreach ( $tag_options as $tag_value => $tag_lavel ) {
+		$selected = '';
+		if ( isset( $options_pad[$name] ) && $tag_value === $options_pad[$name] ) {
+			$selected = ' selected';
+		}
+		?>
+	<option value="<?php echo $tag_value; ?>"<?php echo $selected; ?>><?php echo $tag_lavel; ?></option>
+	<?php } ?>
+</select>
+<?php
+}
+
+
 function pad_the_admin_body() {
 	?>
 
@@ -15,6 +43,15 @@ function pad_the_admin_body() {
 <tr>
 <th><?php _e( 'Post author box title', 'vk-post-author-display' ); ?></th>
 <td><?php echo wp_kses_post( $options_pad['author_box_title'] ); ?> -> <input type="text" name="pad_plugin_options[author_box_title]" id="author_box_title" value="<?php echo esc_attr( $options_pad['author_box_title'] ); ?>" style="width:50%;" /></td>
+</tr>
+<tr>
+<th><?php _e( 'Post author box title tag', 'vk-post-author-display' ); ?></th>
+<td>
+<?php
+$name = 'author_box_title_tag';
+pad_tag_selector( $options_pad, $name );
+?>
+</td>
 </tr>
 <tr>
 <th><?php _e( 'Profile Picture Style', 'vk-post-author-display' ); ?></th>
@@ -46,7 +83,15 @@ function pad_the_admin_body() {
 <th><?php _e( 'Post list box title', 'vk-post-author-display' ); ?></th>
 <td><?php echo wp_kses_post( $options_pad['list_box_title'] ); ?> -> <input type="text" name="pad_plugin_options[list_box_title]" id="list_box_title" value="<?php echo esc_attr( $options_pad['list_box_title'] ); ?>" style="width:50%;" /></td>
 </tr>
-
+<tr>
+<th><?php _e( 'Post list box title tag', 'vk-post-author-display' ); ?></th>
+<td>
+<?php
+$name = 'list_box_title_tag';
+pad_tag_selector( $options_pad, $name );
+?>
+</td>
+</tr>
 <tr>
 <th><?php _e( 'Display post author archive page link', 'vk-post-author-display' ); ?></th>
 <td>
