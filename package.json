@@ -12,7 +12,7 @@
     "sass": "sass --watch assets/_scss:assets/css",
     "sass:build": "sass --style=compressed --no-source-map assets/_scss:assets/css",
     "build": "gulp replace_text_domain && npm run sass:build",
-    "phpunit": "composer install && wp-env run phpunit 'phpunit -c /var/www/html/wp-content/plugins/vk-post-author-display/.phpunit.xml --testsuite default --verbose'"
+	"phpunit": "wp-env run tests-cli --env-cwd='wp-content/plugins/vk-post-author-display' vendor/bin/phpunit -c .phpunit.xml --verbose"
   },
   "repository": {
     "type": "git",
