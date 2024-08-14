@@ -22,10 +22,6 @@ var gulp = require('gulp');
 // });
 
 gulp.task('replace_text_domain', function (done) {
-	// font-awesome.
-	gulp.src(["./inc/font-awesome/package/*.php"])
-		.pipe(replace("vk_font_awesome_version_textdomain","vk-post-author-display"))
-		.pipe(gulp.dest("./inc/font-awesome/package/"));
 	// template-tags.
 	gulp.src(["./inc/template-tags/package/*.php"])
 		.pipe(replace("template_tags_textdomain","vk-post-author-display"))
