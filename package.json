@@ -12,7 +12,7 @@
     "sass": "sass --watch assets/_scss:assets/css",
     "sass:build": "sass --style=compressed --no-source-map assets/_scss:assets/css",
     "build": "gulp replace_text_domain && npm run sass:build",
-    "phpunit": "composer install && wp-env run phpunit 'phpunit -c /var/www/html/wp-content/plugins/vk-post-author-display/.phpunit.xml --testsuite default --verbose'"
+	"phpunit": "wp-env run tests-cli --env-cwd='wp-content/plugins/vk-post-author-display' vendor/bin/phpunit -c .phpunit.xml --verbose"
   },
   "repository": {
     "type": "git",
@@ -25,14 +25,14 @@
   },
   "homepage": "https://github.com/vektor-inc/vk-post-author-display#readme",
   "devDependencies": {
-    "@wordpress/env": "5.16.0",
-    "gulp": "^4.0.2",
+    "@wordpress/env": "10.5.0",
+    "gulp": "^5.0.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-merge-media-queries": "^0.2.1",
     "gulp-replace": "^1.1.4",
     "node-sass": "^9.0.0",
-    "npm-check-updates": "^16.10.12",
-    "sass": "^1.63.6"
+    "npm-check-updates": "^17.0.6",
+    "sass": "^1.77.8"
   },
   "volta": {
     "node": "18.16.0"
