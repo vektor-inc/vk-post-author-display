@@ -176,8 +176,10 @@ function pad_set_css() {
 function pad_get_default_options() {
 	$display_author_options = array(
 		'author_box_title'        => __( 'Author Profile', 'vk-post-author-display' ),
+		'author_box_title_tag'    => 'h4',
 		'author_picture_style'    => 'square',
 		'list_box_title'          => __( 'Latest entries', 'vk-post-author-display' ),
+		'list_box_title_tag'      => 'h5',
 		'author_archive_link'     => 'hide',
 		'author_archive_link_txt' => __( 'Author Archives', 'vk-post-author-display' ),
 		'show_thumbnail'          => 'display',
@@ -252,8 +254,10 @@ function pad_plugin_options_validate( $input ) {
 	$output = $defaults = pad_get_default_options();
 
 	$output['author_box_title']        = wp_kses_post( $input['author_box_title'] );
+	$output['author_box_title_tag']    = esc_html( $input['author_box_title_tag'] );
 	$output['author_picture_style']    = esc_html( $input['author_picture_style'] );
 	$output['list_box_title']          = wp_kses_post( $input['list_box_title'] );
+	$output['list_box_title_tag']      = esc_html( $input['list_box_title_tag'] );
 	$output['author_archive_link']     = esc_html( $input['author_archive_link'] );
 	$output['author_archive_link_txt'] = wp_kses_post( $input['author_archive_link_txt'] );
 	$output['show_thumbnail']          = esc_html( $input['show_thumbnail'] );

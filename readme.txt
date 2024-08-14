@@ -30,6 +30,9 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
+= 1.25.0 =
+[ Add function ] Add a feature that allows specifying the tag.
+
 = 1.24.1 =
 [ Specification Change ] Fix Twitter icon to X icon
 
