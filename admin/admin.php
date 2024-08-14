@@ -1,7 +1,7 @@
 <?php
 /**
  * make admin page
- * 
+ *
  * @package VK Post Author Display
  */
 
@@ -12,11 +12,11 @@ VkAdmin::init();
 $admin_pages = array( 'settings_page_pad_plugin_options' );
 VkAdmin::admin_scripts( $admin_pages );
 
-/*-------------------------------------------*/
-/*	Setting Page
+/*
+	Setting Page
 /*-------------------------------------------*/
 function pad_add_customSettingPage() {
-	require_once dirname( __FILE__ ) . '/view.admin.php';
+	require_once __DIR__ . '/view.admin.php';
 	$get_page_title = __( 'VK Post Author Display Main Setting', 'vk-post-author-display' );
 
 	$get_logo_html = '';

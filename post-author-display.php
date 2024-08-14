@@ -11,7 +11,7 @@ Domain Path: /languages
 License: GPL2
 
 /*
-  Copyright 2013-2020 Hidekazu Ishikawa ( email : kurudrive@gmail.com )
+	Copyright 2013-2020 Hidekazu Ishikawa ( email : kurudrive@gmail.com )
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License, version 2, as
@@ -28,33 +28,33 @@ License: GPL2
 */
 
 /*
- Setting & load file
+Setting & load file
 -------------------------------------------*/
 /*
-  vk post author text domain load
+	vk post author text domain load
 -------------------------------------------*/
 /*
-  Display post author unit
+	Display post author unit
 -------------------------------------------*/
 /*
-  front display css
+	front display css
 -------------------------------------------*/
 /*
-  init
+	init
 -------------------------------------------*/
 /*
-  メニューに追加
+	メニューに追加
 -------------------------------------------*/
 /*
-  Add Short code
+	Add Short code
 -------------------------------------------*/
 
 /*
- Setting & load file
+Setting & load file
 -------------------------------------------*/
 
 // load composer
-require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 $data = get_file_data(
 	__FILE__,
@@ -69,7 +69,7 @@ define( 'VK_PAD_URL', plugin_dir_url( __FILE__ ) );
 define( 'VK_PAD_DIR', plugin_dir_path( __FILE__ ) );
 
 /*
-  vk post author text domain load
+	vk post author text domain load
 -------------------------------------------*/
 // function pad_text_domain() {
 // load_plugin_textdomain( 'vk-post-author-display', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
@@ -90,7 +90,7 @@ function pad_set_plugin_meta( $links ) {
 	array_unshift( $links, $settings_link );
 	return $links;
 }
- add_filter( 'plugin_action_links_' . VK_PAD_BASENAME, 'pad_set_plugin_meta', 10, 1 );
+add_filter( 'plugin_action_links_' . VK_PAD_BASENAME, 'pad_set_plugin_meta', 10, 1 );
 
 
 
@@ -108,7 +108,7 @@ function pad_display_post_types() {
 }
 
 /*
-  Display post author unit
+	Display post author unit
 /*-------------------------------------------*/
 add_filter( 'the_content', 'pad_add_author' );
 function pad_add_author( $content ) {
@@ -146,7 +146,7 @@ function pad_add_author( $content ) {
 }
 
 /*
-  front display css
+	front display css
 /*-------------------------------------------*/
 add_action( 'wp_enqueue_scripts', 'pad_set_css' );
 function pad_set_css() {
@@ -171,7 +171,7 @@ function pad_set_css() {
 }
 
 /*
-  init
+	init
 /*-------------------------------------------*/
 function pad_get_default_options() {
 	$display_author_options = array(
@@ -200,7 +200,7 @@ function pad_plugin_options_Custom_init() {
 add_action( 'admin_init', 'pad_plugin_options_Custom_init' );
 
 /*
-  functionsで毎回呼び出して$options_padに入れる処理を他でする。
+	functionsで毎回呼び出して$options_padに入れる処理を他でする。
 /*-------------------------------------------*/
 function pad_get_plugin_options() {
 	// デフォルト値を取得
@@ -221,7 +221,7 @@ function pad_get_plugin_options() {
 }
 
 /*
-  メニューに追加
+	メニューに追加
 /*-------------------------------------------*/
 function pad_add_customSetting() {
 	$custom_page = add_options_page(
@@ -238,7 +238,7 @@ function pad_add_customSetting() {
 add_action( 'admin_menu', 'pad_add_customSetting' );
 
 /*
-  Setting page
+	Setting page
 -------------------------------------------*/
 // 第１引数で、どのページで適応するのかを指定。この場合後半（settings_page_pad_plugin_options ）がどのページかを判断する hook_suffix になっている。
 // hook_suffix は、body のclass名などから確認する事が出来る。
@@ -268,7 +268,7 @@ function pad_plugin_options_validate( $input ) {
 }
 
 /*
-  optionの値を単純に引っ張る
+	optionの値を単純に引っ張る
 /*-------------------------------------------*/
 function get_pad_options( $optionLabel ) {
 	$options_pad = pad_get_plugin_options();
@@ -279,7 +279,7 @@ function get_pad_options( $optionLabel ) {
 
 
 /*
-  Unset pad custom size thumbnail
+	Unset pad custom size thumbnail
 /*
 -------------------------------------------*/
 // function pad_plugin_disable_thumbnail( $sizes ) {
@@ -289,7 +289,7 @@ function get_pad_options( $optionLabel ) {
 // }
 
 /*
-  Add Short code
+	Add Short code
 -------------------------------------------*/
 add_shortcode( 'pad', 'pad_short_code' );
 function pad_short_code() {

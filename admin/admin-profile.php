@@ -1,7 +1,7 @@
 <?php
 
 /*
-  Add user sns link
+	Add user sns link
 /*-------------------------------------------*/
 
 function pad_sns_array() {
@@ -65,9 +65,9 @@ function pad_update_profile_fields( $contactmethods ) {
 add_filter( 'user_contactmethods', 'pad_update_profile_fields', 10, 1 );
 
 /*
-  vk post author profile image
+	vk post author profile image
 /*-------------------------------------------*/
-require_once dirname( __FILE__ ) . '/view.admin-profile.php';
+require_once __DIR__ . '/view.admin-profile.php';
 add_action( 'show_password_fields', 'add_user_profile_image_form' );
 
 function pad_update_user_profile_image( $user_id, $old_user_data ) {
@@ -81,7 +81,7 @@ function pad_update_user_profile_image( $user_id, $old_user_data ) {
 add_action( 'profile_update', 'pad_update_user_profile_image', 10, 2 );
 
 /*
-  $admin_pages の配列にいれる識別値は下記をコメントアウト解除すればブラウザのコンソールで確認出来る
+	$admin_pages の配列にいれる識別値は下記をコメントアウト解除すればブラウザのコンソールで確認出来る
 /*-------------------------------------------*/
 
 // add_action("admin_head", 'suffix2console');
