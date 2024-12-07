@@ -30,6 +30,8 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
+[ Bug fix ] Fix profile image warning
+
 = 1.25.0 =
 [ Add function ] Add a feature that allows specifying the tag.
 

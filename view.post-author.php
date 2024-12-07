@@ -35,7 +35,9 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 			$profile_image_id = get_the_author_meta( 'user_profile_image' );
 			if ( $profile_image_id ) {
 				$profile_image_src = wp_get_attachment_image_src( $profile_image_id, 'thumbnail' );
-				$profile_unit     .= '<img src="' . $profile_image_src[0] . '" alt="' . $user_name . '" />';
+			}
+			if ( isset( $profile_image_src ) && is_array( $profile_image_src ) ) {
+				$profile_unit .= '<img src="' . $profile_image_src[0] . '" alt="' . $user_name . '" />';
 			} else {
 				$profile_unit .= get_avatar( get_the_author_meta( 'email' ), 100 );
 			}
@@ -189,7 +191,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 			$author_unit = '<section class="padSection" id="padSection">';
 
 			if ( 'author_archive' !== $layout ) {
-				$author_unit .= '<'. esc_html( $options['author_box_title_tag'] ) .' class="padSectionTitle">' . esc_html( $options['author_box_title'] ) . '</'. esc_html( $options['author_box_title_tag'] ) .'>';
+				$author_unit .= '<' . esc_html( $options['author_box_title_tag'] ) . ' class="padSectionTitle">' . esc_html( $options['author_box_title'] ) . '</' . esc_html( $options['author_box_title_tag'] ) . '>';
 			}
 
 			$author_unit .= self::pad_get_author_profile();
