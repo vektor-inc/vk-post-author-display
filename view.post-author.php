@@ -115,8 +115,10 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 					$subject = $sns_url;
 					$pattern = '/https:\/\/twitter.com\//';
 					preg_match( $pattern, $subject, $matches, PREG_OFFSET_CAPTURE );
-					if ( ! $matches ) {
-						$sns_url = 'https://twitter.com/' . $sns_url;
+					$pattern_x = '/https:\/\/x.com\//';
+					preg_match( $pattern_x, $subject, $matches_x, PREG_OFFSET_CAPTURE );
+					if ( ! $matches && ! $matches_x ) {
+						$sns_url = 'https://x.com/' . $sns_url;
 					}
 				} // if ( $key == 'twitter' ){
 
