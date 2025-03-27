@@ -12,6 +12,28 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 	 */
 	class Vk_Post_Author_Box {
 
+		// コンストラクタ
+		public function __construct() {
+			add_shortcode( 'pad', array( __CLASS__, 'pad_short_code_author_box' ) );
+			add_shortcode( 'pad_social_icons', array( __CLASS__, 'pad_short_code_social_icons' ) );
+		}
+
+		/**
+		 * Short code author box
+		 */
+		public static function pad_short_code_author_box() {
+			if ( class_exists( 'Vk_Post_Author_Box' ) && is_singular() ) {
+				return Vk_Post_Author_Box::pad_get_author_box();
+			}
+		}
+
+		/**
+		 * Short code social icons
+		 */
+		public static function pad_short_code_social_icons() {
+			return Vk_Post_Author_Box::get_social_icons();
+		}
+
 		/**
 		 * Get author profile html
 		 *
@@ -54,6 +76,12 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 			$profile_unit .= '</dt><dd>' . "\n";
 			$profile_unit .= wp_kses_post( nl2br( get_the_author_meta( 'description' ) ) ) . "\n";
 
+			$profile_unit .= self::get_social_icons();
+			$profile_unit .= '</dd></dl>';
+			return $profile_unit;
+		}
+
+		public static function get_social_icons(){
 			$sns_array = pad_sns_array();
 			$sns_icons = '';
 
@@ -103,13 +131,13 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 				}
 			}
 
+			$sns_icons_set = '';
 			if ( $sns_icons ) {
-				$profile_unit .= '<ul class="sns_icons">';
-				$profile_unit .= $sns_icons;
-				$profile_unit .= '</ul>';
+				$sns_icons_set .= '<ul class="sns_icons">';
+				$sns_icons_set .= $sns_icons;
+				$sns_icons_set .= '</ul>';
 			}
-			$profile_unit .= '</dd></dl>';
-			return $profile_unit;
+			return $sns_icons_set;
 		}
 
 		/**

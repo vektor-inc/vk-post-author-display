@@ -30,6 +30,8 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
+[ Specification Change ] Add short cord pad_social_icons
+
 = 1.25.1 =
 [ Bug fix ] Fix profile image warning
 
