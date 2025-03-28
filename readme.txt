@@ -30,6 +30,7 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
+[ Specification Change ] CSS Refactoring
 [ Bug fix ] Fix a link error that occurs when an X URL is entered.
 
 = 1.25.1 =
