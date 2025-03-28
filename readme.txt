@@ -3,8 +3,8 @@ Contributors: kurudrive,dswebstudio,mypacecreator,gatespace,hnle,catherine8007,r
 Donate link:
 Tags: post,author
 Requires at least: 5.3
-Tested up to: 6.6
-Stable tag: 1.25.1
+Tested up to: 6.7
+Stable tag: 1.26.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,11 @@ Display to Post Author Information Box on bottom of the contents.
 == Changelog ==
 
 [ Bug fix ] Fix profile image when reset.
+
+= 1.26.0 =
+[ Specification Change ] Add short cord pad_social_icons
+[ Specification Change ] CSS Refactoring
+[ Bug fix ] Fix a link error that occurs when an X URL is entered.
 
 = 1.25.1 =
 [ Bug fix ] Fix profile image warning.
