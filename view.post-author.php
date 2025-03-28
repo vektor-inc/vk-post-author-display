@@ -139,7 +139,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 				$sns_icons_set .= $sns_icons;
 				$sns_icons_set .= '</ul>';
 			}
-			return $sns_icons_set;
+			return wp_kses_post( $sns_icons_set );
 		}
 
 		/**
