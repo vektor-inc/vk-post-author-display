@@ -82,6 +82,7 @@ require_once VK_PAD_DIR . 'inc/template-tags/template-tags-config.php';
 require_once VK_PAD_DIR . 'admin/admin.php';
 require_once VK_PAD_DIR . 'admin/admin-profile.php';
 require_once VK_PAD_DIR . 'view.post-author.php';
+new Vk_Post_Author_Box();
 require_once VK_PAD_DIR . 'hide_controller.php';
 
 // Add a link to this plugin's settings page
@@ -291,13 +292,3 @@ function get_pad_options( $optionLabel ) {
 // unset( $sizes['pad_thumb'] );
 // }
 // }
-
-/*
-	Add Short code
--------------------------------------------*/
-add_shortcode( 'pad', 'pad_short_code' );
-function pad_short_code() {
-	if ( class_exists( 'Vk_Post_Author_Box' ) && is_singular() ) {
-		return Vk_Post_Author_Box::pad_get_author_box();
-	}
-}
