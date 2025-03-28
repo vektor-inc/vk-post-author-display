@@ -30,6 +30,7 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
+[ Bug fix ] Fix profile image when reset.
 
 = 1.26.0 =
 [ Specification Change ] Add short cord pad_social_icons
@@ -37,7 +38,7 @@ Display to Post Author Information Box on bottom of the contents.
 [ Bug fix ] Fix a link error that occurs when an X URL is entered.
 
 = 1.25.1 =
-[ Bug fix ] Fix profile image warning
+[ Bug fix ] Fix profile image warning.
 
 = 1.25.0 =
 [ Add function ] Add a feature that allows specifying the tag.
