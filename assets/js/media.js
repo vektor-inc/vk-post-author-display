@@ -43,11 +43,16 @@ document.addEventListener("DOMContentLoaded", function () {
             let mediaField = document.querySelector(mediaResetTarget);
             if (mediaField) mediaField.value = "";
 
-            let defaultImageSrc = document.querySelector(defaultImageTarget)?.src;
+            let defaultImage = document.querySelector(defaultImageTarget);
+            let defaultImageSrc = defaultImage ? defaultImage.src : "";
             if (defaultImageSrc) {
                 let thumbImg = document.querySelector(thumbSrc);
                 if (thumbImg) {
                     thumbImg.src = defaultImageSrc;
+                    const width = defaultImage.naturalWidth;
+                    const height = defaultImage.naturalHeight;
+                    thumbImg.style.width = width + "px";
+                    thumbImg.style.height = height + "px";
                     thumbImg.removeAttribute("srcset");
                 }
             }
