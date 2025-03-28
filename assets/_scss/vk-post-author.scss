@@ -81,42 +81,42 @@
 	margin-bottom: 5px;
 }
 
-#padSection .sns_icons {
+ul.sns_icons {
 	list-style: none;
 	margin: 10px 0;
 	padding: 0;
-}
-#padSection .sns_icons li {
-	display: inline;
-	font-size: 28px;
-	margin-right: 10px;
-}
-#padSection a.web {
-	color: #1780bb;
-}
-#padSection a.twitter {
-	color: #0f1419;
-}
-#padSection a.facebook {
-	color: #3b5998;
-}
-#padSection a.instagram {
-	color: #262626;
-}
-#padSection a.youtube {
-	color: #cc181e;
-}
-#padSection a.linkedin {
-	color: #0077b5;
-}
-#padSection a.google-plus {
-	color: #db4437;
-}
-#padSection a.wordpress {
-	color: #585c60;
-}
-#padSection a.amazon {
-	color: #232f3e;
+	li {
+		display: inline;
+		font-size: 28px;
+		margin-right: 10px;
+	}
+	li a.web {
+		color: #1780bb;
+	}
+	li a.twitter {
+		color: #0f1419;
+	}
+	li a.facebook {
+		color: #3b5998;
+	}
+	li a.instagram {
+		color: #262626;
+	}
+	li a.youtube {
+		color: #cc181e;
+	}
+	li a.linkedin {
+		color: #0077b5;
+	}
+	li a.google-plus {
+		color: #db4437;
+	}
+	li a.wordpress {
+		color: #585c60;
+	}
+	li a.amazon {
+		color: #232f3e;
+	}
 }
 
 #latestEntries {
