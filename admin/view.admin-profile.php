@@ -11,17 +11,16 @@ function add_user_profile_image_form( $bool ) {
 	<td>
 
 	<input id="user_profile_image" type="hidden" name="user_profile_image" value="<?php echo esc_html( $vpad_profile_user->user_profile_image ); ?>" />
-	<img id="defaultImage_user_profile_image" style="display:none;" src="<?php echo esc_url( VK_PAD_URL ); ?>images/no_image.png" alt="" />
+	<img id="defaultImage_user_profile_image" style="display:none;" src="<?php echo esc_url( VK_PAD_URL ); ?>assets/images/no_image.png" alt="" />
 		<?php
 		$attr = array(
 			'id'    => 'thumb_user_profile_image',
-			'src'   => '',
 			'class' => 'input_thumb',
 		);
 		if ( isset( $vpad_profile_user->user_profile_image ) && $vpad_profile_user->user_profile_image ) {
 			echo wp_get_attachment_image( $vpad_profile_user->user_profile_image, 'medium', false, $attr );
 		} else {
-			echo '<img src="' . VK_PAD_URL . 'images/no_image.png" id="' . $attr['id'] . '" alt="" class="' . $attr['class'] . '" style="width:96px;height:auto;">';
+			echo '<img src="' . esc_url( VK_PAD_URL ) . 'assets/images/no_image.png" id="' . $attr['id'] . '" alt="" class="' . $attr['class'] . '" style="width:96px;height:auto;">';
 		}
 		?>
 
