@@ -31,6 +31,7 @@ Display to Post Author Information Box on bottom of the contents.
 == Changelog ==
 
 [ Bug fix ] Fix profile image when reset.
+[ Bug fix ] Fix link to FontAwesome icon list to correctly point to the free icons page.
 
 = 1.26.0 =
 [ Specification Change ] Add short cord pad_social_icons
