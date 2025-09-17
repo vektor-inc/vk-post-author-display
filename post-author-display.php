@@ -179,6 +179,12 @@ function pad_set_css() {
 	if ( $post && ( has_shortcode( $post->post_content, 'pad' ) || has_shortcode( $post->post_content, 'pad_social_icons' ) ) ) {
 		$should_load_css = true;
 	}
+	
+	// テンプレートファイルで直接記述された場合も対応
+	// 設定に関係なく任意の個別ページでCSSを読み込む
+	if ( is_singular() ) {
+		$should_load_css = true;
+	}
 
 	if ( $should_load_css ) {
 		wp_enqueue_style( 'set_vk_post_autor_css', $cssPath, false, VK_PAD_VERSION );
