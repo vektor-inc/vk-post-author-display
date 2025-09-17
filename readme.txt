@@ -30,6 +30,7 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
+[ Bug fix ] Fix user URL display in social icons.
 [ Bug fix ] Fix profile image when reset.
 
 = 1.26.0 =
