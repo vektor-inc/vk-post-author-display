@@ -31,6 +31,7 @@ Display to Post Author Information Box on bottom of the contents.
 == Changelog ==
 
 [ Bug fix ] Fix profile image when reset.
+[ Bug fix ] Fix CSS not loading when using [pad] or [pad_social_icons] shortcodes on post types that are not enabled in display settings.
 
 = 1.26.0 =
 [ Specification Change ] Add short cord pad_social_icons
