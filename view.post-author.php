@@ -31,7 +31,10 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 		 * Short code social icons
 		 */
 		public static function pad_short_code_social_icons() {
-			return Vk_Post_Author_Box::get_social_icons();
+			global $post;
+			$user_id = $post->post_author;
+			$user = get_userdata( $user_id );
+			return Vk_Post_Author_Box::get_social_icons( $user );
 		}
 
 		/**
@@ -76,12 +79,12 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 			$profile_unit .= '</dt><dd>' . "\n";
 			$profile_unit .= wp_kses_post( nl2br( get_the_author_meta( 'description' ) ) ) . "\n";
 
-			$profile_unit .= self::get_social_icons();
+			$profile_unit .= self::get_social_icons( $user );
 			$profile_unit .= '</dd></dl>';
 			return $profile_unit;
 		}
 
-		public static function get_social_icons(){
+		public static function get_social_icons( $user = null ){
 			$sns_array = pad_sns_array();
 			$sns_icons = '';
 
@@ -95,7 +98,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 				}
 			}
 
-			$url = isset( $user->data->user_url ) ? $user->data->user_url : '';
+			$url = ( $user && isset( $user->data->user_url ) ) ? $user->data->user_url : '';
 			if ( $url ) {
 				if ( '4.7' === $fa ) {
 					$icon = 'fa fa-globe web';
