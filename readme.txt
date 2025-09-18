@@ -4,7 +4,7 @@ Donate link:
 Tags: post,author
 Requires at least: 5.3
 Tested up to: 6.7
-Stable tag: 1.26.0
+Stable tag: 1.26.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,7 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
+= 1.26.1 =
 [ Bug fix ] Fix website icon display in social icons.
 [ Bug fix ] Fix profile image when reset.
 [ Bug fix ] Fix link to FontAwesome icon list to correctly point to the free icons page.
