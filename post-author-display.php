@@ -166,7 +166,27 @@ function pad_set_css() {
 
 	$cssPath = apply_filters( 'pad-stylesheet', plugins_url( 'assets/css/vk-post-author.css', __FILE__ ) );
 
+	// ショートコードが使用されている場合もCSSを読み込む
+	global $post;
+	$should_load_css = false;
+	
+	// 既存の条件（個別ページまたは著者アーカイブ）
 	if ( is_singular( $post_types ) || is_author() ) {
+		$should_load_css = true;
+	}
+	
+	// ショートコードが使用されている場合
+	if ( $post && ( has_shortcode( $post->post_content, 'pad' ) || has_shortcode( $post->post_content, 'pad_social_icons' ) ) ) {
+		$should_load_css = true;
+	}
+	
+	// テンプレートファイルで直接記述された場合も対応
+	// 設定に関係なく任意の個別ページでCSSを読み込む
+	if ( is_singular() ) {
+		$should_load_css = true;
+	}
+
+	if ( $should_load_css ) {
 		wp_enqueue_style( 'set_vk_post_autor_css', $cssPath, false, VK_PAD_VERSION );
 	}
 }

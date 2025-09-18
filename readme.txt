@@ -33,6 +33,7 @@ Display to Post Author Information Box on bottom of the contents.
 = 1.26.1 =
 [ Bug fix ] Fix website icon display in social icons.
 [ Bug fix ] Fix profile image when reset.
+[ Bug fix ] Fix CSS not loading when using [pad] or [pad_social_icons] shortcodes on post types that are not enabled in display settings.
 [ Bug fix ] Fix link to FontAwesome icon list to correctly point to the free icons page.
 
 = 1.26.0 =
