@@ -143,7 +143,7 @@ pad_tag_selector( $options_pad, $name );
 </tr>
 
 <tr>
-	<th><?php _e( 'CSS loading scope', 'vk-post-author-display' ); ?></th>
+	<th><?php _e( 'CSS loading location', 'vk-post-author-display' ); ?></th>
 	<td>
 		<?php
 		$css_load_scopes = array(
