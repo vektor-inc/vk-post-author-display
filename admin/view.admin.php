@@ -143,6 +143,33 @@ pad_tag_selector( $options_pad, $name );
 </tr>
 
 <tr>
+	<th><?php _e( 'CSS loading scope', 'vk-post-author-display' ); ?></th>
+	<td>
+		<?php
+		$css_load_scopes = array(
+			'post_types_only' => __( 'Load CSS on selected post types only', 'vk-post-author-display' ),
+			'all_pages'       => __( 'Load CSS on all pages (for shortcode/code usage)', 'vk-post-author-display' ),
+		);
+		foreach ( $css_load_scopes as $scope_value => $scope_label ) {
+			$checked = '';
+			if ( isset( $options_pad['css_load_scope'] ) && $scope_value === $options_pad['css_load_scope'] ) {
+				$checked = ' checked';
+			}
+			?>
+			<label class="form_horizontal_item">
+				<input type="radio" name="pad_plugin_options[css_load_scope]" value="<?php echo esc_attr( $scope_value ); ?>"<?php echo $checked; ?> />
+				<?php echo esc_html( $scope_label ); ?>
+			</label>
+			<?php
+		}
+		?>
+		<p class="description">
+			<?php _e( 'Select "Load CSS on all pages" if you use shortcode [pad] or custom code on pages that are not in the selected post types.', 'vk-post-author-display' ); ?>
+		</p>
+	</td>
+</tr>
+
+<tr>
 	<th><?php _e( 'Auto display', 'vk-post-author-display' ); ?></th>
 	<td>
 		<?php
