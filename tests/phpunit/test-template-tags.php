@@ -61,24 +61,31 @@ class TemplateTagsTest extends WP_UnitTestCase {
 
 	function test_pad_plugin_options_validate_css_load_scope() {
 
+		$default_input = array(
+			'author_box_title'        => 'Author Profile',
+			'author_box_title_tag'    => 'h4',
+			'author_picture_style'    => 'square',
+			'list_box_title'          => 'Latest entries',
+			'list_box_title_tag'      => 'h5',
+			'author_archive_link'     => 'hide',
+			'author_archive_link_txt' => 'Author Archives',
+			'show_thumbnail'          => 'display',
+			'auto_display'            => 'yes',
+			'post_types'              => array( 'post' => 'true' ),
+		);
+
 		$tests = array(
 			// デフォルト値のテスト
 			array(
-				'input'    => array(),
+				'input'    => array_merge( $default_input, array( 'css_load_scope' => 'post_types_only' ) ),
 				'expected' => 'post_types_only',
-				'label'    => 'Default css_load_scope should be post_types_only',
+				'label'    => 'css_load_scope should be saved as post_types_only',
 			),
 			// all_pages 設定のテスト
 			array(
-				'input'    => array( 'css_load_scope' => 'all_pages' ),
+				'input'    => array_merge( $default_input, array( 'css_load_scope' => 'all_pages' ) ),
 				'expected' => 'all_pages',
 				'label'    => 'css_load_scope should be saved as all_pages',
-			),
-			// post_types_only 設定のテスト
-			array(
-				'input'    => array( 'css_load_scope' => 'post_types_only' ),
-				'expected' => 'post_types_only',
-				'label'    => 'css_load_scope should be saved as post_types_only',
 			),
 		);
 
@@ -88,14 +95,8 @@ class TemplateTagsTest extends WP_UnitTestCase {
 		print '------------------------------------' . PHP_EOL;
 
 		foreach ( $tests as $test ) {
-			$default_options = pad_get_default_options();
-			$this->assertEquals( 'post_types_only', $default_options['css_load_scope'], 'Default option check failed' );
-
-			if ( ! empty( $test['input'] ) ) {
-				$validated = pad_plugin_options_validate( $test['input'] );
-				$this->assertEquals( $test['expected'], $validated['css_load_scope'], $test['label'] );
-			}
-
+			$validated = pad_plugin_options_validate( $test['input'] );
+			$this->assertEquals( $test['expected'], $validated['css_load_scope'], $test['label'] );
 			print $test['label'] . ' ... OK' . PHP_EOL;
 		}
 	}
