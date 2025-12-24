@@ -6,45 +6,41 @@
 
 function pad_sns_array() {
 	$sns_array = array(
+		'web'       => array(
+			'name'     => 'Website',
+			'icon' => '<i class="fa-solid fa-globe"></i>',
+		),
 		'mail'      => array(
 			'name'     => 'Mail（Contact Page）',
-			'icon_fa4' => 'fa fa-envelope-square',
-			'icon_fa6' => 'fa-solid fa-square-envelope',
+			'icon' => '<i class="fa-solid fa-square-envelope"></i>',
 		),
 		'twitter'   => array(
 			'name'     => 'X',
-			'icon_fa4' => 'fa fa-twitter-square',
-			'icon_fa6' => 'fa-brands fa-square-x-twitter',
+			'icon' => '<i class="fa-brands fa-square-x-twitter"></i>',
 		),
 		'facebook'  => array(
 			'name'     => 'Facebook',
-			'icon_fa4' => 'fa fa-facebook-square',
-			'icon_fa6' => 'fa-brands fa-square-facebook',
+			'icon' => '<i class="fa-brands fa-square-facebook"></i>',
 		),
 		'instagram' => array(
 			'name'     => 'Instagram',
-			'icon_fa4' => 'fa fa-instagram',
-			'icon_fa6' => 'fa-brands fa-square-instagram',
+			'icon' => '<i class="fa-brands fa-square-instagram"></i>',
 		),
 		'youtube'   => array(
 			'name'     => 'YouTube',
-			'icon_fa4' => 'fa fa-youtube-square',
-			'icon_fa6' => 'fa-brands fa-square-youtube',
+			'icon' => '<i class="fa-brands fa-square-youtube"></i>',
 		),
 		'linkedin'  => array(
 			'name'     => 'LinkedIn',
-			'icon_fa4' => 'fa fa-linkedin',
-			'icon_fa6' => 'fa-brands fa-linkedin',
+			'icon' => '<i class="fa-brands fa-linkedin"></i>',
 		),
 		'wordpress' => array(
 			'name'     => 'WordPress',
-			'icon_fa4' => 'fa fa-wordpress',
-			'icon_fa6' => 'fa-brands fa-wordpress',
+			'icon' => '<i class="fa-brands fa-wordpress"></i>',
 		),
 		'amazon'    => array(
-			'name'     => __( 'amazon Wish List', 'vk-post-author-display' ),
-			'icon_fa4' => 'fa fa-amazon',
-			'icon_fa6' => 'fa-brands fa-amazon',
+			'name'     => __( 'Amazon Wish List', 'vk-post-author-display' ),
+			'icon' => '<i class="fa-brands fa-amazon"></i>',
 		),
 	);
 	return $sns_array;
