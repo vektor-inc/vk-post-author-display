@@ -106,7 +106,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 
 				if ( $sns_url ) {
 					$sns_icons .= '<li class="pad_' . $key . '"><a href="' . esc_url( $sns_url ) . '" target
-					="_blank" class="' . $key . '">' . $value['icon'] . '</a></li>';
+					="_blank" class="' . $key . '"><i class="' . esc_attr( $value['icon_class'] ) . '"></i></a></li>';
 				}
 			}
 
