@@ -6,45 +6,41 @@
 
 function pad_sns_array() {
 	$sns_array = array(
+		'web'       => array(
+			'name'       => __( 'Website', 'vk-post-author-display' ),
+			'icon_class' => 'fa-solid fa-globe',
+		),
 		'mail'      => array(
-			'name'     => 'Mail（Contact Page）',
-			'icon_fa4' => 'fa fa-envelope-square',
-			'icon_fa6' => 'fa-solid fa-square-envelope',
+			'name'       => __( 'Mail（Contact Page）', 'vk-post-author-display' ),
+			'icon_class' => 'fa-solid fa-square-envelope',
 		),
 		'twitter'   => array(
-			'name'     => 'X',
-			'icon_fa4' => 'fa fa-twitter-square',
-			'icon_fa6' => 'fa-brands fa-square-x-twitter',
+			'name'       => __( 'X', 'vk-post-author-display' ),
+			'icon_class' => 'fa-brands fa-square-x-twitter',
 		),
 		'facebook'  => array(
-			'name'     => 'Facebook',
-			'icon_fa4' => 'fa fa-facebook-square',
-			'icon_fa6' => 'fa-brands fa-square-facebook',
+			'name'       => __( 'Facebook', 'vk-post-author-display' ),
+			'icon_class' => 'fa-brands fa-square-facebook',
 		),
 		'instagram' => array(
-			'name'     => 'Instagram',
-			'icon_fa4' => 'fa fa-instagram',
-			'icon_fa6' => 'fa-brands fa-square-instagram',
+			'name'       => __( 'Instagram', 'vk-post-author-display' ),
+			'icon_class' => 'fa-brands fa-square-instagram',
 		),
 		'youtube'   => array(
-			'name'     => 'YouTube',
-			'icon_fa4' => 'fa fa-youtube-square',
-			'icon_fa6' => 'fa-brands fa-square-youtube',
+			'name'       => __( 'YouTube', 'vk-post-author-display' ),
+			'icon_class' => 'fa-brands fa-square-youtube',
 		),
 		'linkedin'  => array(
-			'name'     => 'LinkedIn',
-			'icon_fa4' => 'fa fa-linkedin',
-			'icon_fa6' => 'fa-brands fa-linkedin',
+			'name'       => __( 'LinkedIn', 'vk-post-author-display' ),
+			'icon_class' => 'fa-brands fa-linkedin',
 		),
 		'wordpress' => array(
-			'name'     => 'WordPress',
-			'icon_fa4' => 'fa fa-wordpress',
-			'icon_fa6' => 'fa-brands fa-wordpress',
+			'name'       => __( 'WordPress', 'vk-post-author-display' ),
+			'icon_class' => 'fa-brands fa-wordpress',
 		),
 		'amazon'    => array(
-			'name'     => __( 'amazon Wish List', 'vk-post-author-display' ),
-			'icon_fa4' => 'fa fa-amazon',
-			'icon_fa6' => 'fa-brands fa-amazon',
+			'name'       => __( 'Amazon Wish List', 'vk-post-author-display' ),
+			'icon_class' => 'fa-brands fa-amazon',
 		),
 	);
 	return $sns_array;

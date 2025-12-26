@@ -30,6 +30,8 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
+[ Other ] compatible for Font Awesome 7.1.0
+
 = 1.26.1 =
 [ Bug fix ] Fix website icon display in social icons.
 [ Bug fix ] Fix profile image when reset.

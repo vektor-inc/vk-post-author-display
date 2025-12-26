@@ -88,27 +88,6 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 			$sns_array = pad_sns_array();
 			$sns_icons = '';
 
-			// Set Font Awesome Version.
-			$fa = '5_WebFonts_CSS';
-
-			if ( class_exists( 'Vk_Font_Awesome_Versions' ) ) {
-				$fa_versions = new Vk_Font_Awesome_Versions();
-				if ( method_exists( $fa_versions, 'get_option_fa' ) ) {
-					$fa = $fa_versions::get_option_fa();
-				}
-			}
-
-			$url = ( $user && isset( $user->data->user_url ) ) ? $user->data->user_url : '';
-			if ( $url ) {
-				if ( '4.7' === $fa ) {
-					$icon = 'fa fa-globe web';
-				} else {
-					$icon = 'fas fa-globe';
-				}
-				$sns_icons = '<li class="pad_url"><a href="' . esc_url( $url ) . '" target
-				="_blank" class="web"><i class="' . $icon . '" aria-hidden="true"></i></a></li>';
-			}
-
 			foreach ( $sns_array as $key => $value ) {
 				$field   = 'pad_' . $key;
 				$sns_url = get_the_author_meta( $field );
@@ -126,13 +105,8 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 				} // if ( $key == 'twitter' ){
 
 				if ( $sns_url ) {
-					if ( '4.7' === $fa ) {
-						$class = $value['icon_fa4'];
-					} else {
-						$class = $value['icon_fa6'];
-					}
 					$sns_icons .= '<li class="pad_' . $key . '"><a href="' . esc_url( $sns_url ) . '" target
-					="_blank" class="' . $key . '"><i class="' . $class . '" aria-hidden="true"></i></a></li>';
+					="_blank" class="' . $key . '"><i class="' . esc_attr( $value['icon_class'] ) . '"></i></a></li>';
 				}
 			}
 
