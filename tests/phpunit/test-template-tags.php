@@ -87,6 +87,18 @@ class TemplateTagsTest extends WP_UnitTestCase {
 				'expected' => 'all_pages',
 				'label'    => 'css_load_scope should be saved as all_pages',
 			),
+			// 不正な値の場合は post_types_only にフォールバック
+			array(
+				'input'    => array_merge( $default_input, array( 'css_load_scope' => 'invalid_scope' ) ),
+				'expected' => 'post_types_only',
+				'label'    => 'css_load_scope falls back to post_types_only when given invalid value',
+			),
+			// キー未指定の場合は post_types_only にフォールバック
+			array(
+				'input'    => $default_input,
+				'expected' => 'post_types_only',
+				'label'    => 'css_load_scope falls back to post_types_only when key is omitted',
+			),
 		);
 
 		print PHP_EOL;
