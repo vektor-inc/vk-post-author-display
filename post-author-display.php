@@ -278,7 +278,11 @@ function pad_plugin_options_validate( $input ) {
 	$output['author_archive_link_txt'] = wp_kses_post( $input['author_archive_link_txt'] );
 	$output['show_thumbnail']          = esc_html( $input['show_thumbnail'] );
 	$output['auto_display']            = esc_html( $input['auto_display'] );
-	$output['css_load_scope']          = esc_html( $input['css_load_scope'] );
+	$allowed_css_load_scopes           = array( 'post_types_only', 'all_pages' );
+	$css_load_scope                    = isset( $input['css_load_scope'] ) ? sanitize_key( $input['css_load_scope'] ) : $defaults['css_load_scope'];
+	$output['css_load_scope']          = in_array( $css_load_scope, $allowed_css_load_scopes, true )
+		? $css_load_scope
+		: $defaults['css_load_scope'];
 	if ( function_exists( 'vk_sanitize_array' ) ) {
 		$output['post_types'] = vk_sanitize_array( $input['post_types'] );
 	} else {
