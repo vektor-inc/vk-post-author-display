@@ -16,8 +16,8 @@ jobs:
                       echo "Tag '${{ github.ref_name }}' is not a valid semver (X.Y.Z). Aborting workflow."
                       exit 1
                   fi
-    smoke_test:
-        name: Smoke Test
+    build_dist:
+        name: Build dist
         runs-on: ubuntu-latest
         needs: [check_tag]
         steps:
@@ -30,6 +30,29 @@ jobs:
               run: npm install
             - name: Create dist
               run: npm run dist
+            - name: Upload dist artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: dist
+                  path: dist/
+                  if-no-files-found: error
+    smoke_test:
+        name: Smoke Test
+        runs-on: ubuntu-latest
+        needs: [build_dist]
+        steps:
+            - uses: actions/checkout@v4
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20.x
+            - name: Install NPM Scripts
+              run: npm install
+            - name: Download dist artifact
+              uses: actions/download-artifact@v4
+              with:
+                  name: dist
+                  path: dist/
             - name: Setup wp-env override for dist
               run: |
                   echo '{"plugins":["./dist/${{ env.plugin_name }}"]}' > wp-env.override.json
@@ -105,14 +128,11 @@ jobs:
         needs: [smoke_test, php_unit]
         steps:
             - uses: actions/checkout@v4
-            - name: Setup Node.js
-              uses: actions/setup-node@v4
+            - name: Download dist artifact
+              uses: actions/download-artifact@v4
               with:
-                  node-version: 20.x
-            - name: Install NPM Scripts
-              run: npm install
-            - name: Create dist
-              run: npm run dist
+                  name: dist
+                  path: dist/
             - name: WordPress Plugin Deploy
               # 10up/action-wordpress-plugin-deploy 2.3.0 / stable
               uses: 10up/action-wordpress-plugin-deploy@54bd289b8525fd23a5c365ec369185f2966529c2
@@ -128,14 +148,11 @@ jobs:
             contents: write
         steps:
             - uses: actions/checkout@v4
-            - name: Setup Node.js
-              uses: actions/setup-node@v4
+            - name: Download dist artifact
+              uses: actions/download-artifact@v4
               with:
-                  node-version: 20.x
-            - name: Install NPM Scripts
-              run: npm install
-            - name: Create dist
-              run: npm run dist
+                  name: dist
+                  path: dist/
             - name: Create Release
               # softprops/action-gh-release v2.6.1 / v2
               uses: softprops/action-gh-release@153bb8e04406b158c6c84fc1615b65b24149a1fe
