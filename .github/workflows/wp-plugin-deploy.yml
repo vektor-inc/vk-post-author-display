@@ -78,6 +78,7 @@ jobs:
                       echo "Retrying wp-env start --update ($n)..."
                       sleep 15
                   done
+                  (( n < 5 )) || exit 1
             - name: Check WordPress Version
               run: npm run wp-env run cli wp core version
             - name: Build
@@ -111,6 +112,8 @@ jobs:
         name: release
         runs-on: ubuntu-latest
         needs: [smoke_test, php_unit]
+        permissions:
+            contents: write
         steps:
             - uses: actions/checkout@v4
             - name: Setup Node.js
