@@ -29,6 +29,7 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
+= 1.27.0 =
 [ Add function ] Add option to load CSS when using shortcode on pages outside selected post types.
 
 = 1.26.2 =
