@@ -2,13 +2,24 @@ name: Deploy to WordPress.org
 on:
     push:
         tags:
-            - '[0-9]+.[0-9]+.[0-9]+'
+            - '**'
 env:
     plugin_name: vk-post-author-display
 jobs:
+    check_tag:
+        name: Verify semver tag
+        runs-on: ubuntu-latest
+        steps:
+            - name: Verify semver tag
+              run: |
+                  if [[ ! "${{ github.ref_name }}" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
+                      echo "Tag '${{ github.ref_name }}' is not a valid semver (X.Y.Z). Aborting workflow."
+                      exit 1
+                  fi
     smoke_test:
         name: Smoke Test
         runs-on: ubuntu-latest
+        needs: [check_tag]
         steps:
             - uses: actions/checkout@v4
             - name: Setup Node.js
@@ -29,6 +40,7 @@ jobs:
               uses: vektor-inc/wp-actions/smoke-test@90f5a231bc956543bf235f36be4928d57af2edab
     php_unit:
         runs-on: ubuntu-latest
+        needs: [check_tag]
         strategy:
             matrix:
                 php-versions: ['8.1']
