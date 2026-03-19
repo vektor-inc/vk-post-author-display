@@ -11,6 +11,7 @@ ZIPBALL="${dist_dir}/${PLUGIN_NAME}.zip"
 
 [[ -e "${dist_dir}" ]] || mkdir "${dist_dir}"
 [[ -e "${ZIPBALL}" ]] && rm -r "${ZIPBALL}"
+[[ -e "${src_dir}" ]] && rm -rf "${src_dir}"
 
 rsync -av "${PLUGIN_DIR}/" "${src_dir}/" --exclude="dist/" --exclude-from='.distignore'
 

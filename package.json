@@ -12,7 +12,8 @@
     "sass": "sass --watch assets/_scss:assets/css",
     "sass:build": "sass --style=compressed --no-source-map assets/_scss:assets/css",
     "build": "gulp replace_text_domain && npm run sass:build",
-	"phpunit": "wp-env run tests-cli --env-cwd='wp-content/plugins/vk-post-author-display' vendor/bin/phpunit -c .phpunit.xml --verbose"
+    "phpunit": "wp-env run tests-cli --env-cwd='wp-content/plugins/vk-post-author-display' vendor/bin/phpunit -c .phpunit.xml --verbose",
+    "dist": "composer install --optimize-autoloader --prefer-dist --no-dev && npm run build && bash bin/dist.sh"
   },
   "repository": {
     "type": "git",
