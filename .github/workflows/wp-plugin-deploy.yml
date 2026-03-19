@@ -48,6 +48,8 @@ jobs:
                   node-version: 20.x
             - name: Install NPM Scripts
               run: npm install
+            - name: Install Composer Packages
+              run: composer install --optimize-autoloader --prefer-dist --no-dev
             - name: Download dist artifact
               uses: actions/download-artifact@v4
               with:
