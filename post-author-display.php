@@ -151,6 +151,9 @@ function pad_add_author( $content ) {
 /*-------------------------------------------*/
 add_action( 'wp_enqueue_scripts', 'pad_set_css' );
 function pad_set_css() {
+	$options = pad_get_plugin_options();
+	$css_load_scope = isset( $options['css_load_scope'] ) ? $options['css_load_scope'] : 'post_types_only';
+
 	$post_types = pad_display_post_types();
 
 	// Cope with use short code in page
@@ -166,7 +169,18 @@ function pad_set_css() {
 
 	$cssPath = apply_filters( 'pad-stylesheet', plugins_url( 'assets/css/vk-post-author.css', __FILE__ ) );
 
-	if ( is_singular( $post_types ) || is_author() ) {
+	// CSS loading logic
+	$should_load_css = false;
+
+	if ( $css_load_scope === 'all_pages' ) {
+		// Load CSS on all pages
+		$should_load_css = true;
+	} else {
+		// Default: Load CSS only on selected post types
+		$should_load_css = ( is_singular( $post_types ) || is_author() );
+	}
+
+	if ( $should_load_css ) {
 		wp_enqueue_style( 'set_vk_post_autor_css', $cssPath, false, VK_PAD_VERSION );
 	}
 }
@@ -186,6 +200,7 @@ function pad_get_default_options() {
 		'show_thumbnail'          => 'display',
 		'auto_display'            => 'yes',
 		'post_types'              => array( 'post' => 'true' ),
+		'css_load_scope'          => 'post_types_only',
 	);
 	return apply_filters( 'pad_default_options', $display_author_options );
 }
@@ -263,6 +278,11 @@ function pad_plugin_options_validate( $input ) {
 	$output['author_archive_link_txt'] = wp_kses_post( $input['author_archive_link_txt'] );
 	$output['show_thumbnail']          = esc_html( $input['show_thumbnail'] );
 	$output['auto_display']            = esc_html( $input['auto_display'] );
+	$allowed_css_load_scopes           = array( 'post_types_only', 'all_pages' );
+	$css_load_scope                    = isset( $input['css_load_scope'] ) ? sanitize_key( $input['css_load_scope'] ) : $defaults['css_load_scope'];
+	$output['css_load_scope']          = in_array( $css_load_scope, $allowed_css_load_scopes, true )
+		? $css_load_scope
+		: $defaults['css_load_scope'];
 	if ( function_exists( 'vk_sanitize_array' ) ) {
 		$output['post_types'] = vk_sanitize_array( $input['post_types'] );
 	} else {

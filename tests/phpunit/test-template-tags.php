@@ -58,4 +58,58 @@ class TemplateTagsTest extends WP_UnitTestCase {
 			// print 'correct   :' . $test_value['correct'] . PHP_EOL;
 		}
 	}
+
+	function test_pad_plugin_options_validate_css_load_scope() {
+
+		$default_input = array(
+			'author_box_title'        => 'Author Profile',
+			'author_box_title_tag'    => 'h4',
+			'author_picture_style'    => 'square',
+			'list_box_title'          => 'Latest entries',
+			'list_box_title_tag'      => 'h5',
+			'author_archive_link'     => 'hide',
+			'author_archive_link_txt' => 'Author Archives',
+			'show_thumbnail'          => 'display',
+			'auto_display'            => 'yes',
+			'post_types'              => array( 'post' => 'true' ),
+		);
+
+		$tests = array(
+			// デフォルト値のテスト
+			array(
+				'input'    => array_merge( $default_input, array( 'css_load_scope' => 'post_types_only' ) ),
+				'expected' => 'post_types_only',
+				'label'    => 'css_load_scope should be saved as post_types_only',
+			),
+			// all_pages 設定のテスト
+			array(
+				'input'    => array_merge( $default_input, array( 'css_load_scope' => 'all_pages' ) ),
+				'expected' => 'all_pages',
+				'label'    => 'css_load_scope should be saved as all_pages',
+			),
+			// 不正な値の場合は post_types_only にフォールバック
+			array(
+				'input'    => array_merge( $default_input, array( 'css_load_scope' => 'invalid_scope' ) ),
+				'expected' => 'post_types_only',
+				'label'    => 'css_load_scope falls back to post_types_only when given invalid value',
+			),
+			// キー未指定の場合は post_types_only にフォールバック
+			array(
+				'input'    => $default_input,
+				'expected' => 'post_types_only',
+				'label'    => 'css_load_scope falls back to post_types_only when key is omitted',
+			),
+		);
+
+		print PHP_EOL;
+		print '------------------------------------' . PHP_EOL;
+		print 'test_pad_plugin_options_validate_css_load_scope' . PHP_EOL;
+		print '------------------------------------' . PHP_EOL;
+
+		foreach ( $tests as $test ) {
+			$validated = pad_plugin_options_validate( $test['input'] );
+			$this->assertEquals( $test['expected'], $validated['css_load_scope'], $test['label'] );
+			print $test['label'] . ' ... OK' . PHP_EOL;
+		}
+	}
 }
