@@ -30,6 +30,7 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
+= 1.27.1 =
 [ Specification Change ] Add Requires PHP: 7.4
 
 = 1.27.0 =
