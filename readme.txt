@@ -4,6 +4,7 @@ Donate link:
 Tags: post,author
 Requires at least: 5.3
 Tested up to: 6.9
+Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,6 +29,8 @@ Display to Post Author Information Box on bottom of the contents.
 3. You can edit "Post author box title","Post list box title","Display post thumbnail image" and more...
 
 == Changelog ==
+
+[ Specification Change ] Add Requires PHP: 7.4
 
 = 1.27.0 =
 [ Add function ] Add option to load CSS when using shortcode on pages outside selected post types.
