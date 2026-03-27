@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/vektor-inc/vk-post-author-display#readme",
   "devDependencies": {
-    "@wordpress/env": "10.5.0",
+    "@wordpress/env": "10.39.0",
     "gulp": "^5.0.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-merge-media-queries": "^0.2.1",
