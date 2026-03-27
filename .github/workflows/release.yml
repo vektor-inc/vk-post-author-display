@@ -142,12 +142,12 @@ jobs:
                   (( n < 5 )) || exit 1
             - name: Check WordPress Version
               run: npm run wp-env run cli wp core version
-            - name: Set Permissions for Theme Directory
+            - name: Install Themes into dist layout
               run: |
-                  sudo mkdir -p tests/themes
-                  sudo chmod -R 777 tests/themes
-            - name: Install Themes
-              run: bash bin/install-theme.sh
+                  pushd "dist/${{ env.plugin_name }}"
+                  bash ../../bin/install-theme.sh
+                  sudo chmod -R 777 temp/themes
+                  popd
             - name: Start Environment
               run: WP_ENV_CORE=WordPress/WordPress#${{ matrix.wp-versions }} WP_ENV_PHP_VERSION=${{ matrix.php-versions }} npx wp-env start && sudo chmod -R 777 ~/wp-env
             - name: Run PHP Unit Test
