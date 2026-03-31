@@ -22,7 +22,12 @@ function pad_add_custom_field_user_view_group() {
 			__( 'Post Author Display', 'vk-post-author-display' ),
 			'pad_content_meta_fields',
 			$post_type,
-			'side'
+			'side',
+			'default',
+			array(
+				// WordPress 7.0 RTC compatibility flag / WordPress 7.0 RTC互換フラグ
+				'__back_compat_meta_box' => true,
+			)
 		);
 	}
 }
