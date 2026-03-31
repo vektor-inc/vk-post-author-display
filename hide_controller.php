@@ -26,7 +26,7 @@ function pad_add_custom_field_user_view_group() {
 			'default',
 			array(
 				// WordPress 7.0 RTC compatibility flag / WordPress 7.0 RTC互換フラグ
-				'__back_compat_meta_box' => true,
+				'__back_compat_meta_box' => false,
 			)
 		);
 	}
