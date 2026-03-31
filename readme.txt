@@ -31,7 +31,6 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
-= 1.27.2 =
 [ Specification Change ] Add back compat meta box flag for WordPress 7.0 RTC compatibility.
 
 = 1.27.1 =
