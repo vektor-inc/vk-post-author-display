@@ -34,7 +34,7 @@ class RegisterMetaTest extends WP_UnitTestCase {
 	 * Test that meta value can be saved and retrieved.
 	 */
 	public function test_meta_save_and_retrieve() {
-		$post_id = $this->factory->post->create();
+		$post_id = self::factory()->post->create();
 		update_post_meta( $post_id, 'pad_hide_post_author', 'true' );
 		$value = get_post_meta( $post_id, 'pad_hide_post_author', true );
 		$this->assertEquals( 'true', $value );
