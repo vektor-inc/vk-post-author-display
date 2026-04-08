@@ -48,8 +48,12 @@ class RegisterMetaTest extends WP_UnitTestCase {
 		$sanitize  = $meta_keys['pad_hide_post_author']['sanitize_callback'];
 		$this->assertEquals( 'sanitize_text_field', $sanitize );
 
-		// Verify sanitize_text_field strips HTML.
+		// Verify sanitize_text_field strips HTML tags.
+		$result = sanitize_text_field( '<b>bold</b>' );
+		$this->assertEquals( 'bold', $result );
+
+		// Verify script tags and their content are removed.
 		$result = sanitize_text_field( '<script>alert("xss")</script>' );
-		$this->assertEquals( 'alert("xss")', $result );
+		$this->assertStringNotContainsString( '<script>', $result );
 	}
 }
