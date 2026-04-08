@@ -31,7 +31,7 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
-[ Other ] Add back compat meta box flag for WordPress 7.0 RTC compatibility.
+[ Specification change ] Migrate meta box to block editor native sidebar panel for WordPress 7.0 RTC (Real-Time Collaboration) compatibility.
 
 = 1.27.1 =
 [ Specification Change ] Add Requires PHP: 7.4

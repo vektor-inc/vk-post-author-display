@@ -5,6 +5,7 @@ _scss/
 dist/
 tests/
 node_modules/
+src/
 .distignore
 .gitattributes
 .gitignore

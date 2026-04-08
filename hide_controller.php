@@ -16,6 +16,16 @@ function pad_add_custom_field_user_view_group() {
 
 	$post_types = pad_display_post_types();
 
+	// WordPress 7.0 RTC compatibility:
+	// ビルドファイルが存在する場合はネイティブサイドバーパネルで代替するため、
+	// レガシーメタボックスを非表示にする（__back_compat_meta_box => true）。
+	// ビルドファイルがない場合は従来通りメタボックスを表示する（フォールバック）。
+	$asset_path  = VK_PAD_DIR . 'build/index.asset.php';
+	$has_build   = file_exists( $asset_path );
+	$callback_args = $has_build
+		? array( '__back_compat_meta_box' => true )
+		: array();
+
 	foreach ( $post_types  as $post_type ) {
 		add_meta_box(
 			'post_author_display',
@@ -24,10 +34,7 @@ function pad_add_custom_field_user_view_group() {
 			$post_type,
 			'side',
 			'default',
-			array(
-				// WordPress 7.0 RTC compatibility flag / WordPress 7.0 RTC互換フラグ
-				'__back_compat_meta_box' => false,
-			)
+			$callback_args
 		);
 	}
 }

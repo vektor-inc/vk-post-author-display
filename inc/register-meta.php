@@ -1,0 +1,39 @@
+<?php
+/**
+ * Register post meta for REST API access.
+ * ブロックエディタからREST API経由でメタデータを読み書きするために登録する。
+ *
+ * @package vk-post-author-display
+ */
+
+/**
+ * Register pad_hide_post_author meta key for the REST API.
+ * pad_hide_post_author メタキーをREST APIに登録する。
+ *
+ * @return void
+ */
+function pad_register_post_meta() {
+	$post_types = pad_display_post_types();
+
+	if ( empty( $post_types ) || ! is_array( $post_types ) ) {
+		return;
+	}
+
+	foreach ( $post_types as $post_type ) {
+		register_post_meta(
+			$post_type,
+			'pad_hide_post_author',
+			array(
+				'type'              => 'string',
+				'description'       => 'Hide post author display flag / 著者表示非表示フラグ',
+				'single'            => true,
+				'sanitize_callback' => 'sanitize_text_field',
+				'show_in_rest'      => true,
+				'auth_callback'     => function () {
+					return current_user_can( 'edit_posts' );
+				},
+			)
+		);
+	}
+}
+add_action( 'init', 'pad_register_post_meta' );
