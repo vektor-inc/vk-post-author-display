@@ -16,6 +16,10 @@ function pad_add_custom_field_user_view_group() {
 
 	$post_types = pad_display_post_types();
 
+	if ( empty( $post_types ) || ! is_array( $post_types ) ) {
+		return;
+	}
+
 	// WordPress 7.0 RTC compatibility:
 	// ビルドファイルが存在する場合はネイティブサイドバーパネルで代替するため、
 	// レガシーメタボックスを非表示にする（__back_compat_meta_box => true）。
