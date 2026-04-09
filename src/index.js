@@ -20,6 +20,9 @@ const PadHidePanel = () => {
 		const editor = select( 'core/editor' );
 		return {
 			postType: editor.getCurrentPostType(),
+			// wp_localize_script で設定された対象投稿タイプ一覧。
+			// データが欠落した場合は空配列にフォールバックし、
+			// すべての投稿タイプでパネルを非表示にする（安全側に倒す）。
 			candidatePostTypes: window.padEditor?.postTypes || [],
 		};
 	}, [] );
@@ -30,6 +33,9 @@ const PadHidePanel = () => {
 		return null;
 	}
 
+	// メタ値は文字列 'true' / '' で管理する。
+	// register_post_meta で type: 'string' を指定しており、
+	// boolean にすると既存データ（レガシーメタボックス由来）との互換性が崩れるため。
 	const isHidden = meta?.pad_hide_post_author === 'true';
 
 	return (

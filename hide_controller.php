@@ -24,7 +24,8 @@ function pad_add_custom_field_user_view_group() {
 	// ビルドファイルが存在する場合はネイティブサイドバーパネルで代替するため、
 	// レガシーメタボックスを非表示にする（__back_compat_meta_box => true）。
 	// ビルドファイルがない場合は従来通りメタボックスを表示する（フォールバック）。
-	$asset_path  = VK_PAD_DIR . 'build/index.asset.php';
+	$base_dir    = defined( 'VK_PAD_DIR' ) ? VK_PAD_DIR : plugin_dir_path( __FILE__ );
+	$asset_path  = $base_dir . 'build/index.asset.php';
 	$has_build   = file_exists( $asset_path );
 	$callback_args = $has_build
 		? array( '__back_compat_meta_box' => true )
