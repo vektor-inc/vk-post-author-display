@@ -41,23 +41,24 @@ class RegisterMetaTest extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Test that sanitize_callback strips dangerous content.
-	 * sanitize_callback が危険なコンテンツを除去することを確認する。
+	 * Test that sanitize_callback only allows 'true' or empty string.
+	 * sanitize_callback が 'true' / '' のみを許可することを確認する。
 	 */
 	public function test_pad_meta_sanitize() {
 		$meta_keys = get_registered_meta_keys( 'post', 'post' );
 		$sanitize  = $meta_keys['pad_hide_post_author']['sanitize_callback'];
-		$this->assertEquals( 'sanitize_text_field', $sanitize );
+		$this->assertIsCallable( $sanitize );
 
-		// Verify sanitize_text_field strips HTML tags.
-		// sanitize_text_field が HTML タグを除去することを確認する。
-		$result = sanitize_text_field( '<b>bold</b>' );
-		$this->assertEquals( 'bold', $result );
+		// 'true' はそのまま返る。
+		$this->assertEquals( 'true', call_user_func( $sanitize, 'true' ) );
 
-		// Verify script tags and their content are removed.
-		// script タグとその内容が除去されることを確認する。
-		$result = sanitize_text_field( '<script>alert("xss")</script>' );
-		$this->assertStringNotContainsString( '<script>', $result );
+		// 空文字はそのまま返る。
+		$this->assertEquals( '', call_user_func( $sanitize, '' ) );
+
+		// 'true' 以外の文字列は空文字に正規化される。
+		$this->assertEquals( '', call_user_func( $sanitize, 'false' ) );
+		$this->assertEquals( '', call_user_func( $sanitize, 'yes' ) );
+		$this->assertEquals( '', call_user_func( $sanitize, '<script>alert("xss")</script>' ) );
 	}
 
 	/**
@@ -67,11 +68,11 @@ class RegisterMetaTest extends WP_UnitTestCase {
 	public function test_pad_meta_sanitize_through_pipeline() {
 		$post_id = self::factory()->post->create();
 
-		// update_post_meta 経由で危険な値を保存し、
-		// register_post_meta の sanitize_callback が適用されることを確認する。
+		// update_post_meta 経由で不正な値を保存し、
+		// register_post_meta の sanitize_callback で空文字に正規化されることを確認する。
 		update_post_meta( $post_id, 'pad_hide_post_author', '<script>alert("xss")</script>' );
 		$value = get_post_meta( $post_id, 'pad_hide_post_author', true );
-		$this->assertStringNotContainsString( '<script>', $value );
+		$this->assertEmpty( $value );
 
 		// 正常値 'true' がそのまま保存されることを確認する。
 		update_post_meta( $post_id, 'pad_hide_post_author', 'true' );

@@ -27,7 +27,12 @@ function pad_register_post_meta() {
 				'type'              => 'string',
 				'description'       => 'Hide post author display flag / 著者表示非表示フラグ',
 				'single'            => true,
-				'sanitize_callback' => 'sanitize_text_field',
+				'sanitize_callback' => function ( $value ) {
+					// フラグ用途のため 'true' / '' のみ許可する。
+					// sanitize_text_field だと任意文字列が残り、
+					// truthiness 判定で意図しない非表示が起きうる。
+					return ( 'true' === (string) $value ) ? 'true' : '';
+				},
 				'show_in_rest'      => true,
 				'auth_callback'     => function ( $allowed, $meta_key, $post_id ) {
 					return current_user_can( 'edit_post', $post_id );
