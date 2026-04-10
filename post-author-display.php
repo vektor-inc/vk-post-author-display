@@ -83,7 +83,42 @@ require_once VK_PAD_DIR . 'admin/admin.php';
 require_once VK_PAD_DIR . 'admin/admin-profile.php';
 require_once VK_PAD_DIR . 'view.post-author.php';
 new Vk_Post_Author_Box();
+require_once VK_PAD_DIR . 'inc/register-meta.php';
 require_once VK_PAD_DIR . 'hide_controller.php';
+
+/**
+ * Enqueue block editor assets for the native sidebar panel.
+ * ブロックエディタ用ネイティブサイドバーパネルのアセットを読み込む。
+ *
+ * @return void
+ */
+function pad_enqueue_block_editor_assets() {
+	$asset_path = VK_PAD_DIR . 'build/index.asset.php';
+	if ( ! file_exists( $asset_path ) ) {
+		return;
+	}
+
+	$asset_file = include $asset_path;
+
+	wp_enqueue_script(
+		'pad-editor-panel',
+		VK_PAD_URL . 'build/index.js',
+		$asset_file['dependencies'],
+		$asset_file['version'],
+		true
+	);
+
+	wp_localize_script(
+		'pad-editor-panel',
+		'padEditor',
+		array(
+			'postTypes' => array_values( pad_display_post_types() ),
+		)
+	);
+
+	wp_set_script_translations( 'pad-editor-panel', 'vk-post-author-display' );
+}
+add_action( 'enqueue_block_editor_assets', 'pad_enqueue_block_editor_assets' );
 
 // Add a link to this plugin's settings page
 function pad_set_plugin_meta( $links ) {

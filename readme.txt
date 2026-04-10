@@ -31,6 +31,8 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
+[ Specification change ] Migrate meta box to block editor native sidebar panel for WordPress 7.0 RTC (Real-Time Collaboration) compatibility.
+
 = 1.27.1 =
 [ Specification Change ] Add Requires PHP: 7.4
 
