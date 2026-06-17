@@ -31,6 +31,9 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
+[ Bug fix ] Fix an issue on the settings screen where admin styles and scripts were sometimes not applied after an update due to caching.
+[ Bug fix ] Fix the left side navigation being cut off on the settings screen while a notice was displayed.
+
 [ Specification change ] Migrate meta box to block editor native sidebar panel for WordPress 7.0 RTC (Real-Time Collaboration) compatibility.
 
 = 1.27.1 =
