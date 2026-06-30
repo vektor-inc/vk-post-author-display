@@ -31,8 +31,6 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
-[ Spec Change ] Update vektor-inc/font-awesome-versions from 0.7.2 to 0.7.4
-
 [ Bug fix ] Fix an issue on the settings screen where admin styles and scripts were sometimes not applied after an update due to caching.
 [ Bug fix ] Fix the left side navigation being cut off on the settings screen while a notice was displayed.
 
