@@ -34,6 +34,18 @@ function pad_sns_array() {
 			'name'       => __( 'LinkedIn', 'vk-post-author-display' ),
 			'icon_class' => 'fa-brands fa-linkedin',
 		),
+		'github'    => array(
+			'name'       => __( 'GitHub', 'vk-post-author-display' ),
+			'icon_class' => 'fa-brands fa-square-github',
+		),
+		'bluesky'   => array(
+			'name'       => __( 'Bluesky', 'vk-post-author-display' ),
+			'icon_class' => 'fa-brands fa-square-bluesky',
+		),
+		'threads'   => array(
+			'name'       => __( 'Threads', 'vk-post-author-display' ),
+			'icon_class' => 'fa-brands fa-square-threads',
+		),
 		'wordpress' => array(
 			'name'       => __( 'WordPress', 'vk-post-author-display' ),
 			'icon_class' => 'fa-brands fa-wordpress',
