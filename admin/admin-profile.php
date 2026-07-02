@@ -18,6 +18,10 @@ function pad_sns_array() {
 			'name'       => __( 'X', 'vk-post-author-display' ),
 			'icon_class' => 'fa-brands fa-square-x-twitter',
 		),
+		'bluesky'   => array(
+			'name'       => __( 'Bluesky', 'vk-post-author-display' ),
+			'icon_class' => 'fa-brands fa-square-bluesky',
+		),
 		'facebook'  => array(
 			'name'       => __( 'Facebook', 'vk-post-author-display' ),
 			'icon_class' => 'fa-brands fa-square-facebook',
@@ -26,6 +30,10 @@ function pad_sns_array() {
 			'name'       => __( 'Instagram', 'vk-post-author-display' ),
 			'icon_class' => 'fa-brands fa-square-instagram',
 		),
+		'threads'   => array(
+			'name'       => __( 'Threads', 'vk-post-author-display' ),
+			'icon_class' => 'fa-brands fa-square-threads',
+		),
 		'youtube'   => array(
 			'name'       => __( 'YouTube', 'vk-post-author-display' ),
 			'icon_class' => 'fa-brands fa-square-youtube',
@@ -33,6 +41,10 @@ function pad_sns_array() {
 		'linkedin'  => array(
 			'name'       => __( 'LinkedIn', 'vk-post-author-display' ),
 			'icon_class' => 'fa-brands fa-linkedin',
+		),
+		'github'    => array(
+			'name'       => __( 'GitHub', 'vk-post-author-display' ),
+			'icon_class' => 'fa-brands fa-square-github',
 		),
 		'wordpress' => array(
 			'name'       => __( 'WordPress', 'vk-post-author-display' ),
