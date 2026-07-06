@@ -31,6 +31,8 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
+[ Bug fix ] Fix an issue where the pad-editor-panel script was loaded on the widget editing screen, causing a PHP notice about wp-editor.
+
 [ New Feature ] Add GitHub, Bluesky and Threads social icons.
 
 [ Spec Change ] Update vektor-inc/font-awesome-versions from 0.7.2 to 0.7.4

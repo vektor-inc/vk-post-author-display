@@ -90,9 +90,19 @@ require_once VK_PAD_DIR . 'hide_controller.php';
  * Enqueue block editor assets for the native sidebar panel.
  * ブロックエディタ用ネイティブサイドバーパネルのアセットを読み込む。
  *
+ * 投稿タイプのあるブロックエディター画面（投稿・固定ページ等）でのみ実行する。
+ * ウィジェット編集画面（widgets.php）では wp-editor スクリプトをエンキューすると
+ * PHP notice が発生するため、post_type が空の場合は早期リターンする。
+ *
  * @return void
  */
 function pad_enqueue_block_editor_assets() {
+	// ウィジェット編集画面（wp-edit-widgets / wp-customize-widgets）では実行しない。
+	$screen = get_current_screen();
+	if ( ! $screen || ! $screen->is_block_editor || empty( $screen->post_type ) ) {
+		return;
+	}
+
 	$asset_path = VK_PAD_DIR . 'build/index.asset.php';
 	if ( ! file_exists( $asset_path ) ) {
 		return;
