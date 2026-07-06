@@ -12,6 +12,52 @@
 class EnqueueGuardTest extends WP_UnitTestCase {
 
 	/**
+	 * Saved current_screen value restored after each test.
+	 *
+	 * @var WP_Screen|null
+	 */
+	private $_original_screen;
+
+	/**
+	 * Save the original current_screen before each test.
+	 *
+	 * @return void
+	 */
+	public function setUp(): void {
+		parent::setUp();
+		$this->_original_screen = isset( $GLOBALS['current_screen'] )
+			? $GLOBALS['current_screen']
+			: null;
+	}
+
+	/**
+	 * Restore current_screen and dequeue test scripts after each test.
+	 *
+	 * @return void
+	 */
+	public function tearDown(): void {
+		$GLOBALS['current_screen'] = $this->_original_screen;
+		wp_dequeue_script( 'pad-editor-panel' );
+		wp_deregister_script( 'pad-editor-panel' );
+		parent::tearDown();
+	}
+
+	/**
+	 * Is_block_editor が true かつ post_type がある時に script がエンキューされる。
+	 * Enqueues script when is_block_editor is true and post_type is set.
+	 *
+	 * @return void
+	 */
+	public function test_pad_enqueue_happy_path() {
+		$screen                    = WP_Screen::get( 'post' );
+		$screen->is_block_editor   = true;
+		$screen->post_type         = 'post';
+		$GLOBALS['current_screen'] = $screen;
+		pad_enqueue_block_editor_assets();
+		$this->assertTrue( wp_script_is( 'pad-editor-panel', 'enqueued' ) );
+	}
+
+	/**
 	 * Current_screen が null の時は何もエンキューしない。
 	 * Does nothing when current_screen is null.
 	 *
@@ -35,7 +81,6 @@ class EnqueueGuardTest extends WP_UnitTestCase {
 		$GLOBALS['current_screen'] = $screen;
 		pad_enqueue_block_editor_assets();
 		$this->assertFalse( wp_script_is( 'pad-editor-panel', 'enqueued' ) );
-		$GLOBALS['current_screen'] = null;
 	}
 
 	/**
@@ -50,6 +95,5 @@ class EnqueueGuardTest extends WP_UnitTestCase {
 		$GLOBALS['current_screen'] = $screen;
 		pad_enqueue_block_editor_assets();
 		$this->assertFalse( wp_script_is( 'pad-editor-panel', 'enqueued' ) );
-		$GLOBALS['current_screen'] = null;
 	}
 }
