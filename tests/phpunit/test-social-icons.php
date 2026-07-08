@@ -112,10 +112,48 @@ class SocialIconsTest extends WP_UnitTestCase {
 				'expected_present'    => true,
 			),
 			array(
+				// Accessibility: each link must carry an aria-label with the SNS name (WCAG 2.4.4).
+				// アクセシビリティ：各リンクに SNS 名の aria-label が付与される（WCAG 2.4.4 対応）。
+				'test_condition_name' => 'github リンクに aria-label="GitHub" が付与される',
+				'needle'              => 'aria-label="GitHub"',
+				'expected_present'    => true,
+			),
+			array(
+				'test_condition_name' => 'bluesky リンクに aria-label="Bluesky" が付与される',
+				'needle'              => 'aria-label="Bluesky"',
+				'expected_present'    => true,
+			),
+			array(
+				'test_condition_name' => 'threads リンクに aria-label="Threads" が付与される',
+				'needle'              => 'aria-label="Threads"',
+				'expected_present'    => true,
+			),
+			array(
+				// Security: target="_blank" links must carry rel="noopener noreferrer" ( tabnabbing 対策 ).
+				// セキュリティ：target="_blank" のリンクに rel="noopener noreferrer" が付与される（ タブナビング対策 ）。
+				'test_condition_name' => 'リンクに rel="noopener noreferrer" が付与される',
+				'needle'              => 'rel="noopener noreferrer"',
+				'expected_present'    => true,
+			),
+			array(
+				// Accessibility: decorative icon must be hidden from screen readers.
+				// アクセシビリティ：装飾アイコンはスクリーンリーダーから隠す。
+				'test_condition_name' => '装飾アイコン i 要素に aria-hidden="true" が付与される',
+				'needle'              => 'aria-hidden="true"',
+				'expected_present'    => true,
+			),
+			array(
 				// Boundary: SNS without a URL must not render a link.
 				// 境界値：URL 未設定の SNS はリンクが出力されない。
 				'test_condition_name' => 'URL 未設定の facebook アイコンは出力されない',
 				'needle'              => 'fa-square-facebook',
+				'expected_present'    => false,
+			),
+			array(
+				// Boundary: an unset SNS name must not appear as an aria-label.
+				// 境界値：未設定 SNS の名前は aria-label として出力されない。
+				'test_condition_name' => 'URL 未設定の facebook の aria-label="Facebook" は出力されない',
+				'needle'              => 'aria-label="Facebook"',
 				'expected_present'    => false,
 			),
 		);

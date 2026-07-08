@@ -31,6 +31,8 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
+[ Bug fix ] Add aria-label and rel="noopener noreferrer" to social icon links so screen readers can identify each link (WCAG 2.1 AA 2.4.4).
+
 [ Bug fix ] Fix an issue where the pad-editor-panel script was loaded on the widget editing screen, causing a PHP notice about wp-editor.
 
 [ New Feature ] Add GitHub, Bluesky and Threads social icons.
