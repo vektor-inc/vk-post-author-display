@@ -57,7 +57,7 @@ jobs:
                   path: dist/
             - name: Setup wp-env override for dist
               run: |
-                  echo '{"plugins":["./dist/${{ env.plugin_name }}"]}' > wp-env.override.json
+                  echo '{"plugins":["./dist/${{ env.plugin_name }}"]}' > .wp-env.override.json
             - name: Start wp-env
               run: |
                   n=0
@@ -126,10 +126,10 @@ jobs:
                     [ -f "$f" ] && cp "$f" "dist/${{ env.plugin_name }}/$f" || true
                   done
                   [ -d tests ] && cp -r tests "dist/${{ env.plugin_name }}/tests" || true
-            - name: Create wp-env.override.json for dist
+            - name: Create .wp-env.override.json for dist
               run: |
-                  printf '{"plugins": ["./dist/%s"]}' "${{ env.plugin_name }}" > wp-env.override.json
-            - name: Install several WordPress version by wp-env.override.json
+                  printf '{"plugins": ["./dist/%s"]}' "${{ env.plugin_name }}" > .wp-env.override.json
+            - name: Install several WordPress version by .wp-env.override.json
               run: |
                   n=0
                   until (( n >= 5 ))
