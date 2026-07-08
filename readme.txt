@@ -5,7 +5,7 @@ Tags: post,author
 Requires at least: 5.3
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.27.1
+Stable tag: 1.28.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,18 +31,14 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
-[ Bug fix ] Add aria-label and rel="noopener noreferrer" to social icon links so screen readers can identify each link (WCAG 2.1 AA 2.4.4).
-
-[ Bug fix ] Fix an issue where the pad-editor-panel script was loaded on the widget editing screen, causing a PHP notice about wp-editor.
-
+= 1.28.0 =
 [ New Feature ] Add GitHub, Bluesky and Threads social icons.
-
 [ Spec Change ] Update vektor-inc/font-awesome-versions from 0.7.2 to 0.7.5
-
-[ Bug fix ] Fix an issue on the settings screen where admin styles and scripts were sometimes not applied after an update due to caching.
-[ Bug fix ] Fix the left side navigation being cut off on the settings screen while a notice was displayed.
-
-[ Specification change ] Migrate meta box to block editor native sidebar panel for WordPress 7.0 RTC (Real-Time Collaboration) compatibility.
+[ Spec Change ] Migrate meta box to block editor native sidebar panel for WordPress 7.0 RTC (Real-Time Collaboration) compatibility.
+[ Bug Fix ] Add aria-label and rel="noopener noreferrer" to social icon links so screen readers can identify each link (WCAG 2.1 AA 2.4.4).
+[ Bug Fix ] Fix an issue where the pad-editor-panel script was loaded on the widget editing screen, causing a PHP notice about wp-editor.
+[ Bug Fix ] Fix an issue on the settings screen where admin styles and scripts were sometimes not applied after an update due to caching.
+[ Bug Fix ] Fix the left side navigation being cut off on the settings screen while a notice was displayed.
 
 = 1.27.1 =
 [ Specification Change ] Add Requires PHP: 7.4
