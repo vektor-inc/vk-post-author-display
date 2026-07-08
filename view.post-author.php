@@ -105,6 +105,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 				} // if ( $key == 'twitter' ){
 
 				if ( $sns_url ) {
+					// アイコンのみのリンクに aria-label でアクセシブルネームを付与し、装飾アイコンは aria-hidden で読み上げを抑制（WCAG 2.4.4 対応）。target="_blank" にはタブナビング対策として rel="noopener noreferrer" を付与.
 					$sns_icons .= '<li class="pad_' . $key . '"><a href="' . esc_url( $sns_url ) . '" target="_blank" rel="noopener noreferrer" aria-label="' . esc_attr( $value['name'] ) . '" class="' . $key . '"><i class="' . esc_attr( $value['icon_class'] ) . '" aria-hidden="true"></i></a></li>';
 				}
 			}
