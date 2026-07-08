@@ -105,8 +105,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 				} // if ( $key == 'twitter' ){
 
 				if ( $sns_url ) {
-					$sns_icons .= '<li class="pad_' . $key . '"><a href="' . esc_url( $sns_url ) . '" target
-					="_blank" class="' . $key . '"><i class="' . esc_attr( $value['icon_class'] ) . '"></i></a></li>';
+					$sns_icons .= '<li class="pad_' . $key . '"><a href="' . esc_url( $sns_url ) . '" target="_blank" rel="noopener noreferrer" aria-label="' . esc_attr( $value['name'] ) . '" class="' . $key . '"><i class="' . esc_attr( $value['icon_class'] ) . '" aria-hidden="true"></i></a></li>';
 				}
 			}
 
