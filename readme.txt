@@ -31,6 +31,8 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
+[ Bug Fix ] Fix excessive spacing between social icons caused by the Lightning theme's global icon margin being added on top of the plugin's own margin.
+
 = 1.28.0 =
 [ New Feature ] Add GitHub, Bluesky and Threads social icons.
 [ Spec Change ] Update vektor-inc/font-awesome-versions from 0.7.2 to 0.7.5
