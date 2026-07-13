@@ -89,6 +89,7 @@ ul.sns_icons {
 		display: inline;
 		font-size: 28px;
 		margin-right: 10px;
+
 		// Reset the theme's global `i { margin-right: .4em; }` (e.g. Lightning), which stacks
 		// with the `li` margin-right above; scoped to this plugin's markup only.
 		// Lightningテーマ等の `i { margin-right: .4em; }` が上の li の margin-right と加算されるため、
