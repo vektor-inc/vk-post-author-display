@@ -31,7 +31,7 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
-[ Spec Change ] Update vektor-inc/font-awesome-versions from 0.7.5 to 0.7.6
+[ Bug Fix ] Update vektor-inc/font-awesome-versions from 0.7.5 to 0.7.6, fixing Font Awesome icons not displaying in some server environments (e.g. AWS Bitnami)
 
 = 1.28.1 =
 [ Bug Fix ] Fix "Array to string conversion" and undefined REQUEST_URI warnings from the shared template tag functions when running under WP-CLI/cron or together with VK All in One Expansion Unit.
