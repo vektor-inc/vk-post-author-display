@@ -31,6 +31,8 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
+[ Spec Change ] Update vektor-inc/font-awesome-versions from 0.7.5 to 0.7.6
+
 = 1.28.1 =
 [ Bug Fix ] Fix "Array to string conversion" and undefined REQUEST_URI warnings from the shared template tag functions when running under WP-CLI/cron or together with VK All in One Expansion Unit.
 [ Bug Fix ] Fix a fatal error that could occur when this plugin and VK All in One Expansion Unit bundle different versions of the shared template tag package.
