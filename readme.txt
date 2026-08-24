@@ -32,7 +32,7 @@ Display to Post Author Information Box on bottom of the contents.
 == Changelog ==
 
 [ Bug Fix ] Fix "Array to string conversion" and undefined REQUEST_URI warnings from the shared template tag functions when running under WP-CLI/cron or together with VK All in One Expansion Unit.
-
+[ Bug Fix ] Fix a fatal error that could occur when this plugin and VK All in One Expansion Unit bundle different versions of the shared template tag package.
 [ Design Bug Fix ] Fix excessive spacing between social icons caused by the Lightning theme's global icon margin being added on top of the plugin's own margin.
 
 = 1.28.0 =

@@ -68,14 +68,20 @@ class TemplateTagsTest extends WP_UnitTestCase {
 	 * （Issue #158 / vk-all-in-one-expansion-unit#1375 相当の修正）。
 	 */
 	function test_vk_get_post_type() {
+		// go_to() で書き換えられる前に、変更前の $_SERVER['REQUEST_URI'] を退避する。
+		$original_request_uri = isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : null;
+
 		// フロントページに移動して $wp_query を用意する。
 		$this->go_to( home_url( '/' ) );
 
 		global $wp_query;
 
 		// テスト後に復元するため、変更前の値を退避する。
-		$original_request_uri         = isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : null;
 		$original_post_type_query_var = isset( $wp_query->query_vars['post_type'] ) ? $wp_query->query_vars['post_type'] : null;
+		// go_to() が WP::register_globals() でセットするグローバル $post（既定の「Hello world!」投稿等）を退避する。
+		// これが残っていると get_post_type() が常に 'post' を返してしまい、
+		// post_type クエリ変数を使う分岐（配列正規化の分岐）に一度も入らないため、明示的に空にする必要がある。
+		$original_global_post = isset( $GLOBALS['post'] ) ? $GLOBALS['post'] : null;
 
 		$test_cases = array(
 			array(
@@ -83,18 +89,23 @@ class TemplateTagsTest extends WP_UnitTestCase {
 				'request_uri'         => '/',
 				'unset_request_uri'   => false,
 				'post_type_query_var' => null,
+				'clear_global_post'   => false,
 			),
 			array(
 				'test_condition_name' => 'REQUEST_URI が未設定（WP-CLI / cron 相当）=> Undefined array key / strpos(null) を出さず slug を含む配列を返す（境界値）',
 				'request_uri'         => null,
 				'unset_request_uri'   => true,
 				'post_type_query_var' => null,
+				'clear_global_post'   => false,
 			),
 			array(
 				'test_condition_name' => 'メインクエリの post_type が配列で指定された場合（pre_get_posts で array( "event", "page" ) を set 相当）=> Array to string conversion 警告を出さず先頭要素を文字列化した slug を返す（異常系）',
 				'request_uri'         => '/',
 				'unset_request_uri'   => false,
 				'post_type_query_var' => array( 'event', 'page' ),
+				// グローバル $post が残っていると get_post_type() が 'post' を返し、
+				// 配列正規化の分岐に到達できないため、このケースでは明示的に空にする。
+				'clear_global_post'   => true,
 			),
 		);
 
@@ -106,10 +117,18 @@ class TemplateTagsTest extends WP_UnitTestCase {
 					$_SERVER['REQUEST_URI'] = $case['request_uri'];
 				}
 
+				$GLOBALS['post'] = $case['clear_global_post'] ? null : $original_global_post;
+
 				if ( null !== $case['post_type_query_var'] ) {
 					$wp_query->query_vars['post_type'] = $case['post_type_query_var'];
 				} else {
 					unset( $wp_query->query_vars['post_type'] );
+				}
+
+				if ( $case['clear_global_post'] ) {
+					// 配列正規化の分岐（post_type クエリ変数を使う分岐）に実際に入ることを担保するため、
+					// その前提となる get_post_type() === false をここで確認しておく。
+					$this->assertFalse( get_post_type(), $case['test_condition_name'] );
 				}
 
 				$actual = vk_get_post_type();
@@ -123,7 +142,7 @@ class TemplateTagsTest extends WP_UnitTestCase {
 				}
 			}
 		} finally {
-			// アサーション失敗（例外）時も含め、$_SERVER と $wp_query を必ず復元して後続テストへの影響を防ぐ。
+			// アサーション失敗（例外）時も含め、$_SERVER・$wp_query・グローバル $post を必ず復元して後続テストへの影響を防ぐ。
 			if ( null !== $original_request_uri ) {
 				$_SERVER['REQUEST_URI'] = $original_request_uri;
 			} else {
@@ -135,6 +154,8 @@ class TemplateTagsTest extends WP_UnitTestCase {
 			} else {
 				unset( $wp_query->query_vars['post_type'] );
 			}
+
+			$GLOBALS['post'] = $original_global_post;
 		}
 	}
 
@@ -147,11 +168,11 @@ class TemplateTagsTest extends WP_UnitTestCase {
 		$tests = array(
 			array(
 				'test_condition_name' => '配列を渡した場合 => 各値が wp_kses_post でサニタイズされた配列を返す（正常系）',
-				'input'                => array(
+				'input'               => array(
 					'post' => 'true',
 					'info' => '<script>alert(1)</script>true',
 				),
-				'expected'             => array(
+				'expected'            => array(
 					'post' => 'true',
 					// wp_kses_post() は script タグ自体を除去するが、タグの中身のテキストは残す仕様。
 					'info' => 'alert(1)true',
@@ -159,18 +180,18 @@ class TemplateTagsTest extends WP_UnitTestCase {
 			),
 			array(
 				'test_condition_name' => '空配列を渡した場合 => 空配列を返す（正常系）',
-				'input'                => array(),
-				'expected'             => array(),
+				'input'               => array(),
+				'expected'            => array(),
 			),
 			array(
 				'test_condition_name' => '配列以外（文字列）を渡した場合 => Undefined variable $return 警告を出さず空配列を返す（異常系）',
-				'input'                => 'not-an-array',
-				'expected'             => array(),
+				'input'               => 'not-an-array',
+				'expected'            => array(),
 			),
 			array(
 				'test_condition_name' => '配列以外（null）を渡した場合 => Undefined variable $return 警告を出さず空配列を返す（境界値）',
-				'input'                => null,
-				'expected'             => array(),
+				'input'               => null,
+				'expected'            => array(),
 			),
 		);
 
