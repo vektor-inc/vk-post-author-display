@@ -59,6 +59,127 @@ class TemplateTagsTest extends WP_UnitTestCase {
 		}
 	}
 
+	/**
+	 * vk_get_post_type() は $_SERVER['REQUEST_URI'] が未設定（WP-CLI / cron 相当）でも
+	 * Undefined array key / strpos(null) の警告を出さず、slug を含む配列を返すことを確認する。
+	 * また、メインクエリの post_type が配列で指定された場合（pre_get_posts で
+	 * array( 'event', 'page' ) 等を set するケース）に "Array to string conversion" の
+	 * 警告を出さず、先頭要素を文字列化した slug を返すことも確認する
+	 * （Issue #158 / vk-all-in-one-expansion-unit#1375 相当の修正）。
+	 */
+	function test_vk_get_post_type() {
+		// フロントページに移動して $wp_query を用意する。
+		$this->go_to( home_url( '/' ) );
+
+		global $wp_query;
+
+		// テスト後に復元するため、変更前の値を退避する。
+		$original_request_uri         = isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : null;
+		$original_post_type_query_var = isset( $wp_query->query_vars['post_type'] ) ? $wp_query->query_vars['post_type'] : null;
+
+		$test_cases = array(
+			array(
+				'test_condition_name' => 'REQUEST_URI が通常どおり設定されている場合 => slug を含む配列を返す（正常系）',
+				'request_uri'         => '/',
+				'unset_request_uri'   => false,
+				'post_type_query_var' => null,
+			),
+			array(
+				'test_condition_name' => 'REQUEST_URI が未設定（WP-CLI / cron 相当）=> Undefined array key / strpos(null) を出さず slug を含む配列を返す（境界値）',
+				'request_uri'         => null,
+				'unset_request_uri'   => true,
+				'post_type_query_var' => null,
+			),
+			array(
+				'test_condition_name' => 'メインクエリの post_type が配列で指定された場合（pre_get_posts で array( "event", "page" ) を set 相当）=> Array to string conversion 警告を出さず先頭要素を文字列化した slug を返す（異常系）',
+				'request_uri'         => '/',
+				'unset_request_uri'   => false,
+				'post_type_query_var' => array( 'event', 'page' ),
+			),
+		);
+
+		try {
+			foreach ( $test_cases as $case ) {
+				if ( $case['unset_request_uri'] ) {
+					unset( $_SERVER['REQUEST_URI'] );
+				} else {
+					$_SERVER['REQUEST_URI'] = $case['request_uri'];
+				}
+
+				if ( null !== $case['post_type_query_var'] ) {
+					$wp_query->query_vars['post_type'] = $case['post_type_query_var'];
+				} else {
+					unset( $wp_query->query_vars['post_type'] );
+				}
+
+				$actual = vk_get_post_type();
+
+				$this->assertIsArray( $actual, $case['test_condition_name'] );
+				$this->assertArrayHasKey( 'slug', $actual, $case['test_condition_name'] );
+				$this->assertIsString( $actual['slug'], $case['test_condition_name'] );
+
+				if ( is_array( $case['post_type_query_var'] ) ) {
+					$this->assertSame( reset( $case['post_type_query_var'] ), $actual['slug'], $case['test_condition_name'] );
+				}
+			}
+		} finally {
+			// アサーション失敗（例外）時も含め、$_SERVER と $wp_query を必ず復元して後続テストへの影響を防ぐ。
+			if ( null !== $original_request_uri ) {
+				$_SERVER['REQUEST_URI'] = $original_request_uri;
+			} else {
+				unset( $_SERVER['REQUEST_URI'] );
+			}
+
+			if ( null !== $original_post_type_query_var ) {
+				$wp_query->query_vars['post_type'] = $original_post_type_query_var;
+			} else {
+				unset( $wp_query->query_vars['post_type'] );
+			}
+		}
+	}
+
+	/**
+	 * vk_sanitize_array() は配列以外が渡された場合でも「Undefined variable $return」の
+	 * 警告を出さず、空配列を返すことを確認する。
+	 */
+	function test_vk_sanitize_array() {
+
+		$tests = array(
+			array(
+				'test_condition_name' => '配列を渡した場合 => 各値が wp_kses_post でサニタイズされた配列を返す（正常系）',
+				'input'                => array(
+					'post' => 'true',
+					'info' => '<script>alert(1)</script>true',
+				),
+				'expected'             => array(
+					'post' => 'true',
+					// wp_kses_post() は script タグ自体を除去するが、タグの中身のテキストは残す仕様。
+					'info' => 'alert(1)true',
+				),
+			),
+			array(
+				'test_condition_name' => '空配列を渡した場合 => 空配列を返す（正常系）',
+				'input'                => array(),
+				'expected'             => array(),
+			),
+			array(
+				'test_condition_name' => '配列以外（文字列）を渡した場合 => Undefined variable $return 警告を出さず空配列を返す（異常系）',
+				'input'                => 'not-an-array',
+				'expected'             => array(),
+			),
+			array(
+				'test_condition_name' => '配列以外（null）を渡した場合 => Undefined variable $return 警告を出さず空配列を返す（境界値）',
+				'input'                => null,
+				'expected'             => array(),
+			),
+		);
+
+		foreach ( $tests as $test_value ) {
+			$actual = vk_sanitize_array( $test_value['input'] );
+			$this->assertSame( $test_value['expected'], $actual, $test_value['test_condition_name'] );
+		}
+	}
+
 	function test_pad_plugin_options_validate_css_load_scope() {
 
 		$default_input = array(

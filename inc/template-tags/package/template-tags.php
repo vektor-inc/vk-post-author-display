@@ -61,7 +61,9 @@ if ( ! function_exists( 'vk_get_post_type' ) ) {
 
 		$postType = array();
 
-		$url = $_SERVER['REQUEST_URI'];
+		// WP-CLI / cron 等では REQUEST_URI が未設定になり得るため、strpos() に null が渡らないよう既定値を与える。
+		// REQUEST_URI can be unset under WP-CLI / cron, so default it to avoid passing null to strpos().
+		$url = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
 
 		// 管理画面の投稿タイプ
 		// ※ phpunitで is_admin()判定が効かない場合のため strpos( $url, 'wp-admin' ) を使用
@@ -90,6 +92,16 @@ if ( ! function_exists( 'vk_get_post_type' ) ) {
 			if ( isset( $wp_query->query_vars['post_type'] ) && $wp_query->query_vars['post_type'] ) {
 
 				$postType['slug'] = $wp_query->query_vars['post_type'];
+
+				// メインクエリに post_type を配列で指定した場合（例: pre_get_posts で array( 'event', 'page' ) を set）への対策.
+				// slug は文字列前提で利用されるため、配列の場合は先頭要素を採用して文字列に正規化する.
+				// これをしないと後続の 'post-type-' . $slug 等で "Array to string conversion" Warning が発生する.
+				// Guard against the main query's post_type being set as an array (e.g. pre_get_posts sets array( 'event', 'page' )).
+				// The slug is treated as a string downstream, so normalize an array to its first element.
+				// Otherwise later usages like 'post-type-' . $slug trigger an "Array to string conversion" warning.
+				if ( is_array( $postType['slug'] ) ) {
+					$postType['slug'] = ! empty( $postType['slug'] ) ? reset( $postType['slug'] ) : '';
+				}
 
 			} else {
 				// Case of no post type query
@@ -334,8 +346,10 @@ if ( ! function_exists( 'vk_sanitize_number' ) ) {
 }
 if ( ! function_exists( 'vk_sanitize_array' ) ) {
 	function vk_sanitize_array( $input ) {
+		// $input が配列でない場合に「Undefined variable $return」警告とならないよう先に初期化する。
+		// Initialize first so a non-array $input does not trigger an "Undefined variable $return" warning.
+		$return = array();
 		if ( is_array( $input ) ) {
-			$return = array();
 			foreach ( $input as $key => $value ) {
 				$return[ $key ] = wp_kses_post( $value );
 			}
@@ -406,7 +420,7 @@ if ( ! function_exists( 'vk_the_post_type_check_list_saved_array_convert' ) ) {
 				}
 			}
 		}
-		return$return;
+		return $return;
 	}
 }
 
