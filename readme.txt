@@ -5,7 +5,7 @@ Tags: post,author
 Requires at least: 5.3
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.28.1
+Stable tag: 1.28.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,7 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
+= 1.28.2 =
 [ Bug Fix ] Update vektor-inc/font-awesome-versions from 0.7.5 to 0.7.6, fixing Font Awesome icons not displaying in some server environments (e.g. AWS Bitnami)
 
 = 1.28.1 =
