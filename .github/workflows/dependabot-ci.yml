@@ -1,0 +1,50 @@
+# Dependabot の PR に対して、依存関係のインストールとビルドが通るかを確認する軽量な CI。
+# dependabot-auto-merge-complete.yml がこのワークフローの成功を見てマージする。
+#
+# PHPUnit（wp-env で WordPress を起動するため実行時間が長い）は従来どおり
+# run-ci ラベル付きの PR でのみ実行する。人が作った PR ではこのワークフローは動かない。
+name: Dependabot CI
+
+on:
+  pull_request:
+    branches:
+      - master
+    # labeled を含めない。Dependabot は PR 作成直後に dependencies などのラベルを
+    # 次々に付けるため、含めるとそのたびに起動して同じ内容を何度もビルドする。
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # php-unit-test.yml と同じく .node-version の値を使う
+      - name: Read .node-version
+        id: nodenv
+        run: echo "NODEVERSION=$(cat .node-version)" >> "$GITHUB_OUTPUT"
+
+      - name: Setup Node.js (.node-version)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '${{ steps.nodenv.outputs.NODEVERSION }}'
+
+      - name: Setup PHP 7.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+
+      - name: Install npm packages
+        run: npm install
+
+      - name: Install Composer packages
+        run: composer install --no-interaction --prefer-dist
+
+      # npm run build = wp-scripts build（ブロックのビルド）+ gulp replace_text_domain
+      # （同梱ライブラリのテキストドメイン置換）+ sass のコンパイル。WP-CLI や wp-env は使わない。
+      - name: Build
+        run: npm run build
