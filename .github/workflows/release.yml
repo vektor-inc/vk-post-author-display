@@ -51,7 +51,7 @@ jobs:
             - name: Install Composer Packages
               run: composer install --optimize-autoloader --prefer-dist --no-dev
             - name: Download dist artifact
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v8
               with:
                   name: dist
                   path: dist/
@@ -115,7 +115,7 @@ jobs:
                   chmod +x wp-cli.phar
                   sudo mv wp-cli.phar /usr/local/bin/wp
             - name: Download dist artifact
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v8
               with:
                   name: dist
                   path: dist/
@@ -160,7 +160,7 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - name: Download dist artifact
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v8
               with:
                   name: dist
                   path: dist/
@@ -180,7 +180,7 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - name: Download dist artifact
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v8
               with:
                   name: dist
                   path: dist/
