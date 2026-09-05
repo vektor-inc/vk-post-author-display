@@ -38,7 +38,7 @@
     "gulp-merge-media-queries": "^0.2.1",
     "gulp-replace": "^1.1.4",
     "npm-check-updates": "^17.0.6",
-    "sass": "^1.77.8"
+    "sass": "^1.103.1"
   },
   "volta": {
     "node": "22.23.2"
