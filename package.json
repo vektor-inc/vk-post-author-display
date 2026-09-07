@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/vektor-inc/vk-post-author-display#readme",
   "dependencies": {
-    "@babel/runtime": "^7.29.2"
+    "@babel/runtime": "^8.0.0"
   },
   "devDependencies": {
     "@wordpress/env": "11.14.0",
