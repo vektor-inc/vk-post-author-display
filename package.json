@@ -37,7 +37,7 @@
     "gulp-clean-css": "^4.3.0",
     "gulp-merge-media-queries": "^0.2.1",
     "gulp-replace": "^1.1.4",
-    "npm-check-updates": "^17.0.6",
+    "npm-check-updates": "^23.1.0",
     "sass": "^1.104.0"
   },
   "volta": {
