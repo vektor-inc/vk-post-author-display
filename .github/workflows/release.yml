@@ -21,7 +21,7 @@ jobs:
         runs-on: ubuntu-latest
         needs: [check_tag]
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v7
             - name: Setup Node.js
               uses: actions/setup-node@v7
               with:
@@ -41,7 +41,7 @@ jobs:
         runs-on: ubuntu-latest
         needs: [build_dist]
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v7
             - name: Setup Node.js
               uses: actions/setup-node@v7
               with:
@@ -91,7 +91,7 @@ jobs:
                     MYSQL_USER: wordpress
                     MYSQL_PASSWORD: wordpress
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v7
             - name: Setup Node.js
               uses: actions/setup-node@v7
               with:
@@ -158,7 +158,7 @@ jobs:
         runs-on: ubuntu-latest
         needs: [smoke_test, php_unit]
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v7
             - name: Download dist artifact
               uses: actions/download-artifact@v8
               with:
@@ -178,7 +178,7 @@ jobs:
         permissions:
             contents: write
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v7
             - name: Download dist artifact
               uses: actions/download-artifact@v8
               with:
