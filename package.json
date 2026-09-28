@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@wordpress/env": "11.16.0",
-    "@wordpress/scripts": "^35.0.0",
+    "@wordpress/scripts": "^36.0.0",
     "gulp": "^5.0.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-merge-media-queries": "^0.2.1",
