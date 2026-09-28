@@ -31,14 +31,14 @@
     "@babel/runtime": "^8.0.0"
   },
   "devDependencies": {
-    "@wordpress/env": "11.15.0",
+    "@wordpress/env": "11.16.0",
     "@wordpress/scripts": "^35.0.0",
     "gulp": "^5.0.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-merge-media-queries": "^0.2.1",
     "gulp-replace": "^1.1.4",
     "npm-check-updates": "^23.1.0",
-    "sass": "^1.104.1"
+    "sass": "^1.105.0"
   },
   "volta": {
     "node": "22.23.2"
