@@ -31,7 +31,7 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
-[ Security Fix ] Strengthen validation of category/tag color codes. Invalid 3/6-digit hex values now fall back to the default color instead of being saved as-is, and the validation is now actually applied on save.
+[ Security Fix ] Strengthen validation of category/tag color codes. Invalid 3/6-digit hex values now fall back to the default color instead of being saved as-is, and the validation is now actually applied on save. The color value is also properly escaped wherever it is displayed.
 
 = 1.28.2 =
 [ Bug Fix ] Update vektor-inc/font-awesome-versions from 0.7.5 to 0.7.6, fixing Font Awesome icons not displaying in some server environments (e.g. AWS Bitnami)
