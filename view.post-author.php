@@ -152,7 +152,7 @@ if ( ! class_exists( 'Vk_Post_Author_Box' ) ) {
 					$terms      = get_the_terms( get_the_ID(), $taxonomy );
 					$term_name  = esc_html( $terms[0]->name );
 					$term_color = Vk_term_color::get_term_color( $terms[0]->term_id );
-					$term_color = ( $term_color ) ? ' style="background-color:' . $term_color . '"' : '';
+					$term_color = ( $term_color ) ? ' style="background-color:' . esc_attr( $term_color ) . '"' : '';
 					$term_link  = esc_url( get_term_link( $terms[0]->term_id, $taxonomy ) );
 					$term       = '<a class="padCate"' . $term_color . ' href="' . $term_link . '">' . $term_name . '</a>';
 				endif;
