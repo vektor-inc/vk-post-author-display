@@ -31,13 +31,13 @@
     "@babel/runtime": "^8.0.0"
   },
   "devDependencies": {
-    "@wordpress/env": "12.0.0",
-    "@wordpress/scripts": "^37.0.0",
+    "@wordpress/env": "12.1.0",
+    "@wordpress/scripts": "^37.1.0",
     "gulp": "^5.0.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-merge-media-queries": "^0.2.1",
     "gulp-replace": "^1.1.4",
     "npm-check-updates": "^23.1.1",
-    "sass": "^1.107.0"
+    "sass": "^1.107.1"
   }
 }
