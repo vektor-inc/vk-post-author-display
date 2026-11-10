@@ -106,8 +106,12 @@ function pad_save_hide_items( $post_id ) {
 		return $post_id;
 	}
 
+	// Save only 'true' and treat any other value (including an array) as an empty string, the same rule as the sanitize_callback registered in inc/register-meta.php.
+	// An array is dropped here so that the callback's (string) conversion does not raise "Array to string conversion".
+	// 'true' だけを保存し、それ以外の値（配列を含む）は空文字として扱う。inc/register-meta.php に登録した sanitize_callback と同じ規則（'true' か空文字だけ）。
+	// 配列はここで落とし、その sanitize_callback の (string) 変換で「Array to string conversion」の警告が出ないようにする。
 	$field       = 'pad_hide_post_author';
-	$field_value = ( isset( $_POST[ $field ] ) ) ? $_POST[ $field ] : '';
+	$field_value = ( isset( $_POST[ $field ] ) && 'true' === sanitize_text_field( wp_unslash( $_POST[ $field ] ) ) ) ? 'true' : '';
 	// データが空だったら入れる
 	if ( get_post_meta( $post_id, $field ) == '' ) {
 		add_post_meta( $post_id, $field, $field_value, true );
