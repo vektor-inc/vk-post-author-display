@@ -209,8 +209,8 @@ class TemplateTagsTest extends WP_UnitTestCase {
 			$this->assertSame( array_keys( $test_value['expected'] ), array_keys( $actual ), $test_value['test_condition_name'] );
 			foreach ( $test_value['expected'] as $key => $expected_value ) {
 				if ( in_array( $key, $test_value['script_removed_keys'], true ) ) {
-					$this->assertStringNotContainsString( '<script', $actual[ $key ], $test_value['test_condition_name'] );
-					$this->assertStringNotContainsString( '</script', $actual[ $key ], $test_value['test_condition_name'] );
+					$this->assertStringNotContainsStringIgnoringCase( '<script', $actual[ $key ], $test_value['test_condition_name'] );
+					$this->assertStringNotContainsStringIgnoringCase( '</script', $actual[ $key ], $test_value['test_condition_name'] );
 					$this->assertStringEndsWith( $expected_value, $actual[ $key ], $test_value['test_condition_name'] );
 				} else {
 					$this->assertSame( $expected_value, $actual[ $key ], $test_value['test_condition_name'] );
