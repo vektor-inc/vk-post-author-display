@@ -66,6 +66,11 @@ class TemplateTagsTest extends WP_UnitTestCase {
 	 * array( 'event', 'page' ) 等を set するケース）に "Array to string conversion" の
 	 * 警告を出さず、先頭要素を文字列化した slug を返すことも確認する
 	 * （Issue #158 / vk-all-in-one-expansion-unit#1375 相当の修正）。
+	 *
+	 * Also check the admin branch (a REQUEST_URI containing "wp-admin"): the post_type / post URL parameters are
+	 * sanitized, a legitimate value returns the same slug as before, and an invalid value is never returned as is.
+	 * 管理画面の分岐（REQUEST_URI に wp-admin を含む場合）も確認する。URL の post_type / post は整えられ、
+	 * 正当な値はこれまでと同じ slug を返し、不正な値はそのままは返らない。
 	 */
 	function test_vk_get_post_type() {
 		// go_to() で書き換えられる前に、変更前の $_SERVER['REQUEST_URI'] を退避する。
@@ -82,6 +87,13 @@ class TemplateTagsTest extends WP_UnitTestCase {
 		// これが残っていると get_post_type() が常に 'post' を返してしまい、
 		// post_type クエリ変数を使う分岐（配列正規化の分岐）に一度も入らないため、明示的に空にする必要がある。
 		$original_global_post = isset( $GLOBALS['post'] ) ? $GLOBALS['post'] : null;
+		// 管理画面の分岐のケースで URL のパラメーターとして $_GET を書き換えるため、変更前の値を退避する。
+		// Back up $_GET because the admin branch cases rewrite it as the URL parameters.
+		$original_get = $_GET;
+
+		// 管理画面の分岐の「post」パラメーター用に、固定ページを 1 件作る。
+		// Create one page for the "post" parameter of the admin branch cases.
+		$page_id = self::factory()->post->create( array( 'post_type' => 'page' ) );
 
 		$test_cases = array(
 			array(
@@ -107,6 +119,85 @@ class TemplateTagsTest extends WP_UnitTestCase {
 				// 配列正規化の分岐に到達できないため、このケースでは明示的に空にする。
 				'clear_global_post'   => true,
 			),
+			// 以降は管理画面の分岐（REQUEST_URI に wp-admin を含む場合）。
+			// グローバル $post が残っていると get_post_type() が 'post' を返し URL のパラメーターを見ないため、全ケースで空にする。
+			// The following cases are for the admin branch (a REQUEST_URI containing "wp-admin").
+			// A remaining global $post makes get_post_type() return 'post' and skips the URL parameters, so every case clears it.
+			array(
+				'test_condition_name' => '管理画面の URL で post_type=page => slug は page（正常系）',
+				'request_uri'         => '/wp-admin/edit.php?post_type=page',
+				'unset_request_uri'   => false,
+				'post_type_query_var' => null,
+				'clear_global_post'   => true,
+				'get'                 => array( 'post_type' => 'page' ),
+				'expected_slug'       => 'page',
+			),
+			array(
+				'test_condition_name' => '管理画面の URL で post_type に大文字と _ - を含む（Event_Type-2） => 英小文字に整えた event_type-2（正常系）',
+				'request_uri'         => '/wp-admin/edit.php?post_type=Event_Type-2',
+				'unset_request_uri'   => false,
+				'post_type_query_var' => null,
+				'clear_global_post'   => true,
+				'get'                 => array( 'post_type' => 'Event_Type-2' ),
+				'expected_slug'       => 'event_type-2',
+			),
+			array(
+				'test_condition_name' => '管理画面の URL で post_type に記号を含む => 英小文字・数字・_・- だけに整えた slug（異常系）',
+				'request_uri'         => '/wp-admin/edit.php',
+				'unset_request_uri'   => false,
+				'post_type_query_var' => null,
+				'clear_global_post'   => true,
+				'get'                 => array( 'post_type' => 'page"><script>alert(1)</script>' ),
+				'expected_slug'       => 'pagescriptalert1script',
+			),
+			array(
+				'test_condition_name' => '管理画面の URL で post_type が配列（post_type[]=x） => 配列のまま返さず空文字（異常系）',
+				'request_uri'         => '/wp-admin/edit.php',
+				'unset_request_uri'   => false,
+				'post_type_query_var' => null,
+				'clear_global_post'   => true,
+				'get'                 => array( 'post_type' => array( 'x' ) ),
+				'expected_slug'       => '',
+			),
+			array(
+				'test_condition_name' => '管理画面の URL で post に固定ページの ID => その投稿タイプ page（正常系）',
+				'request_uri'         => '/wp-admin/post.php?action=edit',
+				'unset_request_uri'   => false,
+				'post_type_query_var' => null,
+				'clear_global_post'   => true,
+				'get'                 => array( 'post' => (string) $page_id ),
+				'expected_slug'       => 'page',
+			),
+			array(
+				'test_condition_name' => '管理画面の URL で post が数字以外（abc） => 投稿タイプは決まらず false（異常系）',
+				'request_uri'         => '/wp-admin/post.php?action=edit',
+				'unset_request_uri'   => false,
+				'post_type_query_var' => null,
+				'clear_global_post'   => true,
+				'get'                 => array( 'post' => 'abc' ),
+				'expected_slug'       => false,
+			),
+			array(
+				'test_condition_name' => '管理画面の URL で post_type も post も無い => 投稿タイプは決まらず false（境界値）',
+				'request_uri'         => '/wp-admin/index.php',
+				'unset_request_uri'   => false,
+				'post_type_query_var' => null,
+				'clear_global_post'   => true,
+				'get'                 => array(),
+				'expected_slug'       => false,
+			),
+			array(
+				'test_condition_name' => '公開側の URL に wp-admin を含み post_type=event を付ける => 正当な値はそのまま event（正常系）',
+				'request_uri'         => '/?post_type=event&redirect_to=/wp-admin/',
+				'unset_request_uri'   => false,
+				'post_type_query_var' => null,
+				'clear_global_post'   => true,
+				'get'                 => array(
+					'post_type'   => 'event',
+					'redirect_to' => '/wp-admin/',
+				),
+				'expected_slug'       => 'event',
+			),
 		);
 
 		try {
@@ -118,6 +209,10 @@ class TemplateTagsTest extends WP_UnitTestCase {
 				}
 
 				$GLOBALS['post'] = $case['clear_global_post'] ? null : $original_global_post;
+
+				// 管理画面の分岐のケースだけ URL のパラメーターを指定する。それ以外は空にする。
+				// Only the admin branch cases specify URL parameters. The other cases use none.
+				$_GET = isset( $case['get'] ) ? $case['get'] : array();
 
 				if ( null !== $case['post_type_query_var'] ) {
 					$wp_query->query_vars['post_type'] = $case['post_type_query_var'];
@@ -135,14 +230,23 @@ class TemplateTagsTest extends WP_UnitTestCase {
 
 				$this->assertIsArray( $actual, $case['test_condition_name'] );
 				$this->assertArrayHasKey( 'slug', $actual, $case['test_condition_name'] );
-				$this->assertIsString( $actual['slug'], $case['test_condition_name'] );
+
+				if ( array_key_exists( 'expected_slug', $case ) ) {
+					// 管理画面の分岐のケースは slug の値そのものを確認する（投稿タイプが決まらないときは false）。
+					// The admin branch cases check the slug itself (false when the post type cannot be determined).
+					$this->assertSame( $case['expected_slug'], $actual['slug'], $case['test_condition_name'] );
+				} else {
+					$this->assertIsString( $actual['slug'], $case['test_condition_name'] );
+				}
 
 				if ( is_array( $case['post_type_query_var'] ) ) {
 					$this->assertSame( reset( $case['post_type_query_var'] ), $actual['slug'], $case['test_condition_name'] );
 				}
 			}
 		} finally {
-			// アサーション失敗（例外）時も含め、$_SERVER・$wp_query・グローバル $post を必ず復元して後続テストへの影響を防ぐ。
+			// アサーション失敗（例外）時も含め、$_SERVER・$_GET・$wp_query・グローバル $post を必ず復元して後続テストへの影響を防ぐ。
+			$_GET = $original_get;
+
 			if ( null !== $original_request_uri ) {
 				$_SERVER['REQUEST_URI'] = $original_request_uri;
 			} else {

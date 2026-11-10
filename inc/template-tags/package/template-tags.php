@@ -71,14 +71,20 @@ if ( ! function_exists( 'vk_get_post_type' ) ) {
 			global $post;
 			$postType['slug'] = get_post_type( $post );
 			if ( ! $postType['slug'] ) {
+				// この分岐は状態を変更しない読み取り専用の判定のため、ノンス検証は不要。
+				// 投稿タイプのスラッグは英数字・アンダースコア・ハイフンのみのため、sanitize_key() で情報は落ちない。
+				// This branch is a read-only check that does not change any state, so nonce verification is not needed.
+				// Post type slugs consist only of alphanumerics, underscores and hyphens, so sanitize_key() does not lose information.
+				// phpcs:disable WordPress.Security.NonceVerification.Recommended
 				if ( ! empty( $_GET['post_type'] ) ) {
-					$postType['slug'] = $_GET['post_type'];
+					$postType['slug'] = sanitize_key( wp_unslash( $_GET['post_type'] ) );
 				} elseif ( ! empty( $_GET['post'] ) ) {
-					$admin_post = get_post( $_GET['post'] );
+					$admin_post = get_post( absint( wp_unslash( $_GET['post'] ) ) );
 					if ( ! empty( $admin_post->post_type ) ) {
 						$postType['slug'] = $admin_post->post_type;
 					}
 				}
+				// phpcs:enable WordPress.Security.NonceVerification.Recommended
 			}
 			return $postType;
 		}
