@@ -172,11 +172,12 @@ class TemplateTagsTest extends WP_UnitTestCase {
 					'post' => 'true',
 					'info' => '<script>alert(1)</script>true',
 				),
+				// info は WordPress のバージョンで結果が変わるため、末尾の文字列だけを期待値にする。
 				'expected'            => array(
 					'post' => 'true',
-					// wp_kses_post() は script タグ自体を除去するが、タグの中身のテキストは残す仕様。
-					'info' => 'alert(1)true',
+					'info' => 'true',
 				),
+				'script_removed_keys' => array( 'info' ),
 			),
 			array(
 				'test_condition_name' => '空配列を渡した場合 => 空配列を返す（正常系）',
@@ -197,7 +198,24 @@ class TemplateTagsTest extends WP_UnitTestCase {
 
 		foreach ( $tests as $test_value ) {
 			$actual = vk_sanitize_array( $test_value['input'] );
-			$this->assertSame( $test_value['expected'], $actual, $test_value['test_condition_name'] );
+
+			if ( empty( $test_value['script_removed_keys'] ) ) {
+				$this->assertSame( $test_value['expected'], $actual, $test_value['test_condition_name'] );
+				continue;
+			}
+
+			// script タグの中身は 7.1 では残り 7.2 では消えるが、どちらでも script タグが出力に残らないことを確認する。
+			$this->assertIsArray( $actual, $test_value['test_condition_name'] );
+			$this->assertSame( array_keys( $test_value['expected'] ), array_keys( $actual ), $test_value['test_condition_name'] );
+			foreach ( $test_value['expected'] as $key => $expected_value ) {
+				if ( in_array( $key, $test_value['script_removed_keys'], true ) ) {
+					$this->assertStringNotContainsStringIgnoringCase( '<script', $actual[ $key ], $test_value['test_condition_name'] );
+					$this->assertStringNotContainsStringIgnoringCase( '</script', $actual[ $key ], $test_value['test_condition_name'] );
+					$this->assertStringEndsWith( $expected_value, $actual[ $key ], $test_value['test_condition_name'] );
+				} else {
+					$this->assertSame( $expected_value, $actual[ $key ], $test_value['test_condition_name'] );
+				}
+			}
 		}
 	}
 
