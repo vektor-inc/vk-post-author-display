@@ -1,4 +1,11 @@
 <?php
+/**
+ * Output the profile picture row on the user profile screen.
+ * ユーザーのプロフィール編集画面に、プロフィール写真の入力欄を出力する。
+ *
+ * @param bool $bool Whether to show the password fields (returned as is). / パスワード欄を表示するかどうか（そのまま返す）。
+ * @return bool
+ */
 function add_user_profile_image_form( $bool ) {
 	global $wp_version, $profileuser, $profile_user;
 	$major_version     = explode( '.', $wp_version )[0];
@@ -11,6 +18,11 @@ function add_user_profile_image_form( $bool ) {
 	<td>
 
 	<input id="user_profile_image" type="hidden" name="user_profile_image" value="<?php echo esc_html( $vpad_profile_user->user_profile_image ); ?>" />
+		<?php
+		// Nonce verified by pad_update_user_profile_image(). The action name must match the one used there.
+		// pad_update_user_profile_image() が確認する nonce。action 名はそちらと必ずそろえること。
+		wp_nonce_field( 'pad_update_user_profile_image_' . $vpad_profile_user->ID, 'pad_user_profile_image_nonce', false );
+		?>
 	<img id="defaultImage_user_profile_image" style="display:none;" src="<?php echo esc_url( VK_PAD_URL ); ?>assets/images/no_image.png" alt="" />
 		<?php
 		$attr = array(

@@ -48,10 +48,18 @@ function pad_add_custom_field_user_view_group() {
 /*  入力フィールドの生成
 /*-------------------------------------------*/
 
+/**
+ * Output the "Don't display post author" checkbox and its nonce field in the meta box.
+ * メタボックスに、「著者を非表示にする」のチェックボックスと nonce 欄を出力する。
+ *
+ * @return void
+ */
 function pad_content_meta_fields() {
 
 	//CSRF対策の設定（フォームにhiddenフィールドとして追加するためのnonceを「'noncename__pad_hide」として設定）
-	wp_nonce_field( wp_create_nonce( __FILE__ ), 'noncename__pad_hide' );
+	// The action name must match the one verified in pad_save_hide_items().
+	// action 名は pad_save_hide_items() で確認するものと必ずそろえること。
+	wp_nonce_field( 'pad_save_hide_items', 'noncename__pad_hide' );
 
 	global $post;
 	$checked = ( get_post_meta( $post->ID, 'pad_hide_post_author', true ) ) ? ' checked' : '';
@@ -68,14 +76,23 @@ function pad_content_meta_fields() {
 /*-------------------------------------------*/
 add_action( 'save_post', 'pad_save_hide_items' );
 
+/**
+ * Save the "Don't display post author" setting after verifying the nonce and the user's permission to edit the post.
+ * Do nothing when the request did not come from the meta box form (REST API, quick edit, WP-CLI, cron, etc.).
+ * nonce と投稿の編集権限を確認したうえで、「著者を非表示にする」の設定を保存する。
+ * メタボックスのフォーム以外からの保存（REST API・クイック編集・WP-CLI・cron など）では何もしない。
+ *
+ * @param int $post_id Post ID. / 投稿 ID。
+ * @return int|void The post ID when nothing was saved. / 保存せずに抜けたときは投稿 ID。
+ */
 function pad_save_hide_items( $post_id ) {
 	global $post;
 
-	//設定したnonce を取得（CSRF対策）
-	$noncename__pad_hide = isset( $_POST['noncename__pad_hide'] ) ? $_POST['noncename__pad_hide'] : null;
-
-	//nonce を確認し、値が書き換えられていれば、何もしない（CSRF対策）
-	if ( ! wp_verify_nonce( $noncename__pad_hide, wp_create_nonce( __FILE__ ) ) ) {
+	// Verify the nonce and do nothing when it is missing or invalid.
+	// Saves that do not go through the meta box form carry no nonce, so they return here.
+	// nonce を確認し、無い・正しくないときは何もしない（CSRF対策）。
+	// メタボックスのフォームを通らない保存には nonce が付かないため、ここで抜ける。
+	if ( ! isset( $_POST['noncename__pad_hide'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['noncename__pad_hide'] ) ), 'pad_save_hide_items' ) ) {
 		return $post_id;
 	}
 
@@ -83,8 +100,18 @@ function pad_save_hide_items( $post_id ) {
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 		return $post_id; }
 
+	// Permission check: only a user who can edit this post may change the setting.
+	// 権限の確認（この投稿を編集できる利用者だけが変更できる）。
+	if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		return $post_id;
+	}
+
+	// Save only 'true' and treat any other value (including an array) as an empty string, the same rule as the sanitize_callback registered in inc/register-meta.php.
+	// An array is dropped here so that the callback's (string) conversion does not raise "Array to string conversion".
+	// 'true' だけを保存し、それ以外の値（配列を含む）は空文字として扱う。inc/register-meta.php に登録した sanitize_callback と同じ規則（'true' か空文字だけ）。
+	// 配列はここで落とし、その sanitize_callback の (string) 変換で「Array to string conversion」の警告が出ないようにする。
 	$field       = 'pad_hide_post_author';
-	$field_value = ( isset( $_POST[ $field ] ) ) ? $_POST[ $field ] : '';
+	$field_value = ( isset( $_POST[ $field ] ) && 'true' === sanitize_text_field( wp_unslash( $_POST[ $field ] ) ) ) ? 'true' : '';
 	// データが空だったら入れる
 	if ( get_post_meta( $post_id, $field ) == '' ) {
 		add_post_meta( $post_id, $field, $field_value, true );

@@ -71,14 +71,26 @@ if ( ! function_exists( 'vk_get_post_type' ) ) {
 			global $post;
 			$postType['slug'] = get_post_type( $post );
 			if ( ! $postType['slug'] ) {
-				if ( ! empty( $_GET['post_type'] ) ) {
-					$postType['slug'] = $_GET['post_type'];
-				} elseif ( ! empty( $_GET['post'] ) ) {
-					$admin_post = get_post( $_GET['post'] );
+				// この分岐は状態を変更しない読み取り専用の判定のため、ノンス検証は不要。
+				// 投稿タイプのスラッグは英数字・アンダースコア・ハイフンのみのため、sanitize_key() で情報は落ちない。
+				// This branch is a read-only check that does not change any state, so nonce verification is not needed.
+				// Post type slugs consist only of alphanumerics, underscores and hyphens, so sanitize_key() does not lose information.
+				// phpcs:disable WordPress.Security.NonceVerification.Recommended
+				// URL に post_type[]=post のように配列で付いた場合は、post_type の指定が無いときと同じ扱いにする。
+				// WordPress 5.8 以前の sanitize_key() は値の型を確かめないため、PHP 8.0 以上で配列を渡すと TypeError（致命的エラー）になる。
+				// When post_type is given as an array in the URL (e.g. post_type[]=post), treat it the same as when post_type is not specified.
+				// sanitize_key() in WordPress 5.8 and earlier does not check the value type, so passing an array causes a TypeError (fatal error) on PHP 8.0 and later.
+				if ( ! empty( $_GET['post_type'] ) && is_string( $_GET['post_type'] ) ) {
+					$postType['slug'] = sanitize_key( wp_unslash( $_GET['post_type'] ) );
+				} elseif ( ! empty( $_GET['post'] ) && is_scalar( $_GET['post'] ) ) {
+					// 配列を absint() に通すと 1 になり、無関係な ID 1 の投稿の投稿タイプを返してしまうため、単一の値のときだけ投稿を引く。
+					// absint() turns an array into 1 and the post type of the unrelated post with ID 1 would be returned, so look up the post only for a scalar value.
+					$admin_post = get_post( absint( wp_unslash( $_GET['post'] ) ) );
 					if ( ! empty( $admin_post->post_type ) ) {
 						$postType['slug'] = $admin_post->post_type;
 					}
 				}
+				// phpcs:enable WordPress.Security.NonceVerification.Recommended
 			}
 			return $postType;
 		}
