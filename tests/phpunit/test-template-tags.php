@@ -71,6 +71,12 @@ class TemplateTagsTest extends WP_UnitTestCase {
 	 * sanitized, a legitimate value returns the same slug as before, and an invalid value is never returned as is.
 	 * 管理画面の分岐（REQUEST_URI に wp-admin を含む場合）も確認する。URL の post_type / post は整えられ、
 	 * 正当な値はこれまでと同じ slug を返し、不正な値はそのままは返らない。
+	 *
+	 * The admin screen is detected by the path part of the URL, so a front-end URL that only has "wp-admin" in its
+	 * query string or as part of a slug is not treated as an admin screen. The post is looked up only when the "post"
+	 * URL parameter can be read as a positive integer.
+	 * 管理画面かどうかは URL のパス部分で判定し、公開側の URL のクエリ文字列やスラッグの一部に wp-admin が
+	 * 含まれるだけでは管理画面扱いにならない。URL の post は、正の整数として読める値のときだけ投稿を引く。
 	 */
 	function test_vk_get_post_type() {
 		// go_to() で書き換えられる前に、変更前の $_SERVER['REQUEST_URI'] を退避する。
@@ -153,6 +159,27 @@ class TemplateTagsTest extends WP_UnitTestCase {
 				'post_type_query_var' => null,
 				'clear_global_post'   => true,
 				'get'                 => array( 'post_type' => 'page' ),
+				'expected_slug'       => 'page',
+			),
+			array(
+				'test_condition_name' => '管理画面の新規追加画面の URL（post-new.php?post_type=page） => slug は page（正常系）',
+				'request_uri'         => '/wp-admin/post-new.php?post_type=page',
+				'unset_request_uri'   => false,
+				'post_type_query_var' => null,
+				'clear_global_post'   => true,
+				'get'                 => array( 'post_type' => 'page' ),
+				'expected_slug'       => 'page',
+			),
+			array(
+				'test_condition_name' => '管理画面の admin-ajax.php の URL で post_type=page => slug は page（正常系）',
+				'request_uri'         => '/wp-admin/admin-ajax.php?action=test&post_type=page',
+				'unset_request_uri'   => false,
+				'post_type_query_var' => null,
+				'clear_global_post'   => true,
+				'get'                 => array(
+					'action'    => 'test',
+					'post_type' => 'page',
+				),
 				'expected_slug'       => 'page',
 			),
 			array(
@@ -252,7 +279,7 @@ class TemplateTagsTest extends WP_UnitTestCase {
 				'expected_slug'       => false,
 			),
 			array(
-				'test_condition_name' => '公開側の URL に wp-admin を含み post_type=event を付ける => 正当な値はそのまま event（正常系）',
+				'test_condition_name' => '公開側の URL のクエリ文字列に wp-admin を含み post_type=event を付ける => 管理画面扱いにせず、URL の post_type は使わず post（異常系）',
 				'request_uri'         => '/?post_type=event&redirect_to=/wp-admin/',
 				'unset_request_uri'   => false,
 				'post_type_query_var' => null,
@@ -261,7 +288,61 @@ class TemplateTagsTest extends WP_UnitTestCase {
 					'post_type'   => 'event',
 					'redirect_to' => '/wp-admin/',
 				),
-				'expected_slug'       => 'event',
+				'expected_slug'       => 'post',
+			),
+			array(
+				'test_condition_name' => '公開側の URL のクエリ文字列に wp-admin を含む（?s=wp-admin） => 管理画面扱いにせず、メインクエリの post_type（post）（異常系）',
+				'request_uri'         => '/?s=wp-admin',
+				'unset_request_uri'   => false,
+				'post_type_query_var' => 'post',
+				'clear_global_post'   => true,
+				'get'                 => array( 'post_type' => 'page' ),
+				'expected_slug'       => 'post',
+			),
+			array(
+				'test_condition_name' => '公開側の URL のパスに wp-admin を含む別名のスラッグがある（/wp-admin-guide/） => 管理画面扱いにせず、メインクエリの post_type（post）（異常系）',
+				'request_uri'         => '/wp-admin-guide/',
+				'unset_request_uri'   => false,
+				'post_type_query_var' => 'post',
+				'clear_global_post'   => true,
+				'get'                 => array( 'post_type' => 'page' ),
+				'expected_slug'       => 'post',
+			),
+			array(
+				'test_condition_name' => 'サブディレクトリ設置の管理画面で URL にクエリ文字列がある => 管理画面として post の投稿タイプ page（正常系）',
+				'request_uri'         => '/sub/wp-admin/post.php?post=1',
+				'unset_request_uri'   => false,
+				'post_type_query_var' => null,
+				'clear_global_post'   => true,
+				'get'                 => array( 'post' => (string) $page_id ),
+				'expected_slug'       => 'page',
+			),
+			array(
+				'test_condition_name' => '管理画面の URL で post が数字以外を含む文字列 => 投稿 ID に化けさせず、post の指定が無いときと同じ false（異常系）',
+				'request_uri'         => '/wp-admin/post.php',
+				'unset_request_uri'   => false,
+				'post_type_query_var' => null,
+				'clear_global_post'   => true,
+				'get'                 => array( 'post' => $page_id . 'abc' ),
+				'expected_slug'       => false,
+			),
+			array(
+				'test_condition_name' => '管理画面の URL で post が負の数の文字列 => 絶対値の投稿を拾わず、post の指定が無いときと同じ false（異常系）',
+				'request_uri'         => '/wp-admin/post.php',
+				'unset_request_uri'   => false,
+				'post_type_query_var' => null,
+				'clear_global_post'   => true,
+				'get'                 => array( 'post' => '-' . $page_id ),
+				'expected_slug'       => false,
+			),
+			array(
+				'test_condition_name' => '管理画面の URL で post が小数の文字列 => 整数部の投稿を拾わず、post の指定が無いときと同じ false（異常系）',
+				'request_uri'         => '/wp-admin/post.php',
+				'unset_request_uri'   => false,
+				'post_type_query_var' => null,
+				'clear_global_post'   => true,
+				'get'                 => array( 'post' => '1.5' ),
+				'expected_slug'       => false,
 			),
 		);
 
@@ -418,6 +499,11 @@ class TemplateTagsTest extends WP_UnitTestCase {
 	 * パスワード保護された投稿・検索結果・スタイルタグを含む本文などで、返る説明文を確認する。
 	 */
 	public function test_vk_get_page_description() {
+
+		// go_to() で書き換えられる前に、変更前の $_SERVER['REQUEST_URI'] を退避する。
+		// Back up $_SERVER['REQUEST_URI'] before go_to() rewrites it.
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- テスト後に元へ戻すための退避で、値は加工しない。 / Backed up only to restore it after the test; the value is not processed.
+		$original_request_uri = isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : null;
 
 		// テスト後に復元するため、変更前のログインユーザーを退避する。
 		// Back up the current user to restore it after the test.
@@ -588,12 +674,18 @@ class TemplateTagsTest extends WP_UnitTestCase {
 				wp_delete_post( $post_id, true );
 			}
 		} finally {
-			// アサーション失敗時も含め、ログインユーザーとオプションを元に戻す。
-			// Restore the current user and the options even when an assertion fails.
+			// アサーション失敗時も含め、ログインユーザー・オプション・$_SERVER['REQUEST_URI'] を元に戻す。
+			// Restore the current user, the options and $_SERVER['REQUEST_URI'] even when an assertion fails.
 			delete_option( 'show_on_front' );
 			delete_option( 'page_on_front' );
 			delete_option( 'page_for_posts' );
 			wp_set_current_user( $original_user_id );
+
+			if ( null !== $original_request_uri ) {
+				$_SERVER['REQUEST_URI'] = $original_request_uri;
+			} else {
+				unset( $_SERVER['REQUEST_URI'] );
+			}
 		}
 	}
 

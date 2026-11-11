@@ -71,8 +71,10 @@ if ( ! function_exists( 'vk_get_post_type' ) ) {
 		$url = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
 
 		// 管理画面の投稿タイプ
-		// ※ phpunitで is_admin()判定が効かない場合のため strpos( $url, 'wp-admin' ) を使用
-		if ( is_admin() || strpos( $url, 'wp-admin' ) ) {
+		// ※ phpunitで is_admin()判定が効かない場合のため、URL のパス部分（クエリ文字列は除く）が wp-admin ディレクトリかどうかで判定する
+		// Note: is_admin() may not work under PHPUnit, so check whether the path part of the URL (excluding the query string) is the wp-admin directory.
+		$url_path = (string) wp_parse_url( $url, PHP_URL_PATH );
+		if ( is_admin() || preg_match( '#/wp-admin(/|$)#', $url_path ) ) {
 			global $post;
 			$postType['slug'] = get_post_type( $post );
 			if ( ! $postType['slug'] ) {
@@ -87,12 +89,15 @@ if ( ! function_exists( 'vk_get_post_type' ) ) {
 				// sanitize_key() in WordPress 5.8 and earlier does not check the value type, so passing an array causes a TypeError (fatal error) on PHP 8.0 and later.
 				if ( ! empty( $_GET['post_type'] ) && is_string( $_GET['post_type'] ) ) {
 					$postType['slug'] = sanitize_key( wp_unslash( $_GET['post_type'] ) );
-				} elseif ( ! empty( $_GET['post'] ) && is_scalar( $_GET['post'] ) ) {
-					// 配列を absint() に通すと 1 になり、無関係な ID 1 の投稿の投稿タイプを返してしまうため、単一の値のときだけ投稿を引く。
-					// absint() turns an array into 1 and the post type of the unrelated post with ID 1 would be returned, so look up the post only for a scalar value.
-					$admin_post = get_post( absint( wp_unslash( $_GET['post'] ) ) );
-					if ( ! empty( $admin_post->post_type ) ) {
-						$postType['slug'] = $admin_post->post_type;
+				} elseif ( ! empty( $_GET['post'] ) && ( is_int( $_GET['post'] ) || is_string( $_GET['post'] ) ) ) {
+					// 配列や数字以外を含む値を absint() に通すと、無関係な投稿 ID に化けて別の投稿の投稿タイプを返してしまうため、正の整数として読める値のときだけ投稿を引く。
+					// absint() turns an array or a value containing non-digits into an unrelated post ID and the post type of another post would be returned, so look up the post only when the value can be read as a positive integer.
+					$admin_post_id = wp_unslash( $_GET['post'] );
+					if ( is_int( $admin_post_id ) || ctype_digit( $admin_post_id ) ) {
+						$admin_post = get_post( absint( $admin_post_id ) );
+						if ( ! empty( $admin_post->post_type ) ) {
+							$postType['slug'] = $admin_post->post_type;
+						}
 					}
 				}
 				// phpcs:enable WordPress.Security.NonceVerification.Recommended
