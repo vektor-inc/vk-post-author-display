@@ -34,6 +34,7 @@ Display to Post Author Information Box on bottom of the contents.
 [ Security Fix ] Strengthen validation of category/tag color codes. Invalid 3/6-digit hex values now fall back to the default color instead of being saved as-is, and the validation is now actually applied on save. The color value is also properly escaped wherever it is displayed.
 [ Security Fix ] Add a permission check and input sanitization when saving the category/tag color, so that only users who can edit the term can change it.
 [ Security Fix ] Add permission checks and input sanitization when saving the profile picture and the "Don't display post author" setting. Add input sanitization when detecting the post type on admin screens.
+[ Security Fix ] Update the bundled shared template tag functions to the latest version, which adds checks for password-protected content and output escaping.
 
 = 1.28.2 =
 [ Bug Fix ] Update vektor-inc/font-awesome-versions from 0.7.5 to 0.7.6, fixing Font Awesome icons not displaying in some server environments (e.g. AWS Bitnami)
