@@ -5,7 +5,7 @@ Tags: post,author
 Requires at least: 5.3
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.28.2
+Stable tag: 1.28.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,7 @@ Display to Post Author Information Box on bottom of the contents.
 
 == Changelog ==
 
+= 1.28.3 =
 [ Spec Change ] Show the post type slug after each post type name in the "Display post types" setting on the settings screen.
 [ Security Fix ] Strengthen validation of category/tag color codes. Invalid 3/6-digit hex values now fall back to the default color instead of being saved as-is, and the validation is now actually applied on save. The color value is also properly escaped wherever it is displayed.
 [ Security Fix ] Add a permission check and input sanitization when saving the category/tag color, so that only users who can edit the term can change it.
