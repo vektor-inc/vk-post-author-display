@@ -36,6 +36,7 @@ Display to Post Author Information Box on bottom of the contents.
 [ Security Fix ] Add a permission check and input sanitization when saving the category/tag color, so that only users who can edit the term can change it.
 [ Security Fix ] Add permission checks and input sanitization when saving the profile picture and the "Don't display post author" setting. Add input sanitization when detecting the post type on admin screens.
 [ Security Fix ] Improve handling of password-protected content, output escaping, and admin screen detection in the bundled shared library.
+[ Security Fix ] Update vektor-inc/vk-admin from 0.8.1 to 0.8.3 to improve output escaping on the settings page and the dashboard widget, and update the Vektor,Inc. logo image shown below the banners.
 
 = 1.28.2 =
 [ Bug Fix ] Update vektor-inc/font-awesome-versions from 0.7.5 to 0.7.6, fixing Font Awesome icons not displaying in some server environments (e.g. AWS Bitnami)
